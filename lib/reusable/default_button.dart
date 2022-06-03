@@ -36,7 +36,6 @@ class DefaultButton extends StatelessWidget {
         onPressed: press,
         child: Text(
           text,
-         
         style: GoogleFonts.openSans(
                         color: Colors.white,
                         fontSize: 17,

@@ -2,6 +2,7 @@ import 'package:demo/screens/HomePage.dart';
 import 'package:demo/screens/Realquick.dart';
 import 'package:demo/screens/StartCourse.dart';
 import 'package:demo/screens/TabBar.dart';
+import 'package:demo/screens/WiPCourse_Player_Vishual.dart';
 import 'package:demo/screens/bottombar.dart';
 import 'package:demo/screens/intropage.dart';
 import 'package:demo/screens/newaccount.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
       ),
       title: "Education On Demand",
-      home: const IntroPage(),
+      home: const WIPCourses(),
     );
   }
 }
