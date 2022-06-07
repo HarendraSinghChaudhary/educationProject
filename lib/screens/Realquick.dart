@@ -1,7 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:demo/controllers/exit_controller.dart';
+import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Notification.dart';
+import '../reusable/default_button.dart';
+
 
 class RealQuick extends StatefulWidget {
   const RealQuick({Key? key}) : super(key: key);
@@ -13,164 +19,143 @@ class RealQuick extends StatefulWidget {
 class _RealQuickState extends State<RealQuick> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xffF3F5F9),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Real quick',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xff344356),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Are you in school?',
-                    style: GoogleFonts.roboto(
-                        color: Color(0xff344356).withOpacity(0.80),
+    return WillPopScope(
+      //Exit Routes
+       onWillPop: () => showExitPopup(context), // called from exitController
+      child: SafeArea(
+          child: Scaffold(
+            backgroundColor: kBackgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                   Text(
+                      'Real quick',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: kTitleColor,
                         fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 19,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 44,
-                      width: 104,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            topLeft: Radius.circular(15)),
-                        color: Color(0xff5468FF),
-                      ),
-                      child: Text(
-                        'YES',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Pagenotification()));
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 44,
-                      width: 104,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(15),
-                            topRight: Radius.circular(15)),
-                        color: Colors.white,
-                      ),
-                      child: Text(
-                        'NO',
-                        style: TextStyle(
-                          color: Color(0xff000000),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 29,),
-              TextFormField(
-                maxLines: 1,
-                style: GoogleFonts.roboto(
-                    color: Color(0xff344356),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 25,bottom: 25,left: 20),
-                  fillColor: Colors.white,
-                  filled: true,
-                  hintText: 'Start typing your school name...',
-                  hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xff979797)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none
-                  ),
-                  focusColor: Colors.white,
+                  ],
                 ),
-              ),
-        
-              SizedBox(height: 142,),
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Pagenotification()));
-                },
-                child: Container(
-                  padding: EdgeInsets.only(left: 50, right: 14),
-                  height: 58,
-                  width: 315,
-                  decoration: BoxDecoration(
-                    color: Color(0xff5468FF),
-                    borderRadius: BorderRadius.circular(15),
+                SizedBox(
+                    height: Get.height * 0.02,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(),
-                      Text(
-                        'CONTINUE',
-                        style: TextStyle(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Are you in school?',
+                      style: GoogleFonts.roboto(
+                          color: kSubTitleColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                    height: Get.height * 0.03,
+                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: (){
+
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 44,
+                        width: 104,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              topLeft: Radius.circular(15)),
+                          color: kPrimaryColor,
+                        ),
+                        child: Text(
+                          'YES',
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color(0xff3D56F0),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                          child: Icon(
-                            Icons.arrow_forward_outlined,
-                            color: Colors.white,
-                          ))
-                    ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed("/quickNotification");
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 44,
+                        width: 104,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(15)),
+                          color: Colors.white,
+                        ),
+                        child: Text(
+                          'NO',
+                          style: TextStyle(
+                            color: Color(0xff000000),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: Get.height * 0.04),
+                TextFormField(
+                  maxLines: 1,
+                  style: GoogleFonts.roboto(
+                      color: kTitleColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(top: 25,bottom: 25,left: 20),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Start typing your school name...',
+                    hintStyle: TextStyle(
+                        fontSize: 16,
+                        color: kLightGreyColorwithMail),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none
+                    ),
+                    focusColor: Colors.white,
                   ),
                 ),
-              ),
-            ],
+          
+                SizedBox(height: Get.height * 0.12),
+
+                  DefaultButton(
+                      width: Get.width * 0.8,
+                      height: Get.height * 0.075,
+                      text: "CONTINUE",
+                      press: () {
+                        Get.toNamed("/quickNotification");
+                       
+                      }),
+          
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

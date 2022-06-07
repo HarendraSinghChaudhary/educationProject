@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -30,18 +30,35 @@ class DefaultButton extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      child:  FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: kPrimaryColor,
         onPressed: press,
-        child: Text(
-          text,
-        style: GoogleFonts.openSans(
-                        color: Colors.white,
-                        fontSize: 17,
-                         height: 1,
-                        fontWeight: FontWeight.w600),
-        ),
+        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                       const SizedBox(width: 20,),
+                        Text(
+                          text,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: kArrowBackgroundColor,
+                            ),
+                            child: const Icon(
+                              Icons.arrow_forward_outlined,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
       ),
     );
   }

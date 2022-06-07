@@ -1,5 +1,5 @@
 import 'package:demo/utils/constant.dart';
-import 'package:demo/utils/text.dart';
+import 'package:demo/utils/text_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -84,7 +84,7 @@ class _WIPCoursesState extends State<WIPCourses> {
                   child: LinearProgressIndicator(
                       backgroundColor: kLightGreyColorwithMail,
                       minHeight: Get.height * 0.017,
-                      valueColor: AlwaysStoppedAnimation<Color>(kCyanColor),
+                      valueColor:const AlwaysStoppedAnimation<Color>(kCyanColor),
                       value:  0.3,
                 ),
               ),

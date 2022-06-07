@@ -1,4 +1,4 @@
-List<dynamic> Paths =[
+List<dynamic> paths =[
   {
     "image" : "assets/images/img_5.png",
     "name" : "Social Media\nInfluencer",

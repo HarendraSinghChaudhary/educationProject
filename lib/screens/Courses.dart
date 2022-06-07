@@ -1,367 +1,114 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:demo/screens/all_courses.dart';
+import 'package:demo/screens/courses.dart';
+import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'list.dart';
+import 'learningpath.dart';
 
 class Courses extends StatefulWidget {
   const Courses({Key? key}) : super(key: key);
 
   @override
-  State<Courses> createState() => _CoursesState();
+  State<Courses> createState() => _TabbarState();
 }
 
-class _CoursesState extends State<Courses> {
-  ScrollController _controller = ScrollController();
-
+class _TabbarState extends State<Courses> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xffF3F5F9),
-        body: Scaffold(
-          backgroundColor: Color(0xffF3F5F9),
-          body: SingleChildScrollView(
-            controller: _controller,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 23, top: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Digital Marketing',
-                        style: TextStyle(
-                          color: Color(0xff344356),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 141,
-                        width: 360,
-                        child: ListView.builder(
-                            itemCount: Paths.length,
-                            scrollDirection: Axis.horizontal,
-                            controller: _controller,
+    return SafeArea(child: DefaultTabController(length: 2,
+      child: Scaffold(
+        backgroundColor: kBackgroundColor,
+        appBar: AppBar(
+          elevation: 0,
+          leadingWidth: 82,
+          leading:  Container(
+            margin:const EdgeInsets.only(top: 12,bottom: 9,left: 12),
+            alignment: Alignment.center,
+            height: 25,
+            width: 73,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(26),
+                color: Colors.white),
+            child: const Text(
+              '50 XP',
+              style: TextStyle(
+                  color: Color(0xff00D9CD),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          backgroundColor: kBackgroundColor,
 
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 21,
-                                  top: 15,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 131,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
-                                          color: Colors.white,),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 72,
-                                            width: 131,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(15)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      Paths[index]["image"]
-                                                          .toString(),
-                                                    ),
-                                                    fit: BoxFit.fill)),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            Paths[index]['name'].toString(),
-                                            style: TextStyle(
-                                              color: Color(0xff344356),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                const  Text('🔥',style: TextStyle(fontSize: 20),),
+                const  SizedBox(
+                    width: 2,
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 23, top: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Entrepreneursip',
-                        style: TextStyle(
-                          color: Color(0xff344356),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 144,
-                        width: 360,
-                        child: ListView.builder(
-                            itemCount: Paths.length,
-                            scrollDirection: Axis.horizontal,
-                            controller: _controller,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 21,
-                                  top: 15,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 131,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.white),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 72,
-                                            width: 131,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(15)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      Paths[index]["image"]
-                                                          .toString(),
-                                                    ),
-                                                    fit: BoxFit.fill)),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            Paths[index]['name'].toString(),
-                                            style: TextStyle(
-                                              color: Color(0xff344356),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 23, top: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Cryptocurrencies & NFTs',
-                        style: TextStyle(
-                          color: Color(0xff344356),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 144,
-                        width: 360,
-                        child: ListView.builder(
-                            itemCount: Paths.length,
-                            scrollDirection: Axis.horizontal,
-                            controller: _controller,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 21,
-                                  top: 15,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 131,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.white),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 72,
-                                            width: 131,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(15)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      Paths[index]["image"]
-                                                          .toString(),
-                                                    ),
-                                                    fit: BoxFit.fill)),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            Paths[index]['name'].toString(),
-                                            style: TextStyle(
-                                              color: Color(0xff344356),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 23, top: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Digital Marketing',
-                        style: TextStyle(
-                          color: Color(0xff344356),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 141,
-                        width: 360,
-                        child: ListView.builder(
-                            itemCount: Paths.length,
-                            scrollDirection: Axis.horizontal,
-                            controller: _controller,
+                  Text(
+                    '3',
+                    style: GoogleFonts.roboto(
+                        color: kSubTitleColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
 
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 21,
-                                  top: 15,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 131,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: Colors.white,),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 72,
-                                            width: 131,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                    Radius.circular(15),
-                                                    topRight:
-                                                    Radius.circular(15)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      Paths[index]["image"]
-                                                          .toString(),
-                                                    ),
-                                                    fit: BoxFit.fill)),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            Paths[index]['name'].toString(),
-                                            style: TextStyle(
-                                              color: Color(0xff344356),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
+          ],
+        ),
+        body:
+      Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+            height: 44,
+            decoration: BoxDecoration(color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: TabBar(
+              unselectedLabelStyle: const TextStyle(
+                color: kTitleColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+              indicator: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+
+              ),
+              labelColor: Colors.black,
+              // ignore: prefer_const_literals_to_create_immutables
+              tabs: [
+                Tab(
+                  text: 'LEARNING PATHS',
                 ),
-                SizedBox(
-                  height: 15,
+              
+                Tab(
+                  text: 'ALL COURSES',
                 ),
               ],
             ),
           ),
-        ));
+          Expanded(
+            // ignore: prefer_const_literals_to_create_immutables
+            child: TabBarView(children: [
+              Learningpath(),
+              AllCourses(),
+            ]),
+          )
+        ],
+      ),
+      ),
+    )
+    );
   }
 }

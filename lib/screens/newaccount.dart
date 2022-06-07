@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:demo/reusable/default_button.dart';
 import 'package:demo/utils/constant.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-import 'Login.dart';
-import 'createpassword.dart';
+
 
 class Newaccount extends StatefulWidget {
   const Newaccount({Key? key}) : super(key: key);
@@ -18,13 +18,15 @@ class Newaccount extends StatefulWidget {
 }
 
 class _NewaccountState extends State<Newaccount> {
-  final _valikey = new GlobalKey<FormState>();
+
+  // global key for validation in textfield
+  final _valikey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffF3F5F9),
+        backgroundColor: kBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
           child: SingleChildScrollView(
@@ -35,23 +37,22 @@ class _NewaccountState extends State<Newaccount> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: GestureDetector(
-                        onTap: (){
-                         Get.back();
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Color(0xff5468FF),
-                        ),
+                    GestureDetector(
+                      onTap: (){
+                       Get.back();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: kPrimaryColor,
                       ),
                     ),
                     Text(
                       'New Account',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: kTitleColor,
                         fontSize: 20,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Container(),
@@ -62,11 +63,14 @@ class _NewaccountState extends State<Newaccount> {
                 ),
                 Text(
                   'Start by entering your email\naddress below.',
+                  
                   style: GoogleFonts.roboto(
+                    height: 1.5,
                       color: kSubTitleColor,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400),
                   textAlign: TextAlign.center,
+                  
                 ),
                 SizedBox(
                   height: 75,
@@ -85,6 +89,7 @@ class _NewaccountState extends State<Newaccount> {
                       hintText: 'Email',
                       hintStyle: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.w400,
                           color: kLightGreyColorwithMail),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -107,13 +112,16 @@ class _NewaccountState extends State<Newaccount> {
                 Text(
                   'Already have an account?',
                   style: GoogleFonts.roboto(
-                      color: kSubTitleColor,
+                      color: kTitleColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w400),
                 ),
+
+                // Navigate to Login Screen or Login Class
+
                 TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+                  Get.toNamed("/signIn");
                     },
                     child: Text(
                       'SIGN IN',
@@ -122,50 +130,23 @@ class _NewaccountState extends State<Newaccount> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     )),
-                SizedBox(height:50 ,),
-                GestureDetector(
-                  onTap: () {
-                    if(_valikey.currentState!.validate()){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CreatePassword()));
+                SizedBox(height: Get.height * 0.05 ,),
+
+
+                // Navigate to Create Password Class
+                // DefaultButton is reusable class called from reusable folder
+
+                DefaultButton(
+                  width: Get.width * 0.8, 
+                  height: Get.height * 0.075, 
+                  text: "CONTINUE", 
+                  press: () {
+                      if(_valikey.currentState!.validate()){
+                      Get.toNamed("/createPassword");
                     }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(left: 50, right: 14),
-                    height: 58,
-                    width: 315,
-                    decoration: BoxDecoration(
-                      color: Color(0xff5468FF),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(),
-                        Text(
-                          'CONTINUE',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Color(0xff3D56F0),
-                            ),
-                            child: Icon(
-                              Icons.arrow_forward_outlined,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  ),
-                )
+
+                  }),
+
               ],
             ),
           ),

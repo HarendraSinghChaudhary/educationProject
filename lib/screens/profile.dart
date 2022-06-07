@@ -1,4 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -11,15 +15,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  ScrollController _controller = ScrollController();
+ final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Color(0xffF3F5F9),
+          backgroundColor: kBackgroundColor,
         body: SingleChildScrollView(
-          controller: _controller,
+      
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 15, left: 15),
@@ -33,7 +38,7 @@ class _ProfileState extends State<Profile> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(26),
                           color: Colors.white),
-                      child: Text(
+                      child: const Text(
                         '50 XP',
                         style: TextStyle(
                             color: Color(0xff00D9CD),
@@ -53,13 +58,13 @@ class _ProfileState extends State<Profile> {
                             height: 28,
                             width: 24,
                           ),
-                          SizedBox(
+                        const  SizedBox(
                             width: 2,
                           ),
                           Text(
                             '3',
                             style: GoogleFonts.roboto(
-                                color: Color(0xff344356).withOpacity(0.40),
+                                color: kSubTitleColor,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700),
                           )
@@ -69,124 +74,156 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text( 'Hi, Zayan 👋🏼',
+
+              SizedBox(height: Get.height * 0.015,),
+            const Center(
+               child:  Text( 'Hi, Zayan 👋🏼',
                   style: TextStyle(
                     color: Color(0xff344356),
                     fontSize: 24,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5 ),
-                height: 51,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 22,right: 22),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 27,
-                            width: 27,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(27),
-                              color: Color(0xffAEB8FF),
-                            ),
-                            child: Icon(
-                              Icons.help,
-                              color: Colors.white,
-                              size: 13,
-                            ),
-                          ),
-                          Container(padding: EdgeInsets.all(6),
-                              height: 27,
-                              width: 27,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(27),
-                                color: Color(0xffAEB8FF),
-                              ),
-                              child: SvgPicture.asset('assets/images/Shape.svg',)
-                          ),
-                          Container(
-                            height: 27,
-                            width: 27,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(27),
-                              color: Color(0xffAEB8FF),
-                            ),
-                            child:Icon(Icons.message,color: Colors.white,size: 18,)
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             ),
+
+              SizedBox(height: Get.height * 0.02,),
+
+              Center(
+                child: SizedBox(
+                  width: Get.width * 0.90,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Request Topic',
-                          style: TextStyle(
-                            color: Color(0xff344356),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          'Redeem Points',
-                          style: TextStyle(
-                            color: Color(0xff344356),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          'Invite Friends',
-                          style: TextStyle(
-                            color: Color(0xff344356),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+
+                          Container(
+                                height: 27,
+                                width: 27,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color:  Color(0xffAEB8FF),
+                                ),
+                                child: const Icon(
+                                  Icons.help,
+                                  color: Colors.white,
+                                  size: 13,
+                                ),
+                              ),
+
+                             const SizedBox(height: 5,),
+
+                              const Text(
+                              'Request Topic',
+                              style: TextStyle(
+                                color: Color(0xff344356),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+
 
 
                       ],
                     ),
-                  ],
+
+                       Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                            Container(padding: EdgeInsets.all(6),
+                                  height: 27,
+                                  width: 27,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(27),
+                                    color: Color(0xffAEB8FF),
+                                  ),
+                                  child: SvgPicture.asset('assets/images/Shape.svg',)
+                              ),
+
+                             const SizedBox(height: 5,),
+
+                              const Text(
+                              'Redeem Points',
+                              style: TextStyle(
+                                color: Color(0xff344356),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+
+
+
+                      ],
+                    ),
+
+                       Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                            Container(
+                                height: 27,
+                                width: 27,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(27),
+                                  color:const Color(0xffAEB8FF),
+                                ),
+                                child:const Icon(Icons.message,color: Colors.white,size: 18,)
+                              ),
+
+                             const SizedBox(height: 5,),
+
+                              const Text(
+                              'Invite Friends',
+                              style: TextStyle(
+                                color: Color(0xff344356),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+
+
+
+                      ],
+                    )
+
+                  ],),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Text(
-                      '📈 LEARNING PATH',
-                      style: TextStyle(
-                        color: Color(0xff344356),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    )
-                  ],
+           
+               SizedBox(height: Get.height * 0.02,),
+
+
+            const  Padding(
+                padding:  EdgeInsets.all(16),
+                child:  Text(
+                  '📈 LEARNING PATH',
+                  style: TextStyle(
+                    color: kTitleColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
                Row(
           children: [
-            Container(
+            SizedBox(
               height: 150,
-              width: 340,
+              width: Get.width * 0.99,
               child: ListView.builder(
-                  itemCount: Paths.length,
+                  itemCount: paths.length,
                   scrollDirection: Axis.horizontal,
                   controller: _controller,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.only(
-                        left: 20,
-                        top: 20,
+                        left: 15,
+                
                       ),
                       child: Row(
                         children: [
@@ -202,26 +239,26 @@ class _ProfileState extends State<Profile> {
                                   height: 72,
                                   width: 162,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius:const BorderRadius.only(
                                           topLeft: Radius.circular(15),
                                           topRight: Radius.circular(15)),
                                       image: DecorationImage(
                                           image: AssetImage(
-                                            Paths[index]["image"]
+                                            paths[index]["image"]
                                                 .toString(),
                                           ),
                                           fit: BoxFit.fill)),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   height: 10,
                                 ),
                                 Container(
                                   alignment: Alignment.topLeft,
-                                  padding: EdgeInsets.only(left: 15),
+                                  padding: const EdgeInsets.only(left: 15),
                                   child: Text(
-                                    Paths[index]['name'].toString(),
-                                    style: TextStyle(
-                                      color: Color(0xff344356),
+                                    paths[index]['name'].toString(),
+                                    style: const TextStyle(
+                                      color: kTitleColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -237,43 +274,33 @@ class _ProfileState extends State<Profile> {
             ),
           ],
       ),
-              SizedBox(height:24,),
-              Padding(
-                padding: const EdgeInsets.only(left: 21),
-                child: Row(
-                  children: [
-                    // Image.asset(
-                    //   'assets/images/img_3.png',
-                    //   height: 28,
-                    //   width: 24,
-                    // ),
-                    Text(
-                      '🔥 HOT COURSES',
-                      style: TextStyle(
-                        color: Color(0xff344356),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
+              SizedBox(height: Get.height * 0.01,),
+           const   Padding(
+                padding:  EdgeInsets.all(16.0),
+                child:  Text(
+                  '🔥 HOT COURSES',
+                  style: TextStyle(
+                    color: kTitleColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-              GridView.builder(
-                padding: EdgeInsets.only(left: 21,right: 21),
-                shrinkWrap: true,
-                itemCount: Hot.length,
+               GridView.builder(
+                padding: const EdgeInsets.only(left: 16,right: 16,top: 10),
+                itemCount: 4,
                 controller: _controller,
                 scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                shrinkWrap: true,
+                gridDelegate: const  SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 1.2,
-                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 14,
+                  childAspectRatio: 1.1,
+                  crossAxisSpacing: 7,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    height: 132,
-                    width: 160.53,
+                  
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.white),
@@ -281,11 +308,11 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: 81,
+                          height: 85,
                           width: 176,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(Hot[index]["image"].toString()),
+                                image: AssetImage('assets/images/img_4.png'),
                                 fit: BoxFit.fill),
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
@@ -293,54 +320,59 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 6,
+                       const SizedBox(
+                          height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 6),
-                          child: Column(
-                            children: [
-                              Text(Hot[index]["name"].toString(),
+                       const Padding(
+                          padding:  EdgeInsets.only(left: 6),
+                          child: Text(
+                                'Bitcoin & Blockchain',
                                 style: TextStyle(
-                                  color: Color(0xff344356),
+                                  color: kTitleColor,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            ],
-                          ),
                         ),
-                        SizedBox(
-                          height: 1,
+                      const  SizedBox(
+                          height: 10,
                         ),
-                        Row(
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // ignore: prefer_const_literals_to_create_immutables
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                 left: 6,
                                 bottom: 1,
                               ),
                               child: Text(
                                 '12 Shorts',
                                 style: TextStyle(
-                                  color: Color(0xff344356).withOpacity(0.40),
-                                  fontSize: 10,
+                                  color: kLightGreyColorwithMail,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 80,bottom: 3),
-                              child: Icon(Icons.bookmark_border,size: 15,),
-                            )
 
+
+                           const Icon(Icons.bookmark_border_outlined)
+                           
+                          
+                          
                           ],
                         ),
+
+                        // SizedBox(height: Get.height * 0.01,)
                       ],
                     ),
                   );
                 },
               ),
+
+              SizedBox(height: Get.height * 0.03,)
+            
             ],
           ),
         )
