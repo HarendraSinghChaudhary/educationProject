@@ -22,6 +22,8 @@ const kCyanColor = Color(0XFF00D9CD);
 const kArrowBackgroundColor = Color(0XFF3D56F0);
 const kLightGreyColorwithMail = Color(0XFFAFB7C0);
 const kBackgroundColorOfWIp = Color(0xFFEBEAF4);
+const kBackOfResourceColor = Color(0xFFEBF0F5);
+const ktitalResourceColor = Color(0xFF0A033C);
 
 
 

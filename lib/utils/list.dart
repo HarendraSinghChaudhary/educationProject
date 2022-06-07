@@ -121,3 +121,23 @@ List<dynamic>Hot = [
     "name"  : "Influencer Marketing",
   }
 ];
+
+
+List<dynamic> Recourcecenter =[
+  {
+    "image" : "assets/images/roundaskto.png",
+    "tital" : "Ask an Expert",
+    "subtital" : "Lorem Ipsum Color Dolor",
+  },
+  {
+    "image" : "assets/images/resumereviewnew.png",
+    "tital" : "Resume Review",
+    "subtital" : "Lorem Ipsum Color Dolor",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Bootcamps and Certificates",
+    "subtital" : "Lorem Ipsum Color Dolor",
+  },
+
+];

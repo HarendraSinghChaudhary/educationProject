@@ -1,7 +1,8 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:demo/screens/list.dart';
+
 import 'package:demo/utils/constant.dart';
+import 'package:demo/utils/list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -305,42 +306,48 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return Row(
                         children: [
-                          Container(
-                            width: 131,
-                            height: 140,
-                            decoration: BoxDecoration(
-                     
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 72,
-                                  width: 131,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(15),
-                                          topRight: Radius.circular(15)),
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed("/coursesEmptyScreen");
 
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                            paths[index]["image"]
-                                                .toString(),
-                                          ),
-                                          fit: BoxFit.fill)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  paths[index]['name'].toString(),
-                                  style: TextStyle(
-                                    color: kTitleColor,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
+                            },
+                            child: Container(
+                              width: 131,
+                              height: 140,
+                              decoration: BoxDecoration(
+                                               
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 72,
+                                    width: 131,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(15),
+                                            topRight: Radius.circular(15)),
+                          
+                                        image: DecorationImage(
+                                            image:AssetImage(
+                                              paths[index]["image"]
+                                                  .toString(),
+                                            ),
+                                            fit: BoxFit.fill)),
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    paths[index]['name'].toString(),
+                                    style: TextStyle(
+                                      color: kTitleColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
 

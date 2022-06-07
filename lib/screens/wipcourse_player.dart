@@ -5,14 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../utils/constant.dart';
 
-class WIPCourses extends StatefulWidget {
-  const WIPCourses({Key? key}) : super(key: key);
+
+class WIPCoursesPlayer extends StatefulWidget {
+  const WIPCoursesPlayer({Key? key}) : super(key: key);
 
   @override
-  State<WIPCourses> createState() => _WIPCoursesState();
+  State<WIPCoursesPlayer> createState() => _WIPCoursesState();
 }
 
-class _WIPCoursesState extends State<WIPCourses> {
+class _WIPCoursesState extends State<WIPCoursesPlayer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +37,7 @@ class _WIPCoursesState extends State<WIPCourses> {
                 child: Column(
                   children: [
                     Text(
-                      wipcreen,
+                     wipcreen,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: Get.height * 0.019,
@@ -84,7 +85,7 @@ class _WIPCoursesState extends State<WIPCourses> {
                   child: LinearProgressIndicator(
                       backgroundColor: kLightGreyColorwithMail,
                       minHeight: Get.height * 0.017,
-                      valueColor:const AlwaysStoppedAnimation<Color>(kCyanColor),
+                      valueColor: const AlwaysStoppedAnimation<Color>(kCyanColor),
                       value:  0.3,
                 ),
               ),

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'list.dart';
+import '../utils/list.dart';
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
