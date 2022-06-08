@@ -141,3 +141,39 @@ List<dynamic> Recourcecenter =[
   },
 
 ];
+List<dynamic> setting = [
+  {
+    "tital" : "Name",
+    "subtital" : "Antonio Pérez",
+    "icon" : "assets/images/profilesetting.svg"
+  },
+  {
+    "tital" : "Email",
+    "subtital" : "antonio@email.com",
+    "icon" : "assets/images/settingmail.svg",
+  },
+  {
+    "tital" : "Password",
+    "subtital" : "updated 2 weeks ago",
+    "icon" : "assets/images/settingpassword.svg",
+  },
+  {
+    "tital" : "Phone Number",
+    "subtital" : "+00 123 456 789",
+    "icon" : "assets/images/settingmobile.svg",
+  },
+];
+List<dynamic> settingtwo = [
+  {
+    "tital" : "Help Center",
+    "icon" : "assets/images/settinguaiton.svg"
+  },
+  {
+    "tital" : "Privacy & Terms",
+    "icon" : "assets/images/settingsafe.svg",
+  },
+  {
+    "tital" : "Contact Us",
+    "icon" : "assets/images/settingsms.svg",
+  },
+];
