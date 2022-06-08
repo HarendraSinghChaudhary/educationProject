@@ -1,21 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:demo/screens/all_courses.dart';
-import 'package:demo/screens/courses.dart';
+import 'package:demo/screens/courses/allCourses/view/all_courses.dart';
+
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'learningpath.dart';
+import '../../learningPath/view/learning_path.dart';
 
-class Courses extends StatefulWidget {
-  const Courses({Key? key}) : super(key: key);
+class CourseHeader extends StatefulWidget {
+  const CourseHeader({Key? key}) : super(key: key);
 
   @override
-  State<Courses> createState() => _TabbarState();
+  State<CourseHeader> createState() => _TabbarState();
 }
 
-class _TabbarState extends State<Courses> {
+class _TabbarState extends State<CourseHeader> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: DefaultTabController(length: 2,
@@ -101,7 +101,7 @@ class _TabbarState extends State<Courses> {
           Expanded(
             // ignore: prefer_const_literals_to_create_immutables
             child: TabBarView(children: [
-              Learningpath(),
+              LearningPath(),
               AllCourses(),
             ]),
           )

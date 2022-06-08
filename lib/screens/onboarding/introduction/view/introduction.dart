@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class IntroPage extends StatefulWidget {
-  const IntroPage({Key? key}) : super(key: key);
+class Introduction extends StatefulWidget {
+  const Introduction({Key? key}) : super(key: key);
 
   @override
-  State<IntroPage> createState() => _IntroPageState();
+  State<Introduction> createState() => _IntroPageState();
 }
 
-class _IntroPageState extends State<IntroPage> {
+class _IntroPageState extends State<Introduction> {
  
   @override
   Widget build(BuildContext context) {

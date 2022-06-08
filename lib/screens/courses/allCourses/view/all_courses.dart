@@ -2,7 +2,7 @@ import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/list.dart';
+import '../../../../utils/list.dart';
 
 class AllCourses extends StatefulWidget {
   const AllCourses({Key? key}) : super(key: key);

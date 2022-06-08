@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StartCourse extends StatefulWidget {
-  const StartCourse({Key? key}) : super(key: key);
+class CourseDetails extends StatefulWidget {
+  const CourseDetails({Key? key}) : super(key: key);
 
   @override
-  State<StartCourse> createState() => _StartCourseState();
+  State<CourseDetails> createState() => _StartCourseState();
 }
 
-class _StartCourseState extends State<StartCourse> {
+class _StartCourseState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

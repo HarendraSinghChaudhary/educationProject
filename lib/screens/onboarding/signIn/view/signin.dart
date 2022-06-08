@@ -1,21 +1,22 @@
 
+import 'package:demo/reusable/default_button.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-import '../reusable/default_button.dart';
 
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignIn> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<SignIn> {
   final _formkey = GlobalKey<FormState>();
   bool buttonk = false;
   bool _Show = true;

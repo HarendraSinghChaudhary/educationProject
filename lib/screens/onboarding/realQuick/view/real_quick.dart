@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:demo/controllers/exit_controller.dart';
+import 'package:demo/reusable/default_button.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../reusable/default_button.dart';
+
 
 
 class RealQuick extends StatefulWidget {

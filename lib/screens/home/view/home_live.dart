@@ -6,15 +6,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../utils/list.dart';
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+import '../../../utils/list.dart';
+class HomeLive extends StatefulWidget {
+  const HomeLive({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<HomeLive> createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<HomeLive> {
  final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
