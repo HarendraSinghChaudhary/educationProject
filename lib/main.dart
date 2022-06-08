@@ -11,6 +11,7 @@ import 'package:demo/screens/onboarding/realQuick/view/real_quick.dart';
 import 'package:demo/screens/onboarding/signIn/view/signin.dart';
 import 'package:demo/screens/onboarding/signUp/view/create_password.dart';
 import 'package:demo/screens/onboarding/signUp/view/new_account.dart';
+import 'package:demo/screens/quizend.dart';
 import 'package:demo/screens/resource_center.dart';
 import 'package:demo/screens/social_me_courses.dart';
 import 'package:demo/screens/social_me_people.dart';
