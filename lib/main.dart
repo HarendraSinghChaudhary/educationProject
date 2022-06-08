@@ -1,20 +1,21 @@
 
+import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
 import 'package:demo/screens/courses_all.dart';
 import 'package:demo/screens/courses_empty_screen.dart';
-import 'package:demo/screens/createpassword.dart';
 
-import 'package:demo/screens/login.dart';
-import 'package:demo/screens/quick_notification.dart';
-import 'package:demo/screens/realquick.dart';
 
-import 'package:demo/screens/home_nav.dart';
-import 'package:demo/screens/intropage.dart';
-import 'package:demo/screens/newaccount.dart';
+import 'package:demo/screens/homeNav/home_nav.dart';
+import 'package:demo/screens/onboarding/introduction/view/introduction.dart';
+import 'package:demo/screens/onboarding/realQuick/view/quick_notification.dart';
+import 'package:demo/screens/onboarding/realQuick/view/real_quick.dart';
+import 'package:demo/screens/onboarding/signIn/view/signin.dart';
+import 'package:demo/screens/onboarding/signUp/view/create_password.dart';
+import 'package:demo/screens/onboarding/signUp/view/new_account.dart';
 import 'package:demo/screens/resource_center.dart';
 import 'package:demo/screens/social_me_courses.dart';
 import 'package:demo/screens/social_me_people.dart';
 import 'package:demo/screens/socialme.dart';
-import 'package:demo/screens/start_course.dart';
+import 'package:demo/screens/courses/courseDetails/view/course_details.dart';
 import 'package:demo/screens/wipcourse_player.dart';
 import 'package:demo/screens/wipscreentwo.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Education on Demand",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const IntroPage(),
+      home: const Introduction(),
 
 
       // Application Routes
@@ -51,13 +52,13 @@ class EducationOnDemand extends StatelessWidget {
             page: () => const HomeNav(
                  
                 )),
-        GetPage(name: "/newAccount", page: () => const Newaccount(), transition: Transition.rightToLeft ),
+        GetPage(name: "/newAccount", page: () => const NewAccount(), transition: Transition.rightToLeft ),
         GetPage(name: "/createPassword", page: () => const CreatePassword(), transition: Transition.leftToRight ),
-        GetPage(name: "/signIn", page: () => const Login(), transition: Transition.rightToLeft ),
+        GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
         GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
         GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
         GetPage(name: "/homeNav", page: () => const HomeNav(), ),
-        GetPage(name: "/startCourse", page: () => const StartCourse(), ),
+        GetPage(name: "/courseHeader", page: () => const CourseHeader(), ),
         GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
         GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
         GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),

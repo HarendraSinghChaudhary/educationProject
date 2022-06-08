@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class Learningpath extends StatefulWidget {
-  const Learningpath({Key? key}) : super(key: key);
+class LearningPath extends StatefulWidget {
+  const LearningPath({Key? key}) : super(key: key);
 
   @override
-  State<Learningpath> createState() => _LearningpathState();
+  State<LearningPath> createState() => _LearningpathState();
 }
 
-class _LearningpathState extends State<Learningpath> {
+class _LearningpathState extends State<LearningPath> {
  final ScrollController _controller = ScrollController();
 
   @override
@@ -46,7 +46,7 @@ class _LearningpathState extends State<Learningpath> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.toNamed("/startCourse");
+                                Get.toNamed("/courseHeader");
                               },
                               child: Container(
                                 width: 131,

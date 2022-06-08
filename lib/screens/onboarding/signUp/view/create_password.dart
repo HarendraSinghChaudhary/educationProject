@@ -1,26 +1,27 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:demo/reusable/default_button.dart';
 import 'package:demo/utils/constant.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 
 
-class Newaccount extends StatefulWidget {
-  const Newaccount({Key? key}) : super(key: key);
+
+
+
+class CreatePassword extends StatefulWidget {
+  const CreatePassword({Key? key}) : super(key: key);
 
   @override
-  State<Newaccount> createState() => _NewaccountState();
+  State<CreatePassword> createState() => _CreatePasswordState();
 }
 
-class _NewaccountState extends State<Newaccount> {
-
-  // global key for validation in textfield
-  final _valikey = GlobalKey<FormState>();
+class _CreatePasswordState extends State<CreatePassword> {
+  RegExp regex =
+  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  bool _isObscure  = true;
+  final _formkey =  GlobalKey<FormState>();
+  bool  button = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +32,21 @@ class _NewaccountState extends State<Newaccount> {
           padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: Get.height * 0.002,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: (){
-                       Get.back();
+                        Get.back();
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: kPrimaryColor,
                       ),
                     ),
-                    Text(
-                      'New Account',
-                      textAlign: TextAlign.center,
+                    const Text(
+                      'Create Password',
                       style: TextStyle(
                         color: kTitleColor,
                         fontSize: 20,
@@ -58,68 +56,80 @@ class _NewaccountState extends State<Newaccount> {
                     Container(),
                   ],
                 ),
-                SizedBox(
+               SizedBox(
                   height: Get.height * 0.01,
                 ),
                 Text(
-                  'Start by entering your email\naddress below.',
-                  
+                  'Your password must have at\nleast one symbol & 8 or\n more characters.',
                   style: GoogleFonts.roboto(
                     height: 1.5,
                       color: kSubTitleColor,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
                   textAlign: TextAlign.center,
-                  
                 ),
-                SizedBox(
-                  height: 75,
+               const SizedBox(
+                  height: 47,
                 ),
                 Form(
-                  autovalidateMode: AutovalidateMode.always, key: _valikey,
+                  key:  _formkey,
                   child: TextFormField(
+                    obscureText: _isObscure ,
                     style: GoogleFonts.roboto(
-                        color: Color(0xff344356),
+                        color: kTitleColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 23,bottom: 23,left: 20),
+                      contentPadding:const EdgeInsets.only(top: 23,bottom: 23,left: 20),
                       fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: kLightGreyColorwithMail),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide.none
-                      ),
-                      focusColor: Colors.white,
-                    ),
-                      validator: MultiValidator(
-                        [
-                          RequiredValidator(errorText: 'Please Enter Email'),
-                          EmailValidator(errorText: 'Please enter a valid email address'),
-                        ]
-                      ),
+                        filled: true,
+                        suffixIcon: TextButton(
           
+                            onPressed: () {
+                              _isObscure= !_isObscure;
+                              setState((){});
+                            },
+                            child: Text(
+                            _isObscure?  'SHOW' :"HIDE",
+          
+                              style: GoogleFonts.roboto(
+                                  color: kLightGreyColorwithMail,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            )),
+                        hintText: 'Password',
+                        hintStyle:const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: kGreyColor),
+                        border: OutlineInputBorder(borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                    ),
+          
+                    validator: (value){
+                      if(value.toString().isEmpty){
+                        return "Please enter Password";
+                      }else if (value.toString().length <6){
+                        return 'Please Enter minimum 6 Digit';
+                      }else if (!regex.hasMatch(value!)){
+                        return "Please make a strong Password";
+                      }return null;
+                    },
+                  ),
                 ),
-                ),
-                SizedBox(
+               const SizedBox(
                   height: 50,
                 ),
                 Text(
-                  'Already have an account?',
+                  'Already have ab account?',
                   style: GoogleFonts.roboto(
                       color: kTitleColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w400),
                 ),
 
-                // Navigate to Login Screen or Login Class
-
-                TextButton(
+                 TextButton(
                     onPressed: () {
                   Get.toNamed("/signIn");
                     },
@@ -132,21 +142,26 @@ class _NewaccountState extends State<Newaccount> {
                     )),
                 SizedBox(height: Get.height * 0.05 ,),
 
-
-                // Navigate to Create Password Class
-                // DefaultButton is reusable class called from reusable folder
+                // Navigate to RealQuick class
 
                 DefaultButton(
                   width: Get.width * 0.8, 
                   height: Get.height * 0.075, 
-                  text: "CONTINUE", 
+                  text: "SIGN UP", 
                   press: () {
-                      if(_valikey.currentState!.validate()){
-                      Get.toNamed("/createPassword");
+
+                     if(_formkey.currentState!.validate()){
+                       Get.toNamed("/realQuick");
+
+                    
                     }
+                  
 
                   }),
-
+           
+          
+             
+             
               ],
             ),
           ),
