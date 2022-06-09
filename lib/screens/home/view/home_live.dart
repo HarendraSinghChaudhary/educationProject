@@ -299,7 +299,8 @@ class _ProfileState extends State<HomeLive> {
                   crossAxisSpacing: 7,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
+                  return 
+                  Container(
                   
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
