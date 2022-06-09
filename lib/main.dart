@@ -13,6 +13,7 @@ import 'package:demo/screens/onboarding/signUp/view/create_password.dart';
 import 'package:demo/screens/onboarding/signUp/view/new_account.dart';
 import 'package:demo/screens/quizend.dart';
 import 'package:demo/screens/resource_center.dart';
+import 'package:demo/screens/settings.dart';
 import 'package:demo/screens/social_me_courses.dart';
 import 'package:demo/screens/social_me_people.dart';
 import 'package:demo/screens/socialme.dart';
@@ -69,6 +70,7 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
         GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
         GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
+        GetPage(name: "/settings", page: () => const Settings() ),
      
       
       ],

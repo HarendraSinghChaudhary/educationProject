@@ -25,7 +25,11 @@ class _ProfileOneState extends State<ProfileOne> {
                 children: [
                   Padding(
                     padding:  EdgeInsets.all(Get.height*0.02),
-                    child: const Icon(Icons.settings,color: kTitleColor,),
+                    child: InkWell(
+                      onTap: (){
+                        Get.toNamed("/settings");
+                      },
+                        child: const Icon(Icons.settings,color: kTitleColor,)),
                   )
                 ],
               ),

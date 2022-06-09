@@ -2,12 +2,12 @@
 
 import 'package:demo/controllers/exit_controller.dart';
 import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
-import 'package:demo/screens/home/view/home_live.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../home/view/home.dart';
+import '../profileone.dart';
 
 
 class HomeNav extends StatefulWidget {
@@ -23,7 +23,7 @@ class _bottombarState extends State<HomeNav > {
   static const List<Widget> _widgetOption = <Widget>[
    Home(),
    CourseHeader(),
-   HomeLive(),
+    ProfileOne(),
   ];
 
   void _onitemTape(int index) {
