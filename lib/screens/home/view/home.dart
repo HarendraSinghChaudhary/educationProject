@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:demo/reusable/path_card.dart';
+import 'package:demo/reusable/trending_card.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:demo/utils/list.dart';
 import 'package:flutter/material.dart';
@@ -348,7 +349,12 @@ class _HomePageState extends State<Home> {
                   crossAxisSpacing: 7,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
+                  return 
+
+                  
+
+
+                  Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.white),
