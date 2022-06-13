@@ -27,8 +27,8 @@ class PathCard extends StatelessWidget {
                           InkWell(
                             onTap: press,
                             child: Container(
-                              width: 131,
-                              height: 140,
+                              width: Get.width*0.35,
+                              height: Get.height*0.17,
                               decoration: BoxDecoration(
                                                
                                   borderRadius: BorderRadius.circular(15),

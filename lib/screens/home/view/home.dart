@@ -26,7 +26,7 @@ class _HomePageState extends State<Home> {
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
+          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,8 +40,8 @@ class _HomePageState extends State<Home> {
                 children: [
                   Container(
                     alignment: Alignment.center,
-                    height: 35,
-                    width: 73,
+                    height: Get.height*0.045,
+                    width: Get.width*0.18,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(26),
                         color: Colors.white),
@@ -62,11 +62,11 @@ class _HomePageState extends State<Home> {
                       children: [
                         Image.asset(
                           'assets/images/img_3.png',
-                          height: 28,
-                          width: 24,
+                          height: Get.height*0.04,
+                          width: Get.width*0.1,
                         ),
                         SizedBox(
-                          width: 2,
+                          width: Get.width*0.01,
                         ),
                         Text(
                           '3',
@@ -86,15 +86,13 @@ class _HomePageState extends State<Home> {
               ),
               //user name and other icons
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: Get.width*0.001),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      // color: Colors.blue,
-                      // padding: EdgeInsets.only(left: 23),
-                      height: 150,
-                      width: 170,
+                    Container(
+                      height: Get.height *0.18,
+                      width: Get.width*0.4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -107,15 +105,15 @@ class _HomePageState extends State<Home> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: Get.height * 0.01,
                           ),
                           Row(
                             children: [
                               Container(
-                                height: 27,
-                                width: 27,
+                                height: Get.height * 0.035,
+                                width: Get.width*0.076,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(27),
+                                  shape: BoxShape.circle,
                                   color: Color(0xffAEB8FF),
                                 ),
                                 child: Icon(
@@ -125,7 +123,7 @@ class _HomePageState extends State<Home> {
                                 ),
                               ),
                               SizedBox(
-                                width: 10,
+                                width: Get.width*0.03,
                               ),
                               Text(
                                 'Request Topic',
@@ -138,23 +136,23 @@ class _HomePageState extends State<Home> {
                             ],
                           ),
                           SizedBox(
-                            height: 12,
+                            height: Get.height*0.014,
                           ),
                           Row(
                             children: [
                               Container(
                                   padding: EdgeInsets.all(6),
-                                  height: 27,
-                                  width: 27,
+                                  height: Get.height * 0.035,
+                                  width: Get.width*0.076,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(27),
+                                    shape: BoxShape.circle,
                                     color: Color(0xffAEB8FF),
                                   ),
                                   child: SvgPicture.asset(
                                     'assets/images/Shape.svg',
                                   )),
                               SizedBox(
-                                width: 10,
+                                width: Get.width*0.03,
                               ),
                               Text(
                                 'Redeem Points',
@@ -167,16 +165,16 @@ class _HomePageState extends State<Home> {
                             ],
                           ),
                           SizedBox(
-                            height: 12,
+                            height: Get.height*0.014,
                           ),
                           Row(
                             children: [
                               Container(
                                   padding: EdgeInsets.all(1),
-                                  height: 27,
-                                  width: 27,
+                                  height: Get.height * 0.035,
+                                  width: Get.width*0.076,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(27),
+                                    shape: BoxShape.circle,
                                     color: Color(0xffAEB8FF),
                                   ),
                                   child: Icon(
@@ -185,7 +183,7 @@ class _HomePageState extends State<Home> {
                                     size: 13,
                                   )),
                               SizedBox(
-                                width: 10,
+                                width: Get.width*0.03,
                               ),
                               Text(
                                 'Invite Friends',
@@ -201,8 +199,8 @@ class _HomePageState extends State<Home> {
                       ),
                     ),
                     Container(
-                      height: 144,
-                      width: 176,
+                      height: Get.height*0.177,
+                      width: Get.width*0.48,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.white,
@@ -211,11 +209,11 @@ class _HomePageState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 81,
-                            width: 176,
+                            height: Get.height*0.1,
+                            width: Get.width*0.48,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('assets/images/img_4.png'),
+                                image: AssetImage('assets/images/img_4.png',),fit: BoxFit.fill,
                               ),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(15),
@@ -224,7 +222,7 @@ class _HomePageState extends State<Home> {
                             ),
                           ),
                           SizedBox(
-                            height: 11,
+                            height: Get.height*0.015,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 16.74),
@@ -238,7 +236,7 @@ class _HomePageState extends State<Home> {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: Get.height*0.001,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,7 +276,7 @@ class _HomePageState extends State<Home> {
               //user name and other icons
 
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(left: 1,),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -297,8 +295,8 @@ class _HomePageState extends State<Home> {
                       height: Get.height * 0.02,
                     ),
                     SizedBox(
-                      height: 144,
-                      width: 360,
+                      height: Get.height * 0.166,
+                      width: Get.width*0.9,
                       child: ListView.builder(
                           itemCount: paths.length,
                           scrollDirection: Axis.horizontal,
@@ -309,11 +307,11 @@ class _HomePageState extends State<Home> {
                                 press: () {
                                   Get.toNamed("/coursesEmptyScreen");
                                 },
-                                image: paths[index]["image"].toString());
+                                image: paths[index]["image"].toString(),);
                           }),
                     ),
                     SizedBox(
-                      height: Get.height * 0.03,
+                      height: Get.height * 0.02,
                     ),
                     Text(
                       '🔥 TRENDING',
@@ -344,9 +342,9 @@ class _HomePageState extends State<Home> {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 14,
+                  mainAxisSpacing: Get.width*0.02,
                   childAspectRatio: 1.1,
-                  crossAxisSpacing: 7,
+                  crossAxisSpacing: Get.height*0.01,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return 
@@ -362,8 +360,8 @@ class _HomePageState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: 85,
-                          width: 176,
+                          height: Get.height * 0.1,
+                          width:  Get.width * 0.44,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage('assets/images/img_4.png'),
@@ -378,7 +376,7 @@ class _HomePageState extends State<Home> {
                           height: 10,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 6),
+                          padding:  EdgeInsets.only(left: Get.width*0.02),
                           child: Column(
                             children: [
                               Text(
@@ -393,14 +391,14 @@ class _HomePageState extends State<Home> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height:Get.height*0.01,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 6,
+                              padding:  EdgeInsets.only(
+                                left: Get.width*0.02,
                                 bottom: 1,
                               ),
                               child: Text(
@@ -415,11 +413,11 @@ class _HomePageState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 1.3),
                               child: Container(
-                                width: 38,
+                                width: Get.width*0.1,
                                 child: Stack(
                                   children: [
                                     Positioned(
-                                        right: 15,
+                                        right:  Get.width*0.038,
                                         child: CircleAvatar(
                                           radius: 8,
                                           backgroundImage: AssetImage(
@@ -427,9 +425,9 @@ class _HomePageState extends State<Home> {
                                           ),
                                         )),
                                     Container(
-                                      padding: EdgeInsets.only(top: 2.5),
-                                      height: 16,
-                                      width: 16,
+                                      padding: EdgeInsets.only(top: Get.height*0.0001),
+                                      height: Get.height*0.02,
+                                      width:Get.width*0.049,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: Colors.white,

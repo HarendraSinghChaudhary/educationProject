@@ -2,6 +2,7 @@
 import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
 import 'package:demo/screens/courses_all.dart';
 import 'package:demo/screens/courses_empty_screen.dart';
+import 'package:demo/screens/flashscreen.dart';
 
 
 import 'package:demo/screens/homeNav/home_nav.dart';
@@ -42,7 +43,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Education on Demand",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const Introduction(),
+      home: const Flashcard(),
 
 
       // Application Routes

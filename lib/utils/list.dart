@@ -177,3 +177,24 @@ List<dynamic> settingtwo = [
     "icon" : "assets/images/settingsms.svg",
   },
 ];
+List<dynamic> Quiz = [
+  {
+    "tital" : "Bitcoin is built on a technology called:",
+    "optino1" : "The Reserve Bank",
+    "optino" : "The Blockhain",
+    "optino3" : "The Cloud",
+  },
+  {
+    "tital" : "The International Literacy Day is observed on",
+    "optino1" : "Sep 8",
+    "optino2" : "Nov 28",
+    "optino3" : "Sep 22",
+  },
+  {
+    "tital" : "The language of Lakshadweep. a Union Territory of India, is",
+    "ontion1" : "Tamil",
+    "ontion2" : "Hindi",
+    "optino3" : "Malayalam",
+  },
+
+];
