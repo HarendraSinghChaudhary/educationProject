@@ -17,8 +17,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 
 class HomeNav extends StatefulWidget {
-  // var index;
-  // HomeNav({required this.index});
+  var index;
+  HomeNav({required this.index});
   @override
   _HomeNavState createState() => _HomeNavState();
 }
@@ -35,12 +35,16 @@ class _HomeNavState extends State<HomeNav> {
   ];
 
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   widget.index == _index;
-    
-  // }
+  @override
+  void initState() {
+    super.initState();
+    if (widget.index != null) {
+      _index = widget.index;
+
+
+      // runApi();
+    }
+  }
 
   //LanguageChange languageChange = new LanguageChange();
   GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');

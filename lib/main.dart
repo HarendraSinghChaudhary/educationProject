@@ -49,7 +49,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Education on Demand",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home:HomeNav(),
+      home:HomeNav(index: 0,),
 
 
       // Application Routes
@@ -58,7 +58,7 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/", page: () =>const EducationOnDemand()),
         GetPage(
             name: "/homeNav",
-            page: () =>  HomeNav(
+            page: () =>  HomeNav(index: 0,
                  
                 )),
         GetPage(name: "/newAccount", page: () => const NewAccount(), transition: Transition.rightToLeft ),
@@ -66,7 +66,7 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
         GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
         GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
-        GetPage(name: "/homeNav", page: () =>  HomeNav(), ),
+        // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
         GetPage(name: "/courseHeader", page: () => const CourseHeader(), ),
         GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
         GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
