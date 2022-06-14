@@ -26,7 +26,13 @@ class _SettingsState extends State<Settings> {
               color: kTitleColor, fontWeight: FontWeight.w600, fontSize: 20),
         ),
         centerTitle: true,
-        leading: Icon(Icons.arrow_back),
+        leading: InkWell
+
+        (
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(Icons.arrow_back)),
         actions: [
           Padding(
             padding:  EdgeInsets.only(right: Get.width*0.04),

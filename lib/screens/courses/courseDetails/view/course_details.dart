@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CourseDetails extends StatefulWidget {
@@ -117,8 +118,9 @@ class _StartCourseState extends State<CourseDetails> {
               ),
             ),
             SizedBox(height: 9,),
-            GestureDetector(
+            InkWell(
               onTap: (){
+                Get.toNamed("/flashCard");
                 },
               child: Container(
                 alignment: Alignment.center,
