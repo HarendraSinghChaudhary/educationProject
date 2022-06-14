@@ -68,7 +68,8 @@ class _Courses_infoState extends State<CoursesEmptyScreen> {
                    SocialmeCourses()
                  
                   ],
-                )),
+                )
+                ),
                 //TabBarView Code end
               ],
             ),
