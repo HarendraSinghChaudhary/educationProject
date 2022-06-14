@@ -225,49 +225,50 @@ class _ProfileState extends State<HomeLive> {
                         left: 15,
                 
                       ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 150,
-                            height: 141,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 72,
-                                  width: 162,
-                                  decoration: BoxDecoration(
-                                      borderRadius:const BorderRadius.only(
-                                          topLeft: Radius.circular(15),
-                                          topRight: Radius.circular(15)),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                            paths[index]["image"]
-                                                .toString(),
-                                          ),
-                                          fit: BoxFit.fill)),
-                                ),
-                               const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: const EdgeInsets.only(left: 15),
-                                  child: Text(
-                                    paths[index]['name'].toString(),
-                                    style: const TextStyle(
-                                      color: kTitleColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                      child: InkWell(
+                        onTap: (){
+                          Get.toNamed("/courseDetails");
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 141,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 72,
+                                width: 162,
+                                decoration: BoxDecoration(
+                                    borderRadius:const BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15)),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                          paths[index]["image"]
+                                              .toString(),
+                                        ),
+                                        fit: BoxFit.fill)),
+                              ),
+                             const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Text(
+                                  paths[index]['name'].toString(),
+                                  style: const TextStyle(
+                                    color: kTitleColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     );
                   }),

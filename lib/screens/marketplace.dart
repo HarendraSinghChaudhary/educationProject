@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -95,7 +97,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                           Text(
                             'Marketplace',
                             style: TextStyle(
-                              fontSize: Get.height * 0.04,
+                              fontSize: 28,
                               fontWeight: FontWeight.w600,
                               color: ktitalResourceColor,
                             ),
@@ -105,7 +107,9 @@ class _MarketPlaceState extends State<MarketPlace> {
                           ),
                           Text(
                             'Redeem points for offers\nexclusively for Ambitious App\nmembers.',
-                            style: TextStyle(color: ksubtitamarketColor,fontSize: 12),
+                            style: TextStyle(color: ksubtitamarketColor, fontSize: 12,
+                            height: 1.3
+                            ),
                           )
                         ],
                       ),
@@ -153,14 +157,14 @@ class _MarketPlaceState extends State<MarketPlace> {
                         '1 Month Free Shopify',
                         style: TextStyle(
                           color: kTitleColor,
-                          fontSize: 16,
+                          fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                     subtitle: Text(
                       ' Try to start your own\n business on Shopify for free.',
-                      style: TextStyle(color: ksubtitamarketColor, fontSize: 13,),
+                      style: TextStyle(color: ksubtitamarketColor, fontSize: 11, height: 1.4),
                     ),
                     trailing: Text(
                       '150 XP',

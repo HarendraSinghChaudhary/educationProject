@@ -46,7 +46,7 @@ class _LearningpathState extends State<LearningPath> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.toNamed("/courseHeader");
+                                // Get.toNamed("/courseHeader");
                               },
                               child: Container(
                                 width: 131,
@@ -104,7 +104,7 @@ class _LearningpathState extends State<LearningPath> {
                Text(
                       'Social Media Influencer Learning Path',
                       style: TextStyle(
-                        wordSpacing: 5,
+                        wordSpacing: 1,
                         color: kTitleColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

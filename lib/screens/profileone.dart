@@ -51,7 +51,7 @@ class _ProfileOneState extends State<ProfileOne> {
                   const Text('134,679 XP',style: TextStyle(fontSize: 20,color: kSubTitleColor,fontWeight: FontWeight.w500),),
                   SizedBox(height: Get.height*0.01,),
                   Container(
-                    margin: EdgeInsets.only(top:Get.height*0.02,left:Get.width*0.06,right: Get.width*0.06 ),
+                    margin: EdgeInsets.only(top:Get.height*0.02,left:Get.width*0.05,right: Get.width*0.05 ),
                     height: Get.height * 0.06,
                     decoration: BoxDecoration(
                       color: kWhiteColor,
@@ -64,7 +64,7 @@ class _ProfileOneState extends State<ProfileOne> {
                       ),
                       unselectedLabelStyle: const TextStyle(
                         color: kSubTitleColor,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w400,
                       ), tabs: const [
                       Tab(
@@ -76,6 +76,7 @@ class _ProfileOneState extends State<ProfileOne> {
                       Tab(
                         text: 'WIP',
                       ),
+                     
                     ],
                     ),
                   ),
@@ -87,6 +88,7 @@ class _ProfileOneState extends State<ProfileOne> {
                       ProfileCompleted(),
                       ProfileCompleted(),
                       ProfileCompleted(),
+              
 
                     ],
                   ))
