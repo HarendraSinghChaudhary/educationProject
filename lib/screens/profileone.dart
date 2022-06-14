@@ -58,13 +58,16 @@ class _ProfileOneState extends State<ProfileOne> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child:  TabBar(
+                      automaticIndicatorColorAdjustment: false,
+                      indicatorPadding: EdgeInsets.zero,
                       labelColor: Colors.black,
                       indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(0),
                       ),
+                      
                       unselectedLabelStyle: const TextStyle(
                         color: kSubTitleColor,
-                        fontSize: 13,
+                        fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ), tabs: const [
                       Tab(

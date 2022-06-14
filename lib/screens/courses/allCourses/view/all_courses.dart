@@ -57,7 +57,7 @@ class _CoursesState extends State<AllCourses> {
                                    children: [
                                      InkWell(
                                        onTap: () {
-                                         Get.toNamed("/startCourse");
+                                        //  Get.toNamed("/startCourse");
                                        },
                                        child: Container(
                                       
@@ -135,7 +135,7 @@ class _CoursesState extends State<AllCourses> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            Get.toNamed("/startCourse");
+                                            // Get.toNamed("/startCourse");
                                           },
                                           child: Container(
                                             width: 131,
@@ -212,7 +212,7 @@ class _CoursesState extends State<AllCourses> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            Get.toNamed("/startCourse");
+                                            // Get.toNamed("/startCourse");
                                           },
                                           child: Container(
                                             width: 131,
