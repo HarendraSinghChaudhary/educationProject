@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../reusable/home_header.dart';
+
 class ResourceCenter extends StatefulWidget {
   const ResourceCenter({Key? key}) : super(key: key);
 
@@ -28,53 +30,7 @@ class _ResourcecenterState extends State<ResourceCenter> {
           child: Column(
             children: [
               //50XP icons and notifiation icon  like appbar top start
-
-              SizedBox(height: Get.height * 0.01,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: Get.height * 0.05,
-                    width: Get.width * 0.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        color: Colors.white),
-                    child: const Text(
-                      '50 XP',
-                      style: TextStyle(
-                          color: Color(0xff00D9CD),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: Get.height * 0.05,
-                    width: Get.width * 0.2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/img_3.png',
-                          height: Get.height * 0.090,
-                          width: Get.width * 0.070,
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.01,
-                        ),
-                        Text(
-                          '3',
-                          style: GoogleFonts.roboto(
-                              color:  const Color(0xff344356).withOpacity(0.40),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+              HomeHeader(),
               //50XP icons and notifiation icon  like appbar top start
               //Recource center box  Start
               Container(

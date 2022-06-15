@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../reusable/home_header.dart';
 import '../../../utils/list.dart';
 class HomeLive extends StatefulWidget {
   const HomeLive({Key? key}) : super(key: key);
@@ -26,54 +27,7 @@ class _ProfileState extends State<HomeLive> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15, left: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 73,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(26),
-                          color: Colors.white),
-                      child: const Text(
-                        '50 XP',
-                        style: TextStyle(
-                            color: Color(0xff00D9CD),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 73,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/img_3.png',
-                            height: 28,
-                            width: 24,
-                          ),
-                        const  SizedBox(
-                            width: 2,
-                          ),
-                          Text(
-                            '3',
-                            style: GoogleFonts.roboto(
-                                color: kSubTitleColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              HomeHeader(),
 
               SizedBox(height: Get.height * 0.015,),
             const Center(

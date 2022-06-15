@@ -3,16 +3,17 @@ import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
 import 'package:demo/screens/courses_all.dart';
 import 'package:demo/screens/courses_empty_screen.dart';
 import 'package:demo/screens/flash_card.dart';
-
-
-
+import 'package:demo/screens/home/view/home.dart';
+import 'package:demo/screens/home/view/home_live.dart';
 import 'package:demo/screens/homeNav/home_nav.dart';
+import 'package:demo/screens/marketplace.dart';
 import 'package:demo/screens/onboarding/introduction/view/introduction.dart';
 import 'package:demo/screens/onboarding/realQuick/view/quick_notification.dart';
 import 'package:demo/screens/onboarding/realQuick/view/real_quick.dart';
 import 'package:demo/screens/onboarding/signIn/view/signin.dart';
 import 'package:demo/screens/onboarding/signUp/view/create_password.dart';
 import 'package:demo/screens/onboarding/signUp/view/new_account.dart';
+import 'package:demo/screens/profile_edit.dart';
 import 'package:demo/screens/quiz_end.dart';
 import 'package:demo/screens/resource_center.dart';
 import 'package:demo/screens/settings.dart';
@@ -49,7 +50,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Education on Demand",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home:HomeNav(index: 0,),
+      home:Introduction(),
 
 
       // Application Routes

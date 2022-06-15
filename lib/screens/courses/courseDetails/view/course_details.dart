@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../reusable/home_header.dart';
+
 class CourseDetails extends StatefulWidget {
   const CourseDetails({Key? key}) : super(key: key);
 
@@ -17,52 +19,9 @@ class _StartCourseState extends State<CourseDetails> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffF3F5F9),
-        appBar: AppBar(
-          elevation: 0,
-          leadingWidth: 82,
-          leading: Container(
-            margin: const EdgeInsets.only(top: 12, bottom: 9, left: 12),
-            alignment: Alignment.center,
-            height: 25,
-            width: 73,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26), color: Colors.white),
-            child: const Text(
-              '50 XP',
-              style: TextStyle(
-                  color: Color(0xff00D9CD),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          backgroundColor: Color(0xffE5E5E5).withOpacity(0),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                const  Text(
-                    '🔥',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                const  SizedBox(
-                    width: 2,
-                  ),
-                  Text(
-                    '3',
-                    style: GoogleFonts.roboto(
-                        color: Color(0xff344356).withOpacity(0.40),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
         body: Column(
           children: [
+            HomeHeader(),
          Container(
               width: 375,
               height: 175,

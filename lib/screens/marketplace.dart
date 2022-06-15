@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
+import '../reusable/home_header.dart';
+
 class MarketPlace extends StatefulWidget {
   const MarketPlace({Key? key}) : super(key: key);
 
@@ -24,54 +26,7 @@ class _MarketPlaceState extends State<MarketPlace> {
           child: Column(
             children: [
               // Appbar container 50Xp and notification icon code Start
-              Padding(
-                padding: EdgeInsets.all(Get.height * 0.01),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: Get.height * 0.047,
-                      width: Get.width * 0.2,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(26),
-                          color: Colors.white),
-                      child: const Text(
-                        '50 XP',
-                        style: TextStyle(
-                            color: Color(0xff00D9CD),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: Get.height * 0.047,
-                      width: Get.width * 0.2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/img_3.png',
-                            height: Get.height * 0.037,
-                            width: Get.width * 0.1,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.01,
-                          ),
-                          Text(
-                            '3',
-                            style: GoogleFonts.roboto(
-                                color: kSubTitleColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              HomeHeader(),
               // Appbar container 50Xp and notification icon code End
               Container(
                 margin: EdgeInsets.symmetric(

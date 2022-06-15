@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:demo/reusable/home_header.dart';
 import 'package:demo/reusable/path_card.dart';
 import 'package:demo/reusable/trending_card.dart';
 import 'package:demo/utils/constant.dart';
@@ -31,55 +32,7 @@ class _HomePageState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // topbar 50Xp and notification icon
-
-              SizedBox(
-                height: Get.height * 0.01,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: Get.height*0.045,
-                    width: Get.width*0.18,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        color: Colors.white),
-                    child: const Text(
-                      '50 XP',
-                      style: TextStyle(
-                          color: Color(0xff00D9CD),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 35,
-                    width: 73,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/img_3.png',
-                          height: Get.height*0.04,
-                          width: Get.width*0.1,
-                        ),
-                        SizedBox(
-                          width: Get.width*0.01,
-                        ),
-                        Text(
-                          '3',
-                          style: GoogleFonts.roboto(
-                              color: kSubTitleColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+              HomeHeader(),
               //topbar 50Xp and notification icon
               SizedBox(
                 height: Get.height * 0.02,
