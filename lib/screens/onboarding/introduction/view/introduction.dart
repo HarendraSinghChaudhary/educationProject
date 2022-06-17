@@ -3,20 +3,52 @@
 import 'dart:io';
 
 import 'package:demo/utils/constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
 
+
+
+
   @override
   State<Introduction> createState() => _IntroPageState();
 }
 
+
 class _IntroPageState extends State<Introduction> {
- 
+ Future googleLogin() async {
+    print("googleLogin method Called");
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    try {
+      var reslut = await _googleSignIn.signIn();
+      if (reslut != null) {
+        final userData = await reslut.authentication;
+        final credential = GoogleAuthProvider.credential(
+            accessToken: userData.accessToken, idToken: userData.idToken);
+        var finalResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        print("Result $reslut");
+        print(reslut.displayName);
+        print(reslut.email);
+        print(reslut.photoUrl);
+        return true;
+      }
+    return false;
+
+
+    } catch (error) {
+      print(error);
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,43 +113,52 @@ class _IntroPageState extends State<Introduction> {
             SizedBox(
               height: 43,
             ),
-            Container(
-              padding: EdgeInsets.only(left: 2),
-              height: 56,
-              width: 277,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2),
-                color: Color(0xff4f86eb),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    height: 53,
-                    width: 53,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: Colors.white,
-                    ),
-                    child: Image.asset(
-                      'assets/images/googlelogog.png',
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10,right: 25),
-                    child: Text(
-                      'Sign in with Google',
-                      style: TextStyle(
+            InkWell(
+              onTap: (){
+                googleLogin().then((value) {
+                  if(value){
+                    Get.toNamed("/quickNotification");
+                  }
+                });
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 2),
+                height: 56,
+                width: 277,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  color: Color(0xff4f86eb),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      height: 53,
+                      width: 53,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
                         color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                      ),
+                      child: Image.asset(
+                        'assets/images/googlelogog.png',
+                        height: 10,
+                        width: 10,
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10,right: 25),
+                      child: Text(
+                        'Sign in with Google',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -138,26 +179,12 @@ class _IntroPageState extends State<Introduction> {
             ),
       
           // Navigate to New Account Class
-            GestureDetector(
-              onTap: () {
-      
-               Get.toNamed("/newAccount");
-           
-              },
-              child: Text(
-                'SIGN UP WITH EMAIL',
-                style: TextStyle(
-                  height: 1.5,
-                  wordSpacing: 1,
-                  color: kLightGreyColorwithMail,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
+
           ],
         ),
       ),
     );
   }
+
+
 }

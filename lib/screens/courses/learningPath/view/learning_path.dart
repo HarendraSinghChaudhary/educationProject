@@ -16,6 +16,8 @@ class LearningPath extends StatefulWidget {
 }
 
 class _LearningpathState extends State<LearningPath> {
+
+  bool isVisible = false;
  final ScrollController _controller = ScrollController();
 
   @override
@@ -46,7 +48,10 @@ class _LearningpathState extends State<LearningPath> {
                           children: [
                             InkWell(
                               onTap: () {
-                                // Get.toNamed("/courseHeader");
+                                setState(() {
+                                  isVisible = true;
+                                });
+                                // Get.toNamed('/wipCoursePlayerNew');
                               },
                               child: Container(
                                 width: 131,
@@ -95,85 +100,99 @@ class _LearningpathState extends State<LearningPath> {
               SizedBox(
                 height: Get.height * 0.03,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 23),
-                child: Row(
-                  // ignore: prefer_const_literals_to_create_immutables
+              Visibility(
+                visible: isVisible,
+                child: Column(
                   children: [
-                  
-               Text(
-                      'Social Media Influencer Learning Path',
-                      style: TextStyle(
-                        wordSpacing: 1,
-                        color: kTitleColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 23),
+                      child: Row(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+
+                     Text(
+                            'Social Media Influencer Learning Path',
+                            style: TextStyle(
+                              wordSpacing: 1,
+                              color: kTitleColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+
+                    SizedBox(height: Get.height * 0.02,),
+                    GridView.builder(
+                      padding: EdgeInsets.only(left: 21, right: 16, top: 10),
+                      itemCount: 6,
+                      controller: _controller,
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        childAspectRatio: 1.15,
+                        crossAxisSpacing: 20,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: (){
+                             Get.toNamed('/wipCoursePlayerNew');
+                          },
+                          child: Container(
+
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 81,
+                                  width: 176,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/images/img_4.png'),
+                                        fit: BoxFit.fill),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10, right: 10),
+                                  child: Text(
+                                    'iPhone Photography for Creators',
+                                    maxLines: 2,
+
+                                    style: TextStyle(
+                                      height: 1.2,
+                                      color: Color(0xff344356),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
                     ),
                   ],
                 ),
               ),
 
-              SizedBox(height: Get.height * 0.02,),
-              GridView.builder(
-                padding: EdgeInsets.only(left: 21, right: 16, top: 10),
-                itemCount: 6,
-                controller: _controller,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 1.15,
-                  crossAxisSpacing: 20,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                  
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 81,
-                          width: 176,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/img_4.png'),
-                                fit: BoxFit.fill),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: Text(
-                            'iPhone Photography for Creators',
-                            maxLines: 2,
 
-                            style: TextStyle(
-                              height: 1.2,
-                              color: Color(0xff344356),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 30,
-              ),
               Center(
                 child: InkWell(
                   onTap: () {},

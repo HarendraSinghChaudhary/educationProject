@@ -46,7 +46,7 @@ class _EditProfileState extends State<EditProfile> {
                 'Change your information',
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    color: kPrimaryColor,
+                    color:  kTitleColor,
                     fontSize: 27,
                     fontWeight: FontWeight.w700),
               ),

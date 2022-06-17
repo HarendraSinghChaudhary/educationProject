@@ -29,8 +29,8 @@ class _HomeNavState extends State<HomeNav> {
   List widgets = <Widget>[
    HomeLive(),
    CourseHeader(),
-   MarketPlace(),
-   ResourceCenter(),
+   // MarketPlace(),
+   // ResourceCenter(),
    ProfileOne(),
   ];
 
@@ -104,30 +104,30 @@ class _HomeNavState extends State<HomeNav> {
     
                   //Enquiry
                   label: "Courses"),
-              BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(bottom: 4.0),
-                    child: SvgPicture.asset(
-                      'assets/icons/market.svg',
-                      width: 22,
-                      color: _index == 2 ? kPrimaryColor : kTitleColor,
-                    ),
-                  ),
-    
-                  //Property
-                  label: "Market"),
-              BottomNavigationBarItem(
-                  icon: Padding(
-                   padding: EdgeInsets.only(bottom: 5.0),
-                    child: SvgPicture.asset(
-                      'assets/icons/help.svg',
-                      width: 20,
-                      color: _index == 3 ? kPrimaryColor : kTitleColor,
-                    ),
-                  ),
-    
-                  //Menu
-                  label: "Resources"),
+              // BottomNavigationBarItem(
+              //     icon: Padding(
+              //       padding: EdgeInsets.only(bottom: 4.0),
+              //       child: SvgPicture.asset(
+              //         'assets/icons/market.svg',
+              //         width: 22,
+              //         color: _index == 2 ? kPrimaryColor : kTitleColor,
+              //       ),
+              //     ),
+              //
+              //     //Property
+              //     label: "Market"),
+              // BottomNavigationBarItem(
+              //     icon: Padding(
+              //      padding: EdgeInsets.only(bottom: 5.0),
+              //       child: SvgPicture.asset(
+              //         'assets/icons/help.svg',
+              //         width: 20,
+              //         color: _index == 3 ? kPrimaryColor : kTitleColor,
+              //       ),
+              //     ),
+              //
+              //     //Menu
+              //     label: "Resources"),
               BottomNavigationBarItem(
                   icon: Padding(
                    padding: EdgeInsets.only(bottom: 3.0),

@@ -1,7 +1,9 @@
 
 import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
+import 'package:demo/screens/courses/wip-course-player-new.dart';
 import 'package:demo/screens/courses_all.dart';
 import 'package:demo/screens/courses_empty_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:demo/screens/flash_card.dart';
 import 'package:demo/screens/home/view/home.dart';
 import 'package:demo/screens/home/view/home_live.dart';
@@ -27,7 +29,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -81,6 +85,10 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/settings", page: () => const Settings() ),
         GetPage(name: "/flashCard", page: () => const FlashCard() ),
         GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
+        GetPage(name: "/editprofile", page: () => const EditProfile() ),
+        GetPage(name: "/introduction", page: () => const Introduction() ),
+        GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
+        GetPage(name: "/homeLive", page: () => const HomeLive() ),
 
      
       

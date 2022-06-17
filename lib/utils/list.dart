@@ -152,11 +152,11 @@ List<dynamic> setting = [
     "subtital" : "antonio@email.com",
     "icon" : "assets/images/settingmail.svg",
   },
-  {
-    "tital" : "Password",
-    "subtital" : "updated 2 weeks ago",
-    "icon" : "assets/images/settingpassword.svg",
-  },
+  // {
+  //   "tital" : "Password",
+  //   "subtital" : "updated 2 weeks ago",
+  //   "icon" : "assets/images/settingpassword.svg",
+  // },
   {
     "tital" : "Phone Number",
     "subtital" : "+00 123 456 789",
@@ -196,5 +196,32 @@ List<dynamic> Quiz = [
     "ontion2" : "Hindi",
     "optino3" : "Malayalam",
   },
+
+];
+List<dynamic> Wiptital = [
+  { "tital" : "Bitcoin is decentralized finance made for"
+      "the 21st century.",},
+  { "tital" : "There are 21 million bitcoin in circulation."
+      "No more can be made.",},
+  { "tital" : "The bitcoin currency is built on"
+      "something called the “blockchain”",},
+  { "tital" : "The blockchain is a decentralized ledger."
+      "Which means everyone on the network"
+      "knows how much bitcoin everyone else"
+       " has",},
+  { "tital" : "It is assumed that the emission of Bitcoin"
+      "will stop in 2140",},
+  { "tital" : "Bitcoin is decentralized finance made for"
+      "the 21st century.",},
+  { "tital" : "There are 21 million bitcoin in circulation."
+      "No more can be made.",},
+  { "tital" : "The bitcoin currency is built on"
+      "something called the “blockchain”",},
+  { "tital" : "The blockchain is a decentralized ledger."
+      "Which means everyone on the network"
+      "knows how much bitcoin everyone else"
+      " has",},
+  { "tital" : "It is assumed that the emission of Bitcoin"
+      "will stop in 2140",},
 
 ];

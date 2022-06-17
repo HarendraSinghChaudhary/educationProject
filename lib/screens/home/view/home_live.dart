@@ -181,7 +181,7 @@ class _ProfileState extends State<HomeLive> {
                       ),
                       child: InkWell(
                         onTap: (){
-                          Get.toNamed("/courseDetails");
+                          Get.toNamed('/wipCoursePlayerNew');
                         },
                         child: Container(
                           width: 150,

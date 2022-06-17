@@ -25,6 +25,7 @@
   const kBackOfResourceColor = Color(0xFFEBF0F5);
   const ktitalResourceColor = Color(0xFF0A033C);
   const ksubtitamarketColor = Color(0xFF7c8894);
+  const kiconscolor = Color(0xFF494B4F);
 
 
 
