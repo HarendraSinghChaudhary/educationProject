@@ -3,6 +3,8 @@ import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
 import 'package:demo/screens/courses/wip-course-player-new.dart';
 import 'package:demo/screens/courses_all.dart';
 import 'package:demo/screens/courses_empty_screen.dart';
+import 'package:demo/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
+import 'package:demo/screens/onboarding/realQuick/view/on-boarding-next-page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:demo/screens/flash_card.dart';
 import 'package:demo/screens/home/view/home.dart';
@@ -89,6 +91,8 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/introduction", page: () => const Introduction() ),
         GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
         GetPage(name: "/homeLive", page: () => const HomeLive() ),
+        GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
+        GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
 
      
       

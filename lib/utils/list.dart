@@ -225,3 +225,38 @@ List<dynamic> Wiptital = [
       "will stop in 2140",},
 
 ];
+List<dynamic> onboarding =[
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Crypto and NFTs",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Marketing & Social Media",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Software Development",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Finance & Investing",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "UI/UX Design",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Startups & Business",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Software Development",
+  },
+  {
+    "image" : "assets/images/bootcampsandcertificates.png",
+    "tital" : "Software Development",
+  },
+
+];

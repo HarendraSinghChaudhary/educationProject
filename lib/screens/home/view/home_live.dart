@@ -16,6 +16,7 @@ class HomeLive extends StatefulWidget {
 }
 
 class _ProfileState extends State<HomeLive> {
+  bool bookmark =  false;
  final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -313,7 +314,13 @@ class _ProfileState extends State<HomeLive> {
                             ),
 
 
-                           const Icon(Icons.bookmark_border_outlined)
+                            InkWell(
+                              onTap:(){
+                                setState( (){
+                                  bookmark  = !bookmark;
+                                });
+                              },
+                                child: bookmark == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
                            
                           
                           
