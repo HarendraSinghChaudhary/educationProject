@@ -29,7 +29,6 @@ class _QuizendState extends State<QuizEnd> {
               width: Get.width * 0.99,
               height: Get.height * 0.99,
               child: Lottie.asset('assets/icons/confetti.json', )),
-              
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
