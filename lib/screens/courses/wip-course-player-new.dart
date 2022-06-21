@@ -12,12 +12,29 @@ class WipCoursePlayerNew extends StatefulWidget {
   State<WipCoursePlayerNew> createState() => _WipCoursePlayerNewState();
 }
 
-class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
+class _WipCoursePlayerNewState extends State<WipCoursePlayerNew>
+    with TickerProviderStateMixin {
   bool like = false;
+
+  AnimationController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _controller?.addListener(() {
+      print(_controller?.value);
+      //  if the full duration of the animation is 8 secs then 0.5 is 4 secs
+      if (double.parse(_controller!.value.toString()) > 0.5) {
+// When it gets there hold it there.
+        _controller?.value = 0.5;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    ScrollController _controller = ScrollController();
+    ScrollController _controllerr = ScrollController();
     return Container(
       color: kBackgroundColor,
       child: SafeArea(
@@ -49,7 +66,7 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                                   color: kBlackColor.withOpacity(0.20),
                                   blurRadius: 1)
                             ]),
-                        child: Icon(
+                        child: const Icon(
                           Icons.close_rounded,
                           size: 17,
                           color: kiconscolor,
@@ -73,7 +90,7 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       height: h * 0.03,
                       width: w * 0.065,
                       decoration: BoxDecoration(
@@ -99,7 +116,7 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                                 color: kBlackColor.withOpacity(0.20),
                                 blurRadius: 1)
                           ]),
-                      child: Icon(
+                      child: const Icon(
                         Icons.share_outlined,
                         size: 17,
                         color: kiconscolor,
@@ -112,7 +129,7 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                 height: h * 0.02,
               ),
               ListView.builder(
-                  controller: _controller,
+                  controller: _controllerr,
                   itemCount: 5,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
@@ -130,10 +147,10 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                                   color: kWhiteColor,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(15),
+                                  padding: const EdgeInsets.all(15),
                                   child: Text(
                                     Wiptital[index]["tital"].toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: ktitalResourceColor,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400),
@@ -148,7 +165,7 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                               child: Container(
                                 width: w * 0.1,
                                 height: h * 0.060,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: kBackgroundColor,
                                 ),
@@ -159,16 +176,26 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew> {
                                     });
                                   },
                                   child: Padding(
-                                    padding: EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
                                     child: CircleAvatar(
-                                      child: like==false ? Icon(
-                                        Icons.favorite_border,
-                                        color: kPrimaryColor,
-                                        size: 18,
-                                      ):Container(
-                                        height : 100,
-                                        width: 100,
-                                          child: Lottie.asset('assets/icons/likeblue.json',fit: BoxFit.contain)),
+                                      child: like == false
+                                          ? const Icon(
+                                              Icons.favorite_border,
+                                              color: kPrimaryColor,
+                                              size: 18,
+                                            )
+                                          : Container(
+                                              height: 100,
+                                              width: 100,
+                                              child: Lottie.asset(
+                                                  'assets/icons/likeblue.json',
+                                                  fit: BoxFit.contain,
+                                                       onLoaded: (comp){
+          _controller
+          ?.duration = comp.duration
+         ; 
+    }
+                                              )),
                                       backgroundColor: kWhiteColor,
                                     ),
                                   ),

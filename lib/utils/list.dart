@@ -229,6 +229,7 @@ List<dynamic> onboarding =[
   {
     "image" : "assets/images/bootcampsandcertificates.png",
     "tital" : "Crypto and NFTs",
+    
   },
   {
     "image" : "assets/images/bootcampsandcertificates.png",
