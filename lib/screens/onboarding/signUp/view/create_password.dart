@@ -153,7 +153,6 @@ class _CreatePasswordState extends State<CreatePassword> {
                      if(_formkey.currentState!.validate()){
                        Get.toNamed("/realQuick");
 
-                    
                     }
                   
 

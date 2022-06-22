@@ -20,10 +20,6 @@ class _CoursesState extends State<AllCourses> {
     return Container(
       color: kBackgroundColor,
       child: Scaffold(
-        appBar: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.red,
-        )),
         backgroundColor: kBackgroundColor,
         body: SingleChildScrollView(
           child: Container(

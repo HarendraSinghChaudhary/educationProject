@@ -133,77 +133,82 @@ class _WipCoursePlayerNewState extends State<WipCoursePlayerNew>
                   itemCount: 5,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                        padding: EdgeInsets.only(
-                            top: h * 0.015, left: w * 0.02, right: w * 0.04),
-                        width: w * 1,
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Container(
-                                width: w * 0.84,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: kWhiteColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Text(
-                                    Wiptital[index]["tital"].toString(),
-                                    style: const TextStyle(
-                                        color: ktitalResourceColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400),
+                    return InkWell(
+                        onTap: (){
+                          Get.toNamed('/flashCard');
+                        },
+                      child: Container(
+                          padding: EdgeInsets.only(
+                              top: h * 0.015, left: w * 0.02, right: w * 0.04),
+                          width: w * 1,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Container(
+                                  width: w * 0.84,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: kWhiteColor,
                                   ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              right: w * 0.001,
-                              child: Container(
-                                width: w * 0.1,
-                                height: h * 0.060,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: kBackgroundColor,
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      like = !like;
-                                    });
-                                  },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: CircleAvatar(
-                                      child: like == false
-                                          ? const Icon(
-                                              Icons.favorite_border,
-                                              color: kPrimaryColor,
-                                              size: 18,
-                                            )
-                                          : Container(
-                                              height: 100,
-                                              width: 100,
-                                              child: Lottie.asset(
-                                                  'assets/icons/likeblue.json',
-                                                  fit: BoxFit.contain,
-                                                       onLoaded: (comp){
-          _controller
-          ?.duration = comp.duration
-         ; 
-    }
-                                              )),
-                                      backgroundColor: kWhiteColor,
+                                    padding: const EdgeInsets.all(15),
+                                    child: Text(
+                                      Wiptital[index]["tital"].toString(),
+                                      style: const TextStyle(
+                                          color: ktitalResourceColor,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ),
                                 ),
                               ),
-                            )
-                          ],
-                        ));
+                              Positioned(
+                                top: 0,
+                                bottom: 0,
+                                right: w * 0.001,
+                                child: Container(
+                                  width: w * 0.1,
+                                  height: h * 0.060,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: kBackgroundColor,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        like = !like;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: CircleAvatar(
+                                        child: like == false
+                                            ? const Icon(
+                                                Icons.favorite_border,
+                                                color: kPrimaryColor,
+                                                size: 18,
+                                              )
+                                            : Container(
+                                                height: 100,
+                                                width: 100,
+                                                child: Lottie.asset(
+                                                    'assets/icons/likeblue.json',
+                                                    fit: BoxFit.contain,
+                                                         onLoaded: (comp){
+          _controller
+          ?.duration = comp.duration
+         ;
+    }
+                                                )),
+                                        backgroundColor: kWhiteColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )),
+                    );
                   }),
               SizedBox(
                 height: h * 0.02,
