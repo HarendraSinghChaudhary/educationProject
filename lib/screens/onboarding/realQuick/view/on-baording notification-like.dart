@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:demo/controllers/category_controller.dart/category_controller.dart';
 import 'package:demo/reusable/default_button.dart';
 import 'package:demo/utils/constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -26,15 +30,49 @@ class _OnbaordingNotificationLikeState
   TextStyle subtital =
       const TextStyle(color: kSubTitleColor, fontSize: 12, height: 1.5);
 
+  //  CategoryController categoryController = Get.find();
+
+CategoryController categoryController = Get.put(CategoryController(), permanent: true);
+  
+
+      @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    
+
+    // Get.lazyPut<CategoryController>(() => CategoryController());
+
+   categoryController .categoryApi();
+
+
+
+  }
+
   final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Container(
       color: kBackgroundColor,
-      child: SafeArea(
+      child: 
+      
+      
+      SafeArea(
           child: Scaffold(
         backgroundColor: kBackgroundColor,
-        body: SingleChildScrollView(
+        body: 
+
+
+        // categoryController.isLoading.value
+        //                 ? Align(
+        //                     alignment: Alignment.center,
+        //                     child: Platform.isAndroid
+        //                         ? CircularProgressIndicator()
+        //                         : CupertinoActivityIndicator())
+        //                 :
+        
+        SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -61,9 +99,11 @@ class _OnbaordingNotificationLikeState
               SizedBox(
                 height: h * 0.02,
               ),
-              ListView.builder(
+
+
+              Obx((() =>    ListView.builder(
                   controller: _controller,
-                  itemCount: onboarding.length,
+                  itemCount:  categoryController.categoryList.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -93,11 +133,10 @@ class _OnbaordingNotificationLikeState
 
                                 Row(
                                   children: [
-                                    SizedBox(
-                                      height: Get.height * 0.07,
-                                      width: Get.width * 0.17,
-                                      child: Image.asset(
-                                        onboarding[index]["image"].toString(),
+                                    CircleAvatar(
+                                      radius: Get.width * 0.07,
+                                      backgroundImage: NetworkImage(
+                                         categoryController.categoryList[index].image.toString(),
                                       ),
                                     ),
                                       SizedBox(
@@ -106,7 +145,7 @@ class _OnbaordingNotificationLikeState
                                 Container(
                               width: Get.width * 0.40,
                                   child: Text(
-                                    onboarding[index]["tital"].toString(),
+                                    Get.find<CategoryController>().categoryList[index].category.toString(),
                                     style: tital,
                                   ),
                                 ),
@@ -119,10 +158,10 @@ class _OnbaordingNotificationLikeState
                                 Checkbox(
                                   checkColor: Colors.white,
                                   activeColor: kPrimaryColor,
-                                  value: this.isSelected,
+                                  value: categoryController.categoryList[index].isSelected,
                                   onChanged: (value) {
                                     setState(() {
-                                      this.isSelected = value!;
+                                     Get.find<CategoryController>().categoryList[index].isSelected = value!;
                                     });
                                   },
                                 ),
@@ -132,7 +171,8 @@ class _OnbaordingNotificationLikeState
                         ),
                       ),
                     );
-                  }),
+                  }))),
+           
               Padding(
                 padding: EdgeInsets.symmetric(vertical: h * 0.03),
                 child: DefaultButton(

@@ -56,7 +56,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Education on Demand",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const Introduction(),
+      home: const QuickNotification(),
 
 
       // Application Routes

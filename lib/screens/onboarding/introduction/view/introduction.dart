@@ -22,6 +22,8 @@ class Introduction extends StatefulWidget {
 
 
 class _IntroPageState extends State<Introduction> {
+
+  bool asign = false;
  Future googleLogin() async {
     print("googleLogin method Called");
     GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -166,13 +168,51 @@ class _IntroPageState extends State<Introduction> {
             ),
       
              Platform.isIOS ?
-            Container(
-              height: 50,
-              width: 277,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/images/img_11.png'),
-              )),
+            InkWell(
+              onTap: () {
+
+                // setState(() {
+                              //   asign = true;
+                              //   context.loaderOverlay.show();
+                              // });
+                              // try {
+                              //   signInWithApple().then((value) {
+                              //     List<UserInfo> data = value.user!.providerData;
+                              //     String name = data[0].displayName == null
+                              //         ? 'user'
+                              //         : data[0].displayName.toString();
+                              //     socialLogin(
+                              //         email: FirebaseAuth
+                              //             .instance.currentUser!.email
+                              //             .toString(),
+                              //         name: name)
+                              //         .then((value) {
+                              //       setState(() {
+                              //         asign = false;
+                              //         context.loaderOverlay.hide();
+                              //       });
+                              //     }).catchError((e) {
+                              //       print(e);
+                              //     });
+                              //   }).catchError((e) {
+                              //     setState(() {
+                              //       asign = false;
+                              //       context.loaderOverlay.hide();
+                              //     });
+                              //   });
+                              // } catch (e) {
+                              //   throw e;
+                              // }
+
+              },
+              child: Container(
+                height: 50,
+                width: 277,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage('assets/images/img_11.png'),
+                )),
+              ),
             ) : Container(),
             SizedBox(
               height: 10,
