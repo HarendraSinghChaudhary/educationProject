@@ -1,34 +1,50 @@
 {
   "project_info": {
-    "project_number": "1054601712150",
-    "project_id": "on-demand-35092",
-    "storage_bucket": "on-demand-35092.appspot.com"
+    "project_number": "1053520529125",
+    "project_id": "ambitious-app-2f946",
+    "storage_bucket": "ambitious-app-2f946.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1054601712150:android:6f392f655d213f99ac9b37",
+        "mobilesdk_app_id": "1:1053520529125:android:b2708672ccd5799ac9f60c",
         "android_client_info": {
-          "package_name": "com.example.demo"
+          "package_name": "com.educationondemand"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1054601712150-puf35e9gd82eeocd0bibrd30ehlmad7v.apps.googleusercontent.com",
+          "client_id": "1053520529125-n5t5no7v89vm8u6hs2nkot7o2kom2k1r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.educationondemand",
+            "certificate_hash": "cce2f4f2ac000fc96e8fccf3656a042c91af290c"
+          }
+        },
+        {
+          "client_id": "1053520529125-apoit3ccn0fs518qs0c14ho79j64781m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBeq96GcuPCrCEvZ9bHfSoeL-oGMFLxwKY"
+          "current_key": "AIzaSyDhJiqiuUg6h9-ShGdAfUZRGyTOTbTkFE0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1054601712150-puf35e9gd82eeocd0bibrd30ehlmad7v.apps.googleusercontent.com",
+              "client_id": "1053520529125-apoit3ccn0fs518qs0c14ho79j64781m.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1053520529125-9bc6pfch4oq2u3hqhbqci4hcov838lei.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.educationondemand",
+                "app_store_id": "1629900526"
+              }
             }
           ]
         }

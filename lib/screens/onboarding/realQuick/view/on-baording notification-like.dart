@@ -161,7 +161,7 @@ CategoryController categoryController = Get.put(CategoryController(), permanent:
                                   value: categoryController.categoryList[index].isSelected,
                                   onChanged: (value) {
                                     setState(() {
-                                     Get.find<CategoryController>().categoryList[index].isSelected = value!;
+                                     categoryController.categoryList[index].isSelected = value!;
                                     });
                                   },
                                 ),

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1053520529125-9bc6pfch4oq2u3hqhbqci4hcov838lei.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1053520529125-9bc6pfch4oq2u3hqhbqci4hcov838lei</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1053520529125-n5t5no7v89vm8u6hs2nkot7o2kom2k1r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD7li4uzTQ8qSTvTo0Gpd6hTE-V-tImLtU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1053520529125</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.educationondemand</string>
+	<key>PROJECT_ID</key>
+	<string>ambitious-app-2f946</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ambitious-app-2f946.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1053520529125:ios:2f1da85521df6e4cc9f60c</string>
+</dict>
+</plist>

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:demo/controllers/signup_controller.dart/applesignin.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class Introduction extends StatefulWidget {
 
 class _IntroPageState extends State<Introduction> {
 
+
+  String name = "";
+
   bool asign = false;
  Future googleLogin() async {
     print("googleLogin method Called");
@@ -36,7 +40,7 @@ class _IntroPageState extends State<Introduction> {
         var finalResult =
         await FirebaseAuth.instance.signInWithCredential(credential);
         print("Result $reslut");
-        print(reslut.displayName);
+        print("name:"+reslut.displayName.toString());
         print(reslut.email);
         print(reslut.photoUrl);
         return true;
@@ -170,7 +174,11 @@ class _IntroPageState extends State<Introduction> {
              Platform.isIOS ?
             InkWell(
               onTap: () {
+                      signInWithApple().then((value) {
+                        print(value);
+                        Get.toNamed("/quickNotification");
 
+                      });
                 // setState(() {
                               //   asign = true;
                               //   context.loaderOverlay.show();
