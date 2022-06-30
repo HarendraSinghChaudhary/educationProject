@@ -1,6 +1,6 @@
-import 'package:demo/screens/home/view/home.dart';
-import 'package:demo/screens/homeNav/home_nav.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/screens/home/view/home.dart';
+import 'package:Ambitious/screens/homeNav/home_nav.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';

@@ -1,32 +1,33 @@
 
-import 'package:demo/screens/courses/courseHeader/view/course_header.dart';
-import 'package:demo/screens/courses/wip-course-player-new.dart';
-import 'package:demo/screens/courses_all.dart';
-import 'package:demo/screens/courses_empty_screen.dart';
-import 'package:demo/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
-import 'package:demo/screens/onboarding/realQuick/view/on-boarding-next-page.dart';
+import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
+import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
+import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
+import 'package:Ambitious/screens/courses_all.dart';
+import 'package:Ambitious/screens/courses_empty_screen.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/on-boarding-next-page.dart';
+import 'package:Ambitious/testing/testing_appbar.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:demo/screens/flash_card.dart';
-import 'package:demo/screens/home/view/home.dart';
-import 'package:demo/screens/home/view/home_live.dart';
-import 'package:demo/screens/homeNav/home_nav.dart';
-import 'package:demo/screens/marketplace.dart';
-import 'package:demo/screens/onboarding/introduction/view/introduction.dart';
-import 'package:demo/screens/onboarding/realQuick/view/quick_notification.dart';
-import 'package:demo/screens/onboarding/realQuick/view/real_quick.dart';
-import 'package:demo/screens/onboarding/signIn/view/signin.dart';
-import 'package:demo/screens/onboarding/signUp/view/create_password.dart';
-import 'package:demo/screens/onboarding/signUp/view/new_account.dart';
-import 'package:demo/screens/profile_edit.dart';
-import 'package:demo/screens/quiz_end.dart';
-import 'package:demo/screens/resource_center.dart';
-import 'package:demo/screens/settings.dart';
-import 'package:demo/screens/social_me_courses.dart';
-import 'package:demo/screens/social_me_people.dart';
-import 'package:demo/screens/socialme.dart';
-import 'package:demo/screens/courses/courseDetails/view/course_details.dart';
-import 'package:demo/screens/wipcourse_player.dart';
-import 'package:demo/screens/wipscreentwo.dart';
+import 'package:Ambitious/screens/flash_card.dart';
+import 'package:Ambitious/screens/home/view/home.dart';
+import 'package:Ambitious/screens/home/view/home_live.dart';
+import 'package:Ambitious/screens/homeNav/home_nav.dart';
+import 'package:Ambitious/screens/marketplace.dart';
+import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/quick_notification.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/real_quick.dart';
+import 'package:Ambitious/screens/onboarding/signIn/view/signin.dart';
+
+import 'package:Ambitious/screens/profile_edit.dart';
+import 'package:Ambitious/screens/quiz_end.dart';
+import 'package:Ambitious/screens/resource_center.dart';
+import 'package:Ambitious/screens/settings.dart';
+import 'package:Ambitious/screens/social_me_courses.dart';
+import 'package:Ambitious/screens/social_me_people.dart';
+import 'package:Ambitious/screens/socialme.dart';
+import 'package:Ambitious/screens/courses/courseDetails/view/course_details.dart';
+import 'package:Ambitious/screens/wipcourse_player.dart';
+import 'package:Ambitious/screens/wipscreentwo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -39,10 +40,17 @@ void main() async{
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(const EducationOnDemand());
+
+ 
 }
 
 
  // This widget is the root of your application.
+
+ScrollController controllerScroll = ScrollController();
+String? name;
+
+TextEditingController nameController = TextEditingController();
 
 class EducationOnDemand extends StatelessWidget {
   const EducationOnDemand({Key? key}) : super(key: key);
@@ -54,7 +62,7 @@ class EducationOnDemand extends StatelessWidget {
       theme: ThemeData(
       ),
         
-      title: "Education on Demand",
+      title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
       home: const Introduction(),
 
@@ -68,8 +76,7 @@ class EducationOnDemand extends StatelessWidget {
             page: () =>  HomeNav(index: 0,
                  
                 )),
-        GetPage(name: "/newAccount", page: () => const NewAccount(), transition: Transition.rightToLeft ),
-        GetPage(name: "/createPassword", page: () => const CreatePassword(), transition: Transition.leftToRight ),
+   
         GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
         GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
         GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),

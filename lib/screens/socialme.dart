@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:demo/screens/social_me_people.dart';
-import 'package:demo/screens/social_me_courses.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/screens/social_me_people.dart';
+import 'package:Ambitious/screens/social_me_courses.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/controllers/category_controller.dart/category_controller.dart';
+import 'package:Ambitious/main.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../reusable/home_header.dart';
 import '../../../utils/list.dart';
@@ -16,14 +19,47 @@ class HomeLive extends StatefulWidget {
 }
 
 class _ProfileState extends State<HomeLive> {
+
+  String id = "";
+  String name = "";
+  String email = "";
   bool bookmark =  false;
- final ScrollController _controller = ScrollController();
+  ScrollController _controller = ScrollController();
+
+ CategoryController categoryController = Get.find();
+
+ @override
+ void initState() {
+   super.initState();
+
+   getUserList();
+
+   categoryController.categoryApi();
+   categoryController.subcategoryApi();
+
+   _controller = ScrollController();
+   
+ }
+
+
+ @override
+  void dispose() {
+
+    _controller.dispose();
+
+    super.dispose();
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           backgroundColor: kBackgroundColor,
         body: SingleChildScrollView(
+          controller: controllerScroll,
       
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,8 +67,8 @@ class _ProfileState extends State<HomeLive> {
               HomeHeader(),
 
               SizedBox(height: Get.height * 0.015,),
-            const Center(
-               child:  Text( 'Hi, Zayan 👋🏼',
+            Center(
+               child:  Text( "Hi, ${name} 👋🏼",
                   style: TextStyle(
                     color: Color(0xff344356),
                     fontSize: 24,
@@ -171,7 +207,7 @@ class _ProfileState extends State<HomeLive> {
               height: 150,
               width: Get.width * 0.99,
               child: ListView.builder(
-                  itemCount: paths.length,
+                  itemCount: categoryController.categoryList.length,
                   scrollDirection: Axis.horizontal,
                   controller: _controller,
                   itemBuilder: (BuildContext context, int index) {
@@ -200,9 +236,9 @@ class _ProfileState extends State<HomeLive> {
                                         topLeft: Radius.circular(15),
                                         topRight: Radius.circular(15)),
                                     image: DecorationImage(
-                                        image: AssetImage(
-                                          paths[index]["image"]
-                                              .toString(),
+                                        image: NetworkImage(
+                                          categoryController.categoryList[index].image.toString()
+                                         
                                         ),
                                         fit: BoxFit.fill)),
                               ),
@@ -213,7 +249,8 @@ class _ProfileState extends State<HomeLive> {
                                 alignment: Alignment.topLeft,
                                 padding: const EdgeInsets.only(left: 15),
                                 child: Text(
-                                  paths[index]['name'].toString(),
+                                  // paths[index]['name'].toString(),
+                                  categoryController.categoryList[index].category.toString(),
                                   style: const TextStyle(
                                     color: kTitleColor,
                                     fontSize: 16,
@@ -244,7 +281,7 @@ class _ProfileState extends State<HomeLive> {
               ),
                GridView.builder(
                 padding: const EdgeInsets.only(left: 16,right: 16,top: 10),
-                itemCount: 4,
+                itemCount: categoryController.subCategoryList.length,
                 controller: _controller,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -267,9 +304,9 @@ class _ProfileState extends State<HomeLive> {
                         Container(
                           height: 85,
                           width: 176,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage('assets/images/img_4.png'),
+                                image: NetworkImage(categoryController.subCategoryList[index].image.toString()),
                                 fit: BoxFit.fill),
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
@@ -280,10 +317,11 @@ class _ProfileState extends State<HomeLive> {
                        const SizedBox(
                           height: 10,
                         ),
-                       const Padding(
+                        Padding(
                           padding:  EdgeInsets.only(left: 6),
                           child: Text(
-                                'Bitcoin & Blockchain',
+                                //'Bitcoin & Blockchain',
+                                categoryController.subCategoryList[index].subCategory.toString(),
                                 style: TextStyle(
                                   color: kTitleColor,
                                   fontSize: 14,
@@ -341,5 +379,18 @@ class _ProfileState extends State<HomeLive> {
         )
       ),
     );
+  }
+
+    Future<dynamic> getUserList() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id = pref.getString("id").toString();
+    print("id: " + id.toString());
+    email = pref.getString("email").toString();
+    print("email: " + email.toString());
+    name = pref.getString("name").toString();
+    print("name: " + name.toString());
+  
+
+    setState(() {});
   }
 }

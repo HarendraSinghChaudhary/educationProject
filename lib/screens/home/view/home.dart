@@ -1,10 +1,10 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:demo/reusable/home_header.dart';
-import 'package:demo/reusable/path_card.dart';
-import 'package:demo/reusable/trending_card.dart';
-import 'package:demo/utils/constant.dart';
-import 'package:demo/utils/list.dart';
+import 'package:Ambitious/reusable/home_header.dart';
+import 'package:Ambitious/reusable/path_card.dart';
+import 'package:Ambitious/reusable/trending_card.dart';
+import 'package:Ambitious/utils/constant.dart';
+import 'package:Ambitious/utils/list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

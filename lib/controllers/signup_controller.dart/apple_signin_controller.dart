@@ -1,14 +1,19 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:Ambitious/controllers/signup_controller.dart/create_user_controller.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 
 /// Generates a cryptographically secure random nonce, to be included in a
 /// credential request.
+/// 
+CreateUserController createUserController = Get.put(CreateUserController(), permanent: true);
 String generateNonce([int length = 32]) {
+ 
   final charset =
       '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
   final random = Random.secure();
@@ -18,12 +23,16 @@ String generateNonce([int length = 32]) {
 
 /// Returns the sha256 hash of [input] in hex notation.
 String sha256ofString(String input) {
+
   final bytes = utf8.encode(input);
   final digest = sha256.convert(bytes);
   return digest.toString();
 }
 
 Future<UserCredential> signInWithApple() async {
+
+  createUserController.isSubmitting(true);
+
   // To prevent replay attacks with the credential returned from Apple, we
   // include a nonce in the credential request. When signing in with
   // Firebase, the nonce in the id token returned by Apple, is expected to
@@ -33,9 +42,13 @@ Future<UserCredential> signInWithApple() async {
 
   // Request credential for the currently signed in Apple account.
   final appleCredential = await SignInWithApple.getAppleIDCredential(
+
+   
     scopes: [
       AppleIDAuthorizationScopes.email,
       AppleIDAuthorizationScopes.fullName,
+
+      
     ],
     nonce: nonce,
   );
@@ -45,8 +58,13 @@ Future<UserCredential> signInWithApple() async {
     idToken: appleCredential.identityToken,
     rawNonce: rawNonce,
   );
+  createUserController.isSubmitting(false);
 
   // Sign in the user with Firebase. If the nonce we generated earlier does
   // not match the nonce in `appleCredential.identityToken`, sign in will fail.
   return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+
+
+
+  
 }

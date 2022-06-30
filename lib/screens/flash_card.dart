@@ -1,7 +1,7 @@
-import 'package:demo/reusable/default_button.dart';
+import 'package:Ambitious/reusable/default_button.dart';
 
-import 'package:demo/utils/constant.dart';
-import 'package:demo/utils/list.dart';
+import 'package:Ambitious/utils/constant.dart';
+import 'package:Ambitious/utils/list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:card_swiper/card_swiper.dart';

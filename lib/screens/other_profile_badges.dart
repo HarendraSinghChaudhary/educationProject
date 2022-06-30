@@ -1,5 +1,5 @@
-import 'package:demo/reusable/default_button_plus.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/reusable/default_button_plus.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'badges.dart';

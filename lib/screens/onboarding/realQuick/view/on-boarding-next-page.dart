@@ -1,4 +1,4 @@
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -89,7 +89,7 @@ class _OnboardingNextPageState extends State<OnboardingNextPage> {
                                       'UI Design 101',
                                       style: TextStyle(
                                           color: kTitleColor,
-                                          fontSize: 24,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   ],

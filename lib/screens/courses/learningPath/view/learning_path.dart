@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 
-import 'package:demo/utils/list.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/utils/list.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

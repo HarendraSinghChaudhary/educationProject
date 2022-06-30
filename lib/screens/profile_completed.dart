@@ -1,4 +1,4 @@
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 class ProfileCompleted extends StatefulWidget {

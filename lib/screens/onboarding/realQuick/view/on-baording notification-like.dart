@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:demo/controllers/category_controller.dart/category_controller.dart';
-import 'package:demo/reusable/default_button.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/controllers/category_controller.dart/category_controller.dart';
+import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
 
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

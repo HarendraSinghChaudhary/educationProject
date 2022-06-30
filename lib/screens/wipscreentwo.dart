@@ -1,7 +1,7 @@
 
-import 'package:demo/reusable/topicon.dart';
-import 'package:demo/utils/constant.dart';
-import 'package:demo/utils/text_file.dart';
+import 'package:Ambitious/reusable/topicon.dart';
+import 'package:Ambitious/utils/constant.dart';
+import 'package:Ambitious/utils/text_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

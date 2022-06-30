@@ -1,4 +1,4 @@
-import 'package:demo/screens/scores.dart';
+import 'package:Ambitious/screens/scores.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';

@@ -1,6 +1,6 @@
 
-import 'package:demo/reusable/default_button.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

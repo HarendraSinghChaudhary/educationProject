@@ -1,5 +1,5 @@
-import 'package:demo/utils/constant.dart';
-import 'package:demo/utils/text_file.dart';
+import 'package:Ambitious/utils/constant.dart';
+import 'package:Ambitious/utils/text_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

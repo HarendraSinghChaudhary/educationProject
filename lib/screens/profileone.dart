@@ -1,5 +1,5 @@
-import 'package:demo/screens/profile_completed.dart';
-import 'package:demo/utils/constant.dart';
+import 'package:Ambitious/screens/profile_completed.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
