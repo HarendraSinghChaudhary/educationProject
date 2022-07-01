@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +20,8 @@ class _OnboardingNextPageState extends State<OnboardingNextPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    print("token: "+token.toString());
     return SafeArea(
         child: Scaffold(
       backgroundColor: kBackgroundColor,
@@ -84,8 +89,9 @@ class _OnboardingNextPageState extends State<OnboardingNextPage> {
                             child: Column(
                               children: [
                                 Row(
+                                  // ignore: prefer_const_literals_to_create_immutables
                                   children: [
-                                    Text(
+                                   Text(
                                       'UI Design 101',
                                       style: TextStyle(
                                           color: kTitleColor,
@@ -98,12 +104,13 @@ class _OnboardingNextPageState extends State<OnboardingNextPage> {
                                   height: h * 0.01,
                                 ),
                                 Row(
+                                  // ignore: prefer_const_literals_to_create_immutables
                                   children: [
                                     Text(
                                       'Learn the basics of UI UX design',
                                       style: TextStyle(
                                         color: ksubtitamarketColor,
-                                        fontSize: 20,
+                                        fontSize: 16,
                                       ),
                                     ),
                                   ],

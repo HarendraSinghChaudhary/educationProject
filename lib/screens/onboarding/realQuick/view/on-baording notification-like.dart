@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:Ambitious/controllers/category_controller.dart/category_controller.dart';
+import 'package:Ambitious/controllers/signup_controller.dart/apple_signin_controller.dart';
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/reusable/default_button.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/list.dart';
 
@@ -21,7 +24,9 @@ class OnbaordingNotificationLike extends StatefulWidget {
 
 class _OnbaordingNotificationLikeState
     extends State<OnbaordingNotificationLike> {
-  bool isSelected = false;
+
+      String isSelected = "";
+  // bool isSelected = false;
   TextStyle tital = const TextStyle(
     color: kTitleColor,
     fontWeight: FontWeight.w600,
@@ -32,47 +37,42 @@ class _OnbaordingNotificationLikeState
 
   //  CategoryController categoryController = Get.find();
 
-CategoryController categoryController = Get.put(CategoryController(), permanent: true);
-  
+  CategoryController categoryController =
+      Get.put(CategoryController(), permanent: true);
 
-      @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    
+    getUserList();
 
     // Get.lazyPut<CategoryController>(() => CategoryController());
 
-   categoryController .categoryApi();
-
-
-
+    categoryController.categoryApi();
   }
 
   final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
+
+    
     return Container(
       color: kBackgroundColor,
-      child: 
-      
-      
-      SafeArea(
+      child: SafeArea(
           child: Scaffold(
         backgroundColor: kBackgroundColor,
-        body: 
+        body:
 
+            // categoryController.isLoading.value
+            //                 ? Align(
+            //                     alignment: Alignment.center,
+            //                     child: Platform.isAndroid
+            //                         ? CircularProgressIndicator()
+            //                         : CupertinoActivityIndicator())
+            //                 :
 
-        // categoryController.isLoading.value
-        //                 ? Align(
-        //                     alignment: Alignment.center,
-        //                     child: Platform.isAndroid
-        //                         ? CircularProgressIndicator()
-        //                         : CupertinoActivityIndicator())
-        //                 :
-        
-        SingleChildScrollView(
+            SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -99,13 +99,13 @@ CategoryController categoryController = Get.put(CategoryController(), permanent:
               SizedBox(
                 height: h * 0.02,
               ),
-
-
-              Obx((() =>    ListView.builder(
+              Obx((() => ListView.builder(
                   controller: _controller,
-                  itemCount:  categoryController.categoryList.length,
+                  itemCount: categoryController.categoryList.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
+                    print(isSelected);
+                    print(categoryController.categoryList[index].id.toString());
                     return Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: Get.height * 0.020,
@@ -129,42 +129,61 @@ CategoryController categoryController = Get.put(CategoryController(), permanent:
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-
-
                                 Row(
                                   children: [
                                     CircleAvatar(
                                       radius: Get.width * 0.07,
                                       backgroundImage: NetworkImage(
-                                         categoryController.categoryList[index].image.toString(),
+                                        categoryController
+                                            .categoryList[index].image
+                                            .toString(),
                                       ),
                                     ),
-                                      SizedBox(
-                                  width: Get.width * 0.04,
-                                ),
-                                Container(
-                              width: Get.width * 0.40,
-                                  child: Text(
-                                    Get.find<CategoryController>().categoryList[index].category.toString(),
-                                    style: tital,
-                                  ),
-                                ),
+                                    SizedBox(
+                                      width: Get.width * 0.04,
+                                    ),
+                                    Container(
+                                      width: Get.width * 0.40,
+                                      child: Text(
+                                        Get.find<CategoryController>()
+                                            .categoryList[index]
+                                            .category
+                                            .toString(),
+                                        style: tital,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              
+
                                 SizedBox(
                                   height: Get.height * 0.002,
                                 ),
-                                Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: kPrimaryColor,
-                                  value: categoryController.categoryList[index].isSelected,
-                                  onChanged: (value) {
-                                    setState(() {
-                                     categoryController.categoryList[index].isSelected = value!;
-                                    });
-                                  },
-                                ),
+
+                                Radio(
+                                    value: categoryController.categoryList[index].id.toString(),
+                                    groupValue: isSelected,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isSelected = value.toString();
+                                        print(value);
+
+                                    
+
+                                        print("Radio Button: "+isSelected.toString());
+                                      });
+
+                                      print("Radio Button1: "+isSelected.toString());
+                                    }),
+                                // Checkbox(
+                                //   checkColor: Colors.white,
+                                //   activeColor: kPrimaryColor,
+                                //   value: categoryController.categoryList[index].isSelected,
+                                //   onChanged: (value) {
+                                //     setState(() {
+                                //      categoryController.categoryList[index].isSelected = value!;
+                                //     });
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -172,7 +191,6 @@ CategoryController categoryController = Get.put(CategoryController(), permanent:
                       ),
                     );
                   }))),
-           
               Padding(
                 padding: EdgeInsets.symmetric(vertical: h * 0.03),
                 child: DefaultButton(
@@ -188,5 +206,24 @@ CategoryController categoryController = Get.put(CategoryController(), permanent:
         ),
       )),
     );
+  }
+
+
+   Future<dynamic> getUserList() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id = pref.getString("id").toString();
+    print("id: " + id.toString());
+    email = pref.getString("email").toString();
+    print("email: " + email.toString());
+    name = pref.getString("name").toString();
+    print("name: " + name.toString());
+
+    token = pref.getString("name").toString();
+    print("name: " + name.toString());
+
+  
+  
+
+    
   }
 }

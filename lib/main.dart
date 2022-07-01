@@ -6,6 +6,7 @@ import 'package:Ambitious/screens/courses_all.dart';
 import 'package:Ambitious/screens/courses_empty_screen.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/on-boarding-next-page.dart';
+import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/testing/testing_appbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:Ambitious/screens/flash_card.dart';
@@ -31,6 +32,7 @@ import 'package:Ambitious/screens/wipscreentwo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,9 @@ void main() async{
 
   runApp(const EducationOnDemand());
 
+
+   
+
  
 }
 
@@ -49,6 +54,9 @@ void main() async{
 
 ScrollController controllerScroll = ScrollController();
 String? name;
+String? id;
+String? token;
+String? email;
 
 TextEditingController nameController = TextEditingController();
 
@@ -64,7 +72,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const Introduction(),
+      home: const Splash(),
 
 
       // Application Routes
@@ -95,7 +103,7 @@ class EducationOnDemand extends StatelessWidget {
         GetPage(name: "/flashCard", page: () => const FlashCard() ),
         GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
         GetPage(name: "/editprofile", page: () => const EditProfile() ),
-        GetPage(name: "/introduction", page: () => const Introduction() ),
+        // GetPage(name: "/introduction", page: () => const Introduction() ),
         GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
         GetPage(name: "/homeLive", page: () => const HomeLive() ),
         GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
@@ -106,5 +114,13 @@ class EducationOnDemand extends StatelessWidget {
       ],
     );
   }
+
+ 
+
+
+  
+
+
+ 
 }
 

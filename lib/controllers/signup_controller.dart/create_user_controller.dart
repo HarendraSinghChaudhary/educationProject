@@ -69,6 +69,8 @@ class CreateUserController extends GetxController {
        
         prefs.setString(
             'token', jsonRes["token"].toString());
+
+            print("token: "+ jsonRes["token"].toString());
        
         prefs.commit();
 

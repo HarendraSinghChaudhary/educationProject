@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:Ambitious/controllers/category_controller.dart/category_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/utils/constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +29,7 @@ class _ProfileState extends State<HomeLive> {
   bool bookmark =  false;
   ScrollController _controller = ScrollController();
 
- CategoryController categoryController = Get.find();
+ CategoryController categoryController = Get.put(CategoryController(), permanent: true);
 
  @override
  void initState() {
@@ -58,7 +61,23 @@ class _ProfileState extends State<HomeLive> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: kBackgroundColor,
-        body: SingleChildScrollView(
+        body: 
+
+
+        Obx((() => 
+
+     categoryController.isLoading.value
+                        ? Align(
+                            alignment: Alignment.center,
+                            child: Platform.isAndroid
+                                ? CircularProgressIndicator()
+                                : CupertinoActivityIndicator())
+                        : 
+
+        
+        
+        
+         SingleChildScrollView(
           controller: controllerScroll,
       
           child: Column(
@@ -377,8 +396,17 @@ class _ProfileState extends State<HomeLive> {
             ],
           ),
         )
+     
+     )
+        
+        
+        
+        
+        
+       
+     
       ),
-    );
+    ));
   }
 
     Future<dynamic> getUserList() async {

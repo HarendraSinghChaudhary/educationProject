@@ -13,14 +13,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Introduction extends StatefulWidget {
-  const Introduction({Key? key}) : super(key: key);
+class CreateUser extends StatefulWidget {
+  const CreateUser({Key? key}) : super(key: key);
 
   @override
-  State<Introduction> createState() => _IntroPageState();
+  State<CreateUser> createState() => _IntroPageState();
 }
 
-class _IntroPageState extends State<Introduction> {
+class _IntroPageState extends State<CreateUser> {
   String? name = "";
   String? email = "";
 
@@ -229,13 +229,33 @@ class _IntroPageState extends State<Introduction> {
                                   });
                                 },
                                 child: Container(
-                                  height: 50,
-                                  width: 277,
+                                   height: 56,
+                              width: 277,
                                   decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/img_11.png'),
-                                  )),
+                                    color: Colors.black,
+                                 ),
+
+                                 child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  Icon(Icons.apple, color: Colors.white, size: 35,),
+                                  
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 25),
+                                    child: Text(
+                                      'Sign in with Apple',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                                 ),
                               )
                             : Container(),
