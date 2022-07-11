@@ -27,15 +27,19 @@ class _LearningpathState extends State<LearningPath> {
     super.initState();
 
     coursesController.learningPathApi().then((value) {
-         selectedModel = coursesController
-                                            .learningPathList.first;
+      selectedModel = coursesController.learningPathList.first;
 
-                                         
+        name =
+          coursesController.learningPathList.first.subCategoryName.toString();
+
+
     });
   }
 
   bool isVisible = false;
   final ScrollController _controller = ScrollController();
+
+  String name= "";
 
   @override
   Widget build(BuildContext context) {
@@ -67,43 +71,34 @@ class _LearningpathState extends State<LearningPath> {
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-
                                         // bool isTrue = true;
-
 
                                         // if (isTrue == true) {
 
-
-
                                         // }
 
-
-                                        
                                         selectedModel = coursesController
                                             .learningPathList[index];
 
-                                         
-
-
+                                        name = coursesController
+                                            .learningPathList[index]
+                                            .subCategoryName
+                                            .toString();
 
                                         //  coursesController.learningPathList[index ].isPress = true;
 
-                                         isShow = index + 1;   
+                                        isShow = index + 1;
 
                                         //  coursesController.learningPathList[isShow].isPress = true;
-
-                                         
 
                                         isVisible = true;
                                       });
                                       // Get.toNamed('/wipCoursePlayerNew');
                                     },
                                     child: Container(
-                                       width: Get.width * 0.35,
+                                      width: Get.width * 0.35,
                                       height: Get.height * 0.22,
-                                   
                                       child: Stack(
-                               
                                         children: [
                                           Container(
                                             width: Get.width * 0.35,
@@ -168,34 +163,32 @@ class _LearningpathState extends State<LearningPath> {
                                               ],
                                             ),
                                           ),
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
                                           Visibility(
-                                            visible: isShow==index+1,
+                                            visible: isShow == index + 1,
                                             child: Positioned(
-                                              top:  Get.height * 0.16,
+                                              top: Get.height * 0.16,
                                               left: 0,
                                               right: 0,
                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                
                                                   Transform(
-                                                    alignment: FractionalOffset.center,
-                                                    transform: new Matrix4.identity()
-                                                      ..rotateZ(45 * 3.1415927 / 180),
+                                                    alignment:
+                                                        FractionalOffset.center,
+                                                    transform:
+                                                        new Matrix4.identity()
+                                                          ..rotateZ(45 *
+                                                              3.1415927 /
+                                                              180),
                                                     child: Container(
                                                       height: 30,
                                                       width: 30,
                                                       decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.circular(8)),
+                                                              BorderRadius
+                                                                  .circular(8)),
                                                     ),
                                                   ),
                                                 ],
@@ -226,8 +219,17 @@ class _LearningpathState extends State<LearningPath> {
                             child: Row(
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
+                                name.isEmpty?Text("....."
+                                ,
+                                    style: TextStyle(
+                                    wordSpacing: 1,
+                                    color: kTitleColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  )
+                                ):
                                 Text(
-                                  'Social Media Influencer Learning Path',
+                                  '${name} Learning Path',
                                   style: TextStyle(
                                     wordSpacing: 1,
                                     color: kTitleColor,

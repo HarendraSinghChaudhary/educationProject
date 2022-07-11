@@ -8,7 +8,7 @@ class LearningPathModel {
   String? subCategoryName;
   String? image;
   bool isPress = false;
-
+  
   List <CoursesByCatModel> courseListbyLearningPath = [];
   
 

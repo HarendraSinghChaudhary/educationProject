@@ -9,6 +9,7 @@ import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.d
 import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/testing/testinf_first.dart';
 import 'package:Ambitious/testing/testing_appbar.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:Ambitious/screens/flash_card.dart';
 import 'package:Ambitious/screens/home/view/home.dart';
@@ -39,6 +40,10 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    // systemNavigationBarColor: Colors.blue, // navigation bar color
+    statusBarColor: kBackgroundColor, // status bar color
+  ));
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 

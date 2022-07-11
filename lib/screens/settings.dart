@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -25,6 +28,8 @@ class _SettingsState extends State<Settings> {
   void initState() {
     // TODO: implement initState
     super.initState();
+         if (Platform.isAndroid) WebView.platform = AndroidWebView();
+
       //  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
   @override
@@ -47,41 +52,41 @@ class _SettingsState extends State<Settings> {
           ),
           centerTitle: true,
         
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: Get.width * 0.04),
-              child: Transform.scale(
-                  scaleX: -1,
-                  child: const Icon(
-                    Icons.nights_stay_sharp,
-                    color: kTitleColor,
-                  )),
-            )
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: EdgeInsets.only(right: Get.width * 0.04),
+          //     child: Transform.scale(
+          //         scaleX: -1,
+          //         child: const Icon(
+          //           Icons.nights_stay_sharp,
+          //           color: kTitleColor,
+          //         )),
+          //   )
+          // ],
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: Get.width * 0.08,
-                    right: Get.width * 0.08,
-                    top: h * 0.02),
-                child: GestureDetector(
-                  onTap: () {
-                    Get.toNamed("/editprofile");
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Edit Profile',
-                        style: TextStyle(color: kPrimaryColor),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(
+              //       left: Get.width * 0.08,
+              //       right: Get.width * 0.08,
+              //       top: h * 0.02),
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       Get.toNamed("/editprofile");
+              //     },
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.end,
+              //       children: [
+              //         Text(
+              //           'Edit Profile',
+              //           style: TextStyle(color: kPrimaryColor),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Container(
                   margin: EdgeInsets.only(
                       left: Get.width * 0.08,
@@ -147,71 +152,72 @@ class _SettingsState extends State<Settings> {
                               color: ksubtitamarketColor, fontSize: 14),
                         ),
                       ),
-                      ListTile(
-                        leading: Container(
-                            padding: const EdgeInsets.all(11),
-                            height: Get.height * 0.05,
-                            width: Get.width * 0.12,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: kPurpleColor),
-                            child: SvgPicture.asset(
-                              "assets/images/settingmobile.svg",
-                            )),
-                        title: Text(
-                          "Phone Number",
-                          style: const TextStyle(
-                              color: kTitleColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        subtitle: Text(
-                          "+00 123 456 789",
-                          style: const TextStyle(
-                              color: ksubtitamarketColor, fontSize: 14),
-                        ),
-                      ),
+                      // ListTile(
+                      //   leading: Container(
+                      //       padding: const EdgeInsets.all(11),
+                      //       height: Get.height * 0.05,
+                      //       width: Get.width * 0.12,
+                      //       decoration: const BoxDecoration(
+                      //           shape: BoxShape.circle, color: kPurpleColor),
+                      //       child: SvgPicture.asset(
+                      //         "assets/images/settingmobile.svg",
+                      //       )),
+                      //   title: Text(
+                      //     "Phone Number",
+                      //     style: const TextStyle(
+                      //         color: kTitleColor,
+                      //         fontSize: 20,
+                      //         fontWeight: FontWeight.w600),
+                      //   ),
+                      //   subtitle: Text(
+                      //     "+00 123 456 789",
+                      //     style: const TextStyle(
+                      //         color: ksubtitamarketColor, fontSize: 14),
+                      //   ),
+                      // ),
                     ],
                   )),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.08, vertical: Get.height * 0.03),
-                height: h * 0.09,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blue.withOpacity(0.22),
-                        offset: const Offset(0, 3),
-                        blurRadius: 4,
-                      )
-                    ]),
-                child: ListTile(
-                  leading: Container(
-                      padding: const EdgeInsets.all(11),
-                      height: Get.height * 0.05,
-                      width: Get.width * 0.12,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: kPurpleColor),
-                      child:
-                          SvgPicture.asset("assets/images/settingpassword.svg")),
-                  title: Text(
-                    'Password',
-                    style: const TextStyle(
-                        color: kTitleColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  subtitle: Text(
-                    "updated 2 weeks ago",
-                    style:
-                        const TextStyle(color: ksubtitamarketColor, fontSize: 14),
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.symmetric(
+              //       horizontal: Get.width * 0.08, vertical: Get.height * 0.03),
+              //   height: h * 0.09,
+              //   decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(15),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: Colors.blue.withOpacity(0.22),
+              //           offset: const Offset(0, 3),
+              //           blurRadius: 4,
+              //         )
+              //       ]),
+              //   child: ListTile(
+              //     leading: Container(
+              //         padding: const EdgeInsets.all(11),
+              //         height: Get.height * 0.05,
+              //         width: Get.width * 0.12,
+              //         decoration: const BoxDecoration(
+              //             shape: BoxShape.circle, color: kPurpleColor),
+              //         child:
+              //             SvgPicture.asset("assets/images/settingpassword.svg")),
+              //     title: Text(
+              //       'Password',
+              //       style: const TextStyle(
+              //           color: kTitleColor,
+              //           fontSize: 20,
+              //           fontWeight: FontWeight.w600),
+              //     ),
+              //     subtitle: Text(
+              //       "updated 2 weeks ago",
+              //       style:
+              //           const TextStyle(color: ksubtitamarketColor, fontSize: 14),
+              //     ),
+              //   ),
+              // ),
               Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: Get.width * 0.08,
+                    vertical: Get.height * 0.03
                   ),
                   height: Get.height * 0.27,
                   decoration: BoxDecoration(
@@ -227,33 +233,49 @@ class _SettingsState extends State<Settings> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    ListTile(
-                              leading: Container(
-                                  padding: const EdgeInsets.all(11),
-                                  height: Get.height * 0.05,
-                                  width: Get.width * 0.12,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: kPurpleColor),
-                                  child: SvgPicture.asset(
-                                    "assets/images/settinguaiton.svg",
-                                  )),
-                              title: Text(
-                               "Help Center",
-                                style: const TextStyle(
-                                    color: kTitleColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              trailing: const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                              )),
+                    // ListTile(
+                    //           leading: Container(
+                    //               padding: const EdgeInsets.all(11),
+                    //               height: Get.height * 0.05,
+                    //               width: Get.width * 0.12,
+                    //               decoration: const BoxDecoration(
+                    //                   shape: BoxShape.circle,
+                    //                   color: kPurpleColor),
+                    //               child: SvgPicture.asset(
+                    //                 "assets/images/settinguaiton.svg",
+                    //               )),
+                    //           title: Text(
+                    //            "Help Center",
+                    //             style: const TextStyle(
+                    //                 color: kTitleColor,
+                    //                 fontSize: 20,
+                    //                 fontWeight: FontWeight.w600),
+                    //           ),
+                    //           trailing: const Icon(
+                    //             Icons.arrow_forward_ios,
+                    //             size: 15,
+                    //           )),
 
                               SizedBox(height: 10,),
 
                                ListTile(
-                              leading: Container(
+                                 onTap: (){
+                                   print("hit");
+                                   setState(() {
+                                     
+                                   });
+                                    WebView(
+
+             onPageFinished: (finish) {
+             
+      
+           javascriptMode: JavascriptMode.unrestricted;
+           initialUrl:'https://www.theambitiousapp.com/privacy-and-terms';
+             }
+      // zoomEnabled: true,
+     );
+                                 },
+                                                           leading: Container(
                                   padding: const EdgeInsets.all(11),
                                   height: Get.height * 0.05,
                                   width: Get.width * 0.12,
@@ -263,17 +285,17 @@ class _SettingsState extends State<Settings> {
                                   child: SvgPicture.asset(
                                     "assets/images/settingsafe.svg",
                                   )),
-                              title: Text(
+                                                           title: Text(
                                "Privacy & Terms",
                                 style: const TextStyle(
                                     color: kTitleColor,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600),
-                              ),
-                              trailing: const Icon(
+                                                           ),
+                                                           trailing: const Icon(
                                 Icons.arrow_forward_ios,
                                 size: 15,
-                              )),
+                                                           )),
 
                               SizedBox(height: 10,),
 

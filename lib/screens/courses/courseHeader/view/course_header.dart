@@ -25,7 +25,7 @@ class _TabbarState extends State<CourseHeader> {
         body:
       Column(
         children: [
-          HomeHeader(),
+          // HomeHeader(),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
             height: 44,
