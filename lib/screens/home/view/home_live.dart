@@ -2,11 +2,15 @@
 
 import 'dart:io';
 
-import 'package:Ambitious/controllers/category_controller.dart/category_controller.dart';
+
+import 'package:Ambitious/controllers/category/category_controller.dart';
+import 'package:Ambitious/controllers/courses/courses_controller.dart';
+
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +33,13 @@ class _ProfileState extends State<HomeLive> {
   bool bookmark =  false;
   ScrollController _controller = ScrollController();
 
- CategoryController categoryController = Get.put(CategoryController(), permanent: true);
+  CoursesController coursesController =
+      Get.put(CoursesController(), permanent: true);
+
+
+  
+
+
 
  @override
  void initState() {
@@ -37,10 +47,11 @@ class _ProfileState extends State<HomeLive> {
 
    getUserList();
 
-   categoryController.categoryApi();
-   categoryController.subcategoryApi();
+   coursesController.learningPathApi();
+  //  categoryController.subcategoryApi();
 
    _controller = ScrollController();
+   
    
  }
 
@@ -58,33 +69,37 @@ class _ProfileState extends State<HomeLive> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: kBackgroundColor,
-        body: 
+
+    print("length: "+ coursesController.learningPathList.length.toString());
+    return Scaffold(
+            
+        backgroundColor: kBackgroundColor,
+      body: 
 
 
-        Obx((() => 
+      Obx((() => 
 
-     categoryController.isLoading.value
-                        ? Align(
-                            alignment: Alignment.center,
-                            child: Platform.isAndroid
-                                ? CircularProgressIndicator()
-                                : CupertinoActivityIndicator())
-                        : 
 
-        
-        
-        
-         SingleChildScrollView(
-          controller: controllerScroll,
+    //  categoryController.isLoading.value
+    //                     ? Align(
+    //                         alignment: Alignment.center,
+    //                         child: Platform.isAndroid
+    //                             ? CircularProgressIndicator()
+    //                             : CupertinoActivityIndicator())
+    //                     : 
+
       
+      
+      
+       SafeArea(
+         child: SingleChildScrollView(
+          controller: controllerScroll,
+           
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeHeader(),
-
+       
               SizedBox(height: Get.height * 0.015,),
             Center(
                child:  Text( "Hi, ${name} 👋🏼",
@@ -95,9 +110,9 @@ class _ProfileState extends State<HomeLive> {
                   ),
                 ),
              ),
-
+       
               SizedBox(height: Get.height * 0.02,),
-
+       
               Center(
                 child: SizedBox(
                   width: Get.width * 0.90,
@@ -109,7 +124,7 @@ class _ProfileState extends State<HomeLive> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
+       
                           Container(
                                 height: 27,
                                 width: 27,
@@ -123,9 +138,9 @@ class _ProfileState extends State<HomeLive> {
                                   size: 13,
                                 ),
                               ),
-
+       
                              const SizedBox(height: 5,),
-
+       
                               const Text(
                               'Request Topic',
                               style: TextStyle(
@@ -134,17 +149,17 @@ class _ProfileState extends State<HomeLive> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-
-
-
+       
+       
+       
                       ],
                     ),
-
+       
                        Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
+       
                             Container(padding: EdgeInsets.all(6),
                                   height: 27,
                                   width: 27,
@@ -154,9 +169,9 @@ class _ProfileState extends State<HomeLive> {
                                   ),
                                   child: SvgPicture.asset('assets/images/Shape.svg',)
                               ),
-
+       
                              const SizedBox(height: 5,),
-
+       
                               const Text(
                               'Redeem Points',
                               style: TextStyle(
@@ -165,17 +180,17 @@ class _ProfileState extends State<HomeLive> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-
-
-
+       
+       
+       
                       ],
                     ),
-
+       
                        Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
+       
                             Container(
                                 height: 27,
                                 width: 27,
@@ -185,9 +200,9 @@ class _ProfileState extends State<HomeLive> {
                                 ),
                                 child:const Icon(Icons.message,color: Colors.white,size: 18,)
                               ),
-
+       
                              const SizedBox(height: 5,),
-
+       
                               const Text(
                               'Invite Friends',
                               style: TextStyle(
@@ -196,21 +211,21 @@ class _ProfileState extends State<HomeLive> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-
-
-
+       
+       
+       
                       ],
                     )
-
+       
                   ],),
                 ),
               ),
            
                SizedBox(height: Get.height * 0.02,),
-
-
+       
+       
             const  Padding(
-                padding:  EdgeInsets.all(16),
+                padding:  EdgeInsets.only(top: 16, left: 10, bottom: 16),
                 child:  Text(
                   '📈 LEARNING PATH',
                   style: TextStyle(
@@ -220,72 +235,96 @@ class _ProfileState extends State<HomeLive> {
                   ),
                 ),
               ),
-               Row(
-          children: [
-            SizedBox(
-              height: 150,
-              width: Get.width * 0.99,
-              child: ListView.builder(
-                  itemCount: categoryController.categoryList.length,
-                  scrollDirection: Axis.horizontal,
-                  controller: _controller,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                
-                      ),
-                      child: InkWell(
-                        onTap: (){
-                          Get.toNamed('/wipCoursePlayerNew');
-                        },
-                        child: Container(
-                          width: 150,
-                          height: 141,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 72,
-                                width: 162,
-                                decoration: BoxDecoration(
-                                    borderRadius:const BorderRadius.only(
-                                        topLeft: Radius.circular(15),
-                                        topRight: Radius.circular(15)),
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                          categoryController.categoryList[index].image.toString()
-                                         
+               Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: SizedBox(
+                          height: 144,
+                          width: Get.width * 0.97,
+                          child: ListView.builder(
+                              itemCount:
+                                  coursesController.learningPathList.length,
+                              scrollDirection: Axis.horizontal,
+                              controller: _controller,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+       
+                                        });
+                                        // Get.toNamed('/wipCoursePlayerNew');
+                                      },
+                                      child: Container(
+                                        width: Get.width * 0.35,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: Colors.white),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: Get.height * 0.1,
+                                              width: Get.width * 0.35,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(15),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  15)),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          coursesController
+                                                              .learningPathList[
+                                                                  index]
+                                                              .image
+                                                              .toString()),
+                                                      fit: BoxFit.fill)),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(left: 10),
+                                              child: Text(
+                                                // paths[index]['name']
+                                                //     .toString(),
+       
+                                                coursesController
+                                                    .learningPathList[index]
+                                                    .subCategoryName
+                                                    .toString(),
+                                                maxLines: 2,
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                  color: Color(0xff344356),
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                        fit: BoxFit.fill)),
-                              ),
-                             const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Text(
-                                  // paths[index]['name'].toString(),
-                                  categoryController.categoryList[index].category.toString(),
-                                  style: const TextStyle(
-                                    color: kTitleColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    )
+                                  ],
+                                );
+                              }),
                         ),
                       ),
-                    );
-                  }),
-            ),
-          ],
-      ),
+                     
+                     
+            
+            
               SizedBox(height: Get.height * 0.01,),
            const   Padding(
                 padding:  EdgeInsets.all(16.0),
@@ -300,7 +339,7 @@ class _ProfileState extends State<HomeLive> {
               ),
                GridView.builder(
                 padding: const EdgeInsets.only(left: 16,right: 16,top: 10),
-                itemCount: categoryController.subCategoryList.length,
+                itemCount: coursesController.coursesByCatList.length,
                 controller: _controller,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -325,7 +364,7 @@ class _ProfileState extends State<HomeLive> {
                           width: 176,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(categoryController.subCategoryList[index].image.toString()),
+                                image: NetworkImage(coursesController.coursesByCatList[index].image.toString()),
                                 fit: BoxFit.fill),
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
@@ -339,8 +378,8 @@ class _ProfileState extends State<HomeLive> {
                         Padding(
                           padding:  EdgeInsets.only(left: 6),
                           child: Text(
-                                //'Bitcoin & Blockchain',
-                                categoryController.subCategoryList[index].subCategory.toString(),
+                             'Bitcoin & Blockchain',
+                                // categoryController.subCategoryList[index].subCategory.toString(),
                                 style: TextStyle(
                                   color: kTitleColor,
                                   fontSize: 14,
@@ -369,8 +408,8 @@ class _ProfileState extends State<HomeLive> {
                                 ),
                               ),
                             ),
-
-
+       
+       
                             InkWell(
                               onTap:(){
                                 setState( (){
@@ -383,30 +422,31 @@ class _ProfileState extends State<HomeLive> {
                           
                           ],
                         ),
-
+       
                         // SizedBox(height: Get.height * 0.01,)
                       ],
                     ),
                   );
                 },
               ),
-
+       
               SizedBox(height: Get.height * 0.03,)
             
             ],
           ),
-        )
+             ),
+       )
      
      )
-        
-        
-        
-        
-        
-       
+      
+      
+      
+      
+      
      
-      ),
-    ));
+     
+    ),
+    );
   }
 
     Future<dynamic> getUserList() async {

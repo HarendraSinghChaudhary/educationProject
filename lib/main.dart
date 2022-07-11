@@ -4,9 +4,10 @@ import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
 import 'package:Ambitious/screens/courses_all.dart';
 import 'package:Ambitious/screens/courses_empty_screen.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/on-boarding-next-page.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
+import 'package:Ambitious/testing/testinf_first.dart';
 import 'package:Ambitious/testing/testing_appbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:Ambitious/screens/flash_card.dart';
@@ -41,6 +42,8 @@ void main() async{
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   runApp(const EducationOnDemand());
 
 
@@ -72,7 +75,7 @@ class EducationOnDemand extends StatelessWidget {
         
       title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const Splash(),
+      home: const CreateUser(),
 
 
       // Application Routes
@@ -106,8 +109,8 @@ class EducationOnDemand extends StatelessWidget {
         // GetPage(name: "/introduction", page: () => const Introduction() ),
         GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
         GetPage(name: "/homeLive", page: () => const HomeLive() ),
-        GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
-        GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
+        // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
+        // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
 
      
       

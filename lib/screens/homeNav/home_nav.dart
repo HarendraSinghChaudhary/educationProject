@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 
-import 'package:Ambitious/controllers/exit_dialog_controller/exit_controller.dart';
+import 'package:Ambitious/controllers/exitDialogue/exit_controller.dart';
+
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/home/view/home_live.dart';
 import 'package:Ambitious/screens/marketplace.dart';
 import 'package:Ambitious/screens/profileone.dart';
 import 'package:Ambitious/screens/resource_center.dart';
+import 'package:Ambitious/screens/settings.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/show_hide.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,7 @@ class _HomeNavState extends State<HomeNav> {
    CourseHeader(),
    // MarketPlace(),
    // ResourceCenter(),
-   ProfileOne(),
+   Settings(),
   ];
 
 

@@ -1,7 +1,9 @@
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/profile_completed.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'courses_all.dart';
 class ProfileOne extends StatefulWidget {
@@ -12,6 +14,14 @@ class ProfileOne extends StatefulWidget {
 }
 
 class _ProfileOneState extends State<ProfileOne> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getUserList();
+  }
   final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -38,8 +48,8 @@ class _ProfileOneState extends State<ProfileOne> {
                   ),
                   //Row for settings icons code Start
                   SizedBox(height: Get.height*0.02,),
-                  const Text(
-                    '👋🏼 Hello,\nAntonio Perez!',
+                  Text(
+                    '👋🏼 Hello,\n${name}!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: kTitleColor,
@@ -103,5 +113,18 @@ class _ProfileOneState extends State<ProfileOne> {
       ),
     ),
     );
+  }
+
+     Future<dynamic> getUserList() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id = pref.getString("id").toString();
+    print("id: " + id.toString());
+    email = pref.getString("email").toString();
+    print("email: " + email.toString());
+    name = pref.getString("name").toString();
+    print("name: " + name.toString());
+  
+
+    setState(() {});
   }
 }

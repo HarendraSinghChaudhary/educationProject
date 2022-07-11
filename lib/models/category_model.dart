@@ -7,7 +7,7 @@ class CategoryModel {
   String? image;
   String? createdAt;
  
-  String? isSelected;
+  bool isSelected = false;
 
 
 }

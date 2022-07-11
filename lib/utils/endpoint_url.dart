@@ -13,6 +13,8 @@ class RestDatasource {
 
   static final CREATEUSER = BASE_URL + "createuser";
   static final GETCATEGORY = BASE_URL + "getCategory";
-  static final GETSUBCATEGORY = BASE_URL + "getSubcategory?categoryId=";
+  static final GETSUBCATEGORY = BASE_URL + "getcourse?categoryId=";
+  static final ALLCOURSES = BASE_URL + "allcoursesbyCat";
+  static final LEARNINGPATH_URL = BASE_URL + "allcoursesbysubCat";
   
 }

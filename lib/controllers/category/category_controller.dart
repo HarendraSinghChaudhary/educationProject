@@ -1,8 +1,5 @@
-
-
 import 'dart:convert';
 
-import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/subcategory_model.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +21,7 @@ class CategoryController extends GetxController {
       Uri.parse(RestDatasource.GETCATEGORY),
       headers: {
         "Authorization":
-            token.toString()
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
       },
     );
 
@@ -64,14 +61,14 @@ class CategoryController extends GetxController {
           update();
         }
 
-        Get.snackbar(
-          "",
-          "",
-          snackPosition: SnackPosition.TOP,
-          titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
-          colorText: Colors.red,
-        );
+        // Get.snackbar(
+        //   "",
+        //   "",
+        //   snackPosition: SnackPosition.TOP,
+        //   titleText: Text(jsonRes["message"].toString()),
+        //   messageText: Text(""),
+        //   colorText: Colors.red,
+        // );
 
         isLoading(false);
         update();
@@ -104,6 +101,5 @@ class CategoryController extends GetxController {
   }
 
 
-   
-
+  
 }

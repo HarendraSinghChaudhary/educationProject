@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:Ambitious/controllers/exit_dialog_controller/exit_controller.dart';
+import 'package:Ambitious/controllers/exitDialogue/exit_controller.dart';
+
 import 'package:Ambitious/reusable/default_button.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';

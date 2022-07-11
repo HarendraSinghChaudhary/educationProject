@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/on-baording%20notification-like.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,7 +78,7 @@ class CreateUserController extends GetxController {
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
         // _handleRemeberme(remember);
-       Get..offAll(OnbaordingNotificationLike());
+       Get.offAll(const Category());
 
         // update();
 
@@ -173,7 +174,7 @@ class CreateUserController extends GetxController {
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
         // _handleRemeberme(remember);
-        Get..offAll(OnbaordingNotificationLike());
+        Get.offAll(const Category());
 
         // update();
 
