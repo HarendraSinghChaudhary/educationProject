@@ -10,7 +10,8 @@ import '../../../../reusable/home_header.dart';
 import '../../learningPath/view/learning_path.dart';
 
 class CourseHeader extends StatefulWidget {
-  const CourseHeader({Key? key}) : super(key: key);
+
+   CourseHeader({Key? key,}) : super(key: key);
 
   @override
   State<CourseHeader> createState() => _TabbarState();

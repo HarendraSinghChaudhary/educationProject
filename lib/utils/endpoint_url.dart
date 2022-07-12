@@ -16,5 +16,6 @@ class RestDatasource {
   static final GETSUBCATEGORY = BASE_URL + "getcourse?categoryId=";
   static final ALLCOURSES = BASE_URL + "allcoursesbyCat";
   static final LEARNINGPATH_URL = BASE_URL + "allcoursesbysubCat";
+  static final GETHOTCOURSE_URL = BASE_URL + "getHotcourse";
   
 }

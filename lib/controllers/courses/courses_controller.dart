@@ -4,6 +4,7 @@ import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/allcourses_model.dart';
 import 'package:Ambitious/models/courseby_cat_model.dart';
+import 'package:Ambitious/models/get_hot_courses_model.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
 import 'package:Ambitious/models/subcategory_model.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
@@ -19,10 +20,114 @@ class CoursesController extends GetxController {
   RxList<CoursesByCatModel> coursesByCatList = RxList();
   RxList<AllCoursesModel> allCourseList = RxList();
   RxList<LearningPathModel> learningPathList = RxList();
-  //  RxList<CoursesByCatModel> courseDataList = RxList();
+   RxList<GetHotCoursesModel> getHotCourseList = RxList();
+
+
+    Future<dynamic> getHotCoursesApi() async {
+    print("token courses" + token.toString());
+
+    isLoading(true);
+
+    var request = http.get(
+      Uri.parse(RestDatasource.GETHOTCOURSE_URL),
+      headers: {
+        "Authorization":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
+      },
+    );
+
+    String msg = "";
+    var jsonArray;
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+      final JsonDecoder _decoder = new JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      msg = jsonRes["message"].toString();
+      jsonArray = jsonRes['courseData'];
+    });
+
+    if (res.statusCode == 200) {
+      print(jsonRes["status"]);
+
+      if (jsonRes["status"].toString() == "true") {
+        getHotCourseList.clear();
+
+        for (var i = 0; i < jsonArray.length; i++) {
+         GetHotCoursesModel modelAgentSearch = GetHotCoursesModel();
+
+          modelAgentSearch.id = jsonArray[i]["_id"].toString();
+          modelAgentSearch.title= jsonArray[i]["title"].toString();
+
+           modelAgentSearch.shortDescrition = jsonArray[i]["shortDescrition"].toString();
+          modelAgentSearch.description= jsonArray[i]["description"].toString();
+
+           modelAgentSearch.categoryId = jsonArray[i]["categoryId"].toString();
+          modelAgentSearch.courseDatatitle= jsonArray[i]["courseDatatitle"].toString();
+           modelAgentSearch.hotCourses= jsonArray[i]["hotCourses"].toString();
+
+           modelAgentSearch.courseData = jsonArray[i]["courseData"].toString();
+
+          if (jsonArray[i]["image"] != null) {
+            modelAgentSearch.image = jsonArray[i]["image"].toString();
+          }
 
 
 
+          
+          getHotCourseList.add(modelAgentSearch);
+
+         
+
+       
+
+          isLoading(false);
+
+          update();
+        }
+
+        // Get.snackbar(
+        //   "",
+        //   "",
+        //   snackPosition: SnackPosition.TOP,
+        //   titleText: Text(jsonRes["message"].toString()),
+        //   messageText: Text(""),
+        //   colorText: Colors.red,
+        // );
+
+        isLoading(false);
+        update();
+      } else {
+        Get.snackbar(
+          "",
+          "",
+          snackPosition: SnackPosition.TOP,
+          titleText: Text(jsonRes["message"].toString()),
+          messageText: Text(""),
+          colorText: Colors.red,
+        );
+
+        isLoading(false);
+        update();
+      }
+    } else {
+      Get.snackbar(
+        "",
+        "",
+        snackPosition: SnackPosition.TOP,
+        titleText: Text("Please try later"),
+        messageText: Text(""),
+        colorText: Colors.red,
+      );
+
+      isLoading(false);
+      update();
+    }
+  }
 
     Future<dynamic> learningPathApi() async {
     print("token courses" + token.toString());

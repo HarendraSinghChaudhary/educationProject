@@ -7,7 +7,11 @@ import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/controllers/courses/courses_controller.dart';
 
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/utils/constant.dart';
+import 'package:crisp/crisp_view.dart';
+import 'package:crisp/models/main.dart';
+import 'package:crisp/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +30,7 @@ class HomeLive extends StatefulWidget {
 }
 
 class _ProfileState extends State<HomeLive> {
-
+  late CrispMain crispMain;
   String id = "";
   String name = "";
   String email = "";
@@ -37,6 +41,10 @@ class _ProfileState extends State<HomeLive> {
       Get.put(CoursesController(), permanent: true);
 
 
+
+
+
+
   
 
 
@@ -44,13 +52,33 @@ class _ProfileState extends State<HomeLive> {
  @override
  void initState() {
    super.initState();
+//  crispMain = CrispMain(
+//       websiteId: 'WEBSITE_ID',
+//       locale: 'pt-br',
+//     );
 
+//     crispMain.register(
+//       user: CrispUser(
+//         email: "Kaushal.appic@gmail.com",
+//         avatar: 'https://avatars2.githubusercontent.com/u/16270189?s=200&v=4',
+//         nickname: "João Cardoso",
+//         // phone: "9772347947",
+//       ),
+//     );
+
+//     crispMain.setMessage("Hhshs world");
+
+//     crispMain.setSessionData({
+//       "order_id": "111",
+//       "app_version": "0.1.1",
+//     });
    getUserList();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     // systemNavigationBarColor: Colors.blue, // navigation bar color
     statusBarColor: kArrowBackgroundColor, // status bar color
   ));
    coursesController.learningPathApi();
+   coursesController.getHotCoursesApi();
   //  categoryController.subcategoryApi();
 
    _controller = ScrollController();
@@ -139,8 +167,14 @@ class _ProfileState extends State<HomeLive> {
               elevation: 3,
              color: Colors.white,
              child: ListTile(
-               contentPadding: EdgeInsets.only(left: 20,right: 10, top: 10,bottom: 10),
-leading:  Icon(Icons.home),
+               contentPadding: EdgeInsets.only(left: 20,right: 20, top: 10,bottom: 10),
+leading: Container(
+  height: 30,
+  width: 40,
+  decoration: BoxDecoration(
+    image: DecorationImage(image: AssetImage("assets/images/rst.png"),fit: BoxFit.fill)
+  ),
+),
 title: Text("Invite Friends", 
 style: TextStyle(
   fontWeight: FontWeight.w700
@@ -165,8 +199,21 @@ trailing:  Container(
               elevation: 3,
              color: Colors.white,
              child: ListTile(
-               contentPadding: EdgeInsets.only(left: 20,right: 10, top: 10,bottom: 10),
-leading:  Icon(Icons.home),
+               onTap: (){
+                 print("Click");
+                  CrispView(
+          crispMain: crispMain,
+          clearCache: false,
+        );
+               },
+               contentPadding: EdgeInsets.only(left: 20,right: 20, top: 10,bottom: 10),
+leading:  Container(
+  height: 40,
+  width: 40,
+  decoration: BoxDecoration(
+    image: DecorationImage(image: AssetImage("assets/images/blub.png"),fit: BoxFit.fill)
+  ),
+),
 title: Text("Request a Topic", 
 style: TextStyle(
   fontWeight: FontWeight.w700
@@ -324,18 +371,18 @@ trailing:  Container(
              fontWeight: FontWeight.w500,
            ),
          ),
-             GridView.builder(
+             ListView.builder(
               padding: const EdgeInsets.only(left: 16,right: 16,top: 10),
-              itemCount: coursesController.coursesByCatList.length,
+              itemCount: coursesController.getHotCourseList.length,
               controller: _controller,
-              scrollDirection: Axis.vertical,
+              scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              gridDelegate: const  SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                childAspectRatio: 1.1,
-                crossAxisSpacing: 7,
-              ),
+              // gridDelegate: const  SliverGridDelegateWithFixedCrossAxisCount(
+              //   crossAxisCount: 2,
+              //   mainAxisSpacing: 14,
+              //   childAspectRatio: 1.1,
+              //   crossAxisSpacing: 7,
+              // ),
               itemBuilder: (BuildContext context, int index) {
                 return 
                 Container(
@@ -351,7 +398,7 @@ trailing:  Container(
                         width: 176,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage(coursesController.coursesByCatList[index].image.toString()),
+                              image: NetworkImage(coursesController.getHotCourseList[index].image.toString()),
                               fit: BoxFit.fill),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(15),
@@ -365,8 +412,8 @@ trailing:  Container(
                       Padding(
                         padding:  EdgeInsets.only(left: 6),
                         child: Text(
-                           'Bitcoin & Blockchain',
-                              // categoryController.subCategoryList[index].subCategory.toString(),
+                          //  'Bitcoin & Blockchain',
+                             coursesController.getHotCourseList[index].title.toString(),
                               style: TextStyle(
                                 color: kTitleColor,
                                 fontSize: 14,
@@ -387,7 +434,8 @@ trailing:  Container(
                               bottom: 1,
                             ),
                             child: Text(
-                              '12 Shorts',
+                              // '12 Shorts',
+                              coursesController.getHotCourseList[index].courseDatatitle.toString(),
                               style: TextStyle(
                                 color: kLightGreyColorwithMail,
                                 fontSize: 12,
@@ -397,13 +445,13 @@ trailing:  Container(
                           ),
        
        
-                          InkWell(
-                            onTap:(){
-                              setState( (){
-                                bookmark  = !bookmark;
-                              });
-                            },
-                              child: bookmark == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
+                          // InkWell(
+                          //   onTap:(){
+                          //     setState( (){
+                          //       coursesController.getHotCourseList[index].isSelected = !coursesController.getHotCourseList[index].isSelected;
+                          //     });
+                          //   },
+                          //     child:  coursesController.getHotCourseList[index].isSelected == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
                          
                         
                         
@@ -455,6 +503,7 @@ trailing:  Container(
                              setState(() {
        
                              });
+                             Get.to(HomeNav(index: 1,));
                              // Get.toNamed('/wipCoursePlayerNew');
                            },
                            child: Container(
