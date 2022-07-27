@@ -312,12 +312,18 @@ class CoursesController extends GetxController {
 
         
               courseModel.title = catList[j]["title"].toString();
+
+              if (courseModel.courseData.toString() !=  "") {
+              courseModel.courseData = catList[j]["courseData"];
+              }
+              
           
 
           modelAgentSearch.courseListbyCategory.add(courseModel);
 
 
           print("title: "+catList[j]["title"].toString());
+          print("courseData: "+ catList[j]["courseData"].toString());
 
 
           

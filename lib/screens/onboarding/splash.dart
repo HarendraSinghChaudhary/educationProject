@@ -2,6 +2,8 @@
 
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
+import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -64,11 +66,11 @@ class _SplashState extends State<Splash> {
       token.toString() == "" || token.toString() == "null" || token.toString() == ''
           ? firstTime == "null"  ?     firstTime?
      Get.offAll(Splash()):
-     Get.offAll(CreateUser()):
-     Get.offAll(CreateUser())
-          : token.toString() == '72' ? Get.offAll(CreateUser())
+     Get.offAll(Introduction()):
+     Get.offAll(Introduction())
+          : token.toString() == '72' ? Get.offAll(Introduction())
           :
-           Get.offAll(HomeNav(index: 0,));
+           Get.offAll(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs,));
     });
   }
 }

@@ -2,12 +2,16 @@
 
 import 'dart:io';
 
-
 import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/controllers/courses/courses_controller.dart';
 
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/screens/course_detail.dart';
+import 'package:Ambitious/screens/courses/learningPath/view/learning_path.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
+import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+import 'package:Ambitious/services/crispchat.dart';
+import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:crisp/crisp_view.dart';
 import 'package:crisp/models/main.dart';
@@ -15,6 +19,7 @@ import 'package:crisp/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,6 +27,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../reusable/home_header.dart';
 import '../../../utils/list.dart';
+
 class HomeLive extends StatefulWidget {
   const HomeLive({Key? key}) : super(key: key);
 
@@ -34,569 +40,488 @@ class _ProfileState extends State<HomeLive> {
   String id = "";
   String name = "";
   String email = "";
-  bool bookmark =  false;
+  bool bookmark = false;
   ScrollController _controller = ScrollController();
 
   CoursesController coursesController =
       Get.put(CoursesController(), permanent: true);
 
+  @override
+  void initState() {
+    super.initState();
 
+    getUserList();
 
-
-
-
-  
-
-
-
- @override
- void initState() {
-   super.initState();
-//  crispMain = CrispMain(
-//       websiteId: 'WEBSITE_ID',
-//       locale: 'pt-br',
-//     );
-
-//     crispMain.register(
-//       user: CrispUser(
-//         email: "Kaushal.appic@gmail.com",
-//         avatar: 'https://avatars2.githubusercontent.com/u/16270189?s=200&v=4',
-//         nickname: "João Cardoso",
-//         // phone: "9772347947",
-//       ),
-//     );
-
-//     crispMain.setMessage("Hhshs world");
-
-//     crispMain.setSessionData({
-//       "order_id": "111",
-//       "app_version": "0.1.1",
-//     });
-   getUserList();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    // systemNavigationBarColor: Colors.blue, // navigation bar color
-    statusBarColor: kArrowBackgroundColor, // status bar color
-  ));
-   coursesController.learningPathApi();
-   coursesController.getHotCoursesApi();
-  //  categoryController.subcategoryApi();
-
-   _controller = ScrollController();
+    coursesController.learningPathApi();
+    coursesController.getHotCoursesApi();
    
-   
- }
-
-
- @override
-  void dispose() {
-
-    _controller.dispose();
-
-    super.dispose();
-
   }
 
 
 
   @override
   Widget build(BuildContext context) {
-
-    print("length: "+ coursesController.learningPathList.length.toString());
+    // Get.lazyPut<LearningPathIndex>(() => LearningPathIndex());
+    print("length: " + coursesController.learningPathList.length.toString());
     return Scaffold(
-    appBar: AppBar(
-      toolbarHeight: Get.height*0.11,
-      automaticallyImplyLeading: false,
-      backgroundColor:kArrowBackgroundColor ,
-     centerTitle: false,
-     elevation: 0,
-     shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft:Radius.circular(20) ,bottomRight: Radius.circular(20))),
-      title: Text( "Hi, ${name} 👋🏼",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-              ), 
-    ),
-            
-        backgroundColor: kBackgroundColor,
-      body: 
-
-
-      Obx((() => 
-
-
-    //  categoryController.isLoading.value
-    //                     ? Align(
-    //                         alignment: Alignment.center,
-    //                         child: Platform.isAndroid
-    //                             ? CircularProgressIndicator()
-    //                             : CupertinoActivityIndicator())
-    //                     : 
-
+      appBar: AppBar(
       
-      
-      
-       SingleChildScrollView(
-        controller: controllerScroll,
-         padding: EdgeInsets.only(left: Get.height*0.015, top: Get.height*0.03),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        toolbarHeight: Get.height * 0.11,
+        automaticallyImplyLeading: false,
+        backgroundColor: kArrowBackgroundColor,
+        centerTitle: false,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20))),
+        title: Row(
           children: [
-            // HomeHeader(),
-       Text(
-         "💰 Earn ",
-         style: TextStyle(
-                  color: Color(0xff344356),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-       ),
-         Text(
-         " Complete 2 tasks for a \$10 gift card",
-         style: TextStyle(
-                  color: Color(0xff4C5A6A),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  height: Get.height*0.0025
-                ),
-       ),
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-           margin: EdgeInsets.only(top: 15,right: 10),
-              elevation: 3,
-             color: Colors.white,
-             child: ListTile(
-               contentPadding: EdgeInsets.only(left: 20,right: 20, top: 10,bottom: 10),
-leading: Container(
-  height: 30,
-  width: 40,
-  decoration: BoxDecoration(
-    image: DecorationImage(image: AssetImage("assets/images/rst.png"),fit: BoxFit.fill)
-  ),
-),
-title: Text("Invite Friends", 
-style: TextStyle(
-  fontWeight: FontWeight.w700
-),
-),
-subtitle: Text("Invite a friend and get a \$5 gift card \nwhen they sign up."),
-trailing:  Container(
-  alignment: Alignment.center,
-  height: 25,
-  width: 25,
-  decoration: BoxDecoration(
-    color: kArrowBackgroundColor,
-    borderRadius: BorderRadius.circular(20),
-  ),
-  child: Icon(Icons.arrow_forward,color: Colors.white,size: 18,),
-),
-             ),
+            Image.asset(
+              "assets/images/logoe.png",
+              width: 35,
             ),
-               Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-           margin: EdgeInsets.only(top: 15,right: 10),
-              elevation: 3,
-             color: Colors.white,
-             child: ListTile(
-               onTap: (){
-                 print("Click");
-                  CrispView(
-          crispMain: crispMain,
-          clearCache: false,
-        );
-               },
-               contentPadding: EdgeInsets.only(left: 20,right: 20, top: 10,bottom: 10),
-leading:  Container(
-  height: 40,
-  width: 40,
-  decoration: BoxDecoration(
-    image: DecorationImage(image: AssetImage("assets/images/blub.png"),fit: BoxFit.fill)
-  ),
-),
-title: Text("Request a Topic", 
-style: TextStyle(
-  fontWeight: FontWeight.w700
-),
-),
-subtitle: Text("We want to hear from you. Get a \$5 gift \ncard for honest feedback."),
-trailing:  Container(
-  alignment: Alignment.center,
-  height: 25,
-  width: 25,
-  decoration: BoxDecoration(
-    color: kArrowBackgroundColor,
-    borderRadius: BorderRadius.circular(20),
-  ),
-  child: Icon(Icons.arrow_forward,color: Colors.white,size: 18,),
-),
-             ),
-            ),
-          // Center(
-          //    child:  Text( "Hi, ${name} 👋🏼",
-          //       style: TextStyle(
-          //         color: Color(0xff344356),
-          //         fontSize: 24,
-          //         fontWeight: FontWeight.w500,
-          //       ),
-          //     ),
-          //  ),
-       
-            // SizedBox(height: Get.height * 0.02,),
-       
-            // Center(
-            //   child: SizedBox(
-            //     width: Get.width * 0.90,
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //       Column(
-            //         crossAxisAlignment: CrossAxisAlignment.center,
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: [
-       
-            //             Container(
-            //                   height: 27,
-            //                   width: 27,
-            //                   decoration: const BoxDecoration(
-            //                     shape: BoxShape.circle,
-            //                     color:  Color(0xffAEB8FF),
-            //                   ),
-            //                   child: const Icon(
-            //                     Icons.help,
-            //                     color: Colors.white,
-            //                     size: 13,
-            //                   ),
-            //                 ),
-       
-            //                const SizedBox(height: 5,),
-       
-            //                 const Text(
-            //                 'Request Topic',
-            //                 style: TextStyle(
-            //                   color: Color(0xff344356),
-            //                   fontSize: 14,
-            //                   fontWeight: FontWeight.w400,
-            //                 ),
-            //               ),
-       
-       
-       
-            //         ],
-            //       ),
-       
-            //          Column(
-            //         crossAxisAlignment: CrossAxisAlignment.center,
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: [
-       
-            //               Container(padding: EdgeInsets.all(6),
-            //                     height: 27,
-            //                     width: 27,
-            //                     decoration: BoxDecoration(
-            //                       borderRadius: BorderRadius.circular(27),
-            //                       color: Color(0xffAEB8FF),
-            //                     ),
-            //                     child: SvgPicture.asset('assets/images/Shape.svg',)
-            //                 ),
-       
-            //                const SizedBox(height: 5,),
-       
-            //                 const Text(
-            //                 'Redeem Points',
-            //                 style: TextStyle(
-            //                   color: Color(0xff344356),
-            //                   fontSize: 14,
-            //                   fontWeight: FontWeight.w400,
-            //                 ),
-            //               ),
-       
-       
-       
-            //         ],
-            //       ),
-       
-            //          Column(
-            //         crossAxisAlignment: CrossAxisAlignment.center,
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: [
-       
-            //               Container(
-            //                   height: 27,
-            //                   width: 27,
-            //                   decoration: BoxDecoration(
-            //                     borderRadius: BorderRadius.circular(27),
-            //                     color:const Color(0xffAEB8FF),
-            //                   ),
-            //                   child:const Icon(Icons.message,color: Colors.white,size: 18,)
-            //                 ),
-       
-            //                const SizedBox(height: 5,),
-       
-            //                 const Text(
-            //                 'Invite Friends',
-            //                 style: TextStyle(
-            //                   color: Color(0xff344356),
-            //                   fontSize: 14,
-            //                   fontWeight: FontWeight.w400,
-            //                 ),
-            //               ),
-       
-       
-       
-            //         ],
-            //       )
-       
-            //     ],),
-            //   ),
-            // ),
-         
-             SizedBox(height: Get.height * 0.03,),
-       
-                Text(
-           '🔥 COURSES FOR YOU',
-           style: TextStyle(
-             color: kTitleColor,
-             fontSize: 16,
-             fontWeight: FontWeight.w500,
-           ),
-         ),
-          Text(
-           'Based on your interests',
-           style: TextStyle(
-             height: 1.7,
-            //  color: kTitleColor,
-             fontSize: 14,
-             fontWeight: FontWeight.w500,
-           ),
-         ),
-             ListView.builder(
-              padding: const EdgeInsets.only(left: 16,right: 16,top: 10),
-              itemCount: coursesController.getHotCourseList.length,
-              controller: _controller,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              // gridDelegate: const  SliverGridDelegateWithFixedCrossAxisCount(
-              //   crossAxisCount: 2,
-              //   mainAxisSpacing: 14,
-              //   childAspectRatio: 1.1,
-              //   crossAxisSpacing: 7,
-              // ),
-              itemBuilder: (BuildContext context, int index) {
-                return 
-                Container(
-                
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 85,
-                        width: 176,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(coursesController.getHotCourseList[index].image.toString()),
-                              fit: BoxFit.fill),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                     const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.only(left: 6),
-                        child: Text(
-                          //  'Bitcoin & Blockchain',
-                             coursesController.getHotCourseList[index].title.toString(),
-                              style: TextStyle(
-                                color: kTitleColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                      ),
-                    const  SizedBox(
-                        height: 10,
-                      ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 6,
-                              bottom: 1,
-                            ),
-                            child: Text(
-                              // '12 Shorts',
-                              coursesController.getHotCourseList[index].courseDatatitle.toString(),
-                              style: TextStyle(
-                                color: kLightGreyColorwithMail,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-       
-       
-                          // InkWell(
-                          //   onTap:(){
-                          //     setState( (){
-                          //       coursesController.getHotCourseList[index].isSelected = !coursesController.getHotCourseList[index].isSelected;
-                          //     });
-                          //   },
-                          //     child:  coursesController.getHotCourseList[index].isSelected == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
-                         
-                        
-                        
-                        ],
-                      ),
-       
-                      // SizedBox(height: Get.height * 0.01,)
-                    ],
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: Get.height * 0.03,),
-          const  Padding(
-              padding:  EdgeInsets.only(top: 16,bottom: 6),
-              child:  Text(
-                '📈 LEARNING PATH',
-                style: TextStyle(
-                  color: kTitleColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+    
+            SizedBox(width: 10,),
+            Text(
+              "Hi, ${name} 👋🏼",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
               ),
             ),
-              Text(
-                'Pursue a new dream',
-                style: TextStyle(
-                  // color: ,
-                  color: Color(0xff4C5A6A),
-                  fontSize: 14,
-
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-             SizedBox(
-               height: 144,
-               width: Get.width * 0.97,
-               child: ListView.builder(
-                 padding: EdgeInsets.only(top: 15),
-                   itemCount:
-                       coursesController.learningPathList.length,
-                   scrollDirection: Axis.horizontal,
-                   controller: _controller,
-                   itemBuilder: (BuildContext context, int index) {
-                     return Row(
-                       children: [
-                         InkWell(
-                           onTap: () {
-                             setState(() {
-       
-                             });
-                             Get.to(HomeNav(index: 1,));
-                             // Get.toNamed('/wipCoursePlayerNew');
-                           },
-                           child: Container(
-                             width: Get.width * 0.35,
-                             decoration: BoxDecoration(
-                                 borderRadius:
-                                     BorderRadius.circular(15),
-                                 color: Colors.white),
-                             child: Column(
-                               crossAxisAlignment:
-                                   CrossAxisAlignment.start,
-                               children: [
-                                 Container(
-                                   height: Get.height * 0.1,
-                                   width: Get.width * 0.35,
-                                   decoration: BoxDecoration(
-                                       borderRadius:
-                                           const BorderRadius.only(
-                                               topLeft:
-                                                   Radius.circular(15),
-                                               topRight:
-                                                   Radius.circular(
-                                                       15)),
-                                       image: DecorationImage(
-                                           image: NetworkImage(
-                                               coursesController
-                                                   .learningPathList[
-                                                       index]
-                                                   .image
-                                                   .toString()),
-                                           fit: BoxFit.fill)),
-                                 ),
-                                 const SizedBox(
-                                   height: 10,
-                                 ),
-                                 Padding(
-                                   padding:
-                                       const EdgeInsets.only(left: 10),
-                                   child: Text(
-                                     // paths[index]['name']
-                                     //     .toString(),
-       
-                                     coursesController
-                                         .learningPathList[index]
-                                         .subCategoryName
-                                         .toString(),
-                                     maxLines: 2,
-                                     textAlign: TextAlign.start,
-                                     style: const TextStyle(
-                                       overflow: TextOverflow.ellipsis,
-                                       color: Color(0xff344356),
-                                       fontSize: 16,
-                                       fontWeight: FontWeight.w400,
-                                     ),
-                                   ),
-                                 )
-                               ],
-                             ),
-                           ),
-                         ),
-                         SizedBox(
-                           width: 15,
-                         )
-                       ],
-                     );
-                   }),
-             ),
-                   
-                   
-          
-          
-            
-
-       
-            SizedBox(height: Get.height * 0.03,)
-          
           ],
         ),
-           )
-     
-     )
-      
-      
-      
-      
-      
-     
-     
-    ),
+      ),
+      backgroundColor: kBackgroundColor,
+      body: Obx((() =>
+    
+          //  categoryController.isLoading.value
+          //                     ? Align(
+          //                         alignment: Alignment.center,
+          //                         child: Platform.isAndroid
+          //                             ? CircularProgressIndicator()
+          //                             : CupertinoActivityIndicator())
+          //                     :
+    
+          SingleChildScrollView(
+            controller: controllerScroll,
+            padding: EdgeInsets.only(
+                left: Get.height * 0.015, top: Get.height * 0.03),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // HomeHeader(),
+                Text(
+                   "💰 EARN ",
+                  // Get.find<LearningPathIndex>().isShowIndex.toString(),
+                 style: TextStyle(
+                    color: kTitleColor,
+                    
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+    
+                  SizedBox(
+                  height: Get.height * 0.005,
+                ),
+                Text(
+                  " Complete 2 tasks for a \$10 gift card",
+                  style: TextStyle(
+                      color: Color(0xff4C5A6A),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                     ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  margin: EdgeInsets.only(top: 15, right: 10),
+                  elevation: 3,
+                  color: Colors.white,
+                  child: ListTile(
+                    onTap: share,
+                    horizontalTitleGap: 20,
+                    contentPadding: EdgeInsets.only(
+                        left: 20, right: 20, top: 10, bottom: 10),
+                    leading: Container(
+                      height: 30,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/rst.png"),
+                              fit: BoxFit.fill)),
+                    ),
+                    title: Text(
+                      "Invite Friends",
+                      style: TextStyle(fontWeight: FontWeight.w700,
+                      fontSize: 16
+                      ),
+                    ),
+    
+                   
+                    subtitle: Text(
+                        "Invite a friend and get a \$5 gift card \nwhen they sign up.",
+    
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black
+                        ),
+                        
+                        ),
+                    trailing: Container(
+                      alignment: Alignment.center,
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        color: kArrowBackgroundColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  margin: EdgeInsets.only(top: 15, right: 10),
+                  elevation: 3,
+                  color: Colors.white,
+                  child: ListTile(
+                    onTap: () {
+                      Get.to(CrispChat());
+                    },
+                    contentPadding: EdgeInsets.only(
+                        left: 20, right: 20, top: 10, bottom: 10),
+                    leading: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/blub.png"),
+                              fit: BoxFit.fill)),
+                    ),
+                    title: Text(
+                      "Request a Topic",
+                      style: TextStyle(fontWeight: FontWeight.w700,
+                      fontSize: 16
+                      ),
+                    ),
+                    subtitle: Text(
+                        "We want to hear from you. Get a \$5 gift \ncard for honest feedback.",
+    
+                         style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black
+                        ),
+                        
+                        
+                        
+                        ),
+                    trailing: Container(
+                      alignment: Alignment.center,
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        color: kArrowBackgroundColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ),
+         
+    
+                SizedBox(
+                  height: Get.height * 0.03,
+                ),
+    
+                Text(
+                  '🔥 COURSES FOR YOU',
+                  style: TextStyle(
+                    color: kTitleColor,
+                    
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+    
+                //  SizedBox(
+                //   height: Get.height * 0.000,
+                // ),
+    
+                Text(
+                  'Based on your interests',
+                  style: TextStyle(
+                    height: 1.7,
+                    color: Color(0xff4C5A6A),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+    
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+             
+                    itemCount: coursesController.getHotCourseList.length,
+                    controller: _controller,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+              
+                    itemBuilder: (BuildContext context, int index) {
+                      return Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.to(CourseDetail(title:    coursesController
+                                          .getHotCourseList[index].title
+                                          .toString(), 
+                                          id:    coursesController
+                                          .getHotCourseList[index].id
+                                          .toString()));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 85,
+                                    width: 176,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(coursesController
+                                              .getHotCourseList[index].image
+                                              .toString()),
+                                          fit: BoxFit.fill),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 6),
+                                    child: Text(
+                                      //  'Bitcoin & Blockchain',
+                                      coursesController
+                                          .getHotCourseList[index].title
+                                          .toString(),
+                                      style: TextStyle(
+                                        color: kTitleColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 6,
+                                          bottom: 1,
+                                        ),
+                                        child: Text(
+                                        '12 Shorts',
+                                          // coursesController
+                                          //     .getHotCourseList[index]
+                                          //     .courseDatatitle
+                                          //     .toString(),
+                                          style: TextStyle(
+                                            color: kLightGreyColorwithMail,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                              
+                                      // InkWell(
+                                      //   onTap:(){
+                                      //     setState( (){
+                                      //       coursesController.getHotCourseList[index].isSelected = !coursesController.getHotCourseList[index].isSelected;
+                                      //     });
+                                      //   },
+                                      //     child:  coursesController.getHotCourseList[index].isSelected == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.03,
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16, bottom: 6),
+                  child: Text(
+                    '📈 LEARNING PATH',
+                    style: TextStyle(
+                      color: kTitleColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Text(
+                  'Pursue a new dream',
+                  style: TextStyle(
+                   
+                    color: Color(0xff4C5A6A),
+                    fontSize: 14,
+    
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  height: 144,
+                  width: Get.width * 0.97,
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(top: 15),
+                      itemCount: coursesController.learningPathList.length,
+                      scrollDirection: Axis.horizontal,
+                      controller: _controller,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                  Get.offAll(BottomNavigationScreen(
+                                  index:  1.obs,
+                                  learningPathIndex: index.obs,
+
+
+
+                     
+                           
+                                  ));
+
+                                  // Get.find<LearningPathIndex>().isShowIndex = index.obs ;
+                                  // print("====="+Get.find<LearningPathIndex>().isShowIndex.toString());
+
+
+                                  // Get.find<LearningPathIndex>().selectedModel = coursesController.learningPathList[index];
+
+                               
+                                    print("press here..");
+                             
+
+
+                              
+                                
+                              },
+                              child: Container(
+                                width: Get.width * 0.35,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: Get.height * 0.1,
+                                      width: Get.width * 0.35,
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15)),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  coursesController
+                                                      .learningPathList[index]
+                                                      .image
+                                                      .toString()),
+                                              fit: BoxFit.fill)),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        // paths[index]['name']
+                                        //     .toString(),
+    
+                                        coursesController
+                                            .learningPathList[index]
+                                            .subCategoryName
+                                            .toString(),
+                                        maxLines: 2,
+                                        textAlign: TextAlign.start,
+                                        style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          color: Color(0xff344356),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            )
+                          ],
+                        );
+                      }),
+                ),
+    
+                SizedBox(
+                  height: Get.height * 0.03,
+                )
+              ],
+            ),
+          ))),
     );
   }
 
-    Future<dynamic> getUserList() async {
+
+    Future<void> share() async {
+    await FlutterShare.share(
+      title: 'Ambitious App',
+      text: 'Hey! Check out this new app called Ambitious. You can learn about Tech, Crypto, Business in just 5 minutes. Sign up here —>',
+      linkUrl: 'https://theambitiousapp.com/',
+      chooserTitle: ''
+    );
+  }
+
+  Future<dynamic> getUserList() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     id = pref.getString("id").toString();
     print("id: " + id.toString());
@@ -604,7 +529,6 @@ trailing:  Container(
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
-  
 
     setState(() {});
   }

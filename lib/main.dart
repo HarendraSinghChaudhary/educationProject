@@ -1,22 +1,22 @@
 
-import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
+
+import 'package:Ambitious/screens/course_detail.dart';
 import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
 import 'package:Ambitious/screens/courses_all.dart';
 import 'package:Ambitious/screens/courses_empty_screen.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.dart';
+import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+
 import 'package:Ambitious/screens/onboarding/splash.dart';
-import 'package:Ambitious/testing/testinf_first.dart';
-import 'package:Ambitious/testing/testing_appbar.dart';
+import 'package:Ambitious/testing/navigation_testing.dart';
+
 import 'package:Ambitious/utils/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:Ambitious/screens/flash_card.dart';
-import 'package:Ambitious/screens/home/view/home.dart';
+
 import 'package:Ambitious/screens/home/view/home_live.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
-import 'package:Ambitious/screens/marketplace.dart';
-import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
+
 import 'package:Ambitious/screens/onboarding/realQuick/view/quick_notification.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/real_quick.dart';
 import 'package:Ambitious/screens/onboarding/signIn/view/signin.dart';
@@ -24,7 +24,6 @@ import 'package:Ambitious/screens/onboarding/signIn/view/signin.dart';
 import 'package:Ambitious/screens/profile_edit.dart';
 import 'package:Ambitious/screens/quiz_end.dart';
 import 'package:Ambitious/screens/resource_center.dart';
-import 'package:Ambitious/screens/settings.dart';
 import 'package:Ambitious/screens/social_me_courses.dart';
 import 'package:Ambitious/screens/social_me_people.dart';
 import 'package:Ambitious/screens/socialme.dart';
@@ -34,22 +33,42 @@ import 'package:Ambitious/screens/wipscreentwo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
+
+
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    // systemNavigationBarColor: Colors.blue, // navigation bar color
+    statusBarColor: Colors.transparent, // status bar color
+  ));
+    WidgetsFlutterBinding.ensureInitialized();
+  // await Intercom.instance.initialize(
+  //   'com.educationondemand',
+  //   androidApiKey: 'androidApiKey',
+  //   iosApiKey: 'iosApiKey',
+  // );
+
+
+
+
+
+
   await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
-     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    // systemNavigationBarColor: Colors.blue, // navigation bar color
-    statusBarColor: kBackgroundColor, // status bar color
-  ));
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+    
+
+
+
   runApp(const EducationOnDemand());
+
+  
 
 
    
@@ -75,51 +94,50 @@ class EducationOnDemand extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-      ),
+   
         
       title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: const CreateUser(),
+      home: Splash(),
 
 
       // Application Routes
 
-      getPages: [
-        GetPage(name: "/", page: () =>const EducationOnDemand()),
-        GetPage(
-            name: "/homeNav",
-            page: () =>  HomeNav(index: 0,
+      // getPages: [
+      //   GetPage(name: "/", page: () =>const EducationOnDemand()),
+      //   GetPage(
+      //       name: "/homeNav",
+      //       page: () =>  BottomNavigationScreen(index: 0.obs,
                  
-                )),
+      //           )),
    
-        GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
-        GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
-        GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
-        // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
-        GetPage(name: "/courseHeader", page: () => const CourseHeader(), ),
-        GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
-        GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
-        GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
-        GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
-        GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
-        GetPage(name: "/socialme", page: () => const Socialme() ),
-        GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
-        GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
-        GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
-        GetPage(name: "/settings", page: () => const Settings() ),
-        GetPage(name: "/flashCard", page: () => const FlashCard() ),
-        GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
-        GetPage(name: "/editprofile", page: () => const EditProfile() ),
-        // GetPage(name: "/introduction", page: () => const Introduction() ),
-        GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
-        GetPage(name: "/homeLive", page: () => const HomeLive() ),
-        // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
-        // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
+      //   GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
+      //   GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
+      //   GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
+      //   // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
+      //   GetPage(name: "/courseHeader", page: () =>  CourseHeader(), ),
+      //   GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
+      //   GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
+      //   GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
+      //   GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
+      //   GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
+      //   GetPage(name: "/socialme", page: () => const Socialme() ),
+      //   GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
+      //   GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
+      //   GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
+      //   // GetPage(name: "/settings", page: () => const Settings() ),
+      //   GetPage(name: "/flashCard", page: () => const FlashCard() ),
+      //   GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
+      //   GetPage(name: "/editprofile", page: () => const EditProfile() ),
+      //   // GetPage(name: "/introduction", page: () => const Introduction() ),
+      //   GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
+      //   GetPage(name: "/homeLive", page: () => const HomeLive() ),
+      //   // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
+      //   // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
 
      
       
-      ],
+      // ],
     );
   }
 

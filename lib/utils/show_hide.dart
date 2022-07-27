@@ -1,105 +1,105 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/rendering.dart';
 
 
 
 
-class ScrollToHideWidget extends StatefulWidget {
+// class ScrollToHideWidget extends StatefulWidget {
 
-  final Widget child;
-  final ScrollController controller;
-  final Duration duration;
+//   final Widget child;
+//   final ScrollController controller;
+//   final Duration duration;
 
-  const ScrollToHideWidget({Key? key,
-   required this.controller, 
-   this.duration = const Duration(milliseconds:  200), 
-   required this.child}) : super(key: key);
+//   const ScrollToHideWidget({Key? key,
+//    required this.controller, 
+//    this.duration = const Duration(milliseconds:  200), 
+//    required this.child}) : super(key: key);
  
 
-  @override
-  State<ScrollToHideWidget> createState() => _ScrollToHideWidgetState();
-}
+//   @override
+//   State<ScrollToHideWidget> createState() => _ScrollToHideWidgetState();
+// }
 
-class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
+// class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
 
-  bool isVisible = true;
+//   bool isVisible = true;
 
-  @override
-  void initState() {
+//   @override
+//   void initState() {
    
-    super.initState();
+//     super.initState();
 
-    widget.controller.addListener(listen);
-  }
-
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-
-     widget.controller.addListener(listen);
-  }
+//     widget.controller.addListener(listen);
+//   }
 
 
-  void listen () {
+//   @override
+//   void dispose() {
+//     // TODO: implement dispose
+//     super.dispose();
 
-    final direction = widget.controller.position.userScrollDirection;
-
-    if (direction == ScrollDirection.forward){
-      show();
-    }else if (direction == ScrollDirection.reverse){
-      hide();
-    }
+//      widget.controller.addListener(listen);
+//   }
 
 
+//   void listen () {
 
-  }
+//     final direction = widget.controller.position.userScrollDirection;
+
+//     if (direction == ScrollDirection.forward){
+//       show();
+//     }else if (direction == ScrollDirection.reverse){
+//       hide();
+//     }
 
 
-  void show () {
-    if (!isVisible){
+
+//   }
 
 
-      setState(() {
+//   void show () {
+//     if (!isVisible){
 
-        isVisible = true;
+
+//       setState(() {
+
+//         isVisible = true;
         
-      });
+//       });
 
 
 
-    }
-  }
+//     }
+//   }
 
-   void hide () {
-    if (isVisible){
+//    void hide () {
+//     if (isVisible){
 
 
-      setState(() {
+//       setState(() {
 
-        isVisible = false;
+//         isVisible = false;
         
-      });
+//       });
 
 
 
-    }
-  }
+//     }
+//   }
 
 
 
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      child: Wrap(
-        children: [
-          widget.child,
-        ],
-      ),
-      height: isVisible ? kBottomNavigationBarHeight : 0,
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedContainer(
+//       child: Wrap(
+//         children: [
+//           widget.child,
+//         ],
+//       ),
+//       height: isVisible ? kBottomNavigationBarHeight : 0,
 
-      duration: widget.duration);
+//       duration: widget.duration);
     
-  }
-}
+//   }
+// }

@@ -125,20 +125,26 @@ List<dynamic>Hot = [
 
 List<dynamic> Recourcecenter =[
   {
-    "image" : "assets/images/roundaskto.png",
-    "tital" : "Ask an Expert",
-    "subtital" : "Lorem Ipsum Color Dolor",
+    "image" : "assets/images/1.png",
+    "tital" : "Ask An Expert Anything",
+    "subtital" : "Learn directly from community leaders"
   },
   {
-    "image" : "assets/images/resumereviewnew.png",
+    "image" : "assets/images/2.png",
     "tital" : "Resume Review",
-    "subtital" : "Lorem Ipsum Color Dolor",
+    "subtital" : "Get a proffesional to review your resume. ",
   },
   {
-    "image" : "assets/images/bootcampsandcertificates.png",
+    "image" : "assets/images/3.png",
     "tital" : "Bootcamps and Certificates",
-    "subtital" : "Lorem Ipsum Color Dolor",
+    "subtital" : "Curated list of programs.",
   },
+
+  // {
+  //   "image" : "assets/images/5.png",
+  //   "tital" : "Discord Community",
+  //   "subtital" : "Network with Ambitious people.",
+  // },
 
 ];
 List<dynamic> setting = [

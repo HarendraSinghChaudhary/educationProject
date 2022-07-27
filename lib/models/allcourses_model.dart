@@ -12,6 +12,7 @@ class AllCoursesModel {
   String image = "";
   List <CoursesByCatModel> courseListbyCategory = [];
   //  RxList<AllCoursesModel> courseListbyCat = RxList();
+  List<String> courseData = []; 
 
 
 

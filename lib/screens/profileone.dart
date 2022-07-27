@@ -25,7 +25,7 @@ class _ProfileOneState extends State<ProfileOne> {
   final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: DefaultTabController(length: 3,
+    return DefaultTabController(length: 3,
       child: Scaffold(
         backgroundColor: kBackgroundColor,
         body:
@@ -111,7 +111,6 @@ class _ProfileOneState extends State<ProfileOne> {
 
 
       ),
-    ),
     );
   }
 

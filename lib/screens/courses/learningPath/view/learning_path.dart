@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/controllers/courses/courses_controller.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
+import 'package:Ambitious/screens/course_detail.dart';
+import 'package:Ambitious/screens/page_detail.dart';
+import 'package:Ambitious/services/crispchat.dart';
 import 'package:Ambitious/utils/list.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -9,43 +13,90 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LearningPath extends StatefulWidget {
-  const LearningPath({Key? key}) : super(key: key);
+  RxInt indexPath;
+  LearningPath({Key? key, required this.indexPath}) : super(key: key);
 
   @override
   State<LearningPath> createState() => _LearningpathState();
 }
 
 class _LearningpathState extends State<LearningPath> {
-  int isShow = 0;
-  CoursesController coursesController =
-      Get.put(CoursesController(), permanent: true);
+
 
   LearningPathModel selectedModel = LearningPathModel();
-
+  final dataKey = GlobalKey();
+  List keys = [];
+  var contexte ;
+ 
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    // Get.find<LearningPathIndex>().dispose();
+  }
   @override
   void initState() {
+  print("111====="+widget.indexPath.toString());
     super.initState();
+ for (int i = 0; i < Get.find<CoursesController>().learningPathList.length; i++) {
+        keys.add(i);
+        keys[i] = GlobalKey();
+      }
+    if (widget.indexPath ==0.obs) {
+      Get.find<CoursesController>().learningPathApi().then((value) {
+        selectedModel = Get.find<CoursesController>().learningPathList[0];
 
-    coursesController.learningPathApi().then((value) {
-      selectedModel = coursesController.learningPathList.first;
+
+        print("press 1....");
 
         name =
-          coursesController.learningPathList.first.subCategoryName.toString();
+            Get.find<CoursesController>().learningPathList.first.subCategoryName.toString();
+      }).whenComplete(() {
+        for (int i = 0; i < Get.find<CoursesController>().learningPathList.length; i++) {
+        keys.add(i);
+        keys[i] = GlobalKey();
+      }
+      });
+    } else {
+      Get.find<CoursesController>().learningPathApi().then((value) {
+        // selectedModel = widget.indexPath;
+        
+           selectedModel = Get.find<CoursesController>().learningPathList[widget.indexPath.toInt()];
+
+         print("press 2...");
+
+        name =
+            Get.find<CoursesController>().learningPathList[widget.indexPath.toInt()].subCategoryName.toString();
+            scollToItem(widget.indexPath.toInt());
+      }).whenComplete((){
+        for (int i = 0; i < Get.find<CoursesController>().learningPathList.length; i++) {
+        keys.add(i);
+        keys[i] = GlobalKey();
+      }
+      });
+    }
 
 
-    });
+
+
+
   }
 
   bool isVisible = false;
   final ScrollController _controller = ScrollController();
 
-  String name= "";
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
+    // Get.lazyPut<LearningPathIndex>(() => LearningPathIndex());
+     Get.lazyPut<CoursesController>(() => CoursesController());
+      // print("index====: "+ Get.find<LearningPathIndex>().isShowIndex.toString());
     return Scaffold(
         backgroundColor: kBackgroundColor,
-        body: Obx((() => SingleChildScrollView(
+        body: Obx((() => 
+        
+        SingleChildScrollView(
               controller: _controller,
               child: Container(
                 margin: EdgeInsets.only(left: 10),
@@ -62,147 +113,147 @@ class _LearningpathState extends State<LearningPath> {
                         width: Get.width * 0.97,
                         child: ListView.builder(
                             itemCount:
-                                coursesController.learningPathList.length,
+                                Get.find<CoursesController>().learningPathList.length,
                             scrollDirection: Axis.horizontal,
                             controller: _controller,
                             itemBuilder: (BuildContext context, int index) {
-                              return Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        // bool isTrue = true;
+                              return Container(
+                                key: keys[index],
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          selectedModel = Get.find<CoursesController>().learningPathList[index];
 
-                                        // if (isTrue == true) {
+                                          name = Get.find<CoursesController>().learningPathList[index]
+                                              .subCategoryName
+                                              .toString();
 
-                                        // }
+                                         widget.indexPath= index.obs ;
+                                        });
 
-                                        selectedModel = coursesController
-                                            .learningPathList[index];
+                                        scollToItem(index);
 
-                                        name = coursesController
-                                            .learningPathList[index]
-                                            .subCategoryName
-                                            .toString();
-
-                                        //  coursesController.learningPathList[index ].isPress = true;
-
-                                        isShow = index + 1;
-
-                                        //  coursesController.learningPathList[isShow].isPress = true;
-
-                                        isVisible = true;
-                                      });
-                                      // Get.toNamed('/wipCoursePlayerNew');
-                                    },
-                                    child: Container(
-                                      width: Get.width * 0.35,
-                                      height: Get.height * 0.22,
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            width: Get.width * 0.35,
-                                            height: Get.height * 0.18,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                color: Colors.white),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  height: Get.height * 0.1,
-                                                  width: Get.width * 0.35,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                                  .only(
-                                                              topLeft: Radius
-                                                                  .circular(15),
-                                                              topRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          15)),
-                                                      image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              coursesController
-                                                                  .learningPathList[
-                                                                      index]
-                                                                  .image
-                                                                  .toString()),
-                                                          fit: BoxFit.fill)),
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: Text(
-                                                    // paths[index]['name']
-                                                    //     .toString(),
-
-                                                    coursesController
-                                                        .learningPathList[index]
-                                                        .subCategoryName
-                                                        .toString(),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.start,
-                                                    style: const TextStyle(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      color: Color(0xff344356),
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible: isShow == index + 1,
-                                            child: Positioned(
-                                              top: Get.height * 0.16,
-                                              left: 0,
-                                              right: 0,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                        // _controller
+                                      },
+                                      child: Container(
+                                        width: Get.width * 0.35,
+                                        height: Get.height * 0.22,
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              width: Get.width * 0.35,
+                                              height: Get.height * 0.18,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  boxShadow: const [
+                                                    BoxShadow(
+                                                        color: Colors.black12,
+                                                        offset: Offset(2, 3),
+                                                        blurRadius: 10,
+                                                        spreadRadius: 3)
+                                                  ],
+                                                  color: Colors.white),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Transform(
-                                                    alignment:
-                                                        FractionalOffset.center,
-                                                    transform:
-                                                        new Matrix4.identity()
-                                                          ..rotateZ(45 *
-                                                              3.1415927 /
-                                                              180),
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 30,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8)),
-                                                    ),
+                                                  Container(
+                                                    height: Get.height * 0.1,
+                                                    width: Get.width * 0.35,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .only(
+                                                                topLeft: Radius
+                                                                    .circular(15),
+                                                                topRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            15)),
+                                                        image: DecorationImage(
+                                                            image: NetworkImage(
+                                                               Get.find<CoursesController>().learningPathList[
+                                                                        index]
+                                                                    .image
+                                                                    .toString()),
+                                                            fit: BoxFit.fill)),
                                                   ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Text(
+                                                      // paths[index]['name']
+                                                      //     .toString(),
+
+                                                      Get.find<CoursesController>().learningPathList[index]
+                                                          .subCategoryName
+                                                          .toString(),
+                                                      maxLines: 2,
+                                                      textAlign: TextAlign.start,
+                                                      style: const TextStyle(
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        color: Color(0xff344356),
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             ),
-                                          )
-                                        ],
+                                            Visibility(
+                                              visible:
+                                                 widget.indexPath ==
+                                                      index ,
+                                              child: Positioned(
+                                                top: Get.height * 0.16,
+                                                left: 0,
+                                                right: 0,
+                                                bottom: 15,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Transform(
+                                                      alignment:
+                                                          FractionalOffset.center,
+                                                      transform:
+                                                          new Matrix4.identity()
+                                                            ..rotateZ(45 *
+                                                                3.1415927 /
+                                                                180),
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 30,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(8)),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  )
-                                ],
+                                    SizedBox(
+                                      width: 15,
+                                    )
+                                  ],
+                                ),
                               );
                             }),
                       ),
@@ -219,24 +270,23 @@ class _LearningpathState extends State<LearningPath> {
                             child: Row(
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                name.isEmpty?Text("....."
-                                ,
-                                    style: TextStyle(
-                                    wordSpacing: 1,
-                                    color: kTitleColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  )
-                                ):
-                                Text(
-                                  '${name} Learning Path',
-                                  style: TextStyle(
-                                    wordSpacing: 1,
-                                    color: kTitleColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                name.isEmpty
+                                    ? Text("",
+                                        style: TextStyle(
+                                          wordSpacing: 1,
+                                          color: kTitleColor,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ))
+                                    : Text(
+                                        '${name} Learning Path',
+                                        style: TextStyle(
+                                          wordSpacing: 1,
+                                          color: kTitleColor,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -261,7 +311,17 @@ class _LearningpathState extends State<LearningPath> {
                             itemBuilder: (BuildContext context, int index) {
                               return InkWell(
                                 onTap: () {
-                                  Get.toNamed('/wipCoursePlayerNew');
+                                 Get.to(PageViewController(title:  selectedModel
+                                              .courseListbyLearningPath[index]
+                                              .title
+                                              .toString(),
+                                              id: selectedModel
+                                              .courseListbyLearningPath[index]
+                                              .id
+                                              .toString(),
+                                              
+                                              
+                                              ));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -325,7 +385,9 @@ class _LearningpathState extends State<LearningPath> {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(CrispChat());
+                        },
                         child: Text(
                           'REQUEST A TOPIC',
                           textAlign: TextAlign.center,
@@ -345,4 +407,24 @@ class _LearningpathState extends State<LearningPath> {
               ),
             ))));
   }
+  Future scollToItem(int index) async {
+    contexte = keys[index].currentContext!;
+    print(keys[index].currentContext!);
+    await Scrollable.ensureVisible(contexte,
+        duration: const Duration(milliseconds: 800));
+  }
+
 }
+
+
+
+// class LearningPathIndex extends GetxController {
+  
+//   LearningPathModel selectedModel = LearningPathModel();
+
+//   RxInt? isShowIndex;
+
+//   void newone () {
+//     print("index: "+ isShowIndex.toString());
+//   }
+// }

@@ -12,7 +12,7 @@ class _ProfileCompletedState extends State<ProfileCompleted> {
   ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
@@ -77,7 +77,6 @@ class _ProfileCompletedState extends State<ProfileCompleted> {
           ],
         ),
       ),
-    ),
     );
   }
 }

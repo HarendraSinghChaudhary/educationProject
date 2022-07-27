@@ -31,13 +31,15 @@ class _OnbaordingNotificationLikeState extends State<Category> {
   String isSelected = "";
   // bool isSelected = false;
 
-  List <String> idList = [];
+  List<String> idList = [];
   List<String> collectId = [];
   TextStyle tital = const TextStyle(
     color: kTitleColor,
     fontWeight: FontWeight.w600,
     fontSize: 15,
   );
+
+  bool _value = false;
   TextStyle subtital =
       const TextStyle(color: kSubTitleColor, fontSize: 12, height: 1.5);
 
@@ -91,14 +93,14 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SkipButton(
-                        height: Get.height * 0.04,
-                        width: Get.width * 0.22,
-                        text: "Skip",
-                        press: () {
-                          Get.to(HomeNav(index: 0));
-                        },
-                      )
+                      // SkipButton(
+                      //   height: Get.height * 0.04,
+                      //   width: Get.width * 0.22,
+                      //   text: "Skip",
+                      //   press: () {
+                      //     Get.to(HomeNav(index: 0));
+                      //   },
+                      // )
                     ],
                   ),
                 ),
@@ -117,13 +119,7 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                 SizedBox(
                   height: h * 0.01,
                 ),
-                // const Text(
-                //   'Pick 1',
-                //   style: TextStyle(
-                //       color: kSubTitleColor,
-                //       fontSize: 18,
-                //       fontWeight: FontWeight.w500),
-                // ),
+  
                 SizedBox(
                   height: h * 0.02,
                 ),
@@ -152,93 +148,54 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                                 )
                               ]),
                           child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.04),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: Get.width * 0.07,
-                                        backgroundImage: NetworkImage(
-                                          categoryController
-                                              .categoryList[index].image
-                                              .toString(),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: Get.width * 0.04,
-                                      ),
-                                      SizedBox(
-                                        width: Get.width * 0.40,
-                                        child: Text(
-                                          categoryController
-                                              .categoryList[index].category
-                                              .toString(),
-                                          style: tital,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(
-                                    height: Get.height * 0.002,
-                                  ),
-
-                                  // Radio(
-                                  //     value: categoryController
-                                  //         .categoryList[index].id
-                                  //         .toString(),
-                                  //     groupValue: idList,
-                                  //     onChanged: (value) {
-                                  //       setState(() {
-                                  //         isSelected = value.toString();
-                                  //         print(value);
-
-                                  //         idList.add(isSelected);
-
-                                  //         print("Radio Button: " +
-                                  //             isSelected.toString());
-                                  //       });
-
-                                  //       print("Radio Button1: " +
-                                  //           isSelected.toString());
-                                  //     }),
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: kPrimaryColor,
-                                    value: categoryController.categoryList[index].isSelected,
-                                    onChanged: (value) {
-                                      print(value);
-                                      setState(() {
-
-                                        if (value == true) {
-
-                                        idList.add(categoryController.categoryList[index].id.toString());
-
-                                        } else {
-                                          idList.remove(categoryController.categoryList[index].id.toString());
-
-                                        }
-
-                                         categoryController.categoryList[index].isSelected =value! ;
-
-
-                                      
-                                      });
-                                    },
-                                  ),
-                                ],
+                            child: CheckboxListTile(
+                              title: SizedBox(
+                                width: Get.width * 0.40,
+                                child: Text(
+                                  categoryController
+                                      .categoryList[index].category
+                                      .toString(),
+                                  style: tital,
+                                ),
                               ),
+                              // subtitle: const Text('A computer science portal for geeks.'),
+                              secondary: CircleAvatar(
+                                radius: Get.width * 0.07,
+                                backgroundImage: NetworkImage(
+                                  categoryController.categoryList[index].image
+                                      .toString(),
+                                ),
+                              ),
+                              autofocus: false,
+                              activeColor:kPrimaryColor,
+                              checkColor: Colors.white,
+                              selected: _value,
+                              value: categoryController
+                                  .categoryList[index].isSelected,
+                              onChanged: (value) {
+                                print(value);
+                                setState(() {
+                                  if (value == true) {
+                                    idList.add(categoryController
+                                        .categoryList[index].id
+                                        .toString());
+                                  } else {
+                                    idList.remove(categoryController
+                                        .categoryList[index].id
+                                        .toString());
+                                  }
+
+                                  categoryController
+                                      .categoryList[index].isSelected = value!;
+                                });
+                              },
                             ),
                           ),
+
+                     
                         ),
                       );
                     }))),
-
               ],
             ),
           ),
@@ -256,25 +213,21 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                     height: w * 0.14,
                     text: 'Next',
                     press: () {
-
-                      print("list: "+idList.toString());
+                      print("list: " + idList.toString());
 
                       String sub = idList.join(",");
 
-                      print("true: "+ sub);
-
+                      print("true: " + sub);
 
                       if (idList.isNotEmpty) {
-                      Get.to(CoursesbyCategory(catId: sub.toString()))?.then((value) {
-                        // idList.clear();
-                        // categoryController.categoryApi();
-                      });
-
+                        Get.to(CoursesbyCategory(catId: sub.toString()))
+                            ?.then((value) {
+                          // idList.clear();
+                          // categoryController.categoryApi();
+                        });
                       } else {
                         Get.snackbar("Please select category", "");
                       }
-
-                   
                     }),
               ),
             ),
