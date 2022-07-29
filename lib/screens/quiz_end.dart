@@ -1,21 +1,32 @@
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/home/view/home.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuizEnd extends StatefulWidget {
-  const QuizEnd({Key? key}) : super(key: key);
+  int length;
+  QuizEnd ({required this.length});
 
   @override
   State<QuizEnd> createState() => _QuizendState();
 }
 
 class _QuizendState extends State<QuizEnd> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserList();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +48,13 @@ class _QuizendState extends State<QuizEnd> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+
+                   SizedBox(height: Get.height * 0.1,),
+
+
                     InkWell(
                       onTap: () {
-                        Get.to(BottomNavigationScreen(index: 1.obs,learningPathIndex:  0.obs,));
+                       Get.back();
                       },
                       child: const Icon(
                         Icons.close_rounded,
@@ -73,7 +88,7 @@ class _QuizendState extends State<QuizEnd> {
                                     fontWeight: FontWeight.w700),
                               ),
                               Text(
-                                '5 of 5',
+                                widget.length.toString() +' of ' + widget.length.toString(),
                                 style: TextStyle(color: kSubTitleColor),
                               ),
                             ],
@@ -146,93 +161,36 @@ class _QuizendState extends State<QuizEnd> {
                 fontSize: 20,fontWeight: FontWeight.w400),
               ),
               //Gretting Code End
-              SizedBox(height: Get.height*0.10,),
+              SizedBox(height: Get.height*0.05,),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'CONTINUE',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color:ksubtitamarketColor,fontSize: 16,fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-              //share Button(4) code Start
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04,vertical: Get.height*0.04),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(Get.height*0.015),
-                      height: Get.height*0.08,
-                      width: Get.width*0.17,
-                      decoration: BoxDecoration(
-                        color: kPrimaryColor,
-                        borderRadius: BorderRadius.circular(13),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.32),
-                              offset: const Offset(0,4),
-                              blurRadius: 9,
-                            )
-                          ]
-                      ),
-                      child: SvgPicture.asset('assets/images/whitesms.svg'),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(Get.height*0.015),
-                      height: Get.height*0.08,
-                      width: Get.width*0.17,
-                      decoration: BoxDecoration(
-                          color: Color(0xff60D4AA),
+          
+              InkWell(
+                onTap: share,
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04,vertical: Get.height*0.04),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(Get.height*0.015),
+                        height: Get.height*0.08,
+                        width: Get.width*0.17,
+                        decoration: BoxDecoration(
+                          color: kPrimaryColor.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(13),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.32),
-                              offset: const Offset(0,4),
-                              blurRadius: 9,
-                            )
-                          ]
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.blue.withOpacity(0.05),
+                                offset: const Offset(0,4),
+                                blurRadius: 9,
+                              )
+                            ]
+                        ),
+                        child: SvgPicture.asset('assets/icons/share-.svg'),
                       ),
-                      child: SvgPicture.asset('assets/images/mail.svg'),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(Get.height*0.015),
-                      height: Get.height*0.08,
-                      width: Get.width*0.17,
-                      decoration: BoxDecoration(
-                          color: Color(0xff4775CC),
-                          borderRadius: BorderRadius.circular(13),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.32),
-                              offset: const Offset(0,4),
-                              blurRadius: 9,
-                            )
-                          ]
-                      ),
-                      child: SvgPicture.asset('assets/images/facebook.svg'),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(Get.height*0.015),
-                      height: Get.height*0.08,
-                      width: Get.width*0.17,
-                      decoration: BoxDecoration(
-                          color: Color(0xff22B9FA),
-                          borderRadius: BorderRadius.circular(13),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.32),
-                              offset: const Offset(0,4),
-                              blurRadius: 9,
-                            )
-                          ]
-                      ),
-                      child: SvgPicture.asset('assets/images/twt.svg'),
-                    ),
-                  ],
+                      
+                    ],
+                  ),
                 ),
               )
               //share Button(4) code End
@@ -241,5 +199,27 @@ class _QuizendState extends State<QuizEnd> {
         ],
       ),
     );
+  }
+
+
+    Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Ambitious App',
+        text:
+            'Hey! Check out this new app called Ambitious. *'+name.toString() + '* has completed *'+ shareCourse.toString() + '* course. You can Learn, Build, and Grow with 1000+ other Ambitious learners. Sign up here —>',
+        linkUrl: 'https://theambitiousapp.com/',
+        chooserTitle: '');
+  }
+
+  Future<dynamic> getUserList() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id = pref.getString("id").toString();
+    print("id: " + id.toString());
+    email = pref.getString("email").toString();
+    print("email: " + email.toString());
+    name = pref.getString("name").toString();
+    print("name: " + name.toString());
+
+    setState(() {});
   }
 }

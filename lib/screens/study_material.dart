@@ -1,66 +1,61 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
 
 import 'package:Ambitious/controllers/study_material/study_material_controller.dart';
-import 'package:Ambitious/reusable/default_button.dart';
-import 'package:Ambitious/screens/quiz_end.dart';
+import 'package:Ambitious/reusable/skip_button.dart';
 import 'package:Ambitious/screens/study_material_detail.dart';
-
 import 'package:Ambitious/utils/constant.dart';
-import 'package:Ambitious/utils/list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:card_swiper/card_swiper.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
-class FlashCard extends StatefulWidget {
-   String  id;
-  FlashCard({Key? key, required this.id})
+class StudyMaterial extends StatefulWidget {
+  String title, id;
+  StudyMaterial({Key? key, required this.title, required this.id})
       : super(key: key);
-
   @override
-  State<FlashCard> createState() => _FlashcardState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _FlashcardState extends State<FlashCard> {
-
+class _MyHomePageState extends State<StudyMaterial> {
+  PageController controller = PageController();
   int _curr = 1;
   double pageNumber = 0.0;
 
-  
-    StudyMaterialController studyMaterialController =
+  StudyMaterialController studyMaterialController =
       Get.put(StudyMaterialController(), permanent: false);
-  String isSelected = "";
-  ScrollController _controller = ScrollController();
 
-          late final Mixpanel _mixpanel;
-
+  late final Mixpanel _mixpanel;
 
   Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+        optOutTrackingDefault: false);
   }
 
   @override
   void initState() {
-
-     _initMixpanel();
-
+    // TODO: implement initState
     super.initState();
-   pageNumber = 0.0;
-
-     studyMaterialController.studyMaterialApi(widget.id);
+    studyMaterialController.studyMaterialApi(widget.id);
+    _initMixpanel();
   }
+
   @override
   Widget build(BuildContext context) {
-    print("length: "+ studyMaterialController.studyMaterialList.length.toString());
+    print("length: " +
+        studyMaterialController.studyMaterialList.length.toString());
+
     return Scaffold(
         backgroundColor: kBackgroundColor,
-        body: 
+// 	appBar:AppBar(
+//     backgroundColor: kBackgroundColor,
+// 		title: "",
+//     centerTitle: true,
+//     elevation: 0,
 
-           Obx((() => studyMaterialController.isLoading.value
+// ),
+        body: Obx((() => studyMaterialController.isLoading.value
             ? Align(
                 alignment: Alignment.center,
                 child: Platform.isAndroid
@@ -70,13 +65,12 @@ class _FlashcardState extends State<FlashCard> {
                     : CupertinoActivityIndicator())
             : 
             
-
             
-        
-        
-        Column(
-          children: [
-              SizedBox(height: Get.height * 0.05),
+            
+            
+            Column(
+                children: [
+                  SizedBox(height: Get.height * 0.03),
                   Padding(
                     padding: EdgeInsets.only(
                         left: Get.width * 0.04,
@@ -104,7 +98,7 @@ class _FlashcardState extends State<FlashCard> {
                           ),
                         ),
                         SizedBox(
-                          width: Get.width * 0.05,
+                          width: Get.width * 0.02,
                         ),
                         SizedBox(
                           width: Get.width * 0.65,
@@ -117,7 +111,7 @@ class _FlashcardState extends State<FlashCard> {
                               minHeight: Get.height * 0.017,
                               valueColor:
                                   AlwaysStoppedAnimation<Color>(kCyanColor),
-                              value: pageNumber ,
+                              value: pageNumber,
                             ),
                           ),
                         ),
@@ -127,52 +121,38 @@ class _FlashcardState extends State<FlashCard> {
                   SizedBox(
                     height: Get.height * 0.01,
                   ),
-
-
-
-
-     
-
-
-
-
-
                  
                  
-            Container(
-              height: Get.height * 0.80,
-              
-             
-              child: Swiper(
-                loop: false,
-                
-                autoplayDisableOnInteraction: true,
-                itemCount: studyMaterialController.studyMaterialList.length,
-                itemWidth: Get.width * 0.95,
-                itemHeight: Get.height * 0.75,
-                layout: SwiperLayout.STACK,
-                onIndexChanged: (int index) {
+                 
+                 
+                  Expanded(
+                    child: PageView.builder(
+                        onPageChanged: (num) {
+                          setState(() {
+                            print(studyMaterialController
+                                .studyMaterialList.length);
 
-                   _curr = index ;
-                        
+                            _curr = num ;
                             print("current: " + _curr.toString());
-                            pageNumber = pageNumber == 0.0 ? (1 / studyMaterialController.studyMaterialList.length) : (_curr / studyMaterialController.studyMaterialList.length);
+                            pageNumber = _curr / 4;
                             print(pageNumber);
-                            
 
-                            setState(() {
-                              
-                            });
+                            _mixpanel.track('Flashcard Swipe');
+                          });
 
+                          if (pageNumber == 4) {
+                            _mixpanel.track(' Course Finished');
+                          }
+                        },
+                        scrollDirection: Axis.vertical,
+                        physics: BouncingScrollPhysics(),
+                        //  controller: controller,
 
-
-
-                },
-            
-        
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return   
+                        itemBuilder: (context, position) {
+                          return 
+                          
+                          
+                          
                           
                           Padding(
                             padding: EdgeInsets.only(top: 10.0, bottom: 20),
@@ -187,14 +167,14 @@ class _FlashcardState extends State<FlashCard> {
                                 children: [
                                   Container(
                                     height: Get.height * 0.2,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.blue,
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10)),
                                         image: DecorationImage(
                                             image: NetworkImage(
-                                             studyMaterialController.studyMaterialList[index].image.toString()),
+                                                "https://pilbox.themuse.com/image.jpg?filter=antialias&h=422&opt=1&pos=top-left&prog=1&q=keep&url=https%3A%2F%2Fcms-assets.themuse.com%2Fmedia%2Flead%2F01212022-1047259374-coding-classes_scanrail.jpg%3Fv%3De701c89d3e07cc24ac41b2df50f5a40a821e3813&w=767"),
                                             fit: BoxFit.cover)),
                                   ),
                                   Row(
@@ -202,7 +182,7 @@ class _FlashcardState extends State<FlashCard> {
                                     children: [
                                       Container(
                                           margin: EdgeInsets.all(10),
-                                          width: Get.width * 0.30,
+                                          width: Get.width * 0.25,
                                           height: Get.height * 0.035,
                                           decoration: BoxDecoration(
                                             color: kPrimaryColor,
@@ -214,27 +194,20 @@ class _FlashcardState extends State<FlashCard> {
                                                 borderRadius:
                                                     BorderRadius.circular(30)),
                                             onPressed: () {
-                                              Get.to(StudyMaterialDetail(
-                                                image: studyMaterialController
-                                                          .studyMaterialList
-                                                       [index].image
-                                                          .toString(),
-
-
-
-
-                                                  detail:
-                                                      studyMaterialController
-                                                          .studyMaterialList
-                                                       [index].StudayMaterial
-                                                          .toString()));
+                                              // Get.to(StudyMaterialDetail(
+                                              //     detail:
+                                              //         studyMaterialController
+                                              //             .studyMaterialList
+                                              //             .first
+                                              //             .courseData[position]
+                                              //             .toString()));
                                             },
                                             child: Text(
                                               "View More",
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 11,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w400),
                                             ),
                                           ))
@@ -242,10 +215,13 @@ class _FlashcardState extends State<FlashCard> {
                                   ),
                                   Expanded(
                                     child: Html(
-                                        data: studyMaterialController
-                                            .studyMaterialList
-                                           [index].StudayMaterial
-                                            .toString()),
+                                      data: "",
+                                        // data: studyMaterialController
+                                        //     .studyMaterialList
+                                        //     .first
+                                        //     .courseData[position]
+                                        //     .toString()
+                                        ),
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -257,44 +233,12 @@ class _FlashcardState extends State<FlashCard> {
                       
                       
                       
-                  
-                  
-                  
-              
-               
-                },
-              ),
-            ),
-
-
-
-           studyMaterialController.studyMaterialList.length - 1  == _curr ?
-
-
-
-
-
-
-            DefaultButton(
-                width: Get.width * 0.86,
-                height: Get.height * 0.075,
-                text: 'COMPLETE',
-                press: () {
-
-                   _mixpanel.track('Course Finished');
-
-
-
-                  Get.to(QuizEnd(length: studyMaterialController.studyMaterialList.length,));
-                }) : Container(),
-
-
-       
-          ],
-        )
- 
-           ))
-        );
-
+                      
+                        },
+                        itemCount: 4 // Can be null
+                        ),
+                  )
+                ],
+              ))));
   }
 }

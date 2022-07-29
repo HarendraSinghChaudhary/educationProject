@@ -6,7 +6,10 @@ class StudyMaterialModel{
 
   String? id;
   String? title;
-  List <dynamic> courseData = [];
+  String? StudayMaterial;
+  String? Moduletitle;
+  String? image;
+
 
 
 

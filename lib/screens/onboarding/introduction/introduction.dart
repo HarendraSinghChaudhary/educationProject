@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 
 
@@ -60,6 +61,27 @@ class _IntroductionState extends State<Introduction> {
 
   CreateUserController createUserController =
       Get.put(CreateUserController(), permanent: true);
+
+          late final Mixpanel _mixpanel;
+
+
+  Future<void> _initMixpanel() async {
+   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  clearMethod();
+  }
+
+
+  clearMethod () async{
+     await  _initMixpanel();
+    _mixpanel.track("Welcome Page");
+
+  }
 
 
 
@@ -302,7 +324,7 @@ class _IntroductionState extends State<Introduction> {
                    ):
 
                     Container(
-            height: Get.height * 0.32,
+            height: Get.height * 0.35,
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 40),
             
@@ -323,15 +345,18 @@ class _IntroductionState extends State<Introduction> {
 
                 RichText(
                   text: TextSpan(
-                  text: "Learn  ",
-                  style: TextStyle(color: Colors.black87, fontSize: 26, fontWeight: FontWeight.w700 ),
+                  text: "Career Growth,",
+                  style: TextStyle(color: Colors.black87, fontSize: 24, fontWeight: FontWeight.w700 ),
 
 
                   children: [
                     TextSpan(
-                      text: "Technology",
-                       style: TextStyle(color: kPrimaryColor, fontSize: 26, fontWeight: FontWeight.w700 ),
-                    )
+                      text: " Simplified",
+                       style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
+                    ),
+
+
+                  
 
                   ]
                 ),
@@ -345,16 +370,12 @@ class _IntroductionState extends State<Introduction> {
                 
                 ),
 
-                 Text("in Just 5 minuts",
-                  style: TextStyle(color: Colors.black87, fontSize: 26,
-                  height: 1.5, fontWeight: FontWeight.w700 ),
-                 
-                 ),
+
 
                  SizedBox(height: 10,),
 
-                   Text("Pick up trending tech topics by\n"
-                   "watching story-style course",
+                   Text("Learn, Build, and Grow with \n"
+                   "1000+ other Ambitious learners",
                   style: TextStyle(color: kSubTitleColor, fontSize: 16,
                   height: 1.5, fontWeight: FontWeight.w400 ),
                  

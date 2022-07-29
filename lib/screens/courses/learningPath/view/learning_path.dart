@@ -2,15 +2,19 @@
 
 import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/controllers/courses/courses_controller.dart';
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
 import 'package:Ambitious/screens/course_detail.dart';
-import 'package:Ambitious/screens/page_detail.dart';
+import 'package:Ambitious/screens/flash_card.dart';
+import 'package:Ambitious/screens/study_material.dart';
 import 'package:Ambitious/services/crispchat.dart';
 import 'package:Ambitious/utils/list.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LearningPath extends StatefulWidget {
   RxInt indexPath;
@@ -23,19 +27,25 @@ class LearningPath extends StatefulWidget {
 class _LearningpathState extends State<LearningPath> {
 
 
+
+    late final Mixpanel _mixpanel;
+
+
+  Future<void> _initMixpanel() async {
+   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+  }
+
+
   LearningPathModel selectedModel = LearningPathModel();
   final dataKey = GlobalKey();
   List keys = [];
   var contexte ;
  
-@override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    // Get.find<LearningPathIndex>().dispose();
-  }
+
   @override
   void initState() {
+
+     _initMixpanel();
   print("111====="+widget.indexPath.toString());
     super.initState();
  for (int i = 0; i < Get.find<CoursesController>().learningPathList.length; i++) {
@@ -311,10 +321,21 @@ class _LearningpathState extends State<LearningPath> {
                             itemBuilder: (BuildContext context, int index) {
                               return InkWell(
                                 onTap: () {
-                                 Get.to(PageViewController(title:  selectedModel
+
+                                  _mixpanel.track('Course Started');
+
+                                  shareCourse =  selectedModel
                                               .courseListbyLearningPath[index]
                                               .title
-                                              .toString(),
+                                              .toString();
+
+
+                           
+
+
+
+
+                                 Get.to(FlashCard(
                                               id: selectedModel
                                               .courseListbyLearningPath[index]
                                               .id

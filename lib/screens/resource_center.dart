@@ -1,4 +1,4 @@
-import 'package:Ambitious/screens/page_detail.dart';
+import 'package:Ambitious/screens/study_material.dart';
 import 'package:Ambitious/utils/list.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';

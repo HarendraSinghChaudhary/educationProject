@@ -12,6 +12,7 @@ import 'package:Ambitious/utils/show_hide.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
 
@@ -26,7 +27,12 @@ class BottomNavigationScreen extends StatefulWidget {
 class _ProfileScreenState extends State<BottomNavigationScreen> {
 
   ProfileController profileController = Get.put(ProfileController(), permanent: true);
-  
+    late final Mixpanel _mixpanel;
+
+  Future<void> _initMixpanel() async {
+    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+        optOutTrackingDefault: false);
+  }
 
   @override
   void initState() {
@@ -34,7 +40,24 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
     super.initState();
  
     profileController._selectedIndex = widget.index;
+
+
+    if (widget.index == 0.obs) {
+
+      clearMethod();
+
    
+
+
+
+    }
+   
+  }
+
+  clearMethod () async{
+     await  _initMixpanel();
+    _mixpanel.track("Course Home Page");
+
   }
 
 
@@ -54,7 +77,7 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
       HomeLive(),
        CourseHeader(index: widget.learningPathIndex),
        // MarketPlace(),
-       ResourceCenter(),
+      //  ResourceCenter(),
        Profile(),
             ],
           ),
@@ -89,7 +112,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                   ),
                  
                   //dashboard
-                  label: "Home",
+                  label: "For You",
                 ),
               
               
@@ -119,18 +142,18 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                 //
                 //     //Property
                 //     label: "Market"),
-                BottomNavigationBarItem(
-                    icon: Padding(
-                     padding: EdgeInsets.only(bottom: 5.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/help.svg',
-                        width: 20,
-                        color: profileController._selectedIndex == 2.obs ? kPrimaryColor : kTitleColor,
-                      ),
-                    ),
+                // BottomNavigationBarItem(
+                //     icon: Padding(
+                //      padding: EdgeInsets.only(bottom: 5.0),
+                //       child: SvgPicture.asset(
+                //         'assets/icons/help.svg',
+                //         width: 20,
+                //         color: profileController._selectedIndex == 2.obs ? kPrimaryColor : kTitleColor,
+                //       ),
+                //     ),
                 
-                    //Menu
-                    label: "Community"),
+                //     //Menu
+                //     label: "Community"),
                 BottomNavigationBarItem(
                     icon: Padding(
                      padding: EdgeInsets.only(bottom: 3.0),

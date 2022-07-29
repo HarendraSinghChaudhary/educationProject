@@ -59,9 +59,8 @@ class _SplashState extends State<Splash> {
     firstTime = prefs.getBool("isFirstTimeLaunch")?? true;
     print("id :" + token.toString() + "^");
 
-    Future.delayed(Duration(seconds: 2), () {
-      // Navigator.push(context,
-      //     MaterialPageRoute(builder: (context) => IntdroductionScreen()));
+    Future.delayed(const Duration(seconds: 2), () {
+     
 
       token.toString() == "" || token.toString() == "null" || token.toString() == ''
           ? firstTime == "null"  ?     firstTime?

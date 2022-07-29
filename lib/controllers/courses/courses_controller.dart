@@ -301,9 +301,9 @@ class CoursesController extends GetxController {
 
             courseModel.id = catList[j]["_id"].toString();
             courseModel.shortDescrition =
-                jsonArray[j]["shortDescrition"].toString();
+                catList[j]["shortDescrition"].toString();
 
-            if (jsonArray[j]["image"] != null) {
+            if (catList[j]["image"] != null) {
               courseModel.image = catList[j]["image"].toString();
             }
 
@@ -313,9 +313,9 @@ class CoursesController extends GetxController {
         
               courseModel.title = catList[j]["title"].toString();
 
-              if (courseModel.courseData.toString() !=  "") {
-              courseModel.courseData = catList[j]["courseData"];
-              }
+              // if (courseModel.courseData.toString() !=  "") {
+              // courseModel.courseData = catList[j]["courseData"];
+              // }
               
           
 

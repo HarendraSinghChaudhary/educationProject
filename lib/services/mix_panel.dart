@@ -2,7 +2,7 @@
 // import 'dart:async';
 // import 'dart:convert';
 // import 'package:flutter/material.dart';
-// import 'package:mixpanel_flutter_example/widget.dart';
+
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 // class EventScreen extends StatefulWidget {
@@ -20,7 +20,7 @@
 //   }
 
 //   Future<void> _initMixpanel() async {
-//     _mixpanel = await MixpanelManager.init();
+//    _mixpanel = await Mixpanel.init("10397e683b5c3c184ec39eb59da450f9", optOutTrackingDefault: false);
 //   }
 
 //   void _showAlert(BuildContext context, String title, String alertText) {

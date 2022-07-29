@@ -73,12 +73,12 @@ class _CourseDetailState extends State<CourseDetail> {
     
                 shrinkWrap: true,
                 controller: _controller,
-                itemCount: studyMaterialController.studyMaterialList.first.courseData.length,
+                itemCount: studyMaterialController.studyMaterialList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return
 
                   studyMaterialController
-                                  .studyMaterialList.first.courseData[index]
+                                  .studyMaterialList[index].id
                                   .toString() != "" ?
 
 
@@ -97,19 +97,21 @@ class _CourseDetailState extends State<CourseDetail> {
                         children: [
                           Container(
                             height: Get.height * 0.2,
-                            decoration: const BoxDecoration(
+                            decoration:  BoxDecoration(
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(10),
                                     topRight: Radius.circular(10)),
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                        "https://pilbox.themuse.com/image.jpg?filter=antialias&h=422&opt=1&pos=top-left&prog=1&q=keep&url=https%3A%2F%2Fcms-assets.themuse.com%2Fmedia%2Flead%2F01212022-1047259374-coding-classes_scanrail.jpg%3Fv%3De701c89d3e07cc24ac41b2df50f5a40a821e3813&w=767"),
+                                         studyMaterialController
+                                  .studyMaterialList[index].StudayMaterial
+                                  .toString()),
                                     fit: BoxFit.cover)),
                           ),
                           Html(
                               data: studyMaterialController
-                                  .studyMaterialList.first.courseData[index]
+                                  .studyMaterialList[index].StudayMaterial
                                   .toString())
                         ],
                       ),

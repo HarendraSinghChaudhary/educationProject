@@ -53,9 +53,11 @@ class StudyMaterialController extends GetxController {
         for (var i = 0; i < jsonArray.length; i++) {
           StudyMaterialModel modelAgentSearch = StudyMaterialModel();
           modelAgentSearch.id = jsonArray[i]["_id"].toString();
-          modelAgentSearch.title = jsonArray[i]["title"].toString();
+          modelAgentSearch.StudayMaterial = jsonArray[i]["StudayMaterial"].toString();
+          modelAgentSearch.Moduletitle = jsonArray[i]["Moduletitle"].toString();
+          modelAgentSearch.image = jsonArray[i]["image"].toString();
 
-          modelAgentSearch.courseData = jsonArray[i]["courseData"];
+        
 
      
         
@@ -69,14 +71,6 @@ class StudyMaterialController extends GetxController {
           update();
         }
 
-        // Get.snackbar(
-        //   "",
-        //   "",
-        //   snackPosition: SnackPosition.TOP,
-        //   titleText: Text(jsonRes["message"].toString()),
-        //   messageText: Text(""),
-        //   colorText: Colors.red,
-        // );
 
         isLoading(false);
         update();

@@ -33,6 +33,7 @@ import 'package:Ambitious/screens/wipscreentwo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 
 void main() async{
@@ -62,6 +63,8 @@ SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+
+
     
 
 
@@ -84,6 +87,7 @@ String? name;
 String? id;
 String? token;
 String? email;
+String shareCourse = "";
 
 TextEditingController nameController = TextEditingController();
 

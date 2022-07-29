@@ -8,6 +8,7 @@ import 'package:Ambitious/controllers/courses/courses_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/course_detail.dart';
 import 'package:Ambitious/screens/courses/learningPath/view/learning_path.dart';
+import 'package:Ambitious/screens/flash_card.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/services/crispchat.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../reusable/home_header.dart';
@@ -46,18 +48,26 @@ class _ProfileState extends State<HomeLive> {
   CoursesController coursesController =
       Get.put(CoursesController(), permanent: true);
 
+         late final Mixpanel _mixpanel;
+
+
+  Future<void> _initMixpanel() async {
+   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+  }
+
+
+
   @override
   void initState() {
+    _initMixpanel();
     super.initState();
 
     getUserList();
 
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
-   
+    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +75,6 @@ class _ProfileState extends State<HomeLive> {
     print("length: " + coursesController.learningPathList.length.toString());
     return Scaffold(
       appBar: AppBar(
-      
         toolbarHeight: Get.height * 0.11,
         automaticallyImplyLeading: false,
         backgroundColor: kArrowBackgroundColor,
@@ -81,8 +90,9 @@ class _ProfileState extends State<HomeLive> {
               "assets/images/logoe.png",
               width: 35,
             ),
-    
-            SizedBox(width: 10,),
+            SizedBox(
+              width: 10,
+            ),
             Text(
               "Hi, ${name} 👋🏼",
               style: TextStyle(
@@ -96,7 +106,7 @@ class _ProfileState extends State<HomeLive> {
       ),
       backgroundColor: kBackgroundColor,
       body: Obx((() =>
-    
+
           //  categoryController.isLoading.value
           //                     ? Align(
           //                         alignment: Alignment.center,
@@ -104,37 +114,36 @@ class _ProfileState extends State<HomeLive> {
           //                             ? CircularProgressIndicator()
           //                             : CupertinoActivityIndicator())
           //                     :
-    
+
           SingleChildScrollView(
             controller: controllerScroll,
             padding: EdgeInsets.only(
-                left: Get.height * 0.015, top: Get.height * 0.03),
+                left: Get.height * 0.015, top: Get.height * 0.01),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // HomeHeader(),
-                Text(
-                   "💰 EARN ",
-                  // Get.find<LearningPathIndex>().isShowIndex.toString(),
-                 style: TextStyle(
-                    color: kTitleColor,
-                    
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-    
-                  SizedBox(
-                  height: Get.height * 0.005,
-                ),
-                Text(
-                  " Complete 2 tasks for a \$10 gift card",
-                  style: TextStyle(
-                      color: Color(0xff4C5A6A),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                     ),
-                ),
+                // Text(
+                //   "💰 EARN ",
+                //   // Get.find<LearningPathIndex>().isShowIndex.toString(),
+                //   style: TextStyle(
+                //     color: kTitleColor,
+                //     fontSize: 16,
+                //     fontWeight: FontWeight.w700,
+                //   ),
+                // ),
+
+                // SizedBox(
+                //   height: Get.height * 0.005,
+                // ),
+                // Text(
+                //   " Complete 2 tasks for a \$10 gift card",
+                //   style: TextStyle(
+                //     color: Color(0xff4C5A6A),
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.w400,
+                //   ),
+                // ),
                 Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -156,22 +165,16 @@ class _ProfileState extends State<HomeLive> {
                     ),
                     title: Text(
                       "Invite Friends",
-                      style: TextStyle(fontWeight: FontWeight.w700,
-                      fontSize: 16
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                     ),
-    
-                   
                     subtitle: Text(
-                        "Invite a friend and get a \$5 gift card \nwhen they sign up.",
-    
-                        style: TextStyle(
+                      "Invite a friend and get a \$5 gift card \nwhen they sign up.",
+                      style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
-                          color: Colors.black
-                        ),
-                        
-                        ),
+                          color: Colors.black),
+                    ),
                     trailing: Container(
                       alignment: Alignment.center,
                       height: 25,
@@ -210,22 +213,16 @@ class _ProfileState extends State<HomeLive> {
                     ),
                     title: Text(
                       "Request a Topic",
-                      style: TextStyle(fontWeight: FontWeight.w700,
-                      fontSize: 16
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                     ),
                     subtitle: Text(
-                        "We want to hear from you. Get a \$5 gift \ncard for honest feedback.",
-    
-                         style: TextStyle(
+                      "We want to hear from you. Get a \$5 gift \ncard for honest feedback.",
+                      style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
-                          color: Colors.black
-                        ),
-                        
-                        
-                        
-                        ),
+                          color: Colors.black),
+                    ),
                     trailing: Container(
                       alignment: Alignment.center,
                       height: 25,
@@ -242,59 +239,62 @@ class _ProfileState extends State<HomeLive> {
                     ),
                   ),
                 ),
-         
-    
+
                 SizedBox(
                   height: Get.height * 0.03,
                 ),
-    
+
                 Text(
                   '🔥 COURSES FOR YOU',
                   style: TextStyle(
                     color: kTitleColor,
-                    
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-    
+
                 //  SizedBox(
                 //   height: Get.height * 0.000,
                 // ),
-    
-                Text(
-                  'Based on your interests',
-                  style: TextStyle(
-                    height: 1.7,
-                    color: Color(0xff4C5A6A),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-    
+
+                // Text(
+                //   'Based on your interests',
+                //   style: TextStyle(
+                //     height: 1.7,
+                //     color: Color(0xff4C5A6A),
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.w400,
+                //   ),
+                // ),
+
                 SizedBox(
                   height: Get.height * 0.02,
                 ),
                 SizedBox(
                   height: 150,
                   child: ListView.builder(
-             
                     itemCount: coursesController.getHotCourseList.length,
                     controller: _controller,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
-              
                     itemBuilder: (BuildContext context, int index) {
                       return Row(
                         children: [
                           InkWell(
                             onTap: () {
-                              Get.to(CourseDetail(title:    coursesController
+                                         _mixpanel.track('Course Started');
+                      
+                                    shareCourse =  coursesController
                                           .getHotCourseList[index].title
-                                          .toString(), 
-                                          id:    coursesController
+                                          .toString();
+                      
+                                                 Get.to(FlashCard(
+                                                id: coursesController
                                           .getHotCourseList[index].id
-                                          .toString()));
+                                          .toString(),
+                                                
+                                                
+                                                ));
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -349,7 +349,7 @@ class _ProfileState extends State<HomeLive> {
                                           bottom: 1,
                                         ),
                                         child: Text(
-                                        '12 Shorts',
+                                          '12 Shorts',
                                           // coursesController
                                           //     .getHotCourseList[index]
                                           //     .courseDatatitle
@@ -361,7 +361,7 @@ class _ProfileState extends State<HomeLive> {
                                           ),
                                         ),
                                       ),
-                              
+
                                       // InkWell(
                                       //   onTap:(){
                                       //     setState( (){
@@ -387,7 +387,7 @@ class _ProfileState extends State<HomeLive> {
                   height: Get.height * 0.02,
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 16, bottom: 6),
+                  padding: EdgeInsets.only(top: 16, ),
                   child: Text(
                     '📈 LEARNING PATH',
                     style: TextStyle(
@@ -397,16 +397,14 @@ class _ProfileState extends State<HomeLive> {
                     ),
                   ),
                 ),
-                Text(
-                  'Pursue a new dream',
-                  style: TextStyle(
-                   
-                    color: Color(0xff4C5A6A),
-                    fontSize: 14,
-    
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                // Text(
+                //   'Pursue a new dream',
+                //   style: TextStyle(
+                //     color: Color(0xff4C5A6A),
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.w400,
+                //   ),
+                // ),
                 SizedBox(
                   height: 144,
                   width: Get.width * 0.97,
@@ -420,29 +418,17 @@ class _ProfileState extends State<HomeLive> {
                           children: [
                             InkWell(
                               onTap: () {
-                                  Get.offAll(BottomNavigationScreen(
-                                  index:  1.obs,
+                                Get.offAll(BottomNavigationScreen(
+                                  index: 1.obs,
                                   learningPathIndex: index.obs,
+                                ));
 
+                                // Get.find<LearningPathIndex>().isShowIndex = index.obs ;
+                                // print("====="+Get.find<LearningPathIndex>().isShowIndex.toString());
 
+                                // Get.find<LearningPathIndex>().selectedModel = coursesController.learningPathList[index];
 
-                     
-                           
-                                  ));
-
-                                  // Get.find<LearningPathIndex>().isShowIndex = index.obs ;
-                                  // print("====="+Get.find<LearningPathIndex>().isShowIndex.toString());
-
-
-                                  // Get.find<LearningPathIndex>().selectedModel = coursesController.learningPathList[index];
-
-                               
-                                    print("press here..");
-                             
-
-
-                              
-                                
+                                print("press here..");
                               },
                               child: Container(
                                 width: Get.width * 0.35,
@@ -475,7 +461,7 @@ class _ProfileState extends State<HomeLive> {
                                       child: Text(
                                         // paths[index]['name']
                                         //     .toString(),
-    
+
                                         coursesController
                                             .learningPathList[index]
                                             .subCategoryName
@@ -501,7 +487,7 @@ class _ProfileState extends State<HomeLive> {
                         );
                       }),
                 ),
-    
+
                 SizedBox(
                   height: Get.height * 0.03,
                 )
@@ -511,14 +497,13 @@ class _ProfileState extends State<HomeLive> {
     );
   }
 
-
-    Future<void> share() async {
+  Future<void> share() async {
     await FlutterShare.share(
-      title: 'Ambitious App',
-      text: 'Hey! Check out this new app called Ambitious. You can learn about Tech, Crypto, Business in just 5 minutes. Sign up here —>',
-      linkUrl: 'https://theambitiousapp.com/',
-      chooserTitle: ''
-    );
+        title: 'Ambitious App',
+        text:
+            'Hey! Check out this new app called Ambitious. You can learn about Tech, Crypto, Business in just 5 minutes. Sign up here —>',
+        linkUrl: 'https://theambitiousapp.com/',
+        chooserTitle: '');
   }
 
   Future<dynamic> getUserList() async {
