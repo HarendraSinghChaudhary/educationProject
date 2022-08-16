@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
+import 'package:Ambitious/screens/name.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -11,9 +12,41 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateUserController extends GetxController {
+
+     late final Mixpanel _mixpanel;
+
+
+  Future<void> _initMixpanel() async {
+   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+  }
+
+
+
+
+   clearMethod () async{
+     await  _initMixpanel();
+   
+
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    clearMethod();
+  }
+
+  
+
+
+
+
+
+
   RxBool isLoading = false.obs;
   RxBool isSubmitting = false.obs;
 
@@ -29,6 +62,8 @@ class CreateUserController extends GetxController {
   Future<dynamic> createGoogleUserApi(
     String email,
     String name,
+    String firstName,
+    String lastName
   ) async {
     isLoading(true);
     print("email Print: "+email);
@@ -45,6 +80,10 @@ class CreateUserController extends GetxController {
         body: {
           "email": email.toString().trim(),
           "name": name.toString().trim(),
+          "firstname": firstName.toString().trim(),
+          "lastname": lastName.toString().trim(),
+          "signintype": "Google SignIn",
+
           
         });
 
@@ -65,6 +104,8 @@ class CreateUserController extends GetxController {
         prefs.setString('name', jsonRes["user"]["name"].toString());
       
         prefs.setString('email', jsonRes["user"]["email"].toString());
+        prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
+        prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
       
         prefs.setString('status', jsonRes["user"]["status"].toString());
        
@@ -75,10 +116,26 @@ class CreateUserController extends GetxController {
        
         prefs.commit();
 
+
+        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
+        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
+        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+
+
+
+
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
-        // _handleRemeberme(remember);
-       Get.offAll(const Category());
+        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
+
+         var splitData = name.split(' ');
+        print("splitData: "+splitData.toString());
+     
+
+
+
+         Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // update();
 
@@ -86,14 +143,7 @@ class CreateUserController extends GetxController {
 
         isLoading(false);
 
-        Fluttertoast.showToast(
-            msg: msg.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: kPrimaryColor,
-            textColor: Colors.white,
-            fontSize: 14.0);
+    
       } else {
         isLoading(false);
       }
@@ -127,10 +177,18 @@ class CreateUserController extends GetxController {
    Future<dynamic> createAppleUserApi(
     String email,
     String name,
+  
   ) async {
     isSubmitting(true);
     print("email Print: "+email);
     print("name Print: "+name);
+
+        var splitData = name.split(' ');
+        print("splitData: "+splitData.toString());
+      var  firstName = splitData[0].toString();
+      var  lastName = splitData[1].toString();
+        print(firstName);
+        print(lastName);
 
     print("avialble token : " + tokenId.toString());
     String msg = "";
@@ -143,6 +201,9 @@ class CreateUserController extends GetxController {
         body: {
           "email": email.toString().trim(),
           "name": name.toString().trim(),
+          "firstname": firstName.toString().trim(),
+          "lastname": lastName.toString().trim(),
+          "signintype": "Google SignIn",
           
         });
 
@@ -165,16 +226,33 @@ class CreateUserController extends GetxController {
         prefs.setString('email', jsonRes["user"]["email"].toString());
       
         prefs.setString('status', jsonRes["user"]["status"].toString());
+        prefs.setString('firstname', firstName.toString());
+        
        
         prefs.setString(
             'token', jsonRes["token"].toString());
        
         prefs.commit();
 
+
+        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
+        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
+        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+
+
+
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
+        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
+
+ 
+
+
+     Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
+
         // _handleRemeberme(remember);
-        Get.offAll(const Category());
+        // Get.offAll(const NameScreen());
 
         // update();
 
@@ -182,14 +260,7 @@ class CreateUserController extends GetxController {
 
        isSubmitting(true);
 
-        Fluttertoast.showToast(
-            msg: msg.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: kPrimaryColor,
-            textColor: Colors.white,
-            fontSize: 14.0);
+      
       } else {
         isSubmitting(true);
       }

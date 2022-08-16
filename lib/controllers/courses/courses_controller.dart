@@ -331,7 +331,7 @@ class CoursesController extends GetxController {
           
           allCourseList.add(modelAgentSearch);
 
-          print("new: "+ allCourseList[0].courseListbyCategory[0].image.toString());
+          // print("new: "+ allCourseList[0].courseListbyCategory[0].image.toString());
 
        
 

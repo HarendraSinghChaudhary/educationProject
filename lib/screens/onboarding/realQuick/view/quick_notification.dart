@@ -1,4 +1,6 @@
 import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
 
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +20,66 @@ class QuickNotification extends StatefulWidget {
 class _PagenotificationState extends State<QuickNotification> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kBackgroundColor,
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Center(
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: kBackgroundColor,
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
 
           children: [
+              SizedBox(
+                    height: Get.height * 0.07,
+                  ),
+            
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: Get.width * 0.04,
+                        right: Get.width * 0.04,
+                        top: Get.height * 0.00),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                         Get.back();
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.transparent,
+                
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.close_rounded,
+                                color: kPrimaryColor,
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                        ),
+                    
+                      
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: Get.height * 0.05,
+                  ),
+
+            
 
             const  CircleAvatar(
-               radius: 130,
+               radius: 80,
                backgroundImage: AssetImage('assets/images/img_1.png'),
              ),
              SizedBox(
                height: Get.height * 0.06,
              ),
             const Text(
-               'Notifications',
+               'Stay up to date!',
                textAlign: TextAlign.center,
                style: TextStyle(
                  color: kTitleColor,
@@ -49,7 +91,7 @@ class _PagenotificationState extends State<QuickNotification> {
                height: Get.height * 0.01,
              ),
              Text(
-               'Stay notified about new course\nupdates, scoreboard stats and\n new friend follows.',
+               'Get notified every weak when\nwe add new courses, features &\n host events.',
                textAlign: TextAlign.center,
                style: GoogleFonts.roboto(
                  height: 1.5,
@@ -58,16 +100,16 @@ class _PagenotificationState extends State<QuickNotification> {
                    fontWeight: FontWeight.w400),
              ),
             SizedBox(
-               height: Get.height * 0.05,
+               height: Get.height * 0.09,
              ),
 
   DefaultButton(
-                    width: Get.width * 0.4,
+                    width: Get.width * 0.8,
                     height: Get.height * 0.070,
 
-                    text: "ALLOW",
+                    text: "ALLOW NOTIFICATIONS",
                     press: () {
-                    Get.toNamed("/onbaordingNotificationLike");
+                     Get.to(Category());
                     }),
 
                      SizedBox(
@@ -77,7 +119,7 @@ class _PagenotificationState extends State<QuickNotification> {
 
             TextButton(
                 onPressed: () {
-                        Get.toNamed("/onbaordingNotificationLike");
+                        Get.to(Category());
                 },
                 child: Text(
                   'SKIP',
@@ -87,8 +129,6 @@ class _PagenotificationState extends State<QuickNotification> {
                 )
             ),
           ],
-        ),
-      ),
         ),
       ),
     );

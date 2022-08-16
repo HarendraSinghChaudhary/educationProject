@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:Ambitious/controllers/signup_controller.dart/apple_signin_controller.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -27,9 +30,12 @@ class _IntroductionState extends State<Introduction> {
 
     String? name = "";
   String? email = "";
+  String? firstName = "";
+  String? lastName = "";
 
   bool asign = false;
   Future googleLogin() async {
+    var familyname;
     createUserController.isLoading(true);
     print("googleLogin method Called");
     GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -42,8 +48,16 @@ class _IntroductionState extends State<Introduction> {
         var finalResult =
             await FirebaseAuth.instance.signInWithCredential(credential);
         print("Result $reslut");
+        print("userData: $userData");
+        print("credential : $credential");
+        print("finalResult : $finalResult");
         print("name:" + reslut.displayName.toString());
+        // print("family name: "+ )
         name = reslut.displayName.toString();
+        firstName = finalResult.additionalUserInfo?.profile!["given_name"];
+        lastName = finalResult.additionalUserInfo?.profile!["family_name"];
+
+        print("=========="+lastName.toString());
         email = reslut.email.toString();
         print("name: " + name!);
         print("email: " + email!);
@@ -51,8 +65,9 @@ class _IntroductionState extends State<Introduction> {
         createUserController.isLoading(false);
         return true;
       }
-      return false;
       createUserController.isLoading(false);
+      return false;
+      
     } catch (error) {
       createUserController.isLoading(false);
       print(error);
@@ -130,19 +145,22 @@ class _IntroductionState extends State<Introduction> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                SizedBox(height: 20,),
+               SizedBox(height: 20,),
 
                 RichText(
                   text: TextSpan(
-                  text: "Learn  ",
-                  style: TextStyle(color: Colors.black87, fontSize: 26, fontWeight: FontWeight.w700 ),
+                  text: "Career Growth,",
+                  style: TextStyle(color: Colors.black87, fontSize: 24, fontWeight: FontWeight.w700 ),
 
 
                   children: [
                     TextSpan(
-                      text: "Technology",
-                       style: TextStyle(color: kPrimaryColor, fontSize: 26, fontWeight: FontWeight.w700 ),
-                    )
+                      text: " Simplified",
+                       style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
+                    ),
+
+
+                  
 
                   ]
                 ),
@@ -156,16 +174,12 @@ class _IntroductionState extends State<Introduction> {
                 
                 ),
 
-                 Text("in Just 5 minuts",
-                  style: TextStyle(color: Colors.black87, fontSize: 26,
-                  height: 1.5, fontWeight: FontWeight.w700 ),
-                 
-                 ),
+
 
                  SizedBox(height: 10,),
 
-                   Text("Pick up trending tech topics by\n"
-                   "watching story-style course",
+                   Text("Learn, Build, and Grow with \n"
+                   "1000+ other Ambitious learners",
                   style: TextStyle(color: kSubTitleColor, fontSize: 16,
                   height: 1.5, fontWeight: FontWeight.w400 ),
                  
@@ -173,6 +187,7 @@ class _IntroductionState extends State<Introduction> {
 
 
                   SizedBox(height: 20,),
+
 
 
                    createUserController.isLoading.value
@@ -189,7 +204,7 @@ class _IntroductionState extends State<Introduction> {
                                 print("response google: " + value.toString());
                                 if (value) {
                                   createUserController.createGoogleUserApi(
-                                      email!, name!);
+                                      email!, name!, firstName!, lastName!);
                                 }
                               });
                             },
@@ -253,13 +268,16 @@ class _IntroductionState extends State<Introduction> {
                             InkWell(
                                 onTap: () {
                                   signInWithApple().then((value) {
+                                   
+                                    
 
                                     createUserController.isSubmitting(true);
                                     print("response: " + value.toString());
 
                                     name = value.user?.displayName.toString();
+                                    
 
-                                    print("apple name: " + name.toString());
+                      
 
                                     email = value.user?.email.toString();
 
@@ -324,7 +342,7 @@ class _IntroductionState extends State<Introduction> {
                    ):
 
                     Container(
-            height: Get.height * 0.35,
+            height: Get.height * 0.32,
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 40),
             
@@ -399,7 +417,7 @@ class _IntroductionState extends State<Introduction> {
                                 print("response google: " + value.toString());
                                 if (value) {
                                   createUserController.createGoogleUserApi(
-                                      email!, name!);
+                                      email!, name!, firstName!, lastName!);
                                 }
                               });
                             },

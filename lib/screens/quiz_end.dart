@@ -1,6 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/reusable/home_header.dart';
+import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/home/view/home.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
+import 'package:Ambitious/services/crispchat.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +45,7 @@ class _QuizendState extends State<QuizEnd> {
           
             width: Get.width * 0.99,
             height: Get.height * 0.99,
-            child: Lottie.asset('assets/icons/confetti.json', )),
+            child: Lottie.asset('assets/icons/confetti.json',  fit: BoxFit.cover)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -54,7 +60,7 @@ class _QuizendState extends State<QuizEnd> {
 
                     InkWell(
                       onTap: () {
-                       Get.back();
+                       Get.to(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs));
                       },
                       child: const Icon(
                         Icons.close_rounded,
@@ -80,17 +86,25 @@ class _QuizendState extends State<QuizEnd> {
                               SizedBox(
                                 height: Get.height * 0.055,
                               ),
-                              Text(
-                                '100%',
-                                style: TextStyle(
-                                    color: kTitleColor,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                widget.length.toString() +' of ' + widget.length.toString(),
-                                style: TextStyle(color: kSubTitleColor),
-                              ),
+                             Container(
+                        alignment: Alignment.center,
+                        height: Get.height * 0.05,
+                        width: Get.width * 0.22,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: Text(
+                          '+100 XP',
+                          style: TextStyle(
+                              color: kCyanColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                              // Text(
+                              //   widget.length.toString() +' of ' + widget.length.toString(),
+                              //   style: TextStyle(color: kSubTitleColor),
+                              // ),
                             ],
                           ),
                           progressColor: kCyanColor,
@@ -110,25 +124,25 @@ class _QuizendState extends State<QuizEnd> {
                           ),
                           child: SvgPicture.asset('assets/images/done.svg')),
                     ),
-                    Positioned(
-                      top: Get.height * 0.197,
-                      left: Get.width * 0.39,
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: Get.height * 0.056,
-                        width: Get.width * 0.22,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25)),
-                        child: Text(
-                          '+100 XP',
-                          style: TextStyle(
-                              color: kCyanColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    )
+                    // Positioned(
+                    //   top: Get.height * 0.197,
+                    //   left: Get.width * 0.39,
+                    //   child: Container(
+                    //     alignment: Alignment.center,
+                    //     height: Get.height * 0.056,
+                    //     width: Get.width * 0.22,
+                    //     decoration: BoxDecoration(
+                    //         color: Colors.white,
+                    //         borderRadius: BorderRadius.circular(25)),
+                    //     child: Text(
+                    //       '+100 XP',
+                    //       style: TextStyle(
+                    //           color: kCyanColor,
+                    //           fontSize: 15,
+                    //           fontWeight: FontWeight.w700),
+                    //     ),
+                    //   ),
+                    // )
                   ]),
                 ],
               ),
@@ -145,7 +159,7 @@ class _QuizendState extends State<QuizEnd> {
 
               SizedBox(height: Get.height * 0.01,),
              const Text(
-                'Congratulations for getting all\nthe answers correct!',
+                'You finished the course!',
                 textAlign: TextAlign.center,
                 style: TextStyle(color:kSubTitleColor,
                   height: 1.5,
@@ -153,7 +167,8 @@ class _QuizendState extends State<QuizEnd> {
               ),
               SizedBox(height: Get.height*0.03,),
             const  Text(
-                'Share your accomplishment with a\nfriend for a 25 XP Bonus!',
+                'Let us know what you think using \n'
+                ' the button bellow.',
                 textAlign: TextAlign.center,
                 
                 style: TextStyle(color:kSubTitleColor,
@@ -164,35 +179,84 @@ class _QuizendState extends State<QuizEnd> {
               SizedBox(height: Get.height*0.05,),
 
           
-              InkWell(
-                onTap: share,
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04,vertical: Get.height*0.04),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(Get.height*0.015),
-                        height: Get.height*0.08,
-                        width: Get.width*0.17,
-                        decoration: BoxDecoration(
-                          color: kPrimaryColor.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(13),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.blue.withOpacity(0.05),
-                                offset: const Offset(0,4),
-                                blurRadius: 9,
-                              )
-                            ]
-                        ),
-                        child: SvgPicture.asset('assets/icons/share-.svg'),
-                      ),
+              // InkWell(
+              //   onTap: share,
+              //   child: Padding(
+              //     padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04,vertical: Get.height*0.04),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         Container(
+              //           padding: EdgeInsets.all(Get.height*0.015),
+              //           height: Get.height*0.08,
+              //           width: Get.width*0.17,
+              //           decoration: BoxDecoration(
+              //             color: kPrimaryColor.withOpacity(0.3),
+              //             borderRadius: BorderRadius.circular(13),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.blue.withOpacity(0.05),
+              //                   offset: const Offset(0,4),
+              //                   blurRadius: 9,
+              //                 )
+              //               ]
+              //           ),
+              //           child: SvgPicture.asset('assets/icons/share-.svg'),
+              //         ),
                       
-                    ],
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+                    DefaultButton(
+                width: Get.width * 0.86,
+                height: Get.height * 0.075,
+                text: 'CONTINUE',
+                press: () {
+
+                   Get.to(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs));
+
+
+
+
+                  // Get.to();
+                }),
+                
+
+                SizedBox(height: Get.height * 0.02,),
+
+
+
+                InkWell(
+                  onTap: () {
+                    Get.to(CrispChat());
+
+
+                   
+                  },
+                  child: Container(
+                     width: Get.width * 0.86,
+                  height: Get.height * 0.075,
+                
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: kPrimaryColor
+                
+                    )
                   ),
-                ),
-              )
+                  child: Center(
+                    child: Text("PROVIDE FEEDBACK", 
+                    style: const TextStyle(
+                                color: kPrimaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                    
+                  ),
+                )
               //share Button(4) code End
             ],
           ),

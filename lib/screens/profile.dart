@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:Ambitious/controllers/signup_controller.dart/create_user_controller.dart';
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/screens/notification_permission.dart';
 import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/services/intercom.dart';
@@ -31,6 +32,7 @@ class _SettingsState extends State<Profile> {
 
 
  CreateUserController createUserController = Get.put(CreateUserController(), permanent: false);
+ 
 
   
 
@@ -42,6 +44,7 @@ class _SettingsState extends State<Profile> {
     // TODO: implement initState
     super.initState();
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    
 
    
     getUserList();
@@ -50,6 +53,7 @@ class _SettingsState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -145,6 +149,7 @@ class _SettingsState extends State<Profile> {
 
                     ListTile(
                         onTap: () {
+                        
                         Get.to(WebViewExample());
                         },
                         leading: Container(
@@ -187,6 +192,35 @@ class _SettingsState extends State<Profile> {
                             )),
                         title: Text(
                           "Contact Us",
+                          style: const TextStyle(
+                              color: kTitleColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                          ListTile(
+                      onTap: () {
+                       Get.to(NotificationPermission());
+                      },
+                        leading: Container(
+                            padding: const EdgeInsets.all(11),
+                            height: Get.height * 0.05,
+                            width: Get.width * 0.12,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle, color: kPurpleColor),
+                            child: SvgPicture.asset(
+                              "assets/images/per.svg", color: Colors.white,
+                            )),
+                        title: Text(
+                          "Permissions",
                           style: const TextStyle(
                               color: kTitleColor,
                               fontSize: 20,

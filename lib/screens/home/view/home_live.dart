@@ -17,6 +17,7 @@ import 'package:Ambitious/utils/constant.dart';
 import 'package:crisp/crisp_view.dart';
 import 'package:crisp/models/main.dart';
 import 'package:crisp/models/user.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,6 +43,7 @@ class _ProfileState extends State<HomeLive> {
   String id = "";
   String name = "";
   String email = "";
+  String tokenId = "";
   bool bookmark = false;
   ScrollController _controller = ScrollController();
 
@@ -57,15 +59,26 @@ class _ProfileState extends State<HomeLive> {
 
 
 
+
+   clearMethod () async{
+     await  _initMixpanel();
+    _mixpanel.track("Course Home Page");
+
+  }
+
+
+
   @override
   void initState() {
-    _initMixpanel();
+   
     super.initState();
 
     getUserList();
 
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
+    clearMethod();
+    token();
     
   }
 
@@ -93,12 +106,17 @@ class _ProfileState extends State<HomeLive> {
             SizedBox(
               width: 10,
             ),
-            Text(
-              "Hi, ${name} 👋🏼",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
+            Expanded(
+              child: Text(
+                "Hi, "+ firstName! +" 👋🏼",
+                 maxLines: 2,
+                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                 
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],
@@ -169,7 +187,7 @@ class _ProfileState extends State<HomeLive> {
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                     ),
                     subtitle: Text(
-                      "Invite a friend and get a \$5 gift card \nwhen they sign up.",
+                      "Invite a friend and get a \$5 gift card when they sign up.",
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
@@ -217,7 +235,7 @@ class _ProfileState extends State<HomeLive> {
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                     ),
                     subtitle: Text(
-                      "We want to hear from you. Get a \$5 gift \ncard for honest feedback.",
+                      "We want to hear from you. Get a \$5 gift card for honest feedback.",
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
@@ -282,7 +300,11 @@ class _ProfileState extends State<HomeLive> {
                         children: [
                           InkWell(
                             onTap: () {
-                                         _mixpanel.track('Course Started');
+                                         _mixpanel.track('Course Started', properties: {
+                                          "Course Name" : coursesController
+                                          .getHotCourseList[index].title
+                                          .toString()
+                                         });
                       
                                     shareCourse =  coursesController
                                           .getHotCourseList[index].title
@@ -292,11 +314,17 @@ class _ProfileState extends State<HomeLive> {
                                                 id: coursesController
                                           .getHotCourseList[index].id
                                           .toString(),
+                                          title: coursesController
+                                          .getHotCourseList[index].title
+                                          .toString(),
                                                 
                                                 
                                                 ));
                             },
                             child: Container(
+
+                                height: Get.height * 0.2,
+                                    width: 176,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: Colors.white),
@@ -328,6 +356,8 @@ class _ProfileState extends State<HomeLive> {
                                       coursesController
                                           .getHotCourseList[index].title
                                           .toString(),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: kTitleColor,
                                         fontSize: 14,
@@ -338,39 +368,7 @@ class _ProfileState extends State<HomeLive> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 6,
-                                          bottom: 1,
-                                        ),
-                                        child: Text(
-                                          '12 Shorts',
-                                          // coursesController
-                                          //     .getHotCourseList[index]
-                                          //     .courseDatatitle
-                                          //     .toString(),
-                                          style: TextStyle(
-                                            color: kLightGreyColorwithMail,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-
-                                      // InkWell(
-                                      //   onTap:(){
-                                      //     setState( (){
-                                      //       coursesController.getHotCourseList[index].isSelected = !coursesController.getHotCourseList[index].isSelected;
-                                      //     });
-                                      //   },
-                                      //     child:  coursesController.getHotCourseList[index].isSelected == false ? Icon(Icons.bookmark_border_outlined):Icon(Icons.bookmark))
-                                    ],
-                                  ),
+                               
                                 ],
                               ),
                             ),
@@ -389,7 +387,7 @@ class _ProfileState extends State<HomeLive> {
                 const Padding(
                   padding: EdgeInsets.only(top: 16, ),
                   child: Text(
-                    '📈 LEARNING PATH',
+                    '📈 LEARNING PATHS',
                     style: TextStyle(
                       color: kTitleColor,
                       fontSize: 16,
@@ -406,7 +404,7 @@ class _ProfileState extends State<HomeLive> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 144,
+                  height: Get.height * 0.2,
                   width: Get.width * 0.97,
                   child: ListView.builder(
                       padding: EdgeInsets.only(top: 15),
@@ -456,23 +454,25 @@ class _ProfileState extends State<HomeLive> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        // paths[index]['name']
-                                        //     .toString(),
-
-                                        coursesController
-                                            .learningPathList[index]
-                                            .subCategoryName
-                                            .toString(),
-                                        maxLines: 2,
-                                        textAlign: TextAlign.start,
-                                        style: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                          color: Color(0xff344356),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          // paths[index]['name']
+                                          //     .toString(),
+                                    
+                                          coursesController
+                                              .learningPathList[index]
+                                              .subCategoryName
+                                              .toString(),
+                                          maxLines: 2,
+                                          textAlign: TextAlign.start,
+                                          style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            color: Color(0xff344356),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
                                       ),
                                     )
@@ -514,7 +514,19 @@ class _ProfileState extends State<HomeLive> {
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
+    firstName = pref.getString("firstname").toString();
+    print("name: " + name.toString());
 
     setState(() {});
+  }
+
+   token() {
+    var messaging = FirebaseMessaging.instance;
+    messaging.getToken().then((value) {
+      print("token: " + value.toString());
+      tokenId = value.toString();
+
+      print("new token: " + tokenId.toString());
+    });
   }
 }

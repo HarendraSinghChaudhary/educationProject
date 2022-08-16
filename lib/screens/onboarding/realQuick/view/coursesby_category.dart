@@ -5,12 +5,14 @@ import 'dart:io';
 import 'package:Ambitious/controllers/courses/courses_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/reusable/skip_button.dart';
+import 'package:Ambitious/screens/flash_card.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:readmore/readmore.dart';
 
 class CoursesbyCategory extends StatefulWidget {
@@ -27,8 +29,21 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
 
   CoursesController coursesController =
       Get.put(CoursesController(), permanent: true);
+
+        late final Mixpanel _mixpanel;
+
+  Future<void> _initMixpanel() async {
+    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+        optOutTrackingDefault: false);
+  }
+
+
+
+
+
   @override
   void initState() {
+     _initMixpanel();
     // TODO: implement initState
     super.initState();
     coursesController.coursesByCatApi(widget.catId.toString());
@@ -52,7 +67,7 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                           :
        SingleChildScrollView(
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
            SizedBox(
             height: h * 0.04,
@@ -80,13 +95,15 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
            SizedBox(
             height: h * 0.02,
           ),
-        const Text(
-          'We think you’ll like',
-          style: TextStyle(
-              color: kTitleColor,
-              fontSize: 28,
-              fontWeight: FontWeight.w600),
+         Center(
+           child: Text(
+            'We think you’ll like',
+            style: TextStyle(
+                color: kTitleColor,
+                fontSize: 28,
+                fontWeight: FontWeight.w600),
         ),
+         ),
         SizedBox(
           height: 20,
         ),
@@ -100,7 +117,32 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: InkWell(
                     onTap: () {
-                     Get.toNamed('/wipCoursePlayerNew');
+
+                        _mixpanel.track('Course Started', properties: {
+                                          "Course Name" :  coursesController
+                                                .coursesByCatList[index]
+                                                .title
+                                                .toString()
+                                         });
+
+
+                     Get.to(FlashCard(id:  coursesController
+                                                .coursesByCatList[index]
+                                                .id
+                                                .toString(),
+
+                                                title:  coursesController
+                                                .coursesByCatList[index]
+                                                .title
+                                                .toString(),
+                                                
+                                                
+                                                
+                                                
+                                                ),
+                                                
+                                                
+                                                );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -116,6 +158,7 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                      
                       width: w * 1,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           coursesController.coursesByCatList[index].image
                                       .toString() !=
@@ -174,23 +217,25 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                                   height: h * 0.01,
                                 ),
                              
-                                ReadMoreText(
+                                // ReadMoreText(
                                 
-                                  coursesController.coursesByCatList[index].shortDescrition.toString(),
-                                  trimLines: 2,
-                                  style: TextStyle(
-                                     color: ksubtitamarketColor,
-                                    fontSize: 16,
+                                //   coursesController.coursesByCatList[index].shortDescrition.toString(),
+                                //   trimLines: 2,
+                                //   style: TextStyle(
+                                //      color: ksubtitamarketColor,
+                                //     fontSize: 16,
 
-                                  ),
-                                  colorClickableText: ksubtitamarketColor,
-                                  trimMode: TrimMode.Line,
-                                  trimCollapsedText: 'Show more',
-                                  trimExpandedText: 'Show less',
-                                  moreStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                )
+                                //   ),
+                                //   colorClickableText: ksubtitamarketColor,
+                                //   trimMode: TrimMode.Line,
+                                //   trimCollapsedText: 'Show more',
+                                //   trimExpandedText: 'Show less',
+                                //   moreStyle: TextStyle(
+                                //       fontSize: 14,
+                                //       fontWeight: FontWeight.bold),
+                                // )
+                             
+                             
                               ],
                             ),
                           ),

@@ -4,17 +4,16 @@ import 'package:Ambitious/screens/courses/allCourses/view/all_courses.dart';
 
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../reusable/home_header.dart';
+import 'package:get/get.dart';
+
 import '../../learningPath/view/learning_path.dart';
 
 class CourseHeader extends StatefulWidget {
   RxInt index;
+  bool? isNavigate;
 
-  CourseHeader({required this.index});
+  CourseHeader({required this.index, this.isNavigate});
 
 
 

@@ -119,7 +119,7 @@ class _LearningpathState extends State<LearningPath> {
                     Padding(
                       padding: EdgeInsets.only(left: 10.0),
                       child: SizedBox(
-                        height: Get.height * 0.21,
+                        height: Get.height * 0.23,
                         width: Get.width * 0.97,
                         child: ListView.builder(
                             itemCount:
@@ -228,7 +228,7 @@ class _LearningpathState extends State<LearningPath> {
                                                 top: Get.height * 0.16,
                                                 left: 0,
                                                 right: 0,
-                                                bottom: 15,
+                                                bottom: 19,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -242,8 +242,8 @@ class _LearningpathState extends State<LearningPath> {
                                                                 3.1415927 /
                                                                 180),
                                                       child: Container(
-                                                        height: 30,
-                                                        width: 30,
+                                                        height: 28,
+                                                        width: 28,
                                                         decoration: BoxDecoration(
                                                             color: Colors.white,
                                                             borderRadius:
@@ -255,6 +255,9 @@ class _LearningpathState extends State<LearningPath> {
                                                 ),
                                               ),
                                             )
+                                         
+                                         
+                                         
                                           ],
                                         ),
                                       ),
@@ -288,15 +291,17 @@ class _LearningpathState extends State<LearningPath> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
                                         ))
-                                    : Text(
-                                        '${name} Learning Path',
-                                        style: TextStyle(
-                                          wordSpacing: 1,
-                                          color: kTitleColor,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
+                                    : Expanded(
+                                      child: Text(
+                                          '${name} Learning Path',
+                                          style: TextStyle(
+                                            wordSpacing: 1,
+                                            color: kTitleColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
+                                    ),
                               ],
                             ),
                           ),
@@ -322,7 +327,12 @@ class _LearningpathState extends State<LearningPath> {
                               return InkWell(
                                 onTap: () {
 
-                                  _mixpanel.track('Course Started');
+                                          _mixpanel.track('Course Started', properties: {
+                                          "Course Name" :  selectedModel
+                                              .courseListbyLearningPath[index]
+                                              .title
+                                              .toString()
+                                         });
 
                                   shareCourse =  selectedModel
                                               .courseListbyLearningPath[index]
@@ -339,6 +349,10 @@ class _LearningpathState extends State<LearningPath> {
                                               id: selectedModel
                                               .courseListbyLearningPath[index]
                                               .id
+                                              .toString(),
+                                              title: selectedModel
+                                              .courseListbyLearningPath[index]
+                                              .title
                                               .toString(),
                                               
                                               

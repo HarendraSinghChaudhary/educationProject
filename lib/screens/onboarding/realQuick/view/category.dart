@@ -40,6 +40,7 @@ class _OnbaordingNotificationLikeState extends State<Category> {
   );
 
   bool _value = false;
+  bool isVisible = false;
   TextStyle subtital =
       const TextStyle(color: kSubTitleColor, fontSize: 12, height: 1.5);
 
@@ -85,9 +86,8 @@ class _OnbaordingNotificationLikeState extends State<Category> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: h * 0.04,
+                  height: h * 0.02,
                 ),
-
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -104,11 +104,47 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                     ],
                   ),
                 ),
-
                 SizedBox(
-                  height: h * 0.02,
+                  height: h * 0.01,
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      isVisible = false;
+                    });
+                  },
+                  child: Visibility(
+                    visible: isVisible ? true : false,
+                    child: Container(
+                      height: Get.height * 0.03,
+                      width: Get.width * 0.5,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.red),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.cancel,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          Text(
+                            "Please select category",
+                            style: TextStyle(
+                              fontSize: 11,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
 
+                 SizedBox(
+                  height: h * 0.01,
+                ),
                 const Text(
                   'What interests you?',
                   style: TextStyle(
@@ -119,7 +155,6 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                 SizedBox(
                   height: h * 0.01,
                 ),
-  
                 SizedBox(
                   height: h * 0.02,
                 ),
@@ -167,7 +202,7 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                                 ),
                               ),
                               autofocus: false,
-                              activeColor:kPrimaryColor,
+                              activeColor: kPrimaryColor,
                               checkColor: Colors.white,
                               selected: _value,
                               value: categoryController
@@ -185,14 +220,14 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                                         .toString());
                                   }
 
+                                  isVisible = false;
+
                                   categoryController
                                       .categoryList[index].isSelected = value!;
                                 });
                               },
                             ),
                           ),
-
-                     
                         ),
                       );
                     }))),
@@ -226,7 +261,9 @@ class _OnbaordingNotificationLikeState extends State<Category> {
                           // categoryController.categoryApi();
                         });
                       } else {
-                        Get.snackbar("Please select category", "");
+                        setState(() {
+                          isVisible = true;
+                        });
                       }
                     }),
               ),
