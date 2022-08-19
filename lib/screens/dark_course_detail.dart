@@ -59,7 +59,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                           height:h*0.23,width: w*0.7,
                           
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(h*0.15),
+                            borderRadius: BorderRadius.circular(h*0.015),
 
                             image: DecorationImage(image: NetworkImage(controller.bigdata.value!.image.toString()),fit: BoxFit.fill,)
                           ),
