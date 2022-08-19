@@ -252,7 +252,7 @@ class CreateUserController extends GetxController {
      Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // _handleRemeberme(remember);
-        // Get.offAll(const NameScreen());
+        // Get.offAll( NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // update();
 
