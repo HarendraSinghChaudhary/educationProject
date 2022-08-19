@@ -138,8 +138,8 @@ class _NameScreenState extends State<NameScreen> {
                         ? Align(
                             alignment: Alignment.center,
                             child: Platform.isAndroid
-                                ? CircularProgressIndicator()
-                                : CupertinoActivityIndicator())
+                                ? const CircularProgressIndicator()
+                                : const CupertinoActivityIndicator())
                         : 
 
                          DefaultButton(

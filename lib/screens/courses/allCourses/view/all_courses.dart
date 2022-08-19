@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../../../../controllers/courses/darkcourse_controller.dart';
 import '../../../../utils/list.dart';
+import '../../../dark_course_detail.dart';
 
 class AllCourses extends StatefulWidget {
   const AllCourses({Key? key}) : super(key: key);
@@ -118,21 +120,37 @@ class _CoursesState extends State<AllCourses> {
                                                           j]
                                                       .title
                                                       .toString();
-
-                                              Get.to(FlashCard(
-                                                id: coursesController
+                                                      Get.to(
+                                            ()=>DarkCourseDetail(
+                                          //   id: coursesController
+                                          // .getHotCourseList[index].id
+                                          // .toString(),
+                                          ),
+                                          binding: DarkCourseDetailBinding(id:
+                                        coursesController
                                                     .allCourseList[index]
                                                     .courseListbyCategory[j]
                                                     .id
-                                                    .toString(),
+                                                    .toString()      ),
+                                          
+                                          );
+
+                                              // Get.to(
+                                                
+                                              //   FlashCard(
+                                              //   id: coursesController
+                                              //       .allCourseList[index]
+                                              //       .courseListbyCategory[j]
+                                              //       .id
+                                              //       .toString(),
 
 
-                                                    title:  coursesController
-                                                    .allCourseList[index]
-                                                    .courseListbyCategory[j]
-                                                    .title
-                                                    .toString(),
-                                              ));
+                                              //       title:  coursesController
+                                              //       .allCourseList[index]
+                                              //       .courseListbyCategory[j]
+                                              //       .title
+                                              //       .toString(),
+                                              // ));
                                             },
                                             child: Container(
                                               width: Get.width * 0.35,

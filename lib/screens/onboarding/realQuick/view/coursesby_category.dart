@@ -15,6 +15,9 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../controllers/courses/darkcourse_controller.dart';
+import '../../../dark_course_detail.dart';
+
 class CoursesbyCategory extends StatefulWidget {
   String? catId;
 
@@ -124,25 +127,37 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                                                 .title
                                                 .toString()
                                          });
-
-
-                     Get.to(FlashCard(id:  coursesController
+Get.to(
+                                            ()=>DarkCourseDetail(
+                                          //   id: coursesController
+                                          // .getHotCourseList[index].id
+                                          // .toString(),
+                                          ),
+                                          binding: DarkCourseDetailBinding(id:
+                                        coursesController
                                                 .coursesByCatList[index]
                                                 .id
-                                                .toString(),
+                                                .toString(),      ),
+                                          
+                                          );
 
-                                                title:  coursesController
-                                                .coursesByCatList[index]
-                                                .title
-                                                .toString(),
+                    //  Get.to(FlashCard(id:  coursesController
+                    //                             .coursesByCatList[index]
+                    //                             .id
+                    //                             .toString(),
+
+                    //                             title:  coursesController
+                    //                             .coursesByCatList[index]
+                    //                             .title
+                    //                             .toString(),
                                                 
                                                 
                                                 
                                                 
-                                                ),
+                    //                             ),
                                                 
                                                 
-                                                );
+                    //                             );
                     },
                     child: Container(
                       decoration: BoxDecoration(

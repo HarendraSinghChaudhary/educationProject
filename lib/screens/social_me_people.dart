@@ -32,21 +32,21 @@ class _Socialme_peopleState extends State<SocialmePeople> {
                   controller: _controller,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      title: Text(
+                      title: const Text(
                         'Sarah Fox',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: kTitleColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w600),
                       ),
-                      subtitle: Text('2,349 XP',style: TextStyle(fontSize: 14,color: kSubTitleColor),),
-                      trailing: Icon(Icons.arrow_forward_ios,size: 18,),
+                      subtitle: const Text('2,349 XP',style: TextStyle(fontSize: 14,color: kSubTitleColor),),
+                      trailing: const Icon(Icons.arrow_forward_ios,size: 18,),
                       leading: Container(
                         height: Get.height * 0.12,
                         width: Get.width * 0.12,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.green,
-                          image: DecorationImage(image: AssetImage('assets/images/sociallogo.jpg',),fit: BoxFit.fill)
+                          image: const DecorationImage(image: AssetImage('assets/images/sociallogo.jpg',),fit: BoxFit.fill)
                         ),
                       ),
                     );

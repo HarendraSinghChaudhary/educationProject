@@ -78,7 +78,7 @@ class CategoryController extends GetxController {
           "",
           snackPosition: SnackPosition.TOP,
           titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
+          messageText: const Text(""),
           colorText: Colors.red,
         );
 
@@ -90,8 +90,8 @@ class CategoryController extends GetxController {
         "",
         "",
         snackPosition: SnackPosition.TOP,
-        titleText: Text("Please try later"),
-        messageText: Text(""),
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
         colorText: Colors.red,
       );
 

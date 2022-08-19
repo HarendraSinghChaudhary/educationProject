@@ -26,13 +26,22 @@
   const ktitalResourceColor = Color(0xFF0A033C);
   const ksubtitamarketColor = Color(0xFF7c8894);
   const kiconscolor = Color(0xFF494B4F);
+  const kstartgradiant = Color(0xFF5468FF);
+  const kendgradiant = Color(0xFF242659);
+  const kdarkblue = Color(0xFF171531);
+  const kcardblue = Color(0xFF1D1F41);
    
-
+  const kbluegradiant = LinearGradient(
+    colors: [kstartgradiant,kendgradiant],
+    begin:Alignment.topCenter,
+    end:Alignment.bottomCenter,
+    
+    );
 
   var h = Get.height;
   var w = Get.width;
 
-
+const loader = Center(child: CircularProgressIndicator.adaptive(),);
 
   
 

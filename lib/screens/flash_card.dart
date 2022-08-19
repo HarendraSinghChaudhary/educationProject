@@ -79,8 +79,9 @@ class _FlashcardState extends State<FlashCard> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.offAll(BottomNavigationScreen(
-                                index: 0.obs, learningPathIndex: 0.obs));
+                            // Get.offAll(BottomNavigationScreen(
+                            //     index: 0.obs, learningPathIndex: 0.obs));
+                            Get.back();
                           },
                           child: Container(
                             height: 40,

@@ -74,11 +74,11 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
           builder: (s) => IndexedStack(
             index: s.selectedIndex,
             children: <Widget>[
-      HomeLive(),
+      const HomeLive(),
        CourseHeader(index: widget.learningPathIndex),
        // MarketPlace(),
       //  ResourceCenter(),
-       Profile(),
+       const Profile(),
             ],
           ),
         ),
@@ -103,7 +103,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
           BottomNavigationBarItem(
                   
                   icon: Padding(
-                     padding: EdgeInsets.only(bottom: 5.0),
+                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: SvgPicture.asset(
                       'assets/images/home.svg',
                        width: 20,
@@ -120,7 +120,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
               
                 BottomNavigationBarItem(
                     icon: Padding(
-                      padding: EdgeInsets.only(bottom: 5.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: SvgPicture.asset(
                         'assets/images/courses.svg',
                          width: 18,
@@ -156,7 +156,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                 //     label: "Community"),
                 BottomNavigationBarItem(
                     icon: Padding(
-                     padding: EdgeInsets.only(bottom: 3.0),
+                     padding: const EdgeInsets.only(bottom: 3.0),
                       child: SvgPicture.asset(
                         'assets/images/profile.svg',
                         width: 20,

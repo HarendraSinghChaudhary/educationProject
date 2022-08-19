@@ -1,13 +1,13 @@
-import 'package:Ambitious/screens/study_material.dart';
+
 import 'package:Ambitious/utils/list.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../reusable/home_header.dart';
+
+
 
 class ResourceCenter extends StatefulWidget {
   const ResourceCenter({Key? key}) : super(key: key);

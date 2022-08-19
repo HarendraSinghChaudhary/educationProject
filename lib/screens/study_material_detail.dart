@@ -35,14 +35,14 @@ class _StudyMaterialDetailState extends State<StudyMaterialDetail> {
   @override
   Widget build(BuildContext context) {
    return Scaffold (appBar: AppBar(
-    title: Text("Study Material Detail"),
+    title: const Text("Study Material Detail"),
     centerTitle: true,
     backgroundColor: kPrimaryColor,
     elevation: 0,
    ),
 
    body: Padding(
-                    padding:  EdgeInsets.only(top: 10.0, bottom: 20),
+                    padding:  const EdgeInsets.only(top: 10.0, bottom: 20),
                     child: 
                     
                     
@@ -59,9 +59,9 @@ class _StudyMaterialDetailState extends State<StudyMaterialDetail> {
                             height: Get.height * 0.2,
                             decoration:  BoxDecoration(
                                 color: Colors.blue,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10)),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: const Radius.circular(10),
+                                    topRight: const Radius.circular(10)),
                                 image: DecorationImage(
                                     image: NetworkImage(
                                        widget.image.toString()),

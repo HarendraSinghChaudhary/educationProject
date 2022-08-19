@@ -22,8 +22,8 @@ class _WipscreentwoState extends State<Wipscreentwo> {
           Container(
             height: Get.height * 0.82,
             width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
+            decoration: const BoxDecoration(
+              image:  DecorationImage(
                   image: NetworkImage('https://bit.ly/3x6JoMt'),
                   fit: BoxFit.fill),
             ),
@@ -94,7 +94,7 @@ class _WipscreentwoState extends State<Wipscreentwo> {
               child: LinearProgressIndicator(
                 backgroundColor: kLightGreyColorwithMail,
                 minHeight: Get.height * 0.017,
-                valueColor: AlwaysStoppedAnimation<Color>(kCyanColor),
+                valueColor: const AlwaysStoppedAnimation<Color>(kCyanColor),
                 value:  0.3,
               ),
             ),

@@ -21,7 +21,7 @@ class _MyAppState extends State<CrispChat> {
   void initState() {
     super.initState();
     getUserList();
-       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       // systemNavigationBarColor: Colors.blue, // navigation bar color
       statusBarColor: kPrimaryColor, // status bar color
     ));

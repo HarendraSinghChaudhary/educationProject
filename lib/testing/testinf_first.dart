@@ -39,14 +39,14 @@ class _TestingOneState extends State<TestingOne> {
                       ),
                       
                       child: Row(
-                        children: [Icon(Icons.access_alarm),
+                        children: [const Icon(Icons.access_alarm),
                         
-                        isClicked == "first" ?  Text("Ramesh") : Container()
+                        isClicked == "first" ?  const Text("Ramesh") : Container()
                          ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
       
@@ -69,15 +69,15 @@ class _TestingOneState extends State<TestingOne> {
       
                       ),
                       child: Row(
-                        children: [Icon(Icons.access_alarm),
+                        children: [const Icon(Icons.access_alarm),
       
-                        isClicked == "second" ?  Text("Ramesh") : Container()
+                        isClicked == "second" ?  const Text("Ramesh") : Container()
                      
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
       
@@ -88,7 +88,7 @@ class _TestingOneState extends State<TestingOne> {
                 ],
               ),
       
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
 
               isClicked == "first" ?
       
@@ -100,6 +100,6 @@ class _TestingOneState extends State<TestingOne> {
     );
   }
 
-  Text yes() => Text("yes");
-  Text no() => Text("No");
+  Text yes() => const Text("yes");
+  Text no() => const Text("No");
 }

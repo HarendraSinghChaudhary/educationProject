@@ -42,7 +42,7 @@ class StudyMaterialController extends GetxController {
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
       msg = jsonRes["message"].toString();
-      jsonArray = jsonRes['courseData'];
+      jsonArray = jsonRes['Moduledata'];
     });
 
     if (res.statusCode == 200) {
@@ -66,9 +66,8 @@ class StudyMaterialController extends GetxController {
 
           print("name: " + jsonArray[i]["courseData"].toString());
 
-          isLoading(false);
 
-          update();
+          // update();
         }
 
 

@@ -20,7 +20,7 @@ class _NotificationPermissionState extends State<NotificationPermission> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
-          title: Text("Permissions"),
+          title: const Text("Permissions"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -79,7 +79,7 @@ class _NotificationPermissionState extends State<NotificationPermission> {
               //     },
               //   ),
               // ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -101,11 +101,11 @@ class _NotificationPermissionState extends State<NotificationPermission> {
                         color: Colors.white,
                       )),
 
-                      SizedBox(width: 15,),
+                      const SizedBox(width: 15,),
 
-                      Text(
+                      const Text(
                     "Notifications",
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: kTitleColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600),
@@ -135,7 +135,7 @@ class _NotificationPermissionState extends State<NotificationPermission> {
 
                                 if (status == true ) {
 
-                                 Get.to(QuickNotification());
+                                 Get.to(const QuickNotification());
                                   setState(() {
                                     
                                   });

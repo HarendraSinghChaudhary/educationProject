@@ -41,12 +41,12 @@ class _CourseDetailState extends State<CourseDetail> {
           elevation: 0,
           title: Text(
             widget.title,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
           centerTitle: true,
           backgroundColor: kBackgroundColor,
-          leading: BackButton(),
-          iconTheme: IconThemeData(color: kPrimaryColor),
+          leading: const BackButton(),
+          iconTheme: const IconThemeData(color: kPrimaryColor),
         ),
         body: SingleChildScrollView(
           child: Obx((() => 
@@ -57,8 +57,8 @@ class _CourseDetailState extends State<CourseDetail> {
                   ? Align(
                       alignment: Alignment.center,
                       child: Platform.isAndroid
-                          ? CircularProgressIndicator()
-                          : CupertinoActivityIndicator())
+                          ? const CircularProgressIndicator()
+                          : const CupertinoActivityIndicator())
                   :
 
 
@@ -86,7 +86,7 @@ class _CourseDetailState extends State<CourseDetail> {
                   
                   
                    Padding(
-                    padding:  EdgeInsets.only(bottom: 10.0),
+                    padding:  const EdgeInsets.only(bottom: 10.0),
                     child: Card(
                       margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
                       color: Colors.white,
@@ -99,8 +99,8 @@ class _CourseDetailState extends State<CourseDetail> {
                             height: Get.height * 0.2,
                             decoration:  BoxDecoration(
                                 color: Colors.blue,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: const Radius.circular(10),
                                     topRight: Radius.circular(10)),
                                 image: DecorationImage(
                                     image: NetworkImage(

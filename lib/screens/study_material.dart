@@ -59,10 +59,10 @@ class _MyHomePageState extends State<StudyMaterial> {
             ? Align(
                 alignment: Alignment.center,
                 child: Platform.isAndroid
-                    ? CircularProgressIndicator(
+                    ? const CircularProgressIndicator(
                         strokeWidth: 1,
                       )
-                    : CupertinoActivityIndicator())
+                    : const CupertinoActivityIndicator())
             : 
             
             
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<StudyMaterial> {
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.close_rounded,
                               color: kPrimaryColor,
                               size: 28,
@@ -104,13 +104,13 @@ class _MyHomePageState extends State<StudyMaterial> {
                           width: Get.width * 0.65,
                           height: Get.height * 0.015,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                             child: LinearProgressIndicator(
                               backgroundColor:
                                   kLightGreyColorwithMail.withOpacity(0.3),
                               minHeight: Get.height * 0.017,
                               valueColor:
-                                  AlwaysStoppedAnimation<Color>(kCyanColor),
+                                  const AlwaysStoppedAnimation<Color>(kCyanColor),
                               value: pageNumber,
                             ),
                           ),
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<StudyMaterial> {
                           }
                         },
                         scrollDirection: Axis.vertical,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         //  controller: controller,
 
                         itemBuilder: (context, position) {
@@ -155,7 +155,7 @@ class _MyHomePageState extends State<StudyMaterial> {
                           
                           
                           Padding(
-                            padding: EdgeInsets.only(top: 10.0, bottom: 20),
+                            padding: const EdgeInsets.only(top: 10.0, bottom: 20),
                             child: Card(
                               margin: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.05),
@@ -181,7 +181,7 @@ class _MyHomePageState extends State<StudyMaterial> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Container(
-                                          margin: EdgeInsets.all(10),
+                                          margin: const EdgeInsets.all(10),
                                           width: Get.width * 0.25,
                                           height: Get.height * 0.035,
                                           decoration: BoxDecoration(
@@ -202,10 +202,10 @@ class _MyHomePageState extends State<StudyMaterial> {
                                               //             .courseData[position]
                                               //             .toString()));
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               "View More",
                                               textAlign: TextAlign.center,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400),
@@ -223,7 +223,7 @@ class _MyHomePageState extends State<StudyMaterial> {
                                         //     .toString()
                                         ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   )
                                 ],

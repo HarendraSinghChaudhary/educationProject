@@ -16,6 +16,9 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../controllers/courses/darkcourse_controller.dart';
+import '../../../dark_course_detail.dart';
+
 class LearningPath extends StatefulWidget {
   RxInt indexPath;
   LearningPath({Key? key, required this.indexPath}) : super(key: key);
@@ -344,19 +347,30 @@ class _LearningpathState extends State<LearningPath> {
 
 
 
-
-                                 Get.to(FlashCard(
-                                              id: selectedModel
+                                      Get.to(
+                                            ()=>DarkCourseDetail(
+                                          //   id: coursesController
+                                          // .getHotCourseList[index].id
+                                          // .toString(),
+                                          ),
+                                          binding: DarkCourseDetailBinding(id:selectedModel
                                               .courseListbyLearningPath[index]
                                               .id
-                                              .toString(),
-                                              title: selectedModel
-                                              .courseListbyLearningPath[index]
-                                              .title
-                                              .toString(),
+                                              .toString(),),
+                                          
+                                          );
+                                //  Get.to(FlashCard(
+                                //               id: selectedModel
+                                //               .courseListbyLearningPath[index]
+                                //               .id
+                                //               .toString(),
+                                //               title: selectedModel
+                                //               .courseListbyLearningPath[index]
+                                //               .title
+                                //               .toString(),
                                               
                                               
-                                              ));
+                                //               ));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

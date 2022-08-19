@@ -30,18 +30,18 @@ class _ScoresState extends State<Scores> {
                 controller: _controller,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text(
+                    title: const Text(
                       'Sarah Fox',
                       style: TextStyle(
                           color: kTitleColor,
                           fontSize: 20,
                           fontWeight: FontWeight.w600),
                     ),
-                    subtitle: Text('2,349 XP',style: TextStyle(fontSize: 14,color: kSubTitleColor),),
+                    subtitle: const Text('2,349 XP',style: TextStyle(fontSize: 14,color: kSubTitleColor),),
                     leading: Container(
                       height: Get.height * 0.12,
                       width: Get.width * 0.12,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.green,
                           image: DecorationImage(image: AssetImage('assets/images/girlprofile.jpg',),fit: BoxFit.fill)
                       ),

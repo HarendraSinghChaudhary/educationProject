@@ -28,8 +28,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../controllers/courses/darkcourse_controller.dart';
 import '../../../reusable/home_header.dart';
 import '../../../utils/list.dart';
+import '../../dark_course_detail.dart';
 
 class HomeLive extends StatefulWidget {
   const HomeLive({Key? key}) : super(key: key);
@@ -48,7 +50,7 @@ class _ProfileState extends State<HomeLive> {
   ScrollController _controller = ScrollController();
 
   CoursesController coursesController =
-      Get.put(CoursesController(), permanent: true);
+      Get.put(CoursesController(), permanent: false);
 
          late final Mixpanel _mixpanel;
 
@@ -309,17 +311,28 @@ class _ProfileState extends State<HomeLive> {
                                     shareCourse =  coursesController
                                           .getHotCourseList[index].title
                                           .toString();
-                      
-                                                 Get.to(FlashCard(
-                                                id: coursesController
+                                          Get.to(
+                                            ()=>DarkCourseDetail(
+                                          //   id: coursesController
+                                          // .getHotCourseList[index].id
+                                          // .toString(),
+                                          ),
+                                          binding: DarkCourseDetailBinding(id:coursesController
                                           .getHotCourseList[index].id
-                                          .toString(),
-                                          title: coursesController
-                                          .getHotCourseList[index].title
-                                          .toString(),
+                                          .toString(),),
+                                          
+                                          );
+                      
+                                          //        Get.to(FlashCard(
+                                          //       id: coursesController
+                                          // .getHotCourseList[index].id
+                                          // .toString(),
+                                          // title: coursesController
+                                          // .getHotCourseList[index].title
+                                          // .toString(),
                                                 
                                                 
-                                                ));
+                                          //       ));
                             },
                             child: Container(
 

@@ -49,9 +49,9 @@ class _ProfileOneState extends State<ProfileOne> {
                   //Row for settings icons code Start
                   SizedBox(height: Get.height*0.02,),
                   Text(
-                    '👋🏼 Hello,\n${name}!',
+                    '👋🏼 Hello,\n$name!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: kTitleColor,
                       fontSize: 30,
                       fontWeight: FontWeight.w600,

@@ -46,7 +46,7 @@ class _NoFriendState extends State<NoFriend> {
                 decoration:  BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: kPrimaryColor,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           color: kPrimaryColor,
                           blurRadius: 4,

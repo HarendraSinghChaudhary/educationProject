@@ -5,6 +5,7 @@ import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
 import 'package:Ambitious/screens/courses_all.dart';
 import 'package:Ambitious/screens/courses_empty_screen.dart';
+import 'package:Ambitious/screens/dark_course_detail.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/services/notification_services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -49,7 +50,8 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 void main() async{
 
 
-SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+SystemChrome.setSystemUIOverlayStyle(
+  const SystemUiOverlayStyle(
     // systemNavigationBarColor: Colors.blue, // navigation bar color
     statusBarColor: Colors.transparent, // status bar color
   ));
@@ -306,13 +308,15 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
    
         
       title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
-      home: Splash(),
+      home: 
+      // DarkCourseDetail()
+      Splash(),
 
 
       // Application Routes

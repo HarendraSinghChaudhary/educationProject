@@ -1,18 +1,12 @@
 import 'dart:convert';
-
-import 'package:Ambitious/controllers/category/category_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/allcourses_model.dart';
 import 'package:Ambitious/models/courseby_cat_model.dart';
 import 'package:Ambitious/models/get_hot_courses_model.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
-import 'package:Ambitious/models/subcategory_model.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:flutter/material.dart';
-
-import 'package:Ambitious/models/category_model.dart';
 import 'package:get/get.dart';
-
 import 'package:http/http.dart' as http;
 
 class CoursesController extends GetxController {
@@ -43,7 +37,7 @@ class CoursesController extends GetxController {
 
     await request.then((http.Response response) {
       res = response;
-      final JsonDecoder _decoder = new JsonDecoder();
+      const JsonDecoder _decoder = JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
@@ -107,7 +101,7 @@ class CoursesController extends GetxController {
           "",
           snackPosition: SnackPosition.TOP,
           titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
+          messageText: const Text(""),
           colorText: Colors.red,
         );
 
@@ -119,8 +113,8 @@ class CoursesController extends GetxController {
         "",
         "",
         snackPosition: SnackPosition.TOP,
-        titleText: Text("Please try later"),
-        messageText: Text(""),
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
         colorText: Colors.red,
       );
 
@@ -149,7 +143,7 @@ class CoursesController extends GetxController {
 
     await request.then((http.Response response) {
       res = response;
-      final JsonDecoder _decoder = new JsonDecoder();
+      const JsonDecoder _decoder =  JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
@@ -228,7 +222,7 @@ class CoursesController extends GetxController {
           "",
           snackPosition: SnackPosition.TOP,
           titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
+          messageText: const Text(""),
           colorText: Colors.red,
         );
 
@@ -240,8 +234,8 @@ class CoursesController extends GetxController {
         "",
         "",
         snackPosition: SnackPosition.TOP,
-        titleText: Text("Please try later"),
-        messageText: Text(""),
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
         colorText: Colors.red,
       );
 
@@ -357,7 +351,7 @@ class CoursesController extends GetxController {
           "",
           snackPosition: SnackPosition.TOP,
           titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
+          messageText: const Text(""),
           colorText: Colors.red,
         );
 
@@ -369,8 +363,8 @@ class CoursesController extends GetxController {
         "",
         "",
         snackPosition: SnackPosition.TOP,
-        titleText: Text("Please try later"),
-        messageText: Text(""),
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
         colorText: Colors.red,
       );
 
@@ -399,7 +393,7 @@ class CoursesController extends GetxController {
 
     await request.then((http.Response response) {
       res = response;
-      final JsonDecoder _decoder = new JsonDecoder();
+      const JsonDecoder _decoder =  JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
@@ -457,7 +451,7 @@ class CoursesController extends GetxController {
           "",
           snackPosition: SnackPosition.TOP,
           titleText: Text(jsonRes["message"].toString()),
-          messageText: Text(""),
+          messageText: const Text(""),
           colorText: Colors.red,
         );
 
@@ -469,8 +463,8 @@ class CoursesController extends GetxController {
         "",
         "",
         snackPosition: SnackPosition.TOP,
-        titleText: Text("Please try later"),
-        messageText: Text(""),
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
         colorText: Colors.red,
       );
 
