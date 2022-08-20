@@ -59,7 +59,7 @@ dependencies:
   mixpanel_flutter: ^1.6.0
   flutter_html: ^3.0.0-alpha.5
   firebase_messaging: ^12.0.1
-  flutter_local_notifications: ^9.7.0
+  flutter_local_notifications: ^9.6.0
   flutter_switch: ^0.3.2
   
 
