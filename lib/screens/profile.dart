@@ -150,7 +150,7 @@ class _SettingsState extends State<Profile> {
                     ListTile(
                         onTap: () {
                         
-                        Get.to(WebViewExample());
+                        Get.to(WebViewExample(url: "https://www.theambitiousapp.com/privacy-and-terms", title: "Privacy & Policy",));
                         },
                         leading: Container(
                             padding: const EdgeInsets.all(11),

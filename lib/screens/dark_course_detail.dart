@@ -1,10 +1,10 @@
 import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/screens/quiz_end.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
 import '../models/darkcoursemodel.dart';
@@ -15,12 +15,10 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
   
    DarkCourseDetail({Key? key}) : super(key: key);
   //  final String id ;
-  final _scrollcontroller = ScrollController();
+  // @override
+  // // TODO: implement controller
+  // DarkCourseDetail_Controller get controller => super.controller;
   @override
-  // TODO: implement controller
-  DarkCourseDetail_Controller get controller => super.controller;
-  @override
-  
   Widget build(BuildContext context) {
   // controller.ids = id;
     // controller.onInit();
@@ -74,7 +72,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
 
           Expanded(
             child: SingleChildScrollView(
-              controller: _scrollcontroller,
+              controller: controller. scrollcontroller,
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +81,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                     child: Text(
                     // "Bitcoin, Simplified",
                     controller.bigdata.value!.title.toString(),
-                    style: GoogleFonts.antonio(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                       color: kWhiteColor,
@@ -113,7 +111,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                 Text(
                       "  90%",
                       // controller.bigdata.value!.
-                      style: GoogleFonts.spaceGrotesk(
+                      style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w300,
                         color: kBlackColor.withOpacity(0.5),
@@ -136,7 +134,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                  Icon(Icons.groups,size: 20,color: kBlackColor.withOpacity(0.5),),
                                 Text(
                       "  123",
-                      style: GoogleFonts.spaceGrotesk(
+                      style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w300,
                         color: kBlackColor.withOpacity(0.5),
@@ -155,8 +153,9 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                     child: RichText(
                       text:TextSpan(
                         text: "Description\n",
-                        style: GoogleFonts.familjenGrotesk(
+                        style: const TextStyle(
                           fontSize: 16,
+                          fontFamily: "HK Grotesk",
                           fontWeight: FontWeight.w700,
                           color: kWhiteColor,
                           height: 2,
@@ -167,7 +166,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                             text: 
                             controller.bigdata.value!.shortDescrition.toString(),
                             // "All the info to dive into the world of social media influenceing. Like the basics of creating content, growing your audience, parternships, monetization, and more",
-                            style: GoogleFonts.familjenGrotesk(
+                            style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: kWhiteColor,
@@ -191,7 +190,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                       elevation: 8,
                       shadowColor: kWhiteColor.withOpacity(0.15),
                       child: ListView.builder(
-                        controller: _scrollcontroller,
+                        controller: controller.scrollcontroller,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.bigdata.value!.allmodule!.length,
                         shrinkWrap: true,
@@ -202,10 +201,12 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                           Allmodule mod = controller.bigdata.value!.allmodule![index];
                           return InkWell(
                             onTap: (){
-                                     Get.to(FlashCard(
+                                     Get.to(
+                                      ()=>FlashCard(
                                                 id: mod.id.toString(),
                                           title: mod.moduletitle.toString()
                                                 ));
+                                                LessonEnd.title = mod.moduletitle.toString();
                             },
                             child: Padding(
                               padding:  EdgeInsets.symmetric(vertical: h*0.01),
@@ -214,7 +215,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                   Expanded(
                                     flex: 2,
                                     child: Center(
-                                    child: Text("${index+1}",style: GoogleFonts.familjenGrotesk(
+                                    child: Text("${index+1}",style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.w700,
                               color: kWhiteColor,
@@ -230,7 +231,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                         Text(
                                            mod.moduletitle.toString(), 
                                           //"What is Bitcoin?",
-                                  style: GoogleFonts.familjenGrotesk(
+                                  style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
                               color: kWhiteColor,
@@ -240,7 +241,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                                   Text(
                             mod.studayMaterial.toString()+" stories",
                             // "8 stories",
-                                  style: GoogleFonts.familjenGrotesk(
+                                  style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: kWhiteColor,

@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../screens/dark_course.dart';
+
 class BottomNavigationScreen extends StatefulWidget {
 
   RxInt index, learningPathIndex;
@@ -75,7 +77,8 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
             index: s.selectedIndex,
             children: <Widget>[
       const HomeLive(),
-       CourseHeader(index: widget.learningPathIndex),
+      //  CourseHeader(index: widget.learningPathIndex),
+      Dark_Course(),
        // MarketPlace(),
       //  ResourceCenter(),
        const Profile(),

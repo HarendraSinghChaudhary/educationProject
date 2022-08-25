@@ -9,6 +9,8 @@ import 'dart:io';
  import 'package:webview_flutter/webview_flutter.dart';
 
  class WebViewExample extends StatefulWidget {
+  final String url, title;
+  WebViewExample({required this.url, required this.title});
    @override
    WebViewExampleState createState() => WebViewExampleState();
  }
@@ -34,11 +36,11 @@ import 'dart:io';
        appBar: AppBar(
          centerTitle: true,
          backgroundColor: kPrimaryColor,
-         title: const Text("Privacy & Policy"),
+         title:  Text(widget.title),
        ),
-       body: const SafeArea(
+       body:  SafeArea(
          child: WebView(
-         initialUrl: 'https://www.theambitiousapp.com/privacy-and-terms',
+         initialUrl: widget.url,
             ),
        ));
      

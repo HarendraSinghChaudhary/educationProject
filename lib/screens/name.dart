@@ -6,7 +6,6 @@ import 'package:Ambitious/reusable/default_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/constant.dart';
@@ -77,7 +76,7 @@ class _NameScreenState extends State<NameScreen> {
                      padding:EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                     child: TextFormField(
                       controller: firstNameController,
-                    style: GoogleFonts.roboto(
+                    style: const TextStyle(
                         color: kTitleColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w400),
@@ -105,7 +104,7 @@ class _NameScreenState extends State<NameScreen> {
                     controller: lastNameController,
                     
          
-                    style: GoogleFonts.roboto(
+                    style: const TextStyle(
                         color: kTitleColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w400),

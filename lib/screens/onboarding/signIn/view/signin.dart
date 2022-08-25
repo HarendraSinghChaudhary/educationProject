@@ -3,7 +3,6 @@ import 'package:Ambitious/reusable/default_button.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 
@@ -57,9 +56,9 @@ class _LoginState extends State<SignIn> {
                 SizedBox(
                   height: Get.height * 0.01,
                 ),
-                Text(
+                const Text(
                   'Sign in to your existing\n account',
-                  style: GoogleFonts.roboto(
+                  style: TextStyle(
                       height: 1.5,
                       color: kSubTitleColor,
                       fontSize: 18,
@@ -70,7 +69,7 @@ class _LoginState extends State<SignIn> {
                   height: Get.height * 0.03,
                 ),
                 TextFormField(
-                  style: GoogleFonts.roboto(
+                  style: const TextStyle(
                       color: kTitleColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
@@ -96,7 +95,7 @@ class _LoginState extends State<SignIn> {
                 ),
                 TextFormField(
                   obscureText: _Show,
-                  style: GoogleFonts.roboto(
+                  style: const TextStyle(
                       color: kTitleColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
@@ -113,7 +112,7 @@ class _LoginState extends State<SignIn> {
                         },
                         child: Text(
                           _Show ? 'SHOW' : 'HIDE',
-                          style: GoogleFonts.roboto(
+                          style: const TextStyle(
                               color: kLightGreyColorwithMail,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
@@ -137,9 +136,9 @@ class _LoginState extends State<SignIn> {
                 SizedBox(
                   height: Get.height * 0.05,
                 ),
-                Text(
+                const Text(
                   "Don't have an account?",
-                  style: GoogleFonts.roboto(
+                  style: const TextStyle(
                       color: kTitleColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w400),
@@ -148,9 +147,9 @@ class _LoginState extends State<SignIn> {
                     onPressed: () {
                       Get.toNamed("/newAccount");
                     },
-                    child: Text(
+                    child: const Text(
                       'CREATE ACCOUNT',
-                      style: GoogleFonts.roboto(
+                      style: TextStyle(
                           color: kPrimaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w500),

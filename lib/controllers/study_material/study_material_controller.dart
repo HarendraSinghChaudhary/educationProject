@@ -14,12 +14,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class StudyMaterialController extends GetxController {
-  RxBool isLoading = false.obs;
+  RxBool isLoading = true.obs;
   RxList<StudyMaterialModel> studyMaterialList = RxList();
 
 
   Future<dynamic> studyMaterialApi(String id) async {
-    isLoading(true);
+    // isLoading(true);
     print("...."+ id.toString());
 
     var request = http.get(
