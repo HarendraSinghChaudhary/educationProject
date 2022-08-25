@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -319,7 +318,9 @@ class _ProfileState extends State<HomeLive> {
                                           ),
                                           binding: DarkCourseDetailBinding(id:coursesController
                                           .getHotCourseList[index].id
-                                          .toString(),),
+                                          .toString(),
+                                          ),
+                                          
                                           
                                           );
                       
@@ -462,7 +463,8 @@ class _ProfileState extends State<HomeLive> {
                                                       .learningPathList[index]
                                                       .image
                                                       .toString()),
-                                              fit: BoxFit.fill)),
+                                              // fit: BoxFit.fill
+                                              )),
                                     ),
                                     const SizedBox(
                                       height: 10,

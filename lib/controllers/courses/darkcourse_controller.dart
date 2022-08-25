@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:Ambitious/main.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
@@ -11,13 +13,24 @@ String ids ;
 DarkCourseDetail_Controller({required this.ids});
 Rxn<DarkCourseDetailModel> bigdata = Rxn<DarkCourseDetailModel>();
 RxBool isLoading = true.obs;
+final scrollcontroller = ScrollController();
+
 @override
   void onInit() {
     // TODO: implement onInit
-    super.onInit();
+    
     getcourse_Module(ids);
+    super.onInit();
   }
-
+@override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    
+  }
+  @override
+  // TODO: implement onDelete
+  InternalFinalCallback<void> get onDelete => super.onDelete;
 Future getcourse_Module(String id)async{
 Uri url = Uri.parse(RestDatasource.GETCOURSEMODULE+id);
 try {
@@ -49,5 +62,6 @@ class DarkCourseDetailBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<DarkCourseDetail_Controller>(() => DarkCourseDetail_Controller(ids: id)); 
+    
   }
 }

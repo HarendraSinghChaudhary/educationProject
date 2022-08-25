@@ -6,7 +6,7 @@ import 'package:Ambitious/reusable/default_button.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 
@@ -52,10 +52,10 @@ class _RealQuickState extends State<RealQuick> {
               ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'Are you in school?',
-                  style: GoogleFonts.roboto(
+                  style: TextStyle(
                       color: kSubTitleColor,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
@@ -121,7 +121,7 @@ class _RealQuickState extends State<RealQuick> {
             SizedBox(height: Get.height * 0.04),
             TextFormField(
               maxLines: 1,
-              style: GoogleFonts.roboto(
+              style: TextStyle(
                   color: kTitleColor,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),

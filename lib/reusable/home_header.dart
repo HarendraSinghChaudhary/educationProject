@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../utils/constant.dart';
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);
@@ -46,9 +43,9 @@ class HomeHeader extends StatelessWidget {
                       SizedBox(
                         width: Get.width*0.01,
                       ),
-                      Text(
+                      const Text(
                         '3',
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
                             color: kSubTitleColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w700),

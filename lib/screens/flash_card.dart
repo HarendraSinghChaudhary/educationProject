@@ -58,7 +58,8 @@ class _FlashcardState extends State<FlashCard> {
         studyMaterialController.studyMaterialList.length.toString());
     return Scaffold(
         backgroundColor: kBackgroundColor,
-        body: Obx((() => studyMaterialController.isLoading.value
+        body: Obx(() => 
+        studyMaterialController.isLoading.value
             ? Align(
                 alignment: Alignment.center,
                 child: Platform.isAndroid
@@ -242,13 +243,18 @@ class _FlashcardState extends State<FlashCard> {
                               "Course Name": widget.title.toString()
                             });
 
-                            Get.to(QuizEnd(
-                              length: studyMaterialController
-                                  .studyMaterialList.length,
-                            ));
+                            Get.off(
+                              ()=>LessonEnd()
+                            //   QuizEnd(
+                            //   length: studyMaterialController
+                            //       .studyMaterialList.length,
+                            // )
+                            );
                           })
                       : Container(),
                 ],
-              ))));
+              )
+              
+              ));
   }
 }

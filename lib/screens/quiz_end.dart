@@ -17,6 +17,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../controllers/courses/darkcourse_controller.dart';
+import '../controllers/study_material/study_material_controller.dart';
+
 class QuizEnd extends StatefulWidget {
   int length;
   QuizEnd ({required this.length});
@@ -60,7 +63,9 @@ class _QuizendState extends State<QuizEnd> {
 
                     InkWell(
                       onTap: () {
-                       Get.to(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs));
+                       Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
+                   Get.delete<StudyMaterialController>();
+                       Get.delete<DarkCourseDetail_Controller>();
                       },
                       child: const Icon(
                         Icons.close_rounded,
@@ -215,7 +220,9 @@ class _QuizendState extends State<QuizEnd> {
                 text: 'CONTINUE',
                 press: () {
 
-                   Get.to(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs));
+                   Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
+                   Get.delete<DarkCourseDetail_Controller>();
+                   Get.delete<StudyMaterialController>();
 
 
 
@@ -230,7 +237,12 @@ class _QuizendState extends State<QuizEnd> {
 
                 InkWell(
                   onTap: () {
-                    Get.to(CrispChat());
+                  //   Get.to(()=> CrispChat());
+                  //  Get.delete<DarkCourseDetail_Controller>();
+                  //  Get.delete<StudyMaterialController>();
+                  Get.to(
+                    ()=>LessonEnd()
+                  );
 
 
                    
@@ -285,5 +297,201 @@ class _QuizendState extends State<QuizEnd> {
     print("name: " + name.toString());
 
     setState(() {});
+  }
+}
+
+class LessonEnd extends GetView {
+  static String title = "";
+  const LessonEnd({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: kdarkblue,
+      body: Stack(
+        children: [
+
+    
+            Container(
+          
+            width: Get.width * 0.99,
+            height: Get.height * 0.99,
+            child: Lottie.asset('assets/icons/confetti.json',  fit: BoxFit.cover)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(Get.height * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                   SizedBox(height: Get.height * 0.1,),
+
+
+                    InkWell(
+                      onTap: () {
+                      //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
+                      Get.back();
+                   Get.delete<StudyMaterialController>();
+                       Get.delete<DarkCourseDetail_Controller>();
+                      },
+                      child: const Icon(
+                        Icons.close_rounded,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //percent_indicator  Code Start
+              Column(
+                children: [
+                  Stack(children: [
+                    SizedBox(
+                      height: Get.height * 0.3,
+                      child: Center(
+                        child: CircularPercentIndicator(
+                          radius: 70.0,
+                          lineWidth: 15.0,
+                          percent: 1,
+                          center: Column(
+                            children: [
+                              SizedBox(
+                                height: Get.height * 0.055,
+                              ),
+                             Container(
+                        alignment: Alignment.center,
+                        height: Get.height * 0.05,
+                        width: Get.width * 0.22,
+                        decoration: BoxDecoration(
+                            color: kPrimaryColor,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: Text(
+                          '+100 XP',
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                              // Text(
+                              //   widget.length.toString() +' of ' + widget.length.toString(),
+                              //   style: TextStyle(color: kSubTitleColor),
+                              // ),
+                            ],
+                          ),
+                          progressColor: kCyanColor,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: Get.height * 0.044,
+                      left: Get.width * 0.435,
+                      child: Container(
+                          padding: EdgeInsets.all(Get.height * 0.016),
+                          height: Get.height * 0.05,
+                          width: Get.width * 0.13,
+                          decoration: BoxDecoration(
+                            color: kCyanColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset('assets/images/done.svg')),
+                    ),
+                    
+                  ]),
+                ],
+              ),
+              //percent_indicator  Code End
+
+              //Gretting Code Start
+              Text(
+                'Lets Go!',
+                style: TextStyle(
+                    color: kWhiteColor,
+                    fontSize: 36,
+                    fontWeight: FontWeight.w700),
+              ),
+
+              SizedBox(height: Get.height * 0.01,),
+              Text(
+                'You just learned about ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color:kWhiteColor,
+                  height: 1.5,
+                fontSize: 20,fontWeight: FontWeight.w400),
+              ),
+              // SizedBox(height: Get.height*0.03,),
+              Text(
+                LessonEnd.title,
+                textAlign: TextAlign.center,
+                
+                style: TextStyle(
+                  color:kWhiteColor,
+                height: 1,
+                fontSize: 20,fontWeight: FontWeight.w400),
+              ),
+              //Gretting Code End
+              SizedBox(height: Get.height*0.2,),
+
+          
+              // InkWell(
+              //   onTap: share,
+              //   child: Padding(
+              //     padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04,vertical: Get.height*0.04),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         Container(
+              //           padding: EdgeInsets.all(Get.height*0.015),
+              //           height: Get.height*0.08,
+              //           width: Get.width*0.17,
+              //           decoration: BoxDecoration(
+              //             color: kPrimaryColor.withOpacity(0.3),
+              //             borderRadius: BorderRadius.circular(13),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.blue.withOpacity(0.05),
+              //                   offset: const Offset(0,4),
+              //                   blurRadius: 9,
+              //                 )
+              //               ]
+              //           ),
+              //           child: SvgPicture.asset('assets/icons/share-.svg'),
+              //         ),
+                      
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+                    DefaultButton(
+                width: Get.width * 0.86,
+                height: Get.height * 0.075,
+                text: 'CONTINUE',
+                press: () {
+
+                  //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
+                  Get.back();
+                   Get.delete<DarkCourseDetail_Controller>();
+                   Get.delete<StudyMaterialController>();
+
+
+
+
+                  // Get.to();
+                }),
+                
+
+
+
+
+               
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

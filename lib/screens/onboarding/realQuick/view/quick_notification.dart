@@ -5,7 +5,7 @@ import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 
@@ -51,7 +51,7 @@ class _PagenotificationState extends State<QuickNotification> {
                               color: Colors.transparent,
                 
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Icon(
                                 Icons.close_rounded,
                                 color: kPrimaryColor,
@@ -90,10 +90,10 @@ class _PagenotificationState extends State<QuickNotification> {
                SizedBox(
                height: Get.height * 0.01,
              ),
-             Text(
+             const Text(
                'Get notified every weak when\nwe add new courses, features &\n host events.',
                textAlign: TextAlign.center,
-               style: GoogleFonts.roboto(
+               style: TextStyle(
                  height: 1.5,
                    color: kSubTitleColor,
                    fontSize: 18,
@@ -121,9 +121,9 @@ class _PagenotificationState extends State<QuickNotification> {
                 onPressed: () {
                         Get.to(Category());
                 },
-                child: Text(
+                child: const Text(
                   'SKIP',
-                  style: GoogleFonts.roboto(color: kLightGreyColorwithMail,
+                  style: TextStyle(color: kLightGreyColorwithMail,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                 )

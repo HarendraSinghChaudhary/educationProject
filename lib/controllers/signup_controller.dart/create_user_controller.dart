@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/name.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
@@ -179,16 +180,26 @@ class CreateUserController extends GetxController {
     String name,
   
   ) async {
+    var firstName;
+    var lastName;
     isSubmitting(true);
     print("email Print: "+email);
     print("name Print: "+name);
 
+
+    if (name.toString() != "null") {
+
         var splitData = name.split(' ');
         print("splitData: "+splitData.toString());
-      var  firstName = splitData[0].toString();
-      var  lastName = splitData[1].toString();
+       firstName = splitData[0].toString() ;
+       lastName = splitData[1].toString() ;
         print(firstName);
         print(lastName);
+    }else {
+      firstName = "";
+      lastName = "";
+
+    }
 
     print("avialble token : " + tokenId.toString());
     String msg = "";
@@ -252,7 +263,7 @@ class CreateUserController extends GetxController {
      Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // _handleRemeberme(remember);
-        // Get.offAll(const NameScreen());
+        // Get.offAll( NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // update();
 

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+
 class CoursesController extends GetxController {
   RxBool isLoading = false.obs;
   RxList<CoursesByCatModel> coursesByCatList = RxList();
@@ -16,6 +17,21 @@ class CoursesController extends GetxController {
   RxList<LearningPathModel> learningPathList = RxList();
    RxList<GetHotCoursesModel> getHotCourseList = RxList();
 
+
+@override
+  void onInit() {
+    // TODO: implement onInit
+    
+getHotCoursesApi();
+learningPathApi();
+allCoursesApi();
+    super.onInit();
+  }
+change_to_a(int a){
+  var b = ((a/100)*255).toInt();
+  print(b);
+ return b;
+}
 
     Future<dynamic> getHotCoursesApi() async {
     print("token courses" + token.toString());
@@ -162,12 +178,18 @@ class CoursesController extends GetxController {
 
           modelAgentSearch.id = jsonArray[i]["_id"].toString();
           modelAgentSearch.subCategoryName = jsonArray[i]["subCategory"].toString();
+          modelAgentSearch.description = jsonArray[i]["Description"]??"";
+          modelAgentSearch.a = jsonArray[i]["A"]??255;
+          modelAgentSearch.r = jsonArray[i]["R"]??0;
+          modelAgentSearch.g = jsonArray[i]["G"]??0;
+          modelAgentSearch.b = jsonArray[i]["B"]??0;
 
           if (jsonArray[i]["image"] != null) {
             modelAgentSearch.image = jsonArray[i]["image"].toString();
           }
 
           var subcatList = jsonArray[i]["courseData"];
+
 
           for (var j = 0; j < subcatList.length; j++) {
             CoursesByCatModel courseModel = CoursesByCatModel();
