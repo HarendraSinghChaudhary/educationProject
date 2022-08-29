@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:Ambitious/controllers/status_change_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/reusable/default_button.dart';
 import 'package:Ambitious/reusable/home_header.dart';
@@ -301,8 +302,10 @@ class _QuizendState extends State<QuizEnd> {
 }
 
 class LessonEnd extends GetView {
+  StatusChangeController statusChangeController = Get.put(StatusChangeController(), permanent: false);
   static String title = "";
-  const LessonEnd({Key? key}) : super(key: key);
+  static String id = "";
+ LessonEnd({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -335,6 +338,9 @@ class LessonEnd extends GetView {
                       Get.back();
                    Get.delete<StudyMaterialController>();
                        Get.delete<DarkCourseDetail_Controller>();
+                       statusChangeController.statusChangeApi(id);
+
+                       
                       },
                       child: const Icon(
                         Icons.close_rounded,

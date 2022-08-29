@@ -64,9 +64,11 @@ class Allmodule {
     Allmodule({
         this.studayMaterial,
         this.id,
+        
         this.moduletitle,
         this.courseId,
         this.status,
+        this.IsCompleated,
     });
 
     int? studayMaterial;
@@ -74,6 +76,7 @@ class Allmodule {
     String? moduletitle;
     String? courseId;
     bool? status;
+    bool? IsCompleated;
 
     factory Allmodule.fromJson(Map<String, dynamic> json) => Allmodule(
         studayMaterial: json["StudayMaterial"],
@@ -81,6 +84,7 @@ class Allmodule {
         moduletitle: json["moduletitle"],
         courseId: json["courseId"],
         status: json["status"],
+        IsCompleated: json["IsCompleated"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -89,5 +93,6 @@ class Allmodule {
         "moduletitle": moduletitle,
         "courseId": courseId,
         "status": status,
+        "IsCompleated": IsCompleated,
     };
 }

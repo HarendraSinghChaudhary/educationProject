@@ -70,13 +70,17 @@ class DarkLearningPath extends GetView<DarkLearningPathController> {
                   SizedBox(
                     height: h*0.01,
                   ),
-                  Text(
-                    // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
-                    controller.description,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: kWhiteColor
+                  Expanded(
+                    child: Text(
+                      // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
+                      controller.description,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: kWhiteColor
+                      ),
                     ),
                   )
                 ],

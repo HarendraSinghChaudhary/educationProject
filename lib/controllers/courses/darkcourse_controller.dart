@@ -10,6 +10,7 @@ import '../../utils/endpoint_url.dart';
 
 class DarkCourseDetail_Controller extends GetxController {
 String ids ;
+
 DarkCourseDetail_Controller({required this.ids});
 Rxn<DarkCourseDetailModel> bigdata = Rxn<DarkCourseDetailModel>();
 RxBool isLoading = true.obs;
@@ -32,6 +33,7 @@ final scrollcontroller = ScrollController();
   // TODO: implement onDelete
   InternalFinalCallback<void> get onDelete => super.onDelete;
 Future getcourse_Module(String id)async{
+  print("course id: "+ id.toString());
 Uri url = Uri.parse(RestDatasource.GETCOURSEMODULE+id);
 try {
   var request =await http.get(
@@ -40,6 +42,8 @@ try {
         "Authorization":
             authToken
       },);
+
+      print("token: "+authToken.toString());
       if(request.statusCode==200){
         var data = jsonDecode(request.body);
         print("data===="+data.toString());
