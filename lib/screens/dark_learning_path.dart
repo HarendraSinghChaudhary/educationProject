@@ -74,7 +74,7 @@ class DarkLearningPath extends GetView<DarkLearningPathController> {
                     child: Text(
                       // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
                       controller.description,
-                      maxLines: 4,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 18,
@@ -178,27 +178,8 @@ class Learn extends GetView {
                                 childAspectRatio: 0.9,
                                 children: List.generate(
                                   list.length, (index) => 
-                                Column(
-                                  
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                         height: h*0.15,
-                                        
-                                        decoration: BoxDecoration(
-                                          color: kcardblue,
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(h*0.02),topRight: Radius.circular(h*0.02)),
-                                          image:  DecorationImage(image: 
-                                          // AssetImage("assets/images/img_9.png",),
-                                          NetworkImage(list[index].image.toString()),
-                                          fit: BoxFit.fill)
-                                        ),
-                                      // child: Image.asset("assets/images/img_9.png")
-                                      )
-                                      ),
-                                    Expanded(
-                                      child: InkWell(
-                                        onTap: (){
+                                InkWell(
+                                  onTap: (){
                                           Get.to(
                                             ()=>DarkCourseDetail(),
                                           binding: DarkCourseDetailBinding(id:
@@ -206,6 +187,25 @@ class Learn extends GetView {
                                           .toString(),
                                           ),);
                                         },
+                                  child: Column(
+                                    
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                           height: h*0.15,
+                                          
+                                          decoration: BoxDecoration(
+                                            color: kcardblue,
+                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(h*0.02),topRight: Radius.circular(h*0.02)),
+                                            image:  DecorationImage(image: 
+                                            // AssetImage("assets/images/img_9.png",),
+                                            NetworkImage(list[index].image.toString()),
+                                            fit: BoxFit.fill)
+                                          ),
+                                        // child: Image.asset("assets/images/img_9.png")
+                                        )
+                                        ),
+                                      Expanded(
                                         child: Container(
                                           height: h*0.15,
                                           width: w,
@@ -292,8 +292,8 @@ class Learn extends GetView {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 )),
                               );
 

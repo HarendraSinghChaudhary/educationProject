@@ -193,8 +193,11 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                               child: DefaultButton(
                                   width: w,
                                   height: h * 0.07,
-                                  text: "START",
-                                  press: () {}),
+                                  text: controller.isstart.value? "START":"CONTINUE",
+                                  press: () {
+                                   controller.onpressed();
+
+                                  }),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -220,12 +223,14 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                           .bigdata.value!.allmodule![index];
                                       return InkWell(
                                         onTap: () {
+
                                           Get.to(() => FlashCard(
                                               id: mod.id.toString(),
                                               title:
                                                   mod.moduletitle.toString()));
-                                          LessonEnd.title =
+                                          controller.lessonTitle =
                                               mod.moduletitle.toString();
+                                              controller.finishId = mod.id.toString();
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
@@ -233,7 +238,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                           child: ListTile(
                                             leading:Text(
                                                       "${index + 1}",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 32,
                                                         fontWeight:
                                                             FontWeight.w700,
@@ -246,7 +251,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                                         mod.moduletitle
                                                             .toString(),
                                                         //"What is Bitcoin?",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           fontSize: 22,
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -260,7 +265,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                                                 .toString() +
                                                             " stories",
                                                         // "8 stories",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -271,7 +276,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
 
                                                       trailing:    mod.IsCompleated == true
                                                   ? Image.asset(
-                                                      "assets/images/Ok.png")
+                                                      "assets/images/Ok.png",height: h*0.04,)
                                                   : const Text(""),
                                           )
                                           

@@ -20,6 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
 import '../controllers/study_material/study_material_controller.dart';
+import 'dark_course_detail.dart';
 
 class QuizEnd extends StatefulWidget {
   int length;
@@ -301,10 +302,8 @@ class _QuizendState extends State<QuizEnd> {
   }
 }
 
-class LessonEnd extends GetView {
-  StatusChangeController statusChangeController = Get.put(StatusChangeController(), permanent: false);
-  static String title = "";
-  static String id = "";
+class LessonEnd extends GetView<StatusChangeController>{
+  
  LessonEnd({Key? key}) : super(key: key);
 
   @override
@@ -338,7 +337,7 @@ class LessonEnd extends GetView {
                       Get.back();
                    Get.delete<StudyMaterialController>();
                        Get.delete<DarkCourseDetail_Controller>();
-                       statusChangeController.statusChangeApi(id);
+                       controller.statusChangeApi(controller.id);
 
                        
                       },
@@ -430,7 +429,7 @@ class LessonEnd extends GetView {
               ),
               // SizedBox(height: Get.height*0.03,),
               Text(
-                LessonEnd.title,
+                controller.cont.lessonTitle,
                 textAlign: TextAlign.center,
                 
                 style: TextStyle(
@@ -471,20 +470,21 @@ class LessonEnd extends GetView {
               //     ),
               //   ),
               // ),
-
-                    DefaultButton(
+               DefaultButton(
                 width: Get.width * 0.86,
                 height: Get.height * 0.075,
                 text: 'CONTINUE',
                 press: () {
 
                   //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
-                  Get.back();
-                   Get.delete<DarkCourseDetail_Controller>();
+                  //  Get.delete<DarkCourseDetail_Controller>();
                    Get.delete<StudyMaterialController>();
-
-
-
+                   controller.statusChangeApi(controller.cont.finishId);
+                  // Get.off(
+                  //   ()=>DarkCourseDetail(),
+                  //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)
+                  // );
+                  Get.back();
 
                   // Get.to();
                 }),

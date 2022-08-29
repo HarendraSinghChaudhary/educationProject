@@ -17,6 +17,8 @@ import 'package:get/get.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../controllers/status_change_controller.dart';
+
 class FlashCard extends StatefulWidget {
   String id, title;
   FlashCard({Key? key, required this.id, required this.title})
@@ -233,7 +235,7 @@ class _FlashcardState extends State<FlashCard> {
                       },
                     ),
                   ),
-                  studyMaterialController.studyMaterialList.length - 1 == _curr
+                  studyMaterialController.studyMaterialList.length - 1 == _curr || studyMaterialController.studyMaterialList.length==1
                       ? DefaultButton(
                           width: Get.width * 0.86,
                           height: Get.height * 0.070,
@@ -244,7 +246,8 @@ class _FlashcardState extends State<FlashCard> {
                             });
 
                             Get.off(
-                              ()=>LessonEnd()
+                              ()=>LessonEnd(),
+                              binding: LessonEndBinding()
                             //   QuizEnd(
                             //   length: studyMaterialController
                             //       .studyMaterialList.length,

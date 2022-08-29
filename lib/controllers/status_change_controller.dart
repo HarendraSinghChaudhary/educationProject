@@ -9,9 +9,28 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'courses/darkcourse_controller.dart';
+class LessonEndBinding implements Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut<StatusChangeController>(() => StatusChangeController()); 
+    
+  }
+}
+
 class StatusChangeController extends GetxController {
   RxBool isLoading = false.obs;
-
+  DarkCourseDetail_Controller cont = Get.find<DarkCourseDetail_Controller>();
+   String title = "";
+   String id = "";
+   String darkcourseId = "";
+   @override
+  void onInit() {
+    // TODO: implement onInit
+    
+    darkcourseId = cont.darkCourseId;
+    super.onInit();
+  }
 
   Future<dynamic> statusChangeApi(String id) async {
     isLoading(true);
@@ -44,7 +63,8 @@ class StatusChangeController extends GetxController {
 
       if (jsonRes["status"].toString() == "true") {
 
-     
+     cont.getcourse_Module();
+     cont.isstart(false);
       
 
         isLoading(false);
