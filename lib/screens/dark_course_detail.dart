@@ -8,6 +8,7 @@ import 'package:get/instance_manager.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
 import '../models/darkcoursemodel.dart';
+import '../testing/dammysotryview.dart';
 import '../utils/constant.dart';
 import 'flash_card.dart';
 
@@ -193,9 +194,11 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                               child: DefaultButton(
                                   width: w,
                                   height: h * 0.07,
-                                  text: controller.isstart.value? "START":"CONTINUE",
+                                  text: controller.isstart.value? "START": !controller.isCompleted.value?"COMPLETED": "CONTINUE",
                                   press: () {
+                                    // Get.to(()=> StoryViews());
                                    controller.onpressed();
+                                //  controller. checkCopletion();
 
                                   }),
                             ),
@@ -226,6 +229,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
 
                                           Get.to(() => FlashCard(
                                               id: mod.id.toString(),
+                                              moduleId: mod.moduleId.toString(),
                                               title:
                                                   mod.moduletitle.toString()));
                                           controller.lessonTitle =

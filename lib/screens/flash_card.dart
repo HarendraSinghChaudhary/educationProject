@@ -20,8 +20,8 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../controllers/status_change_controller.dart';
 
 class FlashCard extends StatefulWidget {
-  String id, title;
-  FlashCard({Key? key, required this.id, required this.title})
+  String id, title,moduleId;
+  FlashCard({Key? key, required this.id, required this.title,required this.moduleId})
       : super(key: key);
 
   @override
@@ -51,7 +51,7 @@ class _FlashcardState extends State<FlashCard> {
     super.initState();
     pageNumber = 0.0;
 
-    studyMaterialController.studyMaterialApi(widget.id);
+    studyMaterialController.studyMaterialApi(widget.moduleId);
   }
 
   @override

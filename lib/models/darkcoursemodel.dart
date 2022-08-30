@@ -41,7 +41,6 @@ class DarkCourseDetailModel {
         image: json["image"],
         status: json["status"],
         moduleTitle: json["moduleTitle"],
-        
         hotCourses: json["hotCourses"],
         allmodule: List<Allmodule>.from(json["allmodule"].map((x) => Allmodule.fromJson(x))),
     );
@@ -54,7 +53,6 @@ class DarkCourseDetailModel {
         "image": image,
         "status": status,
         "moduleTitle": moduleTitle,
-        
         "hotCourses": hotCourses,
         "allmodule": List<dynamic>.from(allmodule!.map((x) => x.toJson())),
     };
@@ -64,7 +62,7 @@ class Allmodule {
     Allmodule({
         this.studayMaterial,
         this.id,
-        
+        this.moduleId,
         this.moduletitle,
         this.courseId,
         this.status,
@@ -76,6 +74,7 @@ class Allmodule {
     String? moduletitle;
     String? courseId;
     bool? status;
+    String? moduleId;
     bool? IsCompleated;
 
     factory Allmodule.fromJson(Map<String, dynamic> json) => Allmodule(
@@ -84,6 +83,7 @@ class Allmodule {
         moduletitle: json["moduletitle"],
         courseId: json["courseId"],
         status: json["status"],
+        moduleId: json["module_id"]??"",
         IsCompleated: json["IsCompleated"]
     );
 
@@ -93,6 +93,7 @@ class Allmodule {
         "moduletitle": moduletitle,
         "courseId": courseId,
         "status": status,
+        "module_id":moduleId,
         "IsCompleated": IsCompleated,
     };
 }

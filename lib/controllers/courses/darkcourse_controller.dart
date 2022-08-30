@@ -19,6 +19,8 @@ final scrollcontroller = ScrollController();
 String finishId = "";
 String lessonTitle = "";
 String darkCourseId = "";
+String module_id = "";
+RxBool isCompleted = false.obs;
 Rx<bool> isstart = true.obs;
 String startid = "";
 String startTitle = "";
@@ -33,9 +35,36 @@ String startTitle = "";
           break;
         }
       }
+      checkCopletion();
     });
     darkCourseId = ids;
     super.onInit();
+  }
+  checkCopletion(){
+    print("start");
+    if(bigdata.value!.allmodule!.every((value){
+       if(value.IsCompleated!){
+          return true;
+       }else{
+        return false;
+       }
+    })){
+      print("1212121212");
+      isCompleted(false);
+
+    }else{
+      print("123123123");
+      isCompleted(true);
+
+    }
+    // for (var element in bigdata.value!.allmodule!) { 
+    //     if(element.IsCompleated!){
+    //       isstart(false);
+    //       break;
+    //     }
+        
+
+      // }
   }
 @override
   void onClose() {
@@ -50,16 +79,21 @@ String startTitle = "";
 onpressed(){
   if(bigdata.value!.allmodule!.isEmpty){
      Get.snackbar("No module availble", "");
-  }else{
+  }else if(!isCompleted.value){
+     Get.snackbar("module completed", "");
+
+  } else {
 for (var element in bigdata.value!.allmodule!) { 
         if(!element.IsCompleated!){
           startid = element.id.toString();
           startTitle = element.moduletitle.toString();
+          module_id = element.moduleId.toString();
           break;
         }
       }
       Get.to(() => FlashCard(
       id: startid.toString(),
+      moduleId: module_id,
       title: startTitle.toString()));
       lessonTitle =
        startTitle.toString();

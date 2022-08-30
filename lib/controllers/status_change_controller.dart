@@ -65,6 +65,7 @@ class StatusChangeController extends GetxController {
 
      cont.getcourse_Module();
      cont.isstart(false);
+     cont.checkCopletion();
       
 
         isLoading(false);
