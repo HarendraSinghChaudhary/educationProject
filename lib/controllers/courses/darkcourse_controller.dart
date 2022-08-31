@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import '../../models/darkcoursemodel.dart';
+import '../../screens/dark_course_detail.dart';
 import '../../screens/flash_card.dart';
 import '../../utils/endpoint_url.dart';
 
@@ -24,10 +25,22 @@ RxBool isCompleted = false.obs;
 Rx<bool> isstart = true.obs;
 String startid = "";
 String startTitle = "";
+replace(){
+  Get.back();
+  Get.to(
+    ()=>DarkCourseDetail(),
+    binding: DarkCourseDetailBinding(id: ids)
+  );
+}
 @override
   void onInit() {
     // TODO: implement onInit
     
+    relode();
+    darkCourseId = ids;
+    super.onInit();
+  }
+  relode(){
     getcourse_Module().whenComplete(() {
       for (var element in bigdata.value!.allmodule!) { 
         if(element.IsCompleated!){
@@ -36,9 +49,8 @@ String startTitle = "";
         }
       }
       checkCopletion();
+      update();
     });
-    darkCourseId = ids;
-    super.onInit();
   }
   checkCopletion(){
     print("start");
@@ -55,8 +67,14 @@ String startTitle = "";
     }else{
       print("123123123");
       isCompleted(true);
-
     }
+    // for (var element in bigdata.value!.allmodule!) { 
+    //     if(!element.IsCompleated!){
+    //       startid = element.id.toString();
+    //       startTitle = element.moduletitle.toString();
+    //       module_id = element.moduleId.toString();
+    //       break;
+    //     }}
     // for (var element in bigdata.value!.allmodule!) { 
     //     if(element.IsCompleated!){
     //       isstart(false);
@@ -118,6 +136,7 @@ try {
       if(request.statusCode==200){
         var data = jsonDecode(request.body);
         print("data===="+data.toString());
+        bigdata.value = null;
        bigdata.value = darkCourseDetailModelFromJson(jsonEncode(data["data"]));
        isLoading(false);
        print(isLoading);

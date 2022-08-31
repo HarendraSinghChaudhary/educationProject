@@ -234,7 +234,8 @@ class Learn extends GetView {
                                                                 ),
                                               ),
                                               Text(
-                                                "12 Shorts",
+                                                // "12 Shorts",
+                                                "${list[index].modules??0} Modules",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                                   fontSize: 10,

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:Ambitious/controllers/status_change_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/reusable/default_button.dart';
@@ -46,7 +48,7 @@ class _QuizendState extends State<QuizEnd> {
         children: [
 
     
-            Container(
+            SizedBox(
           
             width: Get.width * 0.99,
             height: Get.height * 0.99,
@@ -314,7 +316,7 @@ class LessonEnd extends GetView<StatusChangeController>{
         children: [
 
     
-            Container(
+            SizedBox(
           
             width: Get.width * 0.99,
             height: Get.height * 0.99,
@@ -334,11 +336,15 @@ class LessonEnd extends GetView<StatusChangeController>{
                     InkWell(
                       onTap: () {
                       //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
-                      Get.back();
                    Get.delete<StudyMaterialController>();
-                       Get.delete<DarkCourseDetail_Controller>();
-                       controller.statusChangeApi(controller.id);
-
+                   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
+                  controller.cont.checkCopletion();
+                   });
+                  // Get.off(
+                  //   ()=>DarkCourseDetail(),
+                  //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)
+                  // );
+                  Get.back();
                        
                       },
                       child: const Icon(
@@ -479,7 +485,15 @@ class LessonEnd extends GetView<StatusChangeController>{
                   //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
                   //  Get.delete<DarkCourseDetail_Controller>();
                    Get.delete<StudyMaterialController>();
-                   controller.statusChangeApi(controller.cont.finishId);
+                   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
+                    Timer(Duration(seconds: 2), (){
+                  controller.cont.checkCopletion();
+                    });
+                  controller.cont.checkCopletion();
+
+                   });
+                  //  Get.delete<DarkCourseDetail_Controller>();
+                //  controller.cont.replacement();
                   // Get.off(
                   //   ()=>DarkCourseDetail(),
                   //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)

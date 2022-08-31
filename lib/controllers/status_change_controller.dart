@@ -29,6 +29,7 @@ class StatusChangeController extends GetxController {
     // TODO: implement onInit
     
     darkcourseId = cont.darkCourseId;
+    cont.relode();
     super.onInit();
   }
 

@@ -109,7 +109,7 @@ class _ProfileState extends State<HomeLive> {
             ),
             Expanded(
               child: Text(
-                "Hi, "+ firstName! +" 👋🏼",
+                "Hi, "+ firstName.toString() +" 👋🏼",
                  maxLines: 2,
                  overflow: TextOverflow.ellipsis,
                 style: TextStyle(

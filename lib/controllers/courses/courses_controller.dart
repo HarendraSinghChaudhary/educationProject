@@ -205,6 +205,7 @@ change_to_a(int a){
 
         
               courseModel.title = subcatList[j]["title"].toString();
+              courseModel.modules = subcatList[j]["allmodule"].length;
           
 
           modelAgentSearch.courseListbyLearningPath.add(courseModel);
