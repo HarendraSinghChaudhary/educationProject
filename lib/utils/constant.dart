@@ -31,7 +31,10 @@
   const kdarkblue = Color(0xFF171531);
   const kcardblue = Color(0xFF1D1F41);
   const ktabtextselcetedColor = Color(0xFF00D9CD);
-   
+  const kstatusgreyColor = Color(0xFFD4DCE7);
+  const ksettingcardColor = Color(0xFF232048);
+  const ksettingsubtitleColor =Color(0xFFD4DCE7);
+  const kcardshedowColor =Color(0xFF3C80D1);
   const kbluegradiant = LinearGradient(
     colors: [kstartgradiant,kendgradiant],
     begin:Alignment.topCenter,

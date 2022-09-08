@@ -307,6 +307,7 @@ class Build extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: w*0.05),
+      margin: EdgeInsets.only(top: h*0.05),
       child: Column(
         children: [
           Text(

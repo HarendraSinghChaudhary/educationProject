@@ -337,9 +337,12 @@ class LessonEnd extends GetView<StatusChangeController>{
                       onTap: () {
                       //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
                    Get.delete<StudyMaterialController>();
-                   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
+                   if(!controller.cont.isread){
+                    controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
                   controller.cont.checkCopletion();
                    });
+                   }
+                   
                   // Get.off(
                   //   ()=>DarkCourseDetail(),
                   //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)
@@ -485,20 +488,29 @@ class LessonEnd extends GetView<StatusChangeController>{
                   //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
                   //  Get.delete<DarkCourseDetail_Controller>();
                    Get.delete<StudyMaterialController>();
+                   if(!controller.cont.isread){
                    controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
-                    Timer(Duration(seconds: 2), (){
+                  //   Timer(Duration(seconds: 2), (){
+                  // controller.cont.checkCopletion();
+                  //   });
                   controller.cont.checkCopletion();
-                    });
-                  controller.cont.checkCopletion();
-
+                  // Get.off(
+                  //   ()=>DarkCourseDetail(),
+                  //                         binding: DarkCourseDetailBinding(id:
+                  //                         controller.cont.ids
+                  //                         ),
+                  // );
                    });
+                   }
+                  Get.back(); 
+
                   //  Get.delete<DarkCourseDetail_Controller>();
                 //  controller.cont.replacement();
                   // Get.off(
                   //   ()=>DarkCourseDetail(),
                   //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)
                   // );
-                  Get.back();
+                  // Get.back();
 
                   // Get.to();
                 }),

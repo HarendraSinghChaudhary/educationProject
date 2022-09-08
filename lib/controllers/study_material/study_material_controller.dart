@@ -12,11 +12,13 @@ import 'package:Ambitious/models/category_model.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class StudyMaterialController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<StudyMaterialModel> studyMaterialList = RxList();
 
+  
 
   Future<dynamic> studyMaterialApi(String id) async {
     // isLoading(true);
@@ -56,6 +58,11 @@ class StudyMaterialController extends GetxController {
           modelAgentSearch.StudayMaterial = jsonArray[i]["StudayMaterial"].toString();
           modelAgentSearch.Moduletitle = jsonArray[i]["Moduletitle"].toString();
           modelAgentSearch.image = jsonArray[i]["image"].toString();
+          modelAgentSearch.youtubeUrl = jsonArray[i]["YoutubeUrl"];
+          modelAgentSearch.a = jsonArray[i]["A"];
+          modelAgentSearch.r = jsonArray[i]["R"];
+          modelAgentSearch.g = jsonArray[i]["G"];
+          modelAgentSearch.b = jsonArray[i]["B"];
 
         
 

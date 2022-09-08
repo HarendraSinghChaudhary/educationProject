@@ -110,7 +110,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                     child: SvgPicture.asset(
                       'assets/images/home.svg',
                        width: 20,
-                      color: profileController._selectedIndex == 0.obs ? kPrimaryColor : kTitleColor,
+                      color: profileController._selectedIndex == 0.obs ? kPrimaryColor : kWhiteColor,
                     ),
                   ),
                  
@@ -127,7 +127,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/images/courses.svg',
                          width: 18,
-                        color: profileController._selectedIndex == 1.obs ? kPrimaryColor: kTitleColor,
+                        color: profileController._selectedIndex == 1.obs ? kPrimaryColor: kWhiteColor,
                       ),
                     ),
             
@@ -163,7 +163,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/images/profile.svg',
                         width: 20,
-                        color: profileController._selectedIndex == 3.obs ? kPrimaryColor : kTitleColor,
+                        color: profileController._selectedIndex == 3.obs ? kPrimaryColor : kWhiteColor,
                       ),
                     ),
             
@@ -174,6 +174,9 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
         ],
         currentIndex: s.selectedIndex,
         selectedItemColor: kPrimaryColor,
+        unselectedItemColor: kWhiteColor,
+        backgroundColor: kdarkblue,
+        // unselectedLabelStyle:const TextStyle(color: kWhiteColor),
         onTap: (index) => s.onItemTapped(index),
         /* currentIndex: Get.find<ProfileController>().selectedIndex,
         selectedItemColor: Colors.amber[800],

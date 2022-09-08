@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/subcategory_model.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
+import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:flutter/material.dart';
 
 import 'package:Ambitious/models/category_model.dart';
@@ -33,14 +35,19 @@ class StatusChangeController extends GetxController {
     super.onInit();
   }
 
+
   Future<dynamic> statusChangeApi(String id) async {
     isLoading(true);
 
-    var request = http.get(
-      Uri.parse(RestDatasource.MODULESTATUSCHANGEAPI + id),
+    var request = http.post(
+      Uri.parse(RestDatasource.MODULESTATUSCHANGEAPI),
+      body: {
+        "moduleid":id
+      },
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
+           Preferences.pref!.getString("token").toString()
+            // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
       },
     );
 
@@ -64,9 +71,10 @@ class StatusChangeController extends GetxController {
 
       if (jsonRes["status"].toString() == "true") {
 
-     cont.getcourse_Module();
-     cont.isstart(false);
+     cont.getcourse_Module().whenComplete(() {
      cont.checkCopletion();
+     });
+     cont.isstart(false);
       
 
         isLoading(false);

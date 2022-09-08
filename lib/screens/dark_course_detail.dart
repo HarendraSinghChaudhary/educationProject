@@ -1,4 +1,5 @@
 import 'package:Ambitious/reusable/default_button.dart';
+import 'package:Ambitious/screens/customStory.view/storyview.dart';
 import 'package:Ambitious/screens/quiz_end.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -227,14 +228,29 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                       return InkWell(
                                         onTap: () {
 
-                                          Get.to(() => FlashCard(
+                                          // Get.to(() => FlashCard(
+                                          //     id: mod.id.toString(),
+                                          //     moduleId: mod.moduleId.toString(),
+                                          //     title:
+                                          //         mod.moduletitle.toString()));
+                                          if(controller.bigdata.value!.allmodule![index].studayMaterial!=0){
+                                          Get.to(() => CustomStoryView(
                                               id: mod.id.toString(),
                                               moduleId: mod.moduleId.toString(),
                                               title:
                                                   mod.moduletitle.toString()));
+// Get.to(
+//   ()=>CustomCourseView()
+// );
                                           controller.lessonTitle =
                                               mod.moduletitle.toString();
-                                              controller.finishId = mod.id.toString();
+                                              controller.finishId = mod.moduleId.toString();
+                                          }else{
+                                            Get.snackbar("", "");
+                                          }
+                                          
+                                              
+                                          
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(

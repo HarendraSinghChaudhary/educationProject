@@ -55,17 +55,17 @@ class _SettingsState extends State<Profile> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: kdarkblue,
       appBar: AppBar(
 
         automaticallyImplyLeading: false,
 
-        backgroundColor: kBackgroundColor,
+        backgroundColor: kdarkblue,
         elevation: 0,
         title: const Text(
-          'Profile',
-          style: const TextStyle(
-              color: kTitleColor, fontWeight: FontWeight.w600, fontSize: 20),
+          'Settings',
+          style:  TextStyle(
+              color: kWhiteColor, fontWeight: FontWeight.w700, fontSize: 20),
         ),
         centerTitle: true,
 
@@ -78,22 +78,26 @@ class _SettingsState extends State<Profile> {
                 margin: EdgeInsets.only(
                     left: Get.width * 0.08,
                     right: Get.width * 0.08,
-                    top: h * 0.005),
+                    top: h * 0.02),
                 height: h * 0.45,
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ksettingcardColor,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blue.withOpacity(0.22),
-                        offset: const Offset(0, 3),
-                        blurRadius: 4,
+                        color:kcardshedowColor.withOpacity(0.0851449),
+                        //  Colors.blue.withOpacity(0.22),
+                        offset: const Offset(0, 8),
+                        blurRadius: 10,
+                        spreadRadius: 2
+
                       )
                     ]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
+                      iconColor:ksettingsubtitleColor,
                       leading: Container(
                           padding: const EdgeInsets.all(11),
                           height: Get.height * 0.05,
@@ -106,17 +110,18 @@ class _SettingsState extends State<Profile> {
                       title: Text(
                         "Name",
                         style: const TextStyle(
-                            color: kTitleColor,
+                            color: kWhiteColor,
                             fontSize: 20,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w700),
                       ),
                       subtitle: Text(
                         name.toString(),
                         style: const TextStyle(
-                            color: ksubtitamarketColor, fontSize: 14),
+                            color: ksettingsubtitleColor, fontSize: 14),
                       ),
                     ),
                     ListTile(
+                      iconColor:ksettingsubtitleColor,
                       leading: Container(
                           padding: const EdgeInsets.all(11),
                           height: Get.height * 0.05,
@@ -129,14 +134,14 @@ class _SettingsState extends State<Profile> {
                       title: Text(
                         "Email",
                         style: const TextStyle(
-                            color: kTitleColor,
+                            color: kWhiteColor,
                             fontSize: 20,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w700),
                       ),
                       subtitle: Text(
                         email.toString(),
                         style: const TextStyle(
-                            color: ksubtitamarketColor, fontSize: 14),
+                            color: ksettingsubtitleColor, fontSize: 14),
                       ),
                     ),
 
@@ -164,12 +169,13 @@ class _SettingsState extends State<Profile> {
                         title: Text(
                           "Privacy & Terms",
                           style: const TextStyle(
-                              color: kTitleColor,
+                              color: kWhiteColor,
                               fontSize: 20,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w700),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
+                      color:ksettingsubtitleColor,
                           size: 15,
                         )),
 
@@ -193,12 +199,13 @@ class _SettingsState extends State<Profile> {
                         title: Text(
                           "Contact Us",
                           style: const TextStyle(
-                              color: kTitleColor,
+                              color: kWhiteColor,
                               fontSize: 20,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w700),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
+                      color:ksettingsubtitleColor,
                           size: 15,
                         )),
 
@@ -216,18 +223,19 @@ class _SettingsState extends State<Profile> {
                             width: Get.width * 0.12,
                             decoration: const BoxDecoration(
                                 shape: BoxShape.circle, color: kPurpleColor),
-                            child: SvgPicture.asset(
-                              "assets/images/per.svg", color: Colors.white,
+                            child: Image.asset(
+                              "assets/images/Shape.png", color: Colors.white,
                             )),
                         title: Text(
                           "Permissions",
                           style: const TextStyle(
-                              color: kTitleColor,
+                              color: kWhiteColor,
                               fontSize: 20,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w700),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
+                      color:ksettingsubtitleColor,
                           size: 15,
                         )),
 

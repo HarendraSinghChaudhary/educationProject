@@ -102,11 +102,13 @@ class Dark_Course extends GetView<CoursesController>{
                                 // Image.asset("assets/images/bitcoin money bag.png",height: h*0.12,),
                                 Image.network(controller.learningPathList[index].image.toString(),height: h*0.12,),
                                 Padding(
-                                  padding:  EdgeInsets.symmetric(horizontal: w*0.02),
+                                  padding:  EdgeInsets.only(left: w*0.02,right: w*0.02,top: h*0.005),
                                   child: Text(
                                     // "Social Media Creator",
                                     // "pppppppppppppppppppppppp",
                                     controller.learningPathList[index].subCategoryName.toString(),
+                                    // "Social Media Creator and Entropruner",
+                                    overflow: TextOverflow.values[1],
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                                 fontSize: 20,

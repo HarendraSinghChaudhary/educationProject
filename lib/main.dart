@@ -9,6 +9,7 @@ import 'package:Ambitious/screens/dark_course.dart';
 import 'package:Ambitious/screens/dark_course_detail.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/services/notification_services.dart';
+import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
@@ -74,6 +75,7 @@ SystemChrome.setSystemUIOverlayStyle(
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
  
+Preferences.pref = await SharedPreferences.getInstance();
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -320,6 +322,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
       theme:ThemeData(
         fontFamily: "HK Grotesk",
+        primaryColor: kPrimaryColor
       ),
       home: 
       // Dark_Course()

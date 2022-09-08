@@ -2,7 +2,6 @@
 
 import 'package:Ambitious/reusable/home_header.dart';
 import 'package:Ambitious/reusable/path_card.dart';
-import 'package:Ambitious/reusable/trending_card.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/list.dart';
 import 'package:flutter/material.dart';

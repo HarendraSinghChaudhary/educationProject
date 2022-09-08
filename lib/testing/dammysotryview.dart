@@ -1,119 +1,141 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:story_view/story_view.dart';
+import 'package:http/http.dart' as http;
 
+import '../models/study_material_model.dart';
+import '../utils/endpoint_url.dart';
 
-
-class StoryViews extends StatelessWidget {
-  final StoryController controller = StoryController();
-
+class StoryViewBinding implements Bindings{
   @override
-  Widget build(BuildContext context) {
+  void dependencies() {
+    // TODO: implement dependencies
+    Get.lazyPut<StoryViewController>(() => StoryViewController());
+  }
+}
+class StoryViewController extends GetxController{
+  final storyController = StoryController();
+  RxBool isLoading = true.obs;
+  @override
+  void onInit(){
+    studyMaterialApi(StroryViews.id);
+    super.onInit();
+  }
+
+  RxList<StudyMaterialModel> studyMaterialList = RxList();
+   Future<dynamic> studyMaterialApi(String id) async {
+    // isLoading(true);
+    print("...."+ id.toString());
+
+    var request = http.get(
+      Uri.parse(RestDatasource.STUDYMETERIAL_URL + id),
+      headers: {
+        "Authorization":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
+      },
+    );
+
+    String msg = "";
+    var jsonArray;
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+      const JsonDecoder _decoder = JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      msg = jsonRes["message"].toString();
+      jsonArray = jsonRes['Moduledata'];
+    });
+
+    if (res.statusCode == 200) {
+      print(jsonRes["status"]);
+
+      if (jsonRes["status"].toString() == "true") {
+        studyMaterialList.clear();
+        for (var i = 0; i < jsonArray.length; i++) {
+          StudyMaterialModel modelAgentSearch = StudyMaterialModel();
+          modelAgentSearch.id = jsonArray[i]["_id"].toString();
+          modelAgentSearch.StudayMaterial = jsonArray[i]["StudayMaterial"].toString();
+          modelAgentSearch.Moduletitle = jsonArray[i]["Moduletitle"].toString();
+          modelAgentSearch.image = jsonArray[i]["image"].toString();
+
+        
+
+     
+        
+
+          studyMaterialList.add(modelAgentSearch);
+
+          print("name: " + jsonArray[i]["courseData"].toString());
+
+
+          // update();
+        }
+
+
+        isLoading(false);
+        update();
+      } else {
+        Get.snackbar(
+          "",
+          "",
+          snackPosition: SnackPosition.TOP,
+          titleText: Text(jsonRes["message"].toString()),
+          messageText: Text(""),
+          colorText: Colors.red,
+        );
+
+        isLoading(false);
+        update();
+      }
+    } else {
+      Get.snackbar(
+        "",
+        "",
+        snackPosition: SnackPosition.TOP,
+        titleText: Text("Please try later"),
+        messageText: Text(""),
+        colorText: Colors.red,
+      );
+
+      isLoading(false);
+      update();
+    }
+  }
+
+}
+
+class StroryViews extends GetView<StoryViewController>{
+ static String id="", title="",moduleId="";
+  @override
+  Widget build (BuildContext context){
+    controller.onInit();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Delicious Ghanaian Meals"),
+        title: Text("More"),
       ),
-      body: Container(
-        margin: EdgeInsets.all(
-          8,
-        ),
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 300,
-              child: StoryView(
-                controller: controller,
-                storyItems: [
-                  StoryItem.text(
-                    title:
-                        "Hello world!\nHave a look at some great Ghanaian delicacies. I'm sorry if your mouth waters. \n\nTap!",
-                    backgroundColor: Colors.orange,
-                    roundedTop: true,
-                  ),
-                  // StoryItem.inlineImage(
-                  //   NetworkImage(
-                  //       "https://image.ibb.co/gCZFbx/Banku-and-tilapia.jpg"),
-                  //   caption: Text(
-                  //     "Banku & Tilapia. The food to keep you charged whole day.\n#1 Local food.",
-                  //     style: TextStyle(
-                  //       color: Colors.white,
-                  //       backgroundColor: Colors.black54,
-                  //       fontSize: 17,
-                  //     ),
-                  //   ),
-                  // ),
-                  StoryItem.inlineImage(
-                    url:
-                        "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
-                    controller: controller,
-                    caption: Text(
-                      "Omotuo & Nkatekwan; You will love this meal if taken as supper.",
-                      style: TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.black54,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  StoryItem.inlineImage(
-                    url:
-                        "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
-                    controller: controller,
-                    caption: Text(
-                      "Hektas, sektas and skatad",
-                      style: TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.black54,
-                        fontSize: 17,
-                      ),
-                    ),
-                  )
-                ],
-                onStoryShow: (s) {
-                  print("Showing a story");
-                },
-                onComplete: () {
-                  print("Completed a cycle");
-                },
-                progressPosition: ProgressPosition.bottom,
-                repeat: false,
-                inline: true,
-              ),
-            ),
-            Material(
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MoreStories()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(8))),
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "View more stories",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+      body: StoryView(
+        storyItems: 
+        List.generate(controller.studyMaterialList.length, (index) {
+          return StoryItem(Container(), duration: const Duration(seconds: 60));
+        }),
+        onStoryShow: (s) {
+          print("Showing a story");
+        },
+        onComplete: () {
+          print("Completed a cycle");
+        },
+        progressPosition: ProgressPosition.top,
+        repeat: false,
+        controller:controller.storyController,
       ),
     );
+
   }
 }
 
@@ -137,11 +159,10 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("More"),
-      ),
+ return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("More"),
+      // ),
       body: StoryView(
         storyItems: [
           StoryItem.text(
@@ -188,5 +209,5 @@ void initState() {
         controller: storyController,
       ),
     );
-  }
+      }
 }
