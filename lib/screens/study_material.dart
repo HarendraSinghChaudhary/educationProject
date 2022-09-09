@@ -189,10 +189,12 @@ class _MyHomePageState extends State<StudyMaterial> {
                                             borderRadius:
                                                 BorderRadius.circular(30),
                                           ),
-                                          child: FlatButton(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30)),
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        
+
+        ),
                                             onPressed: () {
                                               // Get.to(StudyMaterialDetail(
                                               //     detail:

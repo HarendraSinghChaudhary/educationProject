@@ -309,10 +309,12 @@ class _SettingsState extends State<Profile> {
                           SizedBox(
                             width: 140,
                             height: 40,
-                            child: FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              color: kPrimaryColor,
+                            child: TextButton(
+                               style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            foregroundColor: kPrimaryColor
+
+        ),
                               onPressed: () {
                                 logout();
 
@@ -333,9 +335,12 @@ class _SettingsState extends State<Profile> {
                           SizedBox(
                             width: 140,
                             height: 40,
-                            child: FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+           
+
+        ),
                               onPressed: () {
                                 Get.back();
                               },

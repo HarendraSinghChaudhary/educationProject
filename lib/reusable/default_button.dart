@@ -29,9 +29,13 @@ class DefaultButton extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child:  FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: kPrimaryColor,
+      child:  TextButton(
+         style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            // foregroundColor: kPrimaryColor,
+            backgroundColor: kPrimaryColor
+
+        ),
         onPressed: press,
         child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +84,7 @@ class DefaultButton2 extends StatelessWidget {
     height: heigth,
     width: width,
     decoration: decoration,
-    child: FlatButton(
+    child: TextButton(
       onPressed: onPressed,
       child: child,
     ),

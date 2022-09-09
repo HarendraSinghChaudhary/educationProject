@@ -458,15 +458,15 @@ class _CustomStoryViewState extends State<CustomStoryView> {
 
     return 
     WillPopScope(child: Scaffold(
-      // appBar: AppBar(
-      //   title: Text("More"),
-      // ),
+      // extendBodyBehindAppBar: true,
+      
       backgroundColor: Colors.black,
       body:
       Obx(
         ()=>Get.find<StudyMaterialController>().isLoading.value?loader: 
         CustomCourseView(
           study: Get.find<StudyMaterialController>().studyMaterialList,
+          title: widget.title,
           
         //   courseItem:   List.generate(Get.find<StudyMaterialController>().studyMaterialList.length, (index) {
         //   return 

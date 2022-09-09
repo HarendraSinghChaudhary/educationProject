@@ -27,8 +27,13 @@ class SkipButton extends StatelessWidget {
         )
 
       ),
-      child:  FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child:  TextButton(
+
+        style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
+        ),
+      
        
         onPressed: press,
         child: Text(

@@ -48,12 +48,15 @@ class Dark_Course extends GetView<CoursesController>{
                   SizedBox(
                     height: h*0.015,
                   ),
-                  Text(
-                    "Select a path that interests you to see available courses, projects and action items.",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: kWhiteColor
+                  Expanded(
+                    child: Text(
+                      "Select a path that interests you to see available courses, projects and action items.",
+                      // overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: kWhiteColor
+                      ),
                     ),
                   )
                 ],
@@ -101,20 +104,22 @@ class Dark_Course extends GetView<CoursesController>{
                               children: [
                                 // Image.asset("assets/images/bitcoin money bag.png",height: h*0.12,),
                                 Image.network(controller.learningPathList[index].image.toString(),height: h*0.12,),
-                                Padding(
-                                  padding:  EdgeInsets.only(left: w*0.02,right: w*0.02,top: h*0.005),
-                                  child: Text(
-                                    // "Social Media Creator",
-                                    // "pppppppppppppppppppppppp",
-                                    controller.learningPathList[index].subCategoryName.toString(),
-                                    // "Social Media Creator and Entropruner",
-                                    overflow: TextOverflow.values[1],
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: kWhiteColor
-                                              ),
+                                Expanded(
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(left: w*0.02,right: w*0.02,top: h*0.005),
+                                    child: Text(
+                                      // "Social Media Creator",
+                                      // "pppppppppppppppppppppppp",
+                                      controller.learningPathList[index].subCategoryName.toString(),
+                                      // "Social Media Creator and Entropruner",
+                                      overflow: TextOverflow.values[1],
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: kWhiteColor
+                                                ),
+                                    ),
                                   ),
                                 )
                               ],

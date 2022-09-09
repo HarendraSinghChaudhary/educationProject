@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/status_change_controller.dart';
+import '../../controllers/study_material/study_material_controller.dart';
 import '../../models/study_material_model.dart';
 import '../../services/youtubevideo.dart';
 import '../../utils/constant.dart';
@@ -12,8 +13,9 @@ import '../quiz_end.dart';
 class CustomCourseView extends StatefulWidget {
   // final List<Widget> courseItem;
   final List<StudyMaterialModel> study;
+  final String title;
   // final int a,r,g,b;
-  const CustomCourseView({Key? key, required this.study,}) : super(key: key);
+  const CustomCourseView({Key? key, required this.study,required this.title}) : super(key: key);
 
   @override
   State<CustomCourseView> createState() => _CustomCourseViewState();
@@ -43,7 +45,28 @@ class _CustomCourseViewState extends State<CustomCourseView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(change_to_a(widget.study[currentIndex].a!.toInt()), widget.study[currentIndex].r!.toInt(), widget.study[currentIndex].g!.toInt(), widget.study[currentIndex].b!.toInt()),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: h*0.05,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        elevation: 0,
+        actions: [
+          IconButton(onPressed: (){
+            Get.delete<StudyMaterialController>();
+            Get.back();
+          }, icon: Icon(Icons.cancel))
+        ],
+        title: Text(
+          widget.title,
 
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700
+          ),
+        ),
+      ),
       body: Container(
       height: h,
       width: w,
@@ -158,15 +181,18 @@ class _CustomCourseViewState extends State<CustomCourseView> {
           //       child: 
           //       Image.network(images[currentIndex])),
           // ),
-          // Align(
-          //   alignment: Alignment.topCenter,
-          //   child: Padding(
-          //     padding:  EdgeInsets.symmetric(horizontal: w*0.01,vertical: h*0.01),
-          //     child: Row(
-          //       children: List.generate(maxlength, (index) => Expanded(child: Container(height: h*0.005,decoration: BoxDecoration(color:index<=currentIndex? kCyanColor:kstatusgreyColor, borderRadius: BorderRadius.circular(h*0.0025)),margin: EdgeInsets.symmetric(horizontal: w*0.001),))),
-          //     ),
-          //   ),
-          // ),
+          Positioned(
+            // alignment: Alignment.topCenter,
+            right: 0,
+            left: 0,
+            top: h*0.06,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: w*0.01,),
+              child: Row(
+                children: List.generate(maxlength, (index) => Expanded(child: Container(height: h*0.005,decoration: BoxDecoration(color:index<=currentIndex? kCyanColor:kstatusgreyColor, borderRadius: BorderRadius.circular(h*0.0025)),margin: EdgeInsets.symmetric(horizontal: w*0.001),))),
+              ),
+            ),
+          ),
           Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(
