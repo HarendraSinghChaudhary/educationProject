@@ -14,9 +14,30 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// class StudayMaterialBinding extends Bindings{
+//   String id, title,moduleId;
+//   StudayMaterialBinding({required this.id, required this.moduleId, required this.title});
+//   @override
+//   void dependencies() {
+//     // TODO: implement dependencies
+//     Get.lazyPut<StudyMaterialController>(() => StudyMaterialController(id: id,moduleId: moduleId, title: title));
+//   }
+// }
+
+
 class StudyMaterialController extends GetxController {
+  // String id, title,moduleId;
+  // StudyMaterialController({required this.id,required this.moduleId,required this.title});
   RxBool isLoading = true.obs;
   RxList<StudyMaterialModel> studyMaterialList = RxList();
+
+  
+@override
+  void onInit() {
+    // TODO: implement onInit
+    // studyMaterialApi(id);
+    super.onInit();
+  }
 
   
 

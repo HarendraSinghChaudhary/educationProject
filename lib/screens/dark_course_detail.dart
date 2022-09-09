@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
+import '../controllers/study_material/study_material_controller.dart';
 import '../models/darkcoursemodel.dart';
 import '../testing/dammysotryview.dart';
 import '../utils/constant.dart';
@@ -238,7 +239,13 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                               id: mod.id.toString(),
                                               moduleId: mod.moduleId.toString(),
                                               title:
-                                                  mod.moduletitle.toString()));
+                                                  mod.moduletitle.toString()
+                                                  ),
+                                              //     binding: StudayMaterialBinding(id: mod.id.toString(),
+                                              // moduleId: mod.moduleId.toString(),
+                                              // title:
+                                              //     mod.moduletitle.toString())
+                                                  );
 // Get.to(
 //   ()=>CustomCourseView()
 // );

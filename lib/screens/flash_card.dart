@@ -24,262 +24,345 @@ import '../reusable/url_launcher.dart';
 import '../services/youtubevideo.dart';
 import 'customStory.view/storyview.dart';
 
-class FlashCard extends StatefulWidget {
-  String id, title,moduleId;
-  FlashCard({Key? key, required this.id, required this.title,required this.moduleId})
-      : super(key: key);
+// class FlashCard extends StatefulWidget {
+//   String id, title,moduleId;
+//   FlashCard({Key? key, required this.id, required this.title,required this.moduleId})
+//       : super(key: key);
 
-  @override
-  State<FlashCard> createState() => _FlashcardState();
-}
+//   @override
+//   State<FlashCard> createState() => _FlashcardState();
+// }
 
-class _FlashcardState extends State<FlashCard> {
-  int _curr = 1;
-  double pageNumber = 0.0;
+// class _FlashcardState extends State<FlashCard> {
+//   int _curr = 1;
+//   double pageNumber = 0.0;
 
-  StudyMaterialController studyMaterialController =
-      Get.put(StudyMaterialController(), permanent: false);
-  String isSelected = "";
-  ScrollController _controller = ScrollController();
+//   StudyMaterialController studyMaterialController =
+//       Get.put(StudyMaterialController(), permanent: false);
+//   String isSelected = "";
+//   ScrollController _controller = ScrollController();
 
-  late final Mixpanel _mixpanel;
+//   late final Mixpanel _mixpanel;
 
-  Future<void> _initMixpanel() async {
-    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-        optOutTrackingDefault: false);
-  }
+//   Future<void> _initMixpanel() async {
+//     _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+//         optOutTrackingDefault: false);
+//   }
 
-  @override
-  void initState() {
-    _initMixpanel();
+//   @override
+//   void initState() {
+//     _initMixpanel();
 
-    super.initState();
-    pageNumber = 0.0;
+//     super.initState();
+//     pageNumber = 0.0;
 
-    studyMaterialController.studyMaterialApi(widget.moduleId);
-  }
+//     studyMaterialController.studyMaterialApi(widget.moduleId);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    print("length: " +
-        studyMaterialController.studyMaterialList.length.toString());
-    return Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Obx(() => 
-        studyMaterialController.isLoading.value
-            ? Align(
-                alignment: Alignment.center,
-                child: Platform.isAndroid
-                    ? CircularProgressIndicator(
-                        strokeWidth: 1,
-                      )
-                    : CupertinoActivityIndicator())
-            : Column(
-                children: [
-                  SizedBox(height: Get.height * 0.05),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: Get.width * 0.04,
-                        right: Get.width * 0.04,
-                        top: Get.height * 0.02),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // Get.offAll(BottomNavigationScreen(
-                            //     index: 0.obs, learningPathIndex: 0.obs));
-                            Get.back();
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.transparent,
+//   @override
+//   Widget build(BuildContext context) {
+//     print("length: " +
+//         studyMaterialController.studyMaterialList.length.toString());
+//     return Scaffold(
+//         backgroundColor: kBackgroundColor,
+//         body: Obx(() => 
+//         studyMaterialController.isLoading.value
+//             ? Align(
+//                 alignment: Alignment.center,
+//                 child: Platform.isAndroid
+//                     ? CircularProgressIndicator(
+//                         strokeWidth: 1,
+//                       )
+//                     : CupertinoActivityIndicator())
+//             : Column(
+//                 children: [
+//                   SizedBox(height: Get.height * 0.05),
+//                   Padding(
+//                     padding: EdgeInsets.only(
+//                         left: Get.width * 0.04,
+//                         right: Get.width * 0.04,
+//                         top: Get.height * 0.02),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.start,
+//                       children: [
+//                         InkWell(
+//                           onTap: () {
+//                             // Get.offAll(BottomNavigationScreen(
+//                             //     index: 0.obs, learningPathIndex: 0.obs));
+//                             Get.back();
+//                           },
+//                           child: Container(
+//                             height: 40,
+//                             width: 40,
+//                             decoration: BoxDecoration(
+//                               borderRadius: BorderRadius.circular(10),
+//                               color: Colors.transparent,
                 
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.close_rounded,
-                                color: kPrimaryColor,
-                                size: 28,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.05,
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.65,
-                          height: Get.height * 0.015,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            child: LinearProgressIndicator(
-                              backgroundColor:
-                                  kLightGreyColorwithMail.withOpacity(0.3),
-                              minHeight: Get.height * 0.017,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(kCyanColor),
-                              value: pageNumber,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.01,
-                  ),
-                  Container(
-                    height: Get.height * 0.80,
-                    child: Swiper(
-                      loop: false,
-                      autoplayDisableOnInteraction: true,
-                      itemCount:
-                          studyMaterialController.studyMaterialList.length,
-                      itemWidth: Get.width * 0.95,
-                      itemHeight: Get.height * 0.75,
-                      layout: SwiperLayout.STACK,
-                      onIndexChanged: (int index) {
-                        _curr = index;
+//                             ),
+//                             child: Center(
+//                               child: Icon(
+//                                 Icons.close_rounded,
+//                                 color: kPrimaryColor,
+//                                 size: 28,
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                         SizedBox(
+//                           width: Get.width * 0.05,
+//                         ),
+//                         SizedBox(
+//                           width: Get.width * 0.65,
+//                           height: Get.height * 0.015,
+//                           child: ClipRRect(
+//                             borderRadius: BorderRadius.all(Radius.circular(10)),
+//                             child: LinearProgressIndicator(
+//                               backgroundColor:
+//                                   kLightGreyColorwithMail.withOpacity(0.3),
+//                               minHeight: Get.height * 0.017,
+//                               valueColor:
+//                                   AlwaysStoppedAnimation<Color>(kCyanColor),
+//                               value: pageNumber,
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     height: Get.height * 0.01,
+//                   ),
+//                   Container(
+//                     height: Get.height * 0.80,
+//                     child: Swiper(
+//                       loop: false,
+//                       autoplayDisableOnInteraction: true,
+//                       itemCount:
+//                           studyMaterialController.studyMaterialList.length,
+//                       itemWidth: Get.width * 0.95,
+//                       itemHeight: Get.height * 0.75,
+//                       layout: SwiperLayout.STACK,
+//                       onIndexChanged: (int index) {
+//                         _curr = index;
 
-                        print("current: " + _curr.toString());
-                        pageNumber = pageNumber == 0.0
-                            ? (1 /
-                                studyMaterialController
-                                    .studyMaterialList.length)
-                            : (_curr /
-                                studyMaterialController
-                                    .studyMaterialList.length);
-                        print(pageNumber);
+//                         print("current: " + _curr.toString());
+//                         pageNumber = pageNumber == 0.0
+//                             ? (1 /
+//                                 studyMaterialController
+//                                     .studyMaterialList.length)
+//                             : (_curr /
+//                                 studyMaterialController
+//                                     .studyMaterialList.length);
+//                         print(pageNumber);
 
-                        setState(() {});
-                      },
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.only(top: 10.0, bottom: 20),
-                          child: Card(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.05),
-                            color: Colors.white,
-                            shape: BeveledRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: Get.height * 0.2,
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          topRight: Radius.circular(10)),
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              studyMaterialController
-                                                  .studyMaterialList[index]
-                                                  .image
-                                                  .toString()),
-                                          fit: BoxFit.cover)),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.all(10),
-                                        width: Get.width * 0.30,
-                                        height: Get.height * 0.035,
-                                        decoration: BoxDecoration(
-                                          color: kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)),
-                                          onPressed: () {
-                                            // Get.to(
-                                            //   StudyMaterialDetail(
-                                            //     image: studyMaterialController
-                                            //         .studyMaterialList[index]
-                                            //         .image
-                                            //         .toString(),
-                                            //     detail: studyMaterialController
-                                            //         .studyMaterialList[index]
-                                            //         .StudayMaterial
-                                            //         .toString()));
-                                            Get.to(
-                                              ()=>HtmlView(text: studyMaterialController.studyMaterialList[index].StudayMaterial.toString())
-                                            );
-                                          },
-                                          child: Text(
-                                            "View More",
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ))
-                                  ],
-                                ),
-                                Expanded(
-                                  child: HtmlView(text: studyMaterialController.studyMaterialList[index].StudayMaterial.toString()),
-                                  // child: Html(
-                                  //     data: studyMaterialController
-                                  //         .studyMaterialList[index]
-                                  //         .StudayMaterial
-                                  //         .toString()),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  studyMaterialController.studyMaterialList.length - 1 == _curr || studyMaterialController.studyMaterialList.length==1
-                      ? DefaultButton(
-                          width: Get.width * 0.86,
-                          height: Get.height * 0.070,
-                          text: 'COMPLETE',
-                          press: () {
-                            _mixpanel.track('Course Finished', properties: {
-                              "Course Name": widget.title.toString()
-                            });
+//                         setState(() {});
+//                       },
+//                       scrollDirection: Axis.vertical,
+//                       itemBuilder: (context, index) {
+//                         return Padding(
+//                           padding: EdgeInsets.only(top: 10.0, bottom: 20),
+//                           child: Card(
+//                             margin: EdgeInsets.symmetric(
+//                                 horizontal: Get.width * 0.05),
+//                             color: Colors.white,
+//                             shape: BeveledRectangleBorder(
+//                               borderRadius: BorderRadius.circular(10.0),
+//                             ),
+//                             child: Column(
+//                               children: [
+//                                 Container(
+//                                   height: Get.height * 0.2,
+//                                   decoration: BoxDecoration(
+//                                       color: Colors.blue,
+//                                       borderRadius: BorderRadius.only(
+//                                           topLeft: Radius.circular(10),
+//                                           topRight: Radius.circular(10)),
+//                                       image: DecorationImage(
+//                                           image: NetworkImage(
+//                                               studyMaterialController
+//                                                   .studyMaterialList[index]
+//                                                   .image
+//                                                   .toString()),
+//                                           fit: BoxFit.cover)),
+//                                 ),
+//                                 Row(
+//                                   mainAxisAlignment: MainAxisAlignment.end,
+//                                   children: [
+//                                     Container(
+//                                         margin: EdgeInsets.all(10),
+//                                         width: Get.width * 0.30,
+//                                         height: Get.height * 0.035,
+//                                         decoration: BoxDecoration(
+//                                           color: kPrimaryColor,
+//                                           borderRadius:
+//                                               BorderRadius.circular(30),
+//                                         ),
+//                                         child: FlatButton(
+//                                           shape: RoundedRectangleBorder(
+//                                               borderRadius:
+//                                                   BorderRadius.circular(30)),
+//                                           onPressed: () {
+//                                             // Get.to(
+//                                             //   StudyMaterialDetail(
+//                                             //     image: studyMaterialController
+//                                             //         .studyMaterialList[index]
+//                                             //         .image
+//                                             //         .toString(),
+//                                             //     detail: studyMaterialController
+//                                             //         .studyMaterialList[index]
+//                                             //         .StudayMaterial
+//                                             //         .toString()));
+//                                             Get.to(
+//                                               ()=>HtmlView(text: studyMaterialController.studyMaterialList[index].StudayMaterial.toString())
+//                                             );
+//                                           },
+//                                           child: Text(
+//                                             "View More",
+//                                             textAlign: TextAlign.center,
+//                                             style: const TextStyle(
+//                                                 color: Colors.white,
+//                                                 fontSize: 11,
+//                                                 fontWeight: FontWeight.w400),
+//                                           ),
+//                                         ))
+//                                   ],
+//                                 ),
+//                                 Expanded(
+//                                   child: HtmlView(text: studyMaterialController.studyMaterialList[index].StudayMaterial.toString()),
+//                                   // child: Html(
+//                                   //     data: studyMaterialController
+//                                   //         .studyMaterialList[index]
+//                                   //         .StudayMaterial
+//                                   //         .toString()),
+//                                 ),
+//                                 SizedBox(
+//                                   height: 10,
+//                                 )
+//                               ],
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     ),
+//                   ),
+//                   studyMaterialController.studyMaterialList.length - 1 == _curr || studyMaterialController.studyMaterialList.length==1
+//                       ? DefaultButton(
+//                           width: Get.width * 0.86,
+//                           height: Get.height * 0.070,
+//                           text: 'COMPLETE',
+//                           press: () {
+//                             _mixpanel.track('Course Finished', properties: {
+//                               "Course Name": widget.title.toString()
+//                             });
 
-                            Get.off(
-                              ()=>LessonEnd(),
-                              binding: LessonEndBinding()
-                            //   QuizEnd(
-                            //   length: studyMaterialController
-                            //       .studyMaterialList.length,
-                            // )
-                            );
-                          })
-                      : Container(),
-                ],
-              )
+//                             Get.off(
+//                               ()=>LessonEnd(),
+//                               binding: LessonEndBinding()
+//                             //   QuizEnd(
+//                             //   length: studyMaterialController
+//                             //       .studyMaterialList.length,
+//                             // )
+//                             );
+//                           })
+//                       : Container(),
+//                 ],
+//               )
               
-              ));
-  }
-}
+//               ));
+//   }
+// }
 
 
 
 
 
+// class CustomStoryView extends GetView<StudyMaterialController>{
+//   const CustomStoryView({Key? key}): super (key:key);
+//   @override
+//   Widget build(BuildContext context) {
+//     // Get.lazyPut<StudyMaterialController>(()=>StudyMaterialController());
+//     // StudyMaterialController controller = Get.find<StudyMaterialController>();
+
+//     return Scaffold(
+//       // appBar: AppBar(
+//       //   title: Text("More"),
+//       // ),
+//       backgroundColor: Colors.black,
+//       body:
+//       Obx(
+//         ()=>Get.find<StudyMaterialController>().isLoading.value?loader: 
+//         CustomCourseView(
+//           study: Get.find<StudyMaterialController>().studyMaterialList,
+//           courseItem:   List.generate(Get.find<StudyMaterialController>().studyMaterialList.length, (index) {
+//           return 
+            
+//             Container(
+//             height: h,
+
+//             width: w,
+//             padding: EdgeInsets.only(top: h*0.05),
+//             // decoration: BoxDecoration(
+//             //   // color: Colors.red,
+//             // //   image: DecorationImage(
+//             // //                               image: NetworkImage(
+//             // //                                   controller
+//             // //                                       .studyMaterialList[index]
+//             // //                                       .image
+//             // //                                       .toString()),
+//             // //                               fit: BoxFit.cover),
+//             // ),
+
+//             child: Center(
+//               child: SingleChildScrollView(
+//                 // controller: scrollcontroller,
+//                 physics: BouncingScrollPhysics(),
+//                 child: Column(
+//                   children: [
+//                     HtmlView(text: Get.find<StudyMaterialController>().studyMaterialList[index].StudayMaterial.toString()),
+//                     Visibility(
+//                       visible: Get.find<StudyMaterialController>().studyMaterialList[index].image!=""&&Get.find<StudyMaterialController>().studyMaterialList[index].image!=null&&Get.find<StudyMaterialController>().studyMaterialList[index].image!="null",
+//                       child: Column(
+//                         children: [
+//                           SizedBox(height: h*0.02,),
+//                           ClipRRect(
+//                             borderRadius: BorderRadius.circular(h*0.02),
+//                             child: Image.network(
+//                               Get.find<StudyMaterialController>().studyMaterialList[index].image.toString()
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     Visibility(
+//                       visible: Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!=null&&Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!="null"&&Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!="",
+//                       child: Column(
+//                         children: [
+//                           SizedBox(height: h*0.02,),
+//                           SizedBox(
+//                             height: h*0.3,
+//                             width: w,
+//                             child: YoutubeVideoPlayer(play: true.obs,url: Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl.toString(),)),
+//                         ],
+//                       ),
+//                     ),
+//                     SizedBox(height: h*0.1,),
 
 
 
+//                   ],
+//                 ),
+//         )));
+//         }),)
+//       )
+      
+       
+//     );
 
+  
+//     }
+
+
+// }
 
 class CustomStoryView extends StatefulWidget {
   String id, title,moduleId;
@@ -370,84 +453,97 @@ class _CustomStoryViewState extends State<CustomStoryView> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<StudyMaterialController>(()=>StudyMaterialController());
+    // StudyMaterialController controller = Get.find<StudyMaterialController>();
 
-    return Scaffold(
+    return 
+    WillPopScope(child: Scaffold(
       // appBar: AppBar(
       //   title: Text("More"),
       // ),
       backgroundColor: Colors.black,
       body:
       Obx(
-        ()=>controller.isLoading.value?loader: 
+        ()=>Get.find<StudyMaterialController>().isLoading.value?loader: 
         CustomCourseView(
-          study: controller.studyMaterialList,
-          courseItem:   List.generate(controller.studyMaterialList.length, (index) {
-          return 
+          study: Get.find<StudyMaterialController>().studyMaterialList,
+          
+        //   courseItem:   List.generate(Get.find<StudyMaterialController>().studyMaterialList.length, (index) {
+        //   return 
             
-            Container(
-            height: h,
+        //     Container(
+        //     height: h,
 
-            width: w,
-            padding: EdgeInsets.only(top: h*0.05),
-            // decoration: BoxDecoration(
-            //   // color: Colors.red,
-            // //   image: DecorationImage(
-            // //                               image: NetworkImage(
-            // //                                   controller
-            // //                                       .studyMaterialList[index]
-            // //                                       .image
-            // //                                       .toString()),
-            // //                               fit: BoxFit.cover),
-            // ),
+        //     width: w,
+        //     padding: EdgeInsets.only(top: h*0.05),
+        //     // decoration: BoxDecoration(
+        //     //   // color: Colors.red,
+        //     // //   image: DecorationImage(
+        //     // //                               image: NetworkImage(
+        //     // //                                   controller
+        //     // //                                       .studyMaterialList[index]
+        //     // //                                       .image
+        //     // //                                       .toString()),
+        //     // //                               fit: BoxFit.cover),
+        //     // ),
 
-            child: Center(
-              child: SingleChildScrollView(
-                controller: scrollcontroller,
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    HtmlView(text: controller.studyMaterialList[index].StudayMaterial.toString()),
-                    Visibility(
-                      visible: controller.studyMaterialList[index].image!=""&&controller.studyMaterialList[index].image!=null&&controller.studyMaterialList[index].image!="null",
-                      child: Column(
-                        children: [
-                          SizedBox(height: h*0.02,),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(h*0.02),
-                            child: Image.network(
-                              controller.studyMaterialList[index].image.toString()
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Visibility(
-                      visible: controller.studyMaterialList[index].youtubeUrl!=null&&controller.studyMaterialList[index].youtubeUrl!="null"&&controller.studyMaterialList[index].youtubeUrl!="",
-                      child: Column(
-                        children: [
-                          SizedBox(height: h*0.02,),
-                          SizedBox(
-                            height: h*0.3,
-                            width: w,
-                            child: YoutubeVideoPlayer(play: play,url: controller.studyMaterialList[index].youtubeUrl.toString(),)),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: h*0.1,),
+        //     child: Center(
+        //       child: SingleChildScrollView(
+        //         controller: scrollcontroller,
+        //         physics: BouncingScrollPhysics(),
+        //         child: Column(
+        //           children: [
+        //             HtmlView(text: Get.find<StudyMaterialController>().studyMaterialList[index].StudayMaterial.toString()),
+        //             Visibility(
+        //               visible: Get.find<StudyMaterialController>().studyMaterialList[index].image!=""&&Get.find<StudyMaterialController>().studyMaterialList[index].image!=null&&Get.find<StudyMaterialController>().studyMaterialList[index].image!="null",
+        //               child: Column(
+        //                 children: [
+        //                   SizedBox(height: h*0.02,),
+        //                   ClipRRect(
+        //                     borderRadius: BorderRadius.circular(h*0.02),
+        //                     child: Image.network(
+        //                       Get.find<StudyMaterialController>().studyMaterialList[index].image.toString()
+        //                     ),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //             Visibility(
+        //               visible: Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!=null&&Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!="null"&&Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl!="",
+        //               child: Column(
+        //                 children: [
+        //                   SizedBox(height: h*0.02,),
+        //                   SizedBox(
+        //                     height: h*0.3,
+        //                     width: w,
+        //                     child: YoutubeVideoPlayer(play: play,url: Get.find<StudyMaterialController>().studyMaterialList[index].youtubeUrl.toString(),)),
+        //                 ],
+        //               ),
+        //             ),
+        //             SizedBox(height: h*0.1,),
 
 
 
-                  ],
-                ),
-        )));
-        }),)
+        //           ],
+        //         ),
+        // )));
+        // }),
+        
+        )
       )
       
        
-    );
-
+    ), 
+    onWillPop: ()=> willpop() );
+    
   
     }
+Future<bool> willpop(){
+  // late bool back;
+  // back=true;
+ return  Get.delete<StudyMaterialController>();
+
+}
 }
 
 class HtmlView extends StatelessWidget {

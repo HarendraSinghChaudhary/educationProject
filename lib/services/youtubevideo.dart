@@ -137,6 +137,7 @@ youtubecontroller = YoutubePlayerController(
           Expanded(
             child: Text(
               youtubecontroller.metadata.title,
+              // youtubecontroller.metadata.,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -160,7 +161,8 @@ youtubecontroller = YoutubePlayerController(
           isPlayerReady = true;
         },
         onEnded: (data) {
-          youtubecontroller.reload();
+          // youtubecontroller.reload();
+          // youtubecontroller.reset();
           youtubecontroller.pause();
         },
       ),

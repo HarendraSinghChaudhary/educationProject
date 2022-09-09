@@ -10,10 +10,10 @@ import '../../utils/constant.dart';
 import '../quiz_end.dart';
 
 class CustomCourseView extends StatefulWidget {
-  final List<Widget> courseItem;
+  // final List<Widget> courseItem;
   final List<StudyMaterialModel> study;
   // final int a,r,g,b;
-  const CustomCourseView({Key? key,required this.courseItem, required this.study,}) : super(key: key);
+  const CustomCourseView({Key? key, required this.study,}) : super(key: key);
 
   @override
   State<CustomCourseView> createState() => _CustomCourseViewState();
@@ -32,12 +32,12 @@ class _CustomCourseViewState extends State<CustomCourseView> {
   int maxlength = 0;
   // Youtubecontroller youtubecontroller = Get.find(()=>Youtubecontroller());
   
-
+  bool show = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    maxlength = widget.courseItem.length;
+    maxlength = widget.study.length;
   }
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,68 @@ class _CustomCourseViewState extends State<CustomCourseView> {
               });
             },
             itemBuilder: (context, index){
-              return widget.courseItem[currentIndex];
+              return 
+              // widget.courseItem[currentIndex];
+              Container(
+            height: h,
+
+            width: w,
+            padding: EdgeInsets.only(top: h*0.05,right: w*0.04,left: w*0.04),
+            // decoration: BoxDecoration(
+            //   // color: Colors.red,
+            // //   image: DecorationImage(
+            // //                               image: NetworkImage(
+            // //                                   controller
+            // //                                       .studyMaterialList[index]
+            // //                                       .image
+            // //                                       .toString()),
+            // //                               fit: BoxFit.cover),
+            // ),
+
+            child: Center(
+              child: SingleChildScrollView(
+                // controller: scrollcontroller,
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    HtmlView(text: widget.study[currentIndex].StudayMaterial.toString()),
+                    Visibility(
+                      visible: widget.study[currentIndex].image!=""&&widget.study[currentIndex].image!=null&&widget.study[currentIndex].image!="null",
+                      child: Column(
+                        children: [
+                          SizedBox(height: h*0.02,),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(h*0.02),
+                            child: Image.network(
+                              widget.study[currentIndex].image.toString()
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: widget.study[currentIndex].youtubeUrl!=null&&widget.study[currentIndex].youtubeUrl!="null"&&widget.study[currentIndex].youtubeUrl!="",
+                      child: Column(
+                        children: [
+                          SizedBox(height: h*0.02,),
+                          SizedBox(
+                            height: h*0.3,
+                            width: w,
+                            child: Visibility(
+                              visible: show,
+                              child: YoutubeVideoPlayer(play: true.obs,url: widget.study[currentIndex].youtubeUrl.toString(),))),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: h*0.1,),
+
+
+
+                  ],
+                ),
+        )));
+
+
             },
           ),
           // Align(
@@ -97,15 +158,15 @@ class _CustomCourseViewState extends State<CustomCourseView> {
           //       child: 
           //       Image.network(images[currentIndex])),
           // ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: w*0.01,vertical: h*0.01),
-              child: Row(
-                children: List.generate(maxlength, (index) => Expanded(child: Container(height: h*0.005,decoration: BoxDecoration(color:index<=currentIndex? kCyanColor:kstatusgreyColor, borderRadius: BorderRadius.circular(h*0.0025)),margin: EdgeInsets.symmetric(horizontal: w*0.001),))),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: Padding(
+          //     padding:  EdgeInsets.symmetric(horizontal: w*0.01,vertical: h*0.01),
+          //     child: Row(
+          //       children: List.generate(maxlength, (index) => Expanded(child: Container(height: h*0.005,decoration: BoxDecoration(color:index<=currentIndex? kCyanColor:kstatusgreyColor, borderRadius: BorderRadius.circular(h*0.0025)),margin: EdgeInsets.symmetric(horizontal: w*0.001),))),
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(
@@ -113,14 +174,21 @@ class _CustomCourseViewState extends State<CustomCourseView> {
               height: h,
               child:GestureDetector(
                 onTap: (){
+                  
 
                   if(currentIndex>0){
+                    // show=false;
                     print("taptap");
                     currentIndex--;
                     setState(() {
-                      
+                      show=false;
                     });
+                    Future.delayed(const Duration(milliseconds:100),(){
+                      setState(() {
+                      show=true;
+                    });});
                   }
+                  
 
                 },
               )
@@ -134,6 +202,7 @@ class _CustomCourseViewState extends State<CustomCourseView> {
               height: h,
               child:GestureDetector(
                 onTap: (){
+                  
                   if(currentIndex==maxlength-1){
                       Get.off(
                               ()=>LessonEnd(),
@@ -150,9 +219,14 @@ class _CustomCourseViewState extends State<CustomCourseView> {
                     currentIndex++;
                     // Get.delete(Youtubecontroller());
                     setState(() {
-                      
+                      show=false;
                     });
+                    Future.delayed(const Duration(milliseconds:100),(){
+                      setState(() {
+                      show=true;
+                    });});
                   }
+                  
 
                 },
               )

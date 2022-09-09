@@ -12,6 +12,7 @@ import '../../models/darkcoursemodel.dart';
 import '../../screens/dark_course_detail.dart';
 import '../../screens/flash_card.dart';
 import '../../utils/endpoint_url.dart';
+import '../study_material/study_material_controller.dart';
 
 class DarkCourseDetail_Controller extends GetxController {
 String ids ;
@@ -127,7 +128,11 @@ if(ontapLength!=0){
 Get.to(() => CustomStoryView(
       id: startid.toString(),
       moduleId: module_id,
-      title: startTitle.toString()));
+      title: startTitle.toString(),
+      
+      ),
+      // binding: StudayMaterialBinding(id: startid,moduleId: module_id,title:startTitle),
+      );
       lessonTitle =
        startTitle.toString();
        finishId = module_id.toString();
