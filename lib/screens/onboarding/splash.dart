@@ -64,12 +64,12 @@ class _SplashState extends State<Splash> {
 
       token.toString() == "" || token.toString() == "null" || token.toString() == ''
           ? firstTime == "null"  ?     firstTime?
-     Get.offAll(Splash()):
-     Get.offAll(Introduction()):
-     Get.offAll(Introduction())
-          : token.toString() == '72' ? Get.offAll(Introduction())
+     Get.offAll(()=>const Splash()):
+     Get.offAll(()=>const Introduction()):
+     Get.offAll(()=>const Introduction())
+          : token.toString() == '72' ? Get.offAll(()=>const Introduction())
           :
-           Get.offAll(BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs,));
+           Get.offAll(()=>BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs,));
     });
   }
 }

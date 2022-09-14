@@ -2,6 +2,7 @@ import 'package:Ambitious/controllers/courses/courses_controller.dart';
 import 'package:Ambitious/controllers/exitDialogue/exit_controller.dart';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
+import 'package:Ambitious/screens/Events/eventController.dart';
 import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/courses/learningPath/view/learning_path.dart';
 import 'package:Ambitious/screens/home/view/home_live.dart';
@@ -14,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../screens/Events/eventView.dart';
 import '../screens/dark_course.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
@@ -29,6 +31,7 @@ class BottomNavigationScreen extends StatefulWidget {
 class _ProfileScreenState extends State<BottomNavigationScreen> {
 
   ProfileController profileController = Get.put(ProfileController(), permanent: true);
+  EventController powerHoursController = Get.put(EventController(), permanent: false);
     late final Mixpanel _mixpanel;
 
   Future<void> _initMixpanel() async {
@@ -77,11 +80,9 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
             index: s.selectedIndex,
             children: <Widget>[
       const HomeLive(),
-      //  CourseHeader(index: widget.learningPathIndex),
-      Dark_Course(),
-       // MarketPlace(),
-      //  ResourceCenter(),
-       const Profile(),
+      const Dark_Course(),
+      EventView(),
+      const Profile(),
             ],
           ),
         ),
@@ -133,18 +134,17 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
             
                     //Enquiry
                     label: "Courses"),
-                // BottomNavigationBarItem(
-                //     icon: Padding(
-                //       padding: EdgeInsets.only(bottom: 4.0),
-                //       child: SvgPicture.asset(
-                //         'assets/icons/market.svg',
-                //         width: 22,
-                //         color: _index == 2 ? kPrimaryColor : kTitleColor,
-                //       ),
-                //     ),
-                //
-                //     //Property
-                //     label: "Market"),
+
+                BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: EdgeInsets.only(bottom: 4.0),
+                      child: SvgPicture.asset(
+                        'assets/images/profile.svg',
+                        width: 22,
+                        color: profileController._selectedIndex == 2.obs ? kPrimaryColor : kWhiteColor,
+                      ),
+                    ),
+                    label: "Community"),
                 // BottomNavigationBarItem(
                 //     icon: Padding(
                 //      padding: EdgeInsets.only(bottom: 5.0),
@@ -192,14 +192,14 @@ class ProfileController extends GetxController {
 //       Get.put(LearningPathIndex(), permanent: false);
 
   late RxInt _selectedIndex = 0.obs;
-  set selectedIndex(value) => this._selectedIndex.value = value;
-  get selectedIndex => this._selectedIndex.value;
+  set selectedIndex(value) => _selectedIndex.value = value;
+  get selectedIndex => _selectedIndex.value;
 
   onItemTapped(int index) {
 
   // learningPathIndexController.isShowIndex = 0.obs;
 
-    this.selectedIndex = index; // The set method is accessed this way, you have confused it with methods.
+    selectedIndex = index; // The set method is accessed this way, you have confused it with methods.
     update();
   }
 }

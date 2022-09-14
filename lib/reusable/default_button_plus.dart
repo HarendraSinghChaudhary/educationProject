@@ -32,7 +32,8 @@ class DefaultButtonPlus extends StatelessWidget {
 
          style: TextButton.styleFrom(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            foregroundColor: kPrimaryColor
+            // foregroundColor: kPrimaryColor
+            backgroundColor: kPrimaryColor
 
         ),
        

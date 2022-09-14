@@ -9,6 +9,7 @@ class CoursesByCatModel {
   var description = "";
   var image = "";
   var title = "";
+  var allLikes;
   int? modules;
   List <dynamic> courseData =[];
 

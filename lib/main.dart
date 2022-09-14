@@ -1,5 +1,6 @@
 
 
+import 'package:Ambitious/screens/Events/eventView.dart';
 import 'package:Ambitious/screens/course_detail.dart';
 import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
 import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
@@ -41,6 +42,7 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'screens/Events/CurrentEvent/currentEvent.dart';
 import 'screens/dark_learning_path.dart';
 import 'testing/steper.dart';
 
@@ -316,20 +318,21 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   Widget build(BuildContext context) {
     return   GetMaterialApp(
       debugShowCheckedModeBanner: false,
-   
-        
       title: "Ambitious",
       initialRoute: "/",     // Starting app route. Navigate to EducationOnDemand Class
       theme:ThemeData(
         fontFamily: "HK Grotesk",
         primaryColor: kPrimaryColor
       ),
+      
       home: 
       // Dark_Course()
       // DarkLearningPath()
       // DarkCourseDetail()
       // Stepernew()
       Splash(),
+      // EventView()
+      // CurrentEventView()
 
 
       // Application Routes

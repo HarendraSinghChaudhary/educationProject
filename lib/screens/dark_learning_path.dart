@@ -175,7 +175,7 @@ class Learn extends GetView {
                                 ),
                                 crossAxisSpacing: w*0.06,
                                 mainAxisSpacing: h*0.03,
-                                childAspectRatio: 0.9,
+                                childAspectRatio: 0.6,
                                 children: List.generate(
                                   list.length, (index) => 
                                 InkWell(
@@ -191,8 +191,9 @@ class Learn extends GetView {
                                     
                                     children: [
                                       Expanded(
+                                        flex: 2,
                                         child: Container(
-                                           height: h*0.15,
+                                           height: h*0.2,
                                           
                                           decoration: BoxDecoration(
                                             color: kcardblue,
@@ -258,7 +259,7 @@ class Learn extends GetView {
                                                           foregroundColor: kcardblue,
                                                           child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
                                                         Text(
-                                                                                        "  90%",
+                                                                                        "  ${list[index].allLikes}%",
                                                                                         // controller.bigdata.value!.
                                                                                         style: TextStyle(
                                                     fontSize: 10,
@@ -341,7 +342,7 @@ class Build extends StatelessWidget {
             child: Text(
               "OPEN PROJECTS".toUpperCase(),
               textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
               color: kWhiteColor

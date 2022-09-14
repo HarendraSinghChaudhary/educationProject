@@ -202,6 +202,7 @@ change_to_a(int a){
 
             courseModel.description =
                 subcatList[j]["description"].toString();
+                courseModel.allLikes = subcatList[j]["allLikes"].toString();
 
         
               courseModel.title = subcatList[j]["title"].toString();

@@ -312,7 +312,8 @@ class _SettingsState extends State<Profile> {
                             child: TextButton(
                                style: TextButton.styleFrom(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            foregroundColor: kPrimaryColor
+            // foregroundColor: kPrimaryColor
+            backgroundColor: kPrimaryColor
 
         ),
                               onPressed: () {
