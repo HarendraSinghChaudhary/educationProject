@@ -12,86 +12,70 @@ class PowerHoursModel {
     PowerHoursModel({
         this.msg,
         this.status,
-        this.data,
+        this.upcoming,
+        this.passed,
     });
 
     String? msg;
     bool? status;
-    List<Datum>? data;
+    List<AllDatum>? upcoming;
+    List<AllDatum>? passed;
 
     factory PowerHoursModel.fromJson(Map<String, dynamic> json) => PowerHoursModel(
         msg: json["msg"],
         status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        upcoming: List<AllDatum>.from(json["upcoming"].map((x) => AllDatum.fromJson(x))),
+        passed: List<AllDatum>.from(json["passed"].map((x) => AllDatum.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "msg": msg,
         "status": status,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "upcoming": List<dynamic>.from(upcoming!.map((x) => x.toJson())),
+        "passed": List<dynamic>.from(passed!.map((x) => x.toJson())),
     };
 }
 
-class Datum {
-    Datum({
+class AllDatum {
+    AllDatum({
         this.id,
         this.powerHouseTitle,
-        this.image,
         this.startTime,
         this.endTime,
-        this.data,
         this.joinUrl,
-        this.video,
         this.description,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.type,
+        this.image,
+        this.video,
     });
 
     String? id;
     String? powerHouseTitle;
-    String? image;
-    String? startTime;
-    String? endTime;
-    String? data;
+    DateTime? startTime;
+    DateTime? endTime;
     String? joinUrl;
-    String? video;
     String? description;
-    bool? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    int? type;
+    String? image;
+    String? video;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory AllDatum.fromJson(Map<String, dynamic> json) => AllDatum(
         id: json["_id"],
         powerHouseTitle: json["PowerHouseTitle"],
-        image: json["Image"],
-        startTime: json["startTime"],
-        endTime: json["EndTime"],
-        data: json["Data"],
+        startTime: DateTime.parse(json["startTime"]),
+        endTime: DateTime.parse(json["EndTime"]),
         joinUrl: json["JoinUrl"],
-        video: json["Video"],
         description: json["description"],
-        status: json["status"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        type: json["type"],
+        image: json["Image"],
+        video: json["Video"],
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
         "PowerHouseTitle": powerHouseTitle,
-        "Image": image,
-        "startTime": startTime,
-        "EndTime": endTime,
-        "Data": data,
+        "startTime": startTime!.toIso8601String(),
+        "EndTime": endTime!.toIso8601String(),
         "JoinUrl": joinUrl,
-        "Video": video,
         "description": description,
-        "status": status,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "type": type,
+        "Image": image,
+        "Video": video,
     };
 }

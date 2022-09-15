@@ -104,8 +104,8 @@ onpressed(){
   if(bigdata.value!.allmodule!.isEmpty){
      Get.snackbar("No module availble", "");
   }else if(!isCompleted.value){
-     Get.snackbar("module completed", "");
-
+    //  Get.snackbar("module completed", "");
+    Get.back();
   } else {
 for (var element in bigdata.value!.allmodule!) { 
         if(!element.IsCompleated!){

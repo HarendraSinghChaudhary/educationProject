@@ -69,6 +69,20 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                   )
                               // Image.asset("assets/images/bitcoin.png"),height: h*0.23,
                               ),
+                              Positioned(
+                                top: h*0.03,
+                                left: w*0.05,
+                                child: IconButton(
+                                icon:  Icon(
+                                  Icons.arrow_back_ios,
+                                  color: kWhiteColor,
+                                  size: h*0.03,
+                                ),
+                                onPressed: (){
+                                  Get.back();
+                                },
+                                        ),
+                              ),
                         ],
                       ),
                     ),

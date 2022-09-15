@@ -8,6 +8,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/material.dart';
 
 import '../controllers/study_material/study_material_controller.dart';
+import '../screens/Events/CurrentEvent/currentEventController.dart';
 
 class YoutubeBinding implements Bindings {
  @override
@@ -458,7 +459,8 @@ youtubecontroller = YoutubePlayerController(
       setState(() {
         playerState = youtubecontroller.value.playerState;
          videoMetaData = youtubecontroller.metadata;
-
+    Get.find<CurrentEventController>().valueupdate(youtubecontroller.metadata.title, youtubecontroller.metadata.author);
+    
       });
     }
   }
@@ -578,7 +580,7 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ),
                   ),
-
+    
                   
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -635,7 +637,7 @@ youtubecontroller = YoutubePlayerController(
                       // ),
                     ],
                   ),
-
+    
                   Row(
                     children: <Widget>[
                       const Text(
@@ -662,7 +664,7 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ],
                   ),
-
+    
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 800),
                     decoration: BoxDecoration(

@@ -17,12 +17,14 @@ class RestDatasource {
   static final ALLCOURSES = BASE_URL + "allcoursesbyCat";
   static final LEARNINGPATH_URL = BASE_URL + "allcoursesbysubCat";
   static final GETHOTCOURSE_URL = BASE_URL + "getHotcourse";
+  static final GETHOTSUBCET_URL = BASE_URL +"getHotsubcategory";
   static final STUDYMETERIAL_URL = BASE_URL + "getNewCourseData?moduleId=";
   static final EDITPROFILE_URL = BASE_URL + "editprofile";
   static final GETCOURSEMODULE = BASE_URL + "getModule?courseid=";
   static final MODULESTATUSCHANGEAPI = BASE_URL + "ModuleStatus";
   static final GETPOWERHOUR_URL = BASE_URL + "getPowerHousedata";
   static final SLACK_URL = BASE_URL + "getSlackData";
+  static final USERCHECK_URL = BASE_URL + "usercheckEmail";
 
 }
 const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI";

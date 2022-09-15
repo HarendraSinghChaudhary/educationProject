@@ -2,6 +2,7 @@
 
 import 'package:Ambitious/models/powerhourModel.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -20,7 +21,22 @@ class EventController extends GetxController{
 Rxn<PowerHoursModel> powerHours = Rxn<PowerHoursModel>();
 RxString slackurl = "".obs;
 RxString slackTitle = "".obs;
-Rxn<Datum> data = Rxn<Datum>();
+Rxn<AllDatum> data = Rxn<AllDatum>();
+RxBool homeloading = false.obs;
+RxBool showyoutube = false.obs;
+String timezonename = "";
+Future setCurentLocation() async {
+  String timezone = 'Etc/UTC';
+  print("======= $timezone");
+  try {
+    timezonename = await FlutterNativeTimezone.getLocalTimezone();
+    print("=======111 $timezone");
+  } catch (e) {
+    print('Could not get the local timezone');
+  }
+  // _currentLocation = getLocation(timezone);
+  // setLocalLocation(_currentLocation);
+}
 @override
   void onClose() {
     // TODO: implement onClose
@@ -29,12 +45,14 @@ Rxn<Datum> data = Rxn<Datum>();
   @override
   void onInit() {
     // TODO: implement onInit
+    setCurentLocation().whenComplete((){
     getpowerHourData();
+    });
     super.onInit();
   }
   Future getpowerHourData()async{
 
-     Uri url = Uri.parse(RestDatasource.GETPOWERHOUR_URL);
+     Uri url = Uri.parse(RestDatasource.GETPOWERHOUR_URL+"?timeZone="+timezonename);
 try {
   var request =await http.get(
     url,
@@ -44,6 +62,7 @@ try {
       },);
       if(request.statusCode==200){
         powerHours.value = powerHoursModelFromJson(request.body);
+        homeloading(true);
       }
 } catch (e) {
   print(e);
@@ -67,10 +86,9 @@ try {
   
 }
   }
-  convertdate(String data){
+  convertdate(DateTime date){
 
-   DateTime date= DateTime.parse(data.toString());
-return   DateFormat("EEEE MMMM dd").format(date);
+return DateFormat("EEEE MMMM dd").format(date);
 
   }
 

@@ -84,12 +84,13 @@ class EventView extends GetView<EventController>{
                                 scrollDirection: Axis.horizontal,
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: controller.powerHours.value!.data!.length,
+                                itemCount: controller.powerHours.value!.upcoming!.length,
                                 itemBuilder:(context, index) {
-                                  Datum data = controller.powerHours.value!.data![index];
+                                  AllDatum data = controller.powerHours.value!.upcoming![index];
                                   return GestureDetector(
                                     onTap: (){
                                       controller.data.value = data;
+                                      controller.showyoutube(false);
                                       Get.to(
                                         ()=>CurrentEventView(),
                                         binding: CurrentEventBinding()
@@ -97,7 +98,8 @@ class EventView extends GetView<EventController>{
                                     },
                                     child: Padding(
                                       padding:  EdgeInsets.only(
-                                        right: w*0.04
+                                        right: w*0.04,
+                                      bottom: h*0.01
                                       ),
                                       child: CommunityCard(
                                         flex2: 3,
@@ -119,7 +121,7 @@ class EventView extends GetView<EventController>{
                                                 ),
                                                 child: Text(
                                                   // "Thursday July 21st".toUpperCase(),
-                                                  "${controller.convertdate(data.data.toString())}",
+                                                  "${controller.convertdate(data.startTime!)}",
                                                   // textAlign: TextAlign.start,
                                                   style: const TextStyle(
                                                     fontSize:12,
@@ -223,34 +225,45 @@ class EventView extends GetView<EventController>{
                                 scrollDirection: Axis.horizontal,
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: controller.powerHours.value!.data!.length,
+                                itemCount: controller.powerHours.value!.passed!.length,
                                 itemBuilder:(context, index) {
-                                  Datum data = controller.powerHours.value!.data![index];
-                                  return Padding(
-                                    padding:  EdgeInsets.only(
-                                      right: w*0.04
-                                    ),
-                                    child: CommunityCard(
-                                      flex2: 2,
-                                      url: 
-                                      // "assets/images/banner.png",
-                                      data.image.toString(),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: w*0.025,
-                                          vertical: h*0.01
-                                        ),
-                                        child: Container(
-                                          width: w,
-                                          padding:  EdgeInsets.symmetric(vertical: h*0.01),
-                                          child: Text(
-                                            // "Breaking Down The Blockchain",
-                                            data.powerHouseTitle.toString(),
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                              fontSize:16,
-                                              fontWeight: FontWeight.w700,
-                                              color: kWhiteColor
+                                  AllDatum data = controller.powerHours.value!.passed![index];
+                                  return GestureDetector(
+                                    onTap: (){
+                                      controller.data.value = data;
+                                      controller.showyoutube(true);
+                                      Get.to(
+                                        ()=>CurrentEventView(),
+                                        binding: CurrentEventBinding()
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(
+                                        right: w*0.04,
+                                        bottom: h*0.01
+                                      ),
+                                      child: CommunityCard(
+                                        flex2: 2,
+                                        url: 
+                                        // "assets/images/banner.png",
+                                        data.image.toString(),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: w*0.025,
+                                            vertical: h*0.01
+                                          ),
+                                          child: Container(
+                                            width: w,
+                                            padding:  EdgeInsets.symmetric(vertical: h*0.01),
+                                            child: Text(
+                                              // "Breaking Down The Blockchain",
+                                              data.powerHouseTitle.toString(),
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                fontSize:16,
+                                                fontWeight: FontWeight.w700,
+                                                color: kWhiteColor
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -313,6 +326,8 @@ class CommunityCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(h*0.02),
         ),
+        elevation: 8,
+        shadowColor: kPrimaryColor.withOpacity(0.5),
         child: Column(
                  mainAxisSize: MainAxisSize.min,
                  children: [

@@ -12,9 +12,11 @@ import 'package:http/http.dart' as http;
 
 class CoursesController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool homePageLoading = true.obs;
   RxList<CoursesByCatModel> coursesByCatList = RxList();
   RxList<AllCoursesModel> allCourseList = RxList();
   RxList<LearningPathModel> learningPathList = RxList();
+  RxList<LearningPathModel> hotsubcatList = RxList();
    RxList<GetHotCoursesModel> getHotCourseList = RxList();
 
 
@@ -22,6 +24,7 @@ class CoursesController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     
+gethotsubcatApi();
 getHotCoursesApi();
 learningPathApi();
 allCoursesApi();
@@ -32,6 +35,139 @@ change_to_a(int a){
   print(b);
  return b;
 }
+
+Future<dynamic> gethotsubcatApi() async {
+    print("token courses" + token.toString());
+
+    isLoading(true);
+
+    var request = http.get(
+      Uri.parse(RestDatasource.GETHOTSUBCET_URL),
+      headers: {
+        "Authorization":
+
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
+      },
+    );
+
+    String msg = "";
+    var jsonArray;
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+      const JsonDecoder _decoder =  JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      msg = jsonRes["message"].toString();
+      jsonArray = jsonRes['subcategoryData'];
+    });
+
+    if (res.statusCode == 200) {
+      print(jsonRes["status"]);
+
+      if (jsonRes["status"].toString() == "true") {
+        hotsubcatList.clear();
+
+        for (var i = 0; i < jsonArray.length; i++) {
+         LearningPathModel modelAgentSearch = LearningPathModel();
+
+          modelAgentSearch.id = jsonArray[i]["_id"].toString();
+          modelAgentSearch.subCategoryName = jsonArray[i]["subCategory"].toString();
+          modelAgentSearch.description = jsonArray[i]["Description"]??"";
+          modelAgentSearch.a = jsonArray[i]["A"]??255;
+          modelAgentSearch.r = jsonArray[i]["R"]??0;
+          modelAgentSearch.g = jsonArray[i]["G"]??0;
+          modelAgentSearch.b = jsonArray[i]["B"]??0;
+
+          if (jsonArray[i]["image"] != null) {
+            modelAgentSearch.image = jsonArray[i]["image"].toString();
+          }
+
+          // var subcatList = jsonArray[i]["courseData"];
+
+
+          // for (var j = 0; j < subcatList.length; j++) {
+          //   CoursesByCatModel courseModel = CoursesByCatModel();
+
+          //   courseModel.id = subcatList[j]["_id"].toString();
+          //   courseModel.shortDescrition =
+          //       subcatList[j]["shortDescrition"].toString();
+
+          //   courseModel.image = subcatList[j]["image"].toString();
+
+          //   courseModel.description =
+          //       subcatList[j]["description"].toString();
+          //       courseModel.allLikes = subcatList[j]["allLikes"].toString();
+
+        
+          //     courseModel.title = subcatList[j]["title"].toString();
+          //     courseModel.modules = subcatList[j]["allmodule"].length;
+          
+
+          // modelAgentSearch.courseListbyLearningPath.add(courseModel);
+
+
+          // print("title: "+subcatList[j]["title"].toString());
+
+
+          
+          // }
+          
+          hotsubcatList.add(modelAgentSearch);
+
+          // print("new: "+ allCourseList[0].courseListbyCategory[0].image.toString());
+
+       
+
+          isLoading(false);
+
+          update();
+        }
+
+        // Get.snackbar(
+        //   "",
+        //   "",
+        //   snackPosition: SnackPosition.TOP,
+        //   titleText: Text(jsonRes["message"].toString()),
+        //   messageText: Text(""),
+        //   colorText: Colors.red,
+        // );
+
+        isLoading(false);
+        update();
+      } else {
+        Get.snackbar(
+          "",
+          "",
+          snackPosition: SnackPosition.TOP,
+          titleText: Text(jsonRes["message"].toString()),
+          messageText: const Text(""),
+          colorText: Colors.red,
+        );
+
+        isLoading(false);
+        update();
+      }
+    } else {
+      Get.snackbar(
+        "",
+        "",
+        snackPosition: SnackPosition.TOP,
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
+        colorText: Colors.red,
+      );
+
+      isLoading(false);
+      update();
+    }
+  }
+
+
+
 
     Future<dynamic> getHotCoursesApi() async {
     print("token courses" + token.toString());
@@ -81,6 +217,8 @@ change_to_a(int a){
            modelAgentSearch.hotCourses= jsonArray[i]["hotCourses"].toString();
 
            modelAgentSearch.courseData = jsonArray[i]["courseData"].toString();
+           modelAgentSearch.allLikes = jsonArray[i]["allLikes"].toString();
+           modelAgentSearch.allModules = jsonArray[i]["allmodule"].length.toString();
 
           if (jsonArray[i]["image"] != null) {
             modelAgentSearch.image = jsonArray[i]["image"].toString();
@@ -274,7 +412,7 @@ change_to_a(int a){
     isLoading(true);
 
     var request = http.get(
-      Uri.parse(RestDatasource.ALLCOURSES),
+      Uri.parse(RestDatasource.GETHOTSUBCET_URL),
       headers: {
         "Authorization":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"

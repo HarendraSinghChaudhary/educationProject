@@ -76,14 +76,10 @@ class _IntroductionState extends State<Introduction> {
 
   CreateUserController createUserController =
       Get.put(CreateUserController(), permanent: true);
-
           late final Mixpanel _mixpanel;
-
-
   Future<void> _initMixpanel() async {
    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
   }
-
   @override
   void initState() {
     // TODO: implement initState
@@ -268,9 +264,6 @@ class _IntroductionState extends State<Introduction> {
                             InkWell(
                                 onTap: () {
                                   signInWithApple().then((value) {
-                                   
-                                    
-
                                     createUserController.isSubmitting(true);
                                     print("response: " + value.toString());
 
@@ -339,7 +332,9 @@ class _IntroductionState extends State<Introduction> {
 
               ],
             ),
-                   ):
+                   )
+                   
+                   :
 
                     Container(
             height: Get.height * 0.32,

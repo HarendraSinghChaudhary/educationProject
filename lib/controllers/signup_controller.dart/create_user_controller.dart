@@ -1,16 +1,10 @@
 import 'dart:convert';
-
-import 'package:Ambitious/main.dart';
-import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/name.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/coursesby_category.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -56,7 +50,109 @@ class CreateUserController extends GetxController {
 
 
 
+ Future<dynamic> chackuserapi(
+    String email,
+  ) async {
+    isLoading(true);
+    print("email Print: "+email);
 
+    print("avialble token : " + tokenId.toString());
+    String msg = "";
+    var jsonRes;
+    http.Response? res;
+    var request = http.post(
+        Uri.parse(
+          RestDatasource.USERCHECK_URL,
+
+        ),
+        headers: {
+          "Authorization":Preferences.pref!.getString("token").toString()
+        },
+        body: {
+          "email": email.toString().trim(),
+        });
+
+    await request.then((http.Response response) {
+      res = response;
+      final JsonDecoder _decoder = new JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      print("status: " + jsonRes["status"].toString() + "_");
+      print("message: " + jsonRes["message"].toString() + "_");
+      msg = jsonRes["message"].toString();
+    });
+    if (res!.statusCode == 200) {
+      if (jsonRes["status"] == true) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('id', jsonRes["user"]["_id"].toString());
+        prefs.setString('name', jsonRes["user"]["name"].toString());
+      
+        prefs.setString('email', jsonRes["user"]["email"].toString());
+        prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
+        prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
+      
+        prefs.setString('status', jsonRes["user"]["status"].toString());
+       
+        prefs.setString(
+            'token', jsonRes["token"].toString());
+
+            print("token: "+ jsonRes["token"].toString());
+       
+        prefs.commit();
+
+
+        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
+        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
+        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+
+
+
+
+        // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
+
+        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
+
+     
+        //  Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
+
+        // update();
+
+    
+
+        // isLoading(false);
+
+    return true;
+      } else {
+        // isLoading(false);
+        return false;
+      }
+    } else {
+      // response = msg.toString();
+
+      print("..... " + response.toString());
+      return false;
+
+      // Get.snackbar(
+      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
+      //   backgroundColor: Colors.black,
+      //   padding: const EdgeInsets.only(top: 0)
+
+      // );
+
+      // Fluttertoast.showToast(
+      //     msg: msg.toString(),
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.BOTTOM,
+      //     timeInSecForIosWeb: 1,
+      //     backgroundColor: kPrimaryColor,
+      //     textColor: Colors.white,
+      //     fontSize: 14.0);
+
+      // isLoading(false);
+    }
+  }
 
 
 

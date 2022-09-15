@@ -9,6 +9,8 @@ class GetHotCoursesModel {
   var courseData = "";
   var courseDatatitle = "";
   var hotCourses = "";
+  var allLikes = "";
+  var allModules = "";
   bool isSelected = false;
   
 

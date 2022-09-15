@@ -36,67 +36,95 @@ class DarkLearningPath extends GetView<DarkLearningPathController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kdarkblue,
+      extendBodyBehindAppBar: true,
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   foregroundColor: kWhiteColor,
+        //   elevation: 0,
+        //   automaticallyImplyLeading: true,
+        // ),
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.only(
-              left: w*0.08,
-              right: w*0.08,
-              top: h*0.07
-            ),
-                      height: h*0.25,
-                      width: w,
-                      decoration: BoxDecoration(
-                        gradient: kbluegradiant,
-                        borderRadius: BorderRadius.circular(h*0.01),
-                      ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
-                  Text(
-                    // "Crypto Investor",
-                    controller.title,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: kWhiteColor
-                    ),
-                  ),
-                  SizedBox(
-                    height: h*0.01,
-                  ),
-                  Expanded(
-                    child: Text(
-                      // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
-                      controller.description,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: kWhiteColor
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              
-            ),
-            Expanded(
-              flex: 2,
-              // child: Image.asset("assets/images/magnifying glass.png",height: h*0.1,)
-              child: Image.network(controller.image),
-              ),
+          Stack(
 
-          ],
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                  left: w*0.08,
+                  right: w*0.08,
+                  top: h*0.07
+                ),
+                          height: h*0.25,
+                          width: w,
+                          decoration: BoxDecoration(
+                            gradient: kbluegradiant,
+                            borderRadius: BorderRadius.circular(h*0.01),
+                          ),
+                          alignment: Alignment.bottomCenter,
+        child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:  [
+                      Text(
+                        // "Crypto Investor",
+                        controller.title,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: kWhiteColor
+                        ),
+                      ),
+                      SizedBox(
+                        height: h*0.01,
+                      ),
+                      Expanded(
+                        child: Text(
+                          // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
+                          controller.description,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: kWhiteColor
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  
+                ),
+                Expanded(
+                  flex: 2,
+                  // child: Image.asset("assets/images/magnifying glass.png",height: h*0.1,)
+                  child: Image.network(controller.image),
+                  ),
+
+              ],
         ),
 
-                    ),
+                        ),
+            Positioned(
+              top: h*0.02,
+              left: w*0.05,
+              child: IconButton(
+              icon:  Icon(
+                Icons.arrow_back_ios,
+                color: kWhiteColor,
+                size: h*0.03,
+              ),
+              onPressed: (){
+                Get.back();
+              },
+                      ),
+            ),
+            ],
+          ),
                     Expanded(
                       child: DefaultTabController(
                         length: 2,

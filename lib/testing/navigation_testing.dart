@@ -17,6 +17,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../screens/Events/eventView.dart';
 import '../screens/dark_course.dart';
+import '../screens/home/newHome_live.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
 
@@ -79,7 +80,8 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
           builder: (s) => IndexedStack(
             index: s.selectedIndex,
             children: <Widget>[
-      const HomeLive(),
+      // const HomeLive(),
+      const NewHomeLive(),
       const Dark_Course(),
       EventView(),
       const Profile(),
