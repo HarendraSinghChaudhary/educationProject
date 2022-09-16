@@ -10,6 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../testing/navigation_testing.dart';
+
 class CreateUserController extends GetxController {
 
      late final Mixpanel _mixpanel;
@@ -60,17 +62,18 @@ class CreateUserController extends GetxController {
     String msg = "";
     var jsonRes;
     http.Response? res;
-    var request = http.post(
+    var request = http.get(
         Uri.parse(
-          RestDatasource.USERCHECK_URL,
+          RestDatasource.USERCHECK_URL+"?email=" +email.toString().trim(),
 
         ),
         headers: {
           "Authorization":Preferences.pref!.getString("token").toString()
         },
-        body: {
-          "email": email.toString().trim(),
-        });
+        // body: {
+        //   "email": email.toString().trim(),
+        // }
+        );
 
     await request.then((http.Response response) {
       res = response;
@@ -84,46 +87,9 @@ class CreateUserController extends GetxController {
     });
     if (res!.statusCode == 200) {
       if (jsonRes["status"] == true) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('id', jsonRes["user"]["_id"].toString());
-        prefs.setString('name', jsonRes["user"]["name"].toString());
-      
-        prefs.setString('email', jsonRes["user"]["email"].toString());
-        prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
-        prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
-      
-        prefs.setString('status', jsonRes["user"]["status"].toString());
        
-        prefs.setString(
-            'token', jsonRes["token"].toString());
 
-            print("token: "+ jsonRes["token"].toString());
-       
-        prefs.commit();
-
-
-        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
-        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
-        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
-
-
-
-
-        // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
-
-        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
-
-     
-        //  Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
-
-        // update();
-
-    
-
-        // isLoading(false);
-
-    return true;
+    return jsonRes["isUserExist"];
       } else {
         // isLoading(false);
         return false;
@@ -153,7 +119,65 @@ class CreateUserController extends GetxController {
       // isLoading(false);
     }
   }
+Future<dynamic> deleteuserapi() async {
+    isLoading(true);
+    print("avialble token : " + tokenId.toString());
+    String msg = "";
+    var jsonRes;
+    http.Response? res;
+    var request = http.post(
+        Uri.parse(
+          RestDatasource.USERDELETE_URL+Preferences.pref!.getString("id").toString(),
 
+        ),
+        headers: {
+          "Authorization":Preferences.pref!.getString("token").toString()
+        },
+        // body: {
+        //   "email": email.toString().trim(),
+        // }
+        );
+
+    await request.then((http.Response response) {
+      res = response;
+      final JsonDecoder _decoder = new JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      msg = jsonRes["msg"].toString();
+    });
+    if (res!.statusCode == 200) {
+      if (jsonRes["status"] == true) {
+       
+return true;
+    // return jsonRes["isUserExist"];
+      } else {
+        // isLoading(false);
+        return false;
+      }
+    } else {
+      // response = msg.toString();
+
+      print("..... " + response.toString());
+      return false;
+
+      // Get.snackbar(
+      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
+      //   backgroundColor: Colors.black,
+      //   padding: const EdgeInsets.only(top: 0)
+
+      // );
+
+      // Fluttertoast.showToast(
+      //     msg: msg.toString(),
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.BOTTOM,
+      //     timeInSecForIosWeb: 1,
+      //     backgroundColor: kPrimaryColor,
+      //     textColor: Colors.white,
+      //     fontSize: 14.0);
+
+      // isLoading(false);
+    }
+  }
 
 
   Future<dynamic> createGoogleUserApi(
@@ -230,9 +254,21 @@ class CreateUserController extends GetxController {
         print("splitData: "+splitData.toString());
      
 
+        chackuserapi(email).then((value) {
+          value
+          ?
+          Get.offAll(
+            BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+            
+          )!.whenComplete(() {
+                  isLoading(false);
+          }):
+                   Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
+                  isLoading(false);
+          });
 
+        });
 
-         Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // update();
 
@@ -354,9 +390,17 @@ class CreateUserController extends GetxController {
         var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
 
  
+chackuserapi(email).then((value) {
+value
+?
+Get.offAll(
+  BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+):
+         Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
+        });
 
-     Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
+    //  Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // _handleRemeberme(remember);
         // Get.offAll( NameScreen(firstName: firstName, lastName: lastName, name: name,));

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
+import '../../../services/addtocalendra.dart';
 import '../../../services/youtubevideo.dart';
 import '../../../utils/constant.dart';
 import '../../../utils/hearder.dart';
@@ -13,6 +14,7 @@ import 'currentEventController.dart';
 class CurrentEventView extends GetView<CurrentEventController>{
   @override
   Widget build(BuildContext context) {
+    controller.onInit();
     return
     Obx(
       ()=>Scaffold(
@@ -153,11 +155,23 @@ class CurrentEventView extends GetView<CurrentEventController>{
                             SizedBox(
                               height: h*0.01,
                             ),
-                            controller.data.value!.startTime!.isBefore(DateTime.now())? JoinButton(controller.data.value!.joinUrl):AddtoCalender(),
+                            controller.data.value!.startTime!.toLocal().isBefore(controller.currentdate)
+                            ?
+                             JoinButton(controller.data.value!.joinUrl)
+                             :
+                             AddtoCalender(
+                              starttime: controller.data.value!.startTime!.toLocal(),
+                              endtime: controller.data.value!.startTime!.toLocal(),
+                              title: controller.data.value!.powerHouseTitle.toString(),
+                              des: controller.data.value!.joinUrl.toString(),
+                             ),
                           ],
                         ),
                         ),
                       // AddtoCalender(),
+                      SizedBox(
+                              height: h*0.015,
+                            ),
                       HtmlView(
                         text: controller.data.value!.description!,
                       )
@@ -229,10 +243,22 @@ class JoinButton extends StatelessWidget{
 
 
 class AddtoCalender extends StatelessWidget{
+  final DateTime starttime;
+  final DateTime endtime;
+  final String title;
+  final String des;
+  AddtoCalender({required this.des,required this.endtime, required this.starttime, required this.title});
   @override
   Widget build(BuildContext context){
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        addtoCalendar(
+          starttime,
+          endtime,
+          title,
+          des
+        );
+      },
       style: TextButton.styleFrom(
                   primary: kPrimaryColor,
                   elevation: 2,
@@ -249,7 +275,7 @@ class AddtoCalender extends StatelessWidget{
               color: kWhiteColor,
             ),
             Text(
-              "   ADD to CALENDAR",
+              "   ADD TO CALENDAR",
               style: TextStyle(
                 color: kWhiteColor,
                 fontSize: 16,

@@ -17,6 +17,7 @@ class CurrentEventBinding implements Bindings{
 }
 class CurrentEventController extends GetxController{
   DateTime? date ;
+  DateTime currentdate = DateTime.now(); 
  Rxn<AllDatum> data =Rxn<AllDatum>();
  RxString youtubeTitle = "".obs;
  RxString youtubeAuther = "".obs;
@@ -26,6 +27,8 @@ class CurrentEventController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     data = Get.find<EventController>().data;
+    print("api timeZone===="+data.value!.startTime!.toLocal().toString());
+    print("current timeZone===="+currentdate.toString());
     // youb
     super.onInit();
   }
@@ -39,9 +42,17 @@ class CurrentEventController extends GetxController{
     youtubeTitle = title.obs;
     update();
   }
+  checkIsbefore(){
+    print(data.value!.startTime!.toIso8601String());
+    print(DateTime.now());
+    print(data.value!.startTime!.isBefore(DateTime.now()));
+    // if(data.value!.startTime!.isBefore(DateTime.now())){
+    //   print("yes");
+    // }
+  }
   convertdate(DateTime date){
 
-return DateFormat("EEEE MMMM dd ").add_jm().format(date);
+return DateFormat("EEEE MMMM dd ").add_jm().format(date.toLocal());
 
   }
 }

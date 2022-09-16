@@ -16,7 +16,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
-import 'package:story_view/story_view.dart';
+// import 'package:story_view/story_view.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../controllers/status_change_controller.dart';
@@ -376,7 +376,7 @@ class CustomStoryView extends StatefulWidget {
 class _CustomStoryViewState extends State<CustomStoryView> {
   int _curr = 1;
   double pageNumber = 0.0;
-  final storyController = StoryController();
+  // final storyController = StoryController();
   StudyMaterialController controller =
       Get.put(StudyMaterialController(), permanent: false);
   String isSelected = "";

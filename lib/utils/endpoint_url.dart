@@ -25,6 +25,7 @@ class RestDatasource {
   static final GETPOWERHOUR_URL = BASE_URL + "getPowerHousedata";
   static final SLACK_URL = BASE_URL + "getSlackData";
   static final USERCHECK_URL = BASE_URL + "usercheckEmail";
+  static final USERDELETE_URL = BASE_URL + "Deleteuser?userid=";
 
 }
 const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI";

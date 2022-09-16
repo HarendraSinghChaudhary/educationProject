@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../../utils/sharedPreference.dart';
+
 class CategoryController extends GetxController {
   RxBool isLoading = false.obs;
   RxList<CategoryModel> categoryList = RxList();
@@ -21,8 +23,7 @@ class CategoryController extends GetxController {
       Uri.parse(RestDatasource.GETCATEGORY),
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+            Preferences.pref!.getString("token").toString()      },
     );
 
     String msg = "";

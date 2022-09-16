@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../utils/sharedPreference.dart';
+
 
 class CoursesController extends GetxController {
   RxBool isLoading = false.obs;
@@ -44,10 +46,7 @@ Future<dynamic> gethotsubcatApi() async {
     var request = http.get(
       Uri.parse(RestDatasource.GETHOTSUBCET_URL),
       headers: {
-        "Authorization":
-
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+        "Authorization":Preferences.pref!.getString("token").toString() },
     );
 
     String msg = "";
@@ -178,8 +177,7 @@ Future<dynamic> gethotsubcatApi() async {
       Uri.parse(RestDatasource.GETHOTCOURSE_URL),
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+            Preferences.pref!.getString("token").toString() },
     );
 
     String msg = "";
@@ -286,8 +284,7 @@ Future<dynamic> gethotsubcatApi() async {
       Uri.parse(RestDatasource.LEARNINGPATH_URL),
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+            Preferences.pref!.getString("token").toString() },
     );
 
     String msg = "";
@@ -415,8 +412,7 @@ Future<dynamic> gethotsubcatApi() async {
       Uri.parse(RestDatasource.GETHOTSUBCET_URL),
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+            Preferences.pref!.getString("token").toString()},
     );
 
     String msg = "";
@@ -544,8 +540,7 @@ Future<dynamic> gethotsubcatApi() async {
       Uri.parse(RestDatasource.GETSUBCATEGORY + catId),
       headers: {
         "Authorization":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
-      },
+            Preferences.pref!.getString("token").toString()},
     );
 
     String msg = "";

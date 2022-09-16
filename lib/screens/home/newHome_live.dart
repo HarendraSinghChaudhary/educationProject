@@ -15,6 +15,7 @@ import '../../controllers/courses/darkcourse_controller.dart';
 import '../../main.dart';
 import '../../models/powerhourModel.dart';
 import '../../services/launcher.dart';
+import '../../services/web_view.dart';
 import '../../testing/navigation_testing.dart';
 import '../../utils/endpoint_url.dart';
 import '../Events/CurrentEvent/currentEvent.dart';
@@ -600,7 +601,13 @@ class _NewHomeLiveState extends State<NewHomeLive> {
 
           GestureDetector(
             onTap: (){
-                launchurl(suggessionUrl);
+                // launchurl(suggessionUrl);
+                Get.to(
+                          ()=>  WebViewExample(
+                              title: "Provide Feedback",
+                              url: suggessionUrl,
+                            )
+                          );
             },
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -628,7 +635,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/images/prefix.png",
+                    "assets/images/idea.png",
                     height: h*0.05,
                   ),
                   const Text(

@@ -88,7 +88,7 @@ try {
   }
   convertdate(DateTime date){
 
-return DateFormat("EEEE MMMM dd").format(date);
+return DateFormat("EEEE MMMM dd").format(date.toLocal());
 
   }
 

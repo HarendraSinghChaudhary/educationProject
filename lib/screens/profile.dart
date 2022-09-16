@@ -12,6 +12,7 @@ import 'package:Ambitious/services/web_view.dart';
 import 'package:Ambitious/services/crispchat.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/list.dart';
+import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -359,6 +360,94 @@ class _SettingsState extends State<Profile> {
                 },
                 child: Text(
                   'LOG OUT',
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                )),
+
+            SizedBox(
+              height: Get.height * 0.05,
+            ),
+            InkWell(
+                onTap: () {
+                  Get.defaultDialog(
+                      contentPadding: const EdgeInsets.all(10),
+                      title: "",
+
+                      // titleStyle: TextStyle(color: Colors.black, fontSize: 17),
+
+                      content: Column(
+                        children: [
+                          const Text(
+                              "Are you sure you want to "
+                              "\nDelete your Account?",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500)),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: 140,
+                            height: 40,
+                            child: TextButton(
+                               style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            // foregroundColor: kPrimaryColor
+            backgroundColor: kPrimaryColor
+
+        ),
+                              onPressed: () async {
+                                createUserController.deleteuserapi().then((value) {
+                                  if(value){
+                                    logout();
+                                    Preferences.pref!.clear();
+                                Get.offAll(const Introduction());
+
+                                  }
+                                });
+                              },
+                              child: const Text(
+                                "Delete",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            width: 140,
+                            height: 40,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+           
+
+        ),
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ));
+                },
+                child: Text(
+                  'Delete Account'.toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       fontSize: 16,

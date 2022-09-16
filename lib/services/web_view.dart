@@ -16,17 +16,17 @@ import 'dart:io';
  }
 
  class WebViewExampleState extends State<WebViewExample> {
-   @override
-   void initState() {
-     super.initState();
-     // Enable virtual display.
-     if (Platform.isAndroid) WebView.platform = AndroidWebView();
+  //  @override
+  //  void initState() {
+  //    super.initState();
+  //    // Enable virtual display.
+  //    if (Platform.isAndroid) WebView.platform = AndroidWebView();
 
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      // systemNavigationBarColor: Colors.blue, // navigation bar color
-      statusBarColor: kPrimaryColor, // status bar color
-    ));
-   }
+  //     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //     // systemNavigationBarColor: Colors.blue, // navigation bar color
+  //     statusBarColor: kPrimaryColor, // status bar color
+  //   ));
+  //  }
 
    @override
    Widget build(BuildContext context) {

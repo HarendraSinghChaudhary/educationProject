@@ -24,6 +24,7 @@ class EventView extends GetView<EventController>{
         width: w,
         color: kdarkblue,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Header(
               des: "Tune in to a Live Power Hour, Watch On-Demand or Join a Slack Community", 
@@ -39,10 +40,12 @@ class EventView extends GetView<EventController>{
                     physics: const BouncingScrollPhysics(),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
@@ -183,6 +186,7 @@ class EventView extends GetView<EventController>{
                       Padding(
                         padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
                         child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
@@ -287,7 +291,7 @@ class EventView extends GetView<EventController>{
                           );
                         },
                         child: const SlackCard(
-                          url: "assets/images/blub.png",
+                          url: "assets/images/idea.png",
                           title: "Suggest an idea",
                           subtitle: "Request a Power Hour Topic  or apply to host your own.",
                         ),

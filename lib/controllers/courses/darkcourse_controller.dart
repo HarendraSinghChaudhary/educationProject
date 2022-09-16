@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
-import 'package:story_view/controller/story_controller.dart';
+// import 'package:story_view/controller/story_controller.dart';
 import '../../models/darkcoursemodel.dart';
 import '../../screens/dark_course_detail.dart';
 import '../../screens/flash_card.dart';
@@ -152,9 +152,7 @@ try {
   var request =await http.get(
     url,
       headers: {
-        "Authorization":
-            authToken
-      },);
+        "Authorization":Preferences.pref!.getString("token").toString() },);
 
       print("token: "+authToken.toString());
       if(request.statusCode==200){

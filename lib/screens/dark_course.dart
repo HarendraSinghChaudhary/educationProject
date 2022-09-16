@@ -37,7 +37,7 @@ class Dark_Course extends GetView<CoursesController>{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
-                  Text(
+                  const Text(
                     "Browse",
                     style: TextStyle(
                       fontSize: 32,
@@ -48,11 +48,11 @@ class Dark_Course extends GetView<CoursesController>{
                   SizedBox(
                     height: h*0.015,
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       "Select a path that interests you to see available courses, projects and action items.",
                       // overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style:  TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: kWhiteColor

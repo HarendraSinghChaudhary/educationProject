@@ -12,6 +12,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/sharedPreference.dart';
+
 class EditProfileController extends GetxController {
 
      late final Mixpanel _mixpanel;
@@ -88,10 +90,7 @@ class EditProfileController extends GetxController {
        
         ),
         headers: {
-        "Authorization":
-            token.toString()
-         
-      },
+        "Authorization":Preferences.pref!.getString("token").toString()},
         body: {
           "userId": userId.toString().trim(),
           "name": addName.toString().trim(),

@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:Ambitious/controllers/study_material/study_material_controller.dart';
-import 'package:Ambitious/reusable/skip_button.dart';
-import 'package:Ambitious/screens/study_material_detail.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
