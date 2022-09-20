@@ -297,7 +297,7 @@ class EventView extends GetView<EventController>{
                         ),
                       ),
                       SizedBox(
-              height: h*0.1,
+              height: h*0.02,
             ),
                     ],
                   ),

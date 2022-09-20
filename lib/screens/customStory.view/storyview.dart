@@ -135,7 +135,10 @@ class _CustomCourseViewState extends State<CustomCourseView> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(h*0.02),
                             child: Image.network(
-                              widget.study[currentIndex].image.toString()
+                              widget.study[currentIndex].image.toString(),
+                              errorBuilder: ((context, error, stackTrace) {
+                                return Container();
+                              }),
                             ),
                           ),
                         ],

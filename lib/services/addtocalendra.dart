@@ -13,7 +13,12 @@ final Event event = Event(
       // location: 'Event location',
       startDate: startdate,
       endDate: endDate,
-      allDay: true,
+      allDay: false,
+      iosParams: const IOSParams(
+        reminder: Duration(
+          days: 1
+        )
+      ),
     );
 
   Add2Calendar.addEvent2Cal(event);

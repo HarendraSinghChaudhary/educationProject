@@ -99,8 +99,9 @@ class _IntroductionState extends State<Introduction> {
 
   @override
   Widget build(BuildContext context) {
+    createUserController.isLoading = false.obs;
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: kdarkblue,
       body: Column(
         children: [
           Expanded(
@@ -346,7 +347,7 @@ class _IntroductionState extends State<Introduction> {
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20)
               ),
-              color: Colors.white,
+              color: kcardblue,
             ),
 
 
@@ -359,13 +360,13 @@ class _IntroductionState extends State<Introduction> {
                 RichText(
                   text: TextSpan(
                   text: "Career Growth,",
-                  style: TextStyle(color: Colors.black87, fontSize: 24, fontWeight: FontWeight.w700 ),
+                  style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
 
 
                   children: [
                     TextSpan(
                       text: " Simplified",
-                       style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
+                       style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
                     ),
 
 
@@ -389,7 +390,7 @@ class _IntroductionState extends State<Introduction> {
 
                    Text("Learn, Build, and Grow with \n"
                    "1000+ other Ambitious learners",
-                  style: TextStyle(color: kSubTitleColor, fontSize: 16,
+                  style: TextStyle(color: kWhiteColor, fontSize: 16,
                   height: 1.5, fontWeight: FontWeight.w400 ),
                  
                  ),
@@ -411,8 +412,16 @@ class _IntroductionState extends State<Introduction> {
 
                                 print("response google: " + value.toString());
                                 if (value) {
-                                  createUserController.createGoogleUserApi(
+                                  // createUserController.chackuserapi(
+                                  //   email!
+                                  // ).then((value2) {
+                                  //   if(!value2){
+                                      createUserController.createGoogleUserApi(
                                       email!, name!, firstName!, lastName!);
+                                  //   }
+
+                                  // });
+                                  
                                 }
                               });
                             },

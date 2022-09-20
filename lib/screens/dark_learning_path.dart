@@ -215,107 +215,106 @@ class Learn extends GetView {
                                     
                                     children: [
                                       Expanded(
-                                        flex: 2,
                                         child: Container(
                                            height: h*0.2,
-                                          
+                                          width: w,
                                           decoration: BoxDecoration(
                                             color: kcardblue,
                                             borderRadius: BorderRadius.only(topLeft: Radius.circular(h*0.02),topRight: Radius.circular(h*0.02)),
                                             image:  DecorationImage(image: 
                                             // AssetImage("assets/images/img_9.png",),
                                             NetworkImage(list[index].image.toString()),
-                                            fit: BoxFit.fill)
+                                            fit: BoxFit.fill,
+                                            )
                                           ),
                                         // child: Image.asset("assets/images/img_9.png")
-                                        )
                                         ),
-                                      Expanded(
-                                        child: Container(
-                                          height: h*0.15,
-                                          width: w,
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: h*0.015,
-                                            horizontal: w*0.03
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: kcardblue,
-                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(h*0.02),bottomRight: Radius.circular(h*0.02))
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                // "Bitcoin, Simplified",
-                                                list[index].title.toString(),
-                                                
-                                                // softWrap: true,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight: FontWeight.w400,
-                                                                  color: kWhiteColor
-                                                                ),
-                                              ),
-                                              Text(
-                                                // "12 Shorts",
-                                                "${list[index].modules??0} Modules",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                                  fontSize: 10,
-                                                                  fontWeight: FontWeight.w400,
-                                                                  color: kWhiteColor
-                                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: h*0.01,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: Row(
-                                                      children: [
-                                                        CircleAvatar( 
-                                                          radius: h*0.012,
-                                                          backgroundColor: kWhiteColor.withOpacity(0.5),
-                                                          foregroundColor: kcardblue,
-                                                          child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
-                                                        Text(
-                                                                                        "  ${list[index].allLikes}%",
-                                                                                        // controller.bigdata.value!.
-                                                                                        style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: kWhiteColor.withOpacity(0.5),
-                                                    height: 2,
-                                                                                        ),
+                                      ),
+                                      // Expanded(child: Image.network(list[index].image.toString(),fit: BoxFit.fill,)),
+                                      Container(
+                                        height: h*0.1,
+                                        width: w,
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: h*0.015,
+                                          horizontal: w*0.03
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: kcardblue,
+                                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(h*0.02),bottomRight: Radius.circular(h*0.02))
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              // "Bitcoin, Simplified",
+                                              list[index].title.toString(),
+                                              
+                                              // softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                fontWeight: FontWeight.w400,
+                                                                color: kWhiteColor
+                                                              ),
+                                            ),
+                                            Text(
+                                              // "12 Shorts",
+                                              "${list[index].modules??0} Modules",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                                fontSize: 10,
+                                                                fontWeight: FontWeight.w400,
+                                                                color: kWhiteColor
+                                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: h*0.01,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                // Expanded(
+                                                //   child: Row(
+                                                //     children: [
+                                                //       CircleAvatar( 
+                                                //         radius: h*0.012,
+                                                //         backgroundColor: kWhiteColor.withOpacity(0.5),
+                                                //         foregroundColor: kcardblue,
+                                                //         child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
+                                                //       Text(
+                                                //                                       "  ${list[index].allLikes}%",
+                                                //                                       // controller.bigdata.value!.
+                                                //                                       style: TextStyle(
+                                                //   fontSize: 10,
+                                                //   fontWeight: FontWeight.w300,
+                                                //   color: kWhiteColor.withOpacity(0.5),
+                                                //   height: 2,
+                                                //                                       ),
+                                                //                                     ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                Expanded(
+                                                  child: Row(
+                                                    children: [
+                                                       Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
+                                                      Text(
+                                                                                      "  123",
+                                                                                      style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: kWhiteColor.withOpacity(0.5),
+                                                  height: 2,
                                                                                       ),
-                                                      ],
-                                                    ),
+                                                                                    ),
+                                                    ],
                                                   ),
-                                                  Expanded(
-                                                    child: Row(
-                                                      children: [
-                                                         Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
-                                                        Text(
-                                                                                        "  123",
-                                                                                        style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: kWhiteColor.withOpacity(0.5),
-                                                    height: 2,
-                                                                                        ),
-                                                                                      ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                                
-                                            ],
-                                          ),
+                                                )
+                                              ],
+                                            ),
+                                              
+                                          ],
                                         ),
                                       ),
                                     ],

@@ -153,6 +153,9 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                         return Container(
                           width: w*0.4,
                           // height: h*0.2,
+                          margin: EdgeInsets.only(
+                            right: w*0.04
+                          ),
                           child: InkWell(
                             onTap: () {
                                          _mixpanel.track('Course Started', properties: {
@@ -254,28 +257,28 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Expanded(
-                                                    child: Row(
-                                                      children: [
-                                                        CircleAvatar( 
-                                                          radius: h*0.012,
-                                                          backgroundColor: kWhiteColor.withOpacity(0.5),
-                                                          foregroundColor: kcardblue,
-                                                          child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
-                                                        Text(
-                                                           "  ${coursesController.getHotCourseList[index].allLikes}%",
-                                                          // "",
-                                                           // controller.bigdata.value!.
-                                                           style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: kWhiteColor.withOpacity(0.5),
-                                                    height: 2,
-                                                           ),
-                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
+                                                  // Expanded(
+                                                  //   child: Row(
+                                                  //     children: [
+                                                  //       CircleAvatar( 
+                                                  //         radius: h*0.012,
+                                                  //         backgroundColor: kWhiteColor.withOpacity(0.5),
+                                                  //         foregroundColor: kcardblue,
+                                                  //         child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
+                                                  //       Text(
+                                                  //          "  ${coursesController.getHotCourseList[index].allLikes}%",
+                                                  //         // "",
+                                                  //          // controller.bigdata.value!.
+                                                  //          style: TextStyle(
+                                                  //   fontSize: 10,
+                                                  //   fontWeight: FontWeight.w300,
+                                                  //   color: kWhiteColor.withOpacity(0.5),
+                                                  //   height: 2,
+                                                  //          ),
+                                                  //        ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
                                                   Expanded(
                                                     child: Row(
                                                       children: [
@@ -421,7 +424,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                     borderRadius: BorderRadius.circular(15),
                                     color: kcardblue),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
                                       height: Get.height * 0.1,
@@ -446,8 +449,9 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                       height: 10,
                                     ),
                                     Expanded(
-                                      child: Padding(
+                                      child: Container(
                                         padding: const EdgeInsets.only(left: 10),
+                                        alignment: Alignment.center,
                                         child: Text(
                                           // paths[index]['name']
                                           //     .toString(),

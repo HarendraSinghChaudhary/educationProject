@@ -4,6 +4,7 @@ import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
+import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -44,10 +45,11 @@ class _SplashState extends State<Splash> {
    
 
     return Scaffold(
+      backgroundColor: kdarkblue,
   
       body: Center(child: Container(
         height: 280,
-        child: Image.asset("assets/images/logos.png",))),
+        child: Image.asset("assets/images/newlogo.png",))),
     );
     
   }

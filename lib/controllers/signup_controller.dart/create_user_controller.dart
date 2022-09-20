@@ -87,6 +87,21 @@ class CreateUserController extends GetxController {
     });
     if (res!.statusCode == 200) {
       if (jsonRes["status"] == true) {
+
+         SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('id', jsonRes["data"]["_id"].toString());
+        prefs.setString('name', jsonRes["data"]["name"].toString());
+      
+        prefs.setString('email', jsonRes["data"]["email"].toString());
+        prefs.setString('firstname', jsonRes["data"]["firstname"].toString());
+        prefs.setString('lastname', jsonRes["data"]["lastname"].toString());
+      
+        prefs.setString('status', jsonRes["data"]["status"].toString());
+       
+        // prefs.setString(
+        //     'token', jsonRes["token"].toString());
+
+            print("token: "+ jsonRes["token"].toString());
        
 
     return jsonRes["isUserExist"];
@@ -254,18 +269,18 @@ return true;
         print("splitData: "+splitData.toString());
      
 
-        chackuserapi(email).then((value) {
-          value
-          ?
-          Get.offAll(
-            BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+        // chackuserapi(email).then((value) {
+        //   value
+        //   ?
+        //   Get.offAll(
+        //     BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
             
-          )!.whenComplete(() {
+        //   )!.whenComplete(() {
+        //           isLoading(false);
+        //   }):
+                   Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
                   isLoading(false);
-          }):
-                   Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
-                  isLoading(false);
-          });
+          // });
 
         });
 
@@ -390,15 +405,15 @@ return true;
         var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
 
  
-chackuserapi(email).then((value) {
-value
-?
-Get.offAll(
-  BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
-):
-         Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
+// chackuserapi(email).then((value) {
+// value
+// ?
+// Get.offAll(
+//   BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+// ):
+         Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
-        });
+        // });
 
     //  Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
 

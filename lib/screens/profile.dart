@@ -404,6 +404,7 @@ class _SettingsState extends State<Profile> {
                                 createUserController.deleteuserapi().then((value) {
                                   if(value){
                                     logout();
+                                    createUserController.isSubmitting(false);
                                     Preferences.pref!.clear();
                                 Get.offAll(const Introduction());
 

@@ -165,6 +165,7 @@ youtubecontroller = YoutubePlayerController(
           // youtubecontroller.reload();
           // youtubecontroller.reset();
           youtubecontroller.pause();
+          
         },
       ),
       builder: (context, player) => Scaffold(

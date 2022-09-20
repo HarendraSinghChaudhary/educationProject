@@ -44,7 +44,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                             ),
                           ),
                           Positioned(
-                              bottom: 0,
+                              bottom: -20,
                               left: w * 0.15,
                               right: w * 0.15,
                               // width: w*0.3,
@@ -53,8 +53,8 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                   visible: controller
                                       .bigdata.value!.image!.isNotEmpty,
                                   child: Container(
-                                    height: h * 0.23,
-                                    width: w * 0.7,
+                                    height: h * 0.28,
+                                    // width: w * 0.7,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(h * 0.015),
@@ -62,7 +62,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                           image: NetworkImage(controller
                                               .bigdata.value!.image
                                               .toString()),
-                                          fit: BoxFit.fill,
+                                          // fit: BoxFit.fill,
                                         )),
                                   )
                                   //  Image.network(controller.bigdata.value!.image.toString() ,height:h*0.23,width: w*0.8,fit: BoxFit.contain,)

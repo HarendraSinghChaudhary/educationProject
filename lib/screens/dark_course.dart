@@ -77,8 +77,8 @@ class Dark_Course extends GetView<CoursesController>{
                           horizontal: w*0.05,
                           vertical: h*0.02
                         ),
-                        crossAxisSpacing: w*0.09,
-                        mainAxisSpacing: h*0.03,
+                        crossAxisSpacing: w*0.04,
+                        mainAxisSpacing: h*0.02,
                         childAspectRatio: 0.85,
                         children: List.generate(controller.learningPathList.length, (index) =>
                          GestureDetector(
@@ -105,8 +105,9 @@ class Dark_Course extends GetView<CoursesController>{
                                 // Image.asset("assets/images/bitcoin money bag.png",height: h*0.12,),
                                 Image.network(controller.learningPathList[index].image.toString(),height: h*0.12,),
                                 Expanded(
-                                  child: Padding(
+                                  child: Container(
                                     padding:  EdgeInsets.only(left: w*0.02,right: w*0.02,top: h*0.005),
+                                    alignment: Alignment.center,
                                     child: Text(
                                       // "Social Media Creator",
                                       // "pppppppppppppppppppppppp",
