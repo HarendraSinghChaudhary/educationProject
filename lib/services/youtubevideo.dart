@@ -1,18 +1,11 @@
 import 'dart:developer';
-
 import 'package:Ambitious/utils/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/material.dart';
-
-import '../controllers/study_material/study_material_controller.dart';
-import '../screens/Events/CurrentEvent/currentEvent.dart';
 import '../screens/Events/CurrentEvent/currentEventController.dart';
 import 'launcher.dart';
-import 'web_view.dart';
 
 class YoutubeBinding implements Bindings {
  @override

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:Ambitious/reusable/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:crisp/crisp.dart';
@@ -60,6 +62,27 @@ class _NewHomeLiveState extends State<NewHomeLive> {
 
   }
 
+FirebaseMessaging messaging = FirebaseMessaging.instance;
+Future askPermission()async{
+NotificationSettings settings = await messaging.requestPermission(
+  alert: true,
+  announcement: false,
+  badge: true,
+  carPlay: false,
+  criticalAlert: false,
+  provisional: false,
+  sound: true,
+);
+if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  print('User granted permission');
+} else if (settings.authorizationStatus == AuthorizationStatus.denied) {
+  print('User granted provisional permission');
+} else {
+  print('User declined or has not accepted permission');
+}
+}
+
+
 
 
   @override
@@ -73,7 +96,8 @@ class _NewHomeLiveState extends State<NewHomeLive> {
     eventController.getpowerHourData();
     clearMethod();
     token();
-    coursesController.bottomSheet();
+    askPermission();
+    // coursesController.bottomSheet();
     
   }
   @override
@@ -244,6 +268,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                                   color: kWhiteColor
                                                                 ),
                                               ),
+                                               Spacer(),
                                               Text(
                                                 // "12 Shorts",
                                                 "${coursesController.getHotCourseList[index].allModules} Modules",

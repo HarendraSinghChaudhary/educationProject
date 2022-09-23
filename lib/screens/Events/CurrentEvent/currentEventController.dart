@@ -27,18 +27,16 @@ class CurrentEventController extends GetxController{
  
    @override
   void onInit() {
-    // TODO: implement onInit
     data = Get.find<EventController>().data;
     print("api timeZone===="+data.value!.startTime!.toLocal().toString());
     print("current timeZone===="+currentdate.toString());
     // youb
     super.onInit();
   }
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  // }
   valueupdate(String title, String auther){
     youtubeAuther.value = auther;
     youtubeTitle.value = title;

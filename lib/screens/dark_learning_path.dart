@@ -169,7 +169,7 @@ class DarkLearningPath extends GetView<DarkLearningPathController> {
                                   child: TabBarView(
                                     children: [
                                   Learn(list: controller.courseListbyLearningPath,),
-                                  Build()
+                                  const Build()
                                     ]),
                                 )
                                 
@@ -258,17 +258,18 @@ class Learn extends GetView {
 
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                                 fontSize: 14,
                                                                 fontWeight: FontWeight.w400,
                                                                 color: kWhiteColor
                                                               ),
                                             ),
+                                              const Spacer(),
                                             Text(
                                               // "12 Shorts",
                                               "${list[index].modules??0} Modules",
                                               textAlign: TextAlign.center,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                                 fontSize: 10,
                                                                 fontWeight: FontWeight.w400,
                                                                 color: kWhiteColor
@@ -340,7 +341,7 @@ class Build extends StatelessWidget {
       margin: EdgeInsets.only(top: h*0.05),
       child: Column(
         children: [
-          Text(
+          const Text(
             "Tap the button below to access projects from an external link. ",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -399,7 +400,7 @@ class Build extends StatelessWidget {
             child: Text(
               "SUGGEST A PROJECT".toUpperCase(),
               textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
               color: kWhiteColor
@@ -466,11 +467,11 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
                         bottom: h*0.02
 
                       ),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: kbluegradiant,
                         // borderRadius: BorderRadius.circular(h*0.01),
                       ),
-                      alignment: Alignment.bottomCenter,
+                      alignment: Alignment.center,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -482,6 +483,7 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
+                height: 2,
                 color: kWhiteColor
               ),
             ),
@@ -616,9 +618,9 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                // SizedBox(
-                //   height: h*0.01,
-                // ),
+                SizedBox(
+                  height: h*0.01,
+                ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
                       height: 44,
@@ -664,7 +666,7 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
 
                     ),
                     Visibility(visible: controller.islearn.value, child: Learn(list: controller.courseListbyLearningPath,)),
-                    Visibility(visible: controller.islearn.value, child: Learn(list: controller.courseListbyLearningPath,)),
+                    // Visibility(visible: controller.islearn.value, child: Learn(list: controller.courseListbyLearningPath,)),
                     Visibility(visible: !controller.islearn.value,child: const Build())
                       
                     

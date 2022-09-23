@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:Ambitious/screens/Events/eventView.dart';
 import 'package:Ambitious/screens/course_detail.dart';
 import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
@@ -330,7 +332,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       // DarkLearningPath()
       // DarkCourseDetail()
       // Stepernew()
-      Splash(),
+       Splash(),
       // EventView()
       // CurrentEventView()
 

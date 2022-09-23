@@ -10,7 +10,8 @@ import 'dart:io';
 
  class WebViewExample extends StatefulWidget {
   final String url, title;
-  WebViewExample({required this.url, required this.title});
+ // ignore: use_key_in_widget_constructors
+ const WebViewExample({required this.url, required this.title});
    @override
    WebViewExampleState createState() => WebViewExampleState();
  }
