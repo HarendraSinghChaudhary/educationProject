@@ -214,35 +214,35 @@ class _SettingsState extends State<Profile> {
                       height: 10,
                     ),
 
-                          ListTile(
-                      onTap: () {
-                       Get.to(NotificationPermission());
-                      },
-                        leading: Container(
-                            padding: const EdgeInsets.all(11),
-                            height: Get.height * 0.05,
-                            width: Get.width * 0.12,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: kPurpleColor),
-                            child: Image.asset(
-                              "assets/images/Shape.png", color: Colors.white,
-                            )),
-                        title: Text(
-                          "Permissions",
-                          style: const TextStyle(
-                              color: kWhiteColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios,
-                      color:ksettingsubtitleColor,
-                          size: 15,
-                        )),
+                    //       ListTile(
+                    //   onTap: () {
+                    //    Get.to(NotificationPermission());
+                    //   },
+                    //     leading: Container(
+                    //         padding: const EdgeInsets.all(11),
+                    //         height: Get.height * 0.05,
+                    //         width: Get.width * 0.12,
+                    //         decoration: const BoxDecoration(
+                    //             shape: BoxShape.circle, color: kPurpleColor),
+                    //         child: Image.asset(
+                    //           "assets/images/Shape.png", color: Colors.white,
+                    //         )),
+                    //     title: Text(
+                    //       "Permissions",
+                    //       style: const TextStyle(
+                    //           color: kWhiteColor,
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.w700),
+                    //     ),
+                    //     trailing: const Icon(
+                    //       Icons.arrow_forward_ios,
+                    //   color:ksettingsubtitleColor,
+                    //       size: 15,
+                    //     )),
 
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                   ],
                 )),
             // Container(
