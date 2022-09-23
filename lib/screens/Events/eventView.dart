@@ -79,7 +79,7 @@ class EventView extends GetView<EventController>{
                            
                         
                             Container(
-                              height: h*0.36,
+                              height: h*0.38,
                               margin: EdgeInsets.symmetric(
                                 vertical: h*0.015
                               ),

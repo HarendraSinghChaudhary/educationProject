@@ -68,12 +68,12 @@ class _NewHomeLiveState extends State<NewHomeLive> {
     super.initState();
 
     getUserList();
-
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
     eventController.getpowerHourData();
     clearMethod();
     token();
+    coursesController.bottomSheet();
     
   }
   @override
@@ -142,7 +142,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
             height: h*0.01,
           ),
           SizedBox(
-            height: h*0.3,
+            height: h*0.38,
             child: ListView.builder(
                       itemCount: coursesController.getHotCourseList.length,
                       controller: _controller,
@@ -151,13 +151,15 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          width: w*0.4,
+                          width: w*0.45,
                           // height: h*0.2,
                           margin: EdgeInsets.only(
                             right: w*0.04
                           ),
                           child: InkWell(
                             onTap: () {
+                                    Get.find<CoursesController>().coursecount(coursesController.getHotCourseList[index].id);
+
                                          _mixpanel.track('Course Started', properties: {
                                           "Course Name" : coursesController
                                           .getHotCourseList[index].title
@@ -233,6 +235,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                 coursesController.getHotCourseList[index].title.toString(),
                                                 
                                                 // softWrap: true,
+                                                maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.start,
                                                 style: const TextStyle(
@@ -247,13 +250,14 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                 textAlign: TextAlign.center,
                                                 style: const TextStyle(
                                                                   fontSize: 10,
+                                                                  height: 1.5,
                                                                   fontWeight: FontWeight.w400,
                                                                   color: kWhiteColor
                                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: h*0.01,
-                                              ),
+                                              // SizedBox(
+                                              //   height: h*0.01,
+                                              // ),
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
@@ -284,7 +288,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                       children: [
                                                          Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
                                                         Text(
-                                                          "  123",
+                                                          "  "+coursesController.getHotCourseList[index].viewCount,
                                                           style: TextStyle(
                                                     fontSize: 10,
                                                     fontWeight: FontWeight.w300,
@@ -303,10 +307,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                         ),
                                       ),
                                     ],
-                                  ),
-     
-                            
-                                              )                      );
+                                  ),));
                       },
                     ),
      

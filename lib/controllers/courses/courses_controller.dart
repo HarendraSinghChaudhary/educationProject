@@ -4,6 +4,7 @@ import 'package:Ambitious/models/allcourses_model.dart';
 import 'package:Ambitious/models/courseby_cat_model.dart';
 import 'package:Ambitious/models/get_hot_courses_model.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
+import 'package:Ambitious/screens/onboarding/realQuick/view/quick_notification.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,22 @@ change_to_a(int a){
   print(b);
  return b;
 }
+
+
+bottomSheet(){
+  Future.delayed(const Duration(seconds: 2),(){
+    Get.bottomSheet(
+    const QuickNotification(),
+    // persistent:false,
+    isScrollControlled:true,
+    enterBottomSheetDuration:const Duration(milliseconds: 1000)
+  );
+  
+  });
+  
+}
+
+
 
 Future<dynamic> gethotsubcatApi() async {
     print("token courses" + token.toString());
@@ -184,8 +201,8 @@ Future<dynamic> gethotsubcatApi() async {
     var jsonArray;
     var jsonRes;
     var res;
-
-    await request.then((http.Response response) {
+try {
+   await request.then((http.Response response) {
       res = response;
       const JsonDecoder _decoder = JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
@@ -217,6 +234,7 @@ Future<dynamic> gethotsubcatApi() async {
            modelAgentSearch.courseData = jsonArray[i]["courseData"].toString();
            modelAgentSearch.allLikes = jsonArray[i]["allLikes"].toString();
            modelAgentSearch.allModules = jsonArray[i]["allmodule"].length.toString();
+           modelAgentSearch.viewCount = jsonArray[i]["ViewsCount"].toString();
 
           if (jsonArray[i]["image"] != null) {
             modelAgentSearch.image = jsonArray[i]["image"].toString();
@@ -273,6 +291,11 @@ Future<dynamic> gethotsubcatApi() async {
       isLoading(false);
       update();
     }
+} catch (e) {
+  print(e);
+  
+}
+   
   }
 
     Future<dynamic> learningPathApi() async {
@@ -342,6 +365,7 @@ Future<dynamic> gethotsubcatApi() async {
         
               courseModel.title = subcatList[j]["title"].toString();
               courseModel.modules = subcatList[j]["allmodule"].length;
+              courseModel.viewCount = subcatList[j]["ViewsCount"]??0;
           
 
           modelAgentSearch.courseListbyLearningPath.add(courseModel);
@@ -629,4 +653,52 @@ Future<dynamic> gethotsubcatApi() async {
       update();
     }
   }
+
+  Future<dynamic> coursecount(String courseId) async {
+    print("token courses" + token.toString());
+
+    isLoading(true);
+
+    var request = http.post(
+      Uri.parse(RestDatasource.COURSEVIEWCOUNT_URL),
+      headers: {
+        "Authorization":
+            Preferences.pref!.getString("token").toString()},
+            body: {
+              "courseId":courseId
+            }
+    );
+
+    String msg = "";
+    var jsonArray;
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+      final JsonDecoder _decoder = new JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      msg = jsonRes["message"].toString();
+      jsonArray = jsonRes['courseData'];
+    });
+
+    if (res.statusCode == 200) {
+     
+    } else {
+      Get.snackbar(
+        "",
+        "",
+        snackPosition: SnackPosition.TOP,
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
+        colorText: Colors.red,
+      );
+
+      isLoading(false);
+      update();
+    }
+  }
+
 }

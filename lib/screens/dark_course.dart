@@ -33,7 +33,7 @@ class Dark_Course extends GetView<CoursesController>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
@@ -50,7 +50,8 @@ class Dark_Course extends GetView<CoursesController>{
                   ),
                   const Expanded(
                     child: Text(
-                      "Select a path that interests you to see available courses, projects and action items.",
+                      "Choose a path to view courses, projects and tools.",
+                      // "Select a path that interests you to see available courses, projects and action items.",
                       // overflow: TextOverflow.ellipsis,
                       style:  TextStyle(
                         fontSize: 16,
@@ -63,7 +64,7 @@ class Dark_Course extends GetView<CoursesController>{
               ),
               
             ),
-            Expanded(flex: 2, child: Image.asset("assets/images/magnifying glass.png",height: h*0.1,)),
+            Expanded(flex: 3, child: Image.asset("assets/images/magnifying glass.png",height: h*0.13,)),
 
           ],
         ),
@@ -85,7 +86,7 @@ class Dark_Course extends GetView<CoursesController>{
                           onTap: (){
                             Get.to(
                               () => 
-                              const DarkLearningPath(),
+                              const DarkLearningPath2(),
                               binding: DarkLearningBinding(courseListbyLearningPath: controller.learningPathList[index].courseListbyLearningPath, description: controller.learningPathList[index].description??"", image: controller.learningPathList[index].image.toString(), title: controller.learningPathList[index].subCategoryName.toString(),)
                               );
                             // print(

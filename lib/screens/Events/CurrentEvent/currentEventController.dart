@@ -22,7 +22,9 @@ class CurrentEventController extends GetxController{
  RxString youtubeTitle = "".obs;
  RxString youtubeAuther = "".obs;
  RxString youtubeImage = "".obs;
+//  RxBool isfullscreen = 
  RxBool isYoutube = false.obs;
+ 
    @override
   void onInit() {
     // TODO: implement onInit
@@ -38,8 +40,8 @@ class CurrentEventController extends GetxController{
     super.onClose();
   }
   valueupdate(String title, String auther){
-    youtubeAuther = auther.obs;
-    youtubeTitle = title.obs;
+    youtubeAuther.value = auther;
+    youtubeTitle.value = title;
     update();
   }
   checkIsbefore(){

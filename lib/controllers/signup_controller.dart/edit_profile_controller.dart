@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:Ambitious/screens/name.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/category.dart';
 import 'package:Ambitious/screens/onboarding/realQuick/view/quick_notification.dart';
+import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +147,7 @@ class EditProfileController extends GetxController {
 
 
 
-         Get.offAll(const QuickNotification());
+         Get.offAll(BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,));
 
 
 

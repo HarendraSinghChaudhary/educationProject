@@ -11,6 +11,7 @@ class CoursesByCatModel {
   var title = "";
   var allLikes;
   int? modules;
+  int? viewCount;
   List <dynamic> courseData =[];
 
 

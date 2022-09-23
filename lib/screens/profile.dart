@@ -80,7 +80,7 @@ class _SettingsState extends State<Profile> {
                     left: Get.width * 0.08,
                     right: Get.width * 0.08,
                     top: h * 0.02),
-                height: h * 0.45,
+                // height: h * 0.45,
                 decoration: BoxDecoration(
                     color: ksettingcardColor,
                     borderRadius: BorderRadius.circular(15),

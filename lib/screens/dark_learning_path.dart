@@ -1,5 +1,7 @@
+import 'package:extended_sliver/extended_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/courses/courses_controller.dart';
 import '../controllers/courses/darkcourse_controller.dart';
 import '../models/courseby_cat_model.dart';
 import '../reusable/default_button.dart';
@@ -26,6 +28,7 @@ class DarkLearningPathController extends GetxController{
  final String title;
  final String description;
 DarkLearningPathController({required this.courseListbyLearningPath,required this.description,required this.image,required this.title});
+RxBool islearn = true.obs; 
 }
 class DarkLearningPath extends GetView<DarkLearningPathController> {
 
@@ -199,11 +202,12 @@ class Learn extends GetView {
                                 ),
                                 crossAxisSpacing: w*0.06,
                                 mainAxisSpacing: h*0.03,
-                                childAspectRatio: 0.6,
+                                childAspectRatio: 0.5,
                                 children: List.generate(
                                   list.length, (index) => 
                                 InkWell(
                                   onTap: (){
+                                    Get.find<CoursesController>().coursecount(list[index].id);
                                           Get.to(
                                             ()=>DarkCourseDetail(),
                                           binding: DarkCourseDetailBinding(id:
@@ -232,7 +236,7 @@ class Learn extends GetView {
                                       ),
                                       // Expanded(child: Image.network(list[index].image.toString(),fit: BoxFit.fill,)),
                                       Container(
-                                        height: h*0.1,
+                                        height: h*0.14,
                                         width: w,
                                         padding: EdgeInsets.symmetric(
                                           vertical: h*0.015,
@@ -250,6 +254,8 @@ class Learn extends GetView {
                                               list[index].title.toString(),
                                               
                                               // softWrap: true,
+                                              maxLines: 2,
+
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
@@ -300,7 +306,7 @@ class Learn extends GetView {
                                                     children: [
                                                        Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
                                                       Text(
-                                                                                      "  123",
+                                                                                      "  "+list[index].viewCount.toString(),
                                                                                       style: TextStyle(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w300,
@@ -405,4 +411,271 @@ class Build extends StatelessWidget {
     );
     
   }
+}
+
+
+class DarkLearningPath2 extends GetView<DarkLearningPathController> {
+
+   
+   const DarkLearningPath2({Key? key}) : super(key: key);
+
+
+   @override
+  Widget build(BuildContext context) {
+    return 
+    Obx(
+      ()=>Scaffold(
+      backgroundColor: kdarkblue,
+      body: CustomScrollView(
+        slivers: [
+          ExtendedSliverAppbar(
+            toolBarColor:kdarkblue,
+            isOpacityFadeWithToolbar:true,
+            isOpacityFadeWithTitle:true,
+            
+            // title: Text(
+            //   // "Crypto Investor",
+            //   controller.title,
+            //   textAlign: TextAlign.center,
+            //   style: const TextStyle(
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.w700,
+            //     color: kWhiteColor
+            //   ),
+            // ),
+      
+      leading:  InkWell(
+        onTap: (){
+          Get.back();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            "assets/images/Arrow.png",
+            height: h*0.03,
+          ),
+        ),
+      ),
+      background:Container(
+                      height: h*0.4,
+                      width: w,
+                      padding: EdgeInsets.only(
+                        left: w*0.1,
+                        right: w*0.1,
+                        top: h*0.05,
+                        bottom: h*0.02
+
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: kbluegradiant,
+                        // borderRadius: BorderRadius.circular(h*0.01),
+                      ),
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.network(controller.image,height: h*0.15,),
+                Text(
+              // "Crypto Investor",
+              controller.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                color: kWhiteColor
+              ),
+            ),
+            SizedBox(
+              height: h*0.01,
+            ),
+            Text(
+              // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
+              controller.description,
+              textAlign: TextAlign.center,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: kWhiteColor
+              ),
+            )
+                        ],
+                      ),
+
+                    ),
+      // Image.asset(
+      //   'assets/cypridina.jpeg',
+      //   fit: BoxFit.cover,
+      // ),
+      // actions: Padding(
+      //   padding: const EdgeInsets.all(10.0),
+      //   child: Icon(
+      //     Icons.more_horiz,
+      //     color: Colors.white,
+      //   ),
+      // ),
+    ),
+        //   SliverAppBar(
+        //     backgroundColor: Colors.transparent,
+
+        //     snap: false,
+        //     pinned: true,
+        //     floating: true,
+        //     automaticallyImplyLeading: true,
+        //     expandedHeight: h*0.4,
+        // //     bottom: PreferredSize(
+        // //       preferredSize: Size.fromHeight(h*0.3),
+        // //       child: 
+        // //       Column(
+        // //   // crossAxisAlignment: CrossAxisAlignment.start,
+        // //   // mainAxisAlignment: MainAxisAlignment.end,
+        // //   children: [
+
+        // //     Text(
+        // //       // "Crypto Investor",
+        // //       controller.title,
+        // //       textAlign: TextAlign.center,
+        // //       style: const TextStyle(
+        // //         fontSize: 24,
+        // //         fontWeight: FontWeight.w700,
+        // //         color: kWhiteColor
+        // //       ),
+        // //     ),
+        // //     SizedBox(
+        // //       height: h*0.01,
+        // //     ),
+        // //     Text(
+        // //       // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
+        // //       controller.description,
+        // //       textAlign: TextAlign.center,
+        // //       maxLines: 3,
+        // //       overflow: TextOverflow.ellipsis,
+        // //       style: const TextStyle(
+        // //         fontSize: 18,
+        // //         fontWeight: FontWeight.w400,
+        // //         color: kWhiteColor
+        // //       ),
+        // //     ),
+            
+        // //   ],
+        // // ),
+        // //     ),
+        // // //     
+            
+             
+        //     flexibleSpace:FlexibleSpaceBar(
+        //     title:Column(
+        //       children: [
+        //         Image.network(controller.image,height: h*0.15,),
+        //     //     Text(
+        //     //   // "Crypto Investor",
+        //     //   controller.title,
+        //     //   textAlign: TextAlign.center,
+        //     //   style: const TextStyle(
+        //     //     fontSize: 24,
+        //     //     fontWeight: FontWeight.w700,
+        //     //     color: kWhiteColor
+        //     //   ),
+        //     // ),
+        //     // SizedBox(
+        //     //   height: h*0.01,
+        //     // ),
+        //     // Text(
+        //     //   // "Learn the basics of cryptocurrencies and how to buy, sell and trade.",
+        //     //   controller.description,
+        //     //   textAlign: TextAlign.center,
+        //     //   maxLines: 3,
+        //     //   overflow: TextOverflow.ellipsis,
+        //     //   style: const TextStyle(
+        //     //     fontSize: 18,
+        //     //     fontWeight: FontWeight.w400,
+        //     //     color: kWhiteColor
+        //     //   ),
+        //     // ),
+        //       ],
+        //     ),
+        //     centerTitle: true,
+        //       background: Container(
+        //     padding: EdgeInsets.only(
+        //       left: w*0.08,
+        //       right: w*0.08,
+        //       top: h*0.06
+        //     ),
+        //               // height: h*0.4,
+        //               width: w,
+        //               decoration: BoxDecoration(
+        //                 gradient: kbluegradiant,
+        //                 borderRadius: BorderRadius.circular(h*0.01),
+        //               ),
+        //               alignment: Alignment.bottomCenter,
+
+        //             ),
+        //     ), 
+        //               ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                // SizedBox(
+                //   height: h*0.01,
+                // ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                      height: 44,
+                      decoration: BoxDecoration(color: kcardblue,
+                        borderRadius: BorderRadius.circular(15),
+                        
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: (){
+                                controller.islearn.value= true;
+                              },
+                              child:  Center(
+                                child: Text(
+                                  "LEARN",
+                                  style: TextStyle(
+                                    color:controller.islearn.value?kPrimaryColor: kWhiteColor
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: (){
+                                controller.islearn.value= false;
+                              },
+                              child:  Center(
+                                child: Text(
+                                  "BUILD",
+                                  style: TextStyle(
+                                    color: controller.islearn.value?kWhiteColor:kPrimaryColor
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          
+                        ],
+                      ),  
+
+                    ),
+                    Visibility(visible: controller.islearn.value, child: Learn(list: controller.courseListbyLearningPath,)),
+                    Visibility(visible: controller.islearn.value, child: Learn(list: controller.courseListbyLearningPath,)),
+                    Visibility(visible: !controller.islearn.value,child: const Build())
+                      
+                    
+            
+                  ],
+            ),
+          )
+        ],
+      ),
+    )
+
+    );
+       }
 }

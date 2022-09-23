@@ -11,6 +11,7 @@ class GetHotCoursesModel {
   var hotCourses = "";
   var allLikes = "";
   var allModules = "";
+  var viewCount = "";
   bool isSelected = false;
   
 

@@ -52,6 +52,13 @@ class CreateUserController extends GetxController {
 
 
 
+Future appledeleteAPI()async{
+  
+}
+
+
+
+
  Future<dynamic> chackuserapi(
     String email,
   ) async {
@@ -219,8 +226,6 @@ return true;
           "firstname": firstName.toString().trim(),
           "lastname": lastName.toString().trim(),
           "signintype": "Google SignIn",
-
-          
         });
 
     await request.then((http.Response response) {
@@ -234,6 +239,7 @@ return true;
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
+      bool isUserExist = jsonRes["isUserExist"];
       if (jsonRes["status"] == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
@@ -272,14 +278,17 @@ return true;
         // chackuserapi(email).then((value) {
         //   value
         //   ?
-        //   Get.offAll(
-        //     BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+        isUserExist ? 
+          Get.offAll(
+            BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,))
+            :
+             Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
+                  isLoading(false);
             
         //   )!.whenComplete(() {
         //           isLoading(false);
         //   }):
-                   Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
-                  isLoading(false);
+                  
           // });
 
         });
@@ -376,6 +385,7 @@ return true;
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
+      bool isUserExist = jsonRes["isUserExist"];
       if (jsonRes["status"] == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
@@ -408,9 +418,11 @@ return true;
 // chackuserapi(email).then((value) {
 // value
 // ?
-// Get.offAll(
-//   BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
-// ):
+
+isUserExist?
+Get.offAll(
+  BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
+):
          Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,));
 
         // });

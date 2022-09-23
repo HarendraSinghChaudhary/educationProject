@@ -43,28 +43,46 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                               borderRadius: BorderRadius.circular(h * 0.01),
                             ),
                           ),
-                          Positioned(
-                              bottom: -20,
-                              left: w * 0.15,
-                              right: w * 0.15,
+                          Align(
+                              // bottom: -20,
+                              // left: w * 0.15,
+                              // right: w * 0.15,
+                              // top: h*0.08,
                               // width: w*0.3,
+                              alignment: Alignment.bottomCenter,
+                              // heightFactor: 1.2,
 
                               child: Visibility(
                                   visible: controller
                                       .bigdata.value!.image!.isNotEmpty,
-                                  child: Container(
-                                    height: h * 0.28,
-                                    // width: w * 0.7,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(h * 0.015),
-                                        image: DecorationImage(
-                                          image: NetworkImage(controller
-                                              .bigdata.value!.image
-                                              .toString()),
-                                          // fit: BoxFit.fill,
-                                        )),
+                                  child: 
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.all(Radius.circular(h*0.02)),
+                                    child: Image.network(
+                                      controller
+                                                .bigdata.value!.image
+                                                .toString(),
+                                                height: h*0.25,
+                                                errorBuilder: ((context, error, stackTrace) {
+                                                  return Container();
+                                                }),
+                                                
+                                  
+                                    ),
                                   )
+                                  // Container(
+                                  //   height: h * 0.28,
+                                  //   // width: w * 0.7,
+                                  //   decoration: BoxDecoration(
+                                  //       borderRadius:
+                                  //           BorderRadius.circular(h * 0.015),
+                                  //       image: DecorationImage(
+                                  //         image: NetworkImage(controller
+                                  //             .bigdata.value!.image
+                                  //             .toString()),
+                                  //         // fit: BoxFit.fill,
+                                  //       )),
+                                  // )
                                   //  Image.network(controller.bigdata.value!.image.toString() ,height:h*0.23,width: w*0.8,fit: BoxFit.contain,)
                                   )
                               // Image.asset("assets/images/bitcoin.png"),height: h*0.23,
@@ -110,40 +128,40 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Card(
-                                    color: kWhiteColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(h * 0.012),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Row(
-                                        children: [
-                                          CircleAvatar(
-                                              radius: h * 0.012,
-                                              backgroundColor:
-                                                  kBlackColor.withOpacity(0.5),
-                                              foregroundColor: kWhiteColor,
-                                              child: const Icon(
-                                                Icons.thumb_up_off_alt_rounded,
-                                                size: 15,
-                                              )),
-                                          Text(
-                                            "  90%",
-                                            // controller.bigdata.value!.
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w300,
-                                              color:
-                                                  kBlackColor.withOpacity(0.5),
-                                              height: 2,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  // Card(
+                                  //   color: kWhiteColor,
+                                  //   shape: RoundedRectangleBorder(
+                                  //     borderRadius:
+                                  //         BorderRadius.circular(h * 0.012),
+                                  //   ),
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(3.0),
+                                  //     child: Row(
+                                  //       children: [
+                                  //         CircleAvatar(
+                                  //             radius: h * 0.012,
+                                  //             backgroundColor:
+                                  //                 kBlackColor.withOpacity(0.5),
+                                  //             foregroundColor: kWhiteColor,
+                                  //             child: const Icon(
+                                  //               Icons.thumb_up_off_alt_rounded,
+                                  //               size: 15,
+                                  //             )),
+                                  //         Text(
+                                  //           "  90%",
+                                  //           // controller.bigdata.value!.
+                                  //           style: TextStyle(
+                                  //             fontSize: 10,
+                                  //             fontWeight: FontWeight.w300,
+                                  //             color:
+                                  //                 kBlackColor.withOpacity(0.5),
+                                  //             height: 2,
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Card(
                                     color: kWhiteColor,
                                     shape: RoundedRectangleBorder(
