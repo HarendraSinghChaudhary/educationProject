@@ -27,8 +27,10 @@ class DarkLearningPathController extends GetxController{
  final String image;
  final String title;
  final String description;
+ 
 DarkLearningPathController({required this.courseListbyLearningPath,required this.description,required this.image,required this.title});
 RxBool islearn = true.obs; 
+RxInt viewCount= 0.obs;
 }
 class DarkLearningPath extends GetView<DarkLearningPathController> {
 
@@ -208,6 +210,7 @@ class Learn extends GetView {
                                 InkWell(
                                   onTap: (){
                                     Get.find<CoursesController>().coursecount(list[index].id);
+                                    Get.find<DarkLearningPathController>().viewCount.value = list[index].viewCount!;
                                           Get.to(
                                             ()=>DarkCourseDetail(),
                                           binding: DarkCourseDetailBinding(id:

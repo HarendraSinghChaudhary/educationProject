@@ -19,6 +19,7 @@ import '../../controllers/courses/courses_controller.dart';
 import '../../controllers/courses/darkcourse_controller.dart';
 import '../../main.dart';
 import '../../models/powerhourModel.dart';
+import '../../services/firbase.dart';
 import '../../services/launcher.dart';
 import '../../services/web_view.dart';
 import '../../testing/navigation_testing.dart';
@@ -28,6 +29,7 @@ import '../Events/CurrentEvent/currentEventController.dart';
 import '../Events/eventController.dart';
 import '../Events/eventView.dart';
 import '../dark_course_detail.dart';
+import '../dark_learning_path.dart';
 
 class NewHomeLive extends StatefulWidget {
   const NewHomeLive({Key? key}) : super(key: key);
@@ -87,7 +89,7 @@ Future checkPermession()async{
                 borderRadius: BorderRadius.circular(h*0.02),
                 color: Colors.white,
               ),
-              height: h*0.25,
+              // height: h*0.3,
               width: w*0.8,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -147,7 +149,8 @@ Future checkPermession()async{
                     color: kGreyColor,
                   ),
 
-                  Expanded(
+                  SizedBox(
+                    height: h*0.06,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -389,201 +392,211 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: [
-          const Text(
-            "🔥 Featured ",
-            style: TextStyle(
-              fontSize: 24,
-              color: kWhiteColor,
-              fontWeight: FontWeight.w700
+          Visibility(
+            visible: coursesController.getHotCourseList.isNotEmpty,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                 Text(
+                  "🔥 Featured ",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: kWhiteColor,
+                    fontWeight: FontWeight.w700
+                  ),
+                ),
+                const Text(
+              "Members enjoy taking these courses",
+              style: TextStyle(
+                fontSize: 18,
+                color: kWhiteColor,
+                height: 2,
+                fontWeight: FontWeight.w300
+              ),
             ),
-          ),
-          const Text(
-            "Members enjoy taking these courses",
-            style: TextStyle(
-              fontSize: 18,
-              color: kWhiteColor,
-              height: 2,
-              fontWeight: FontWeight.w300
+            SizedBox(
+              height: h*0.01,
             ),
-          ),
-          SizedBox(
-            height: h*0.01,
-          ),
-          SizedBox(
-            height: h*0.38,
-            child: ListView.builder(
-                      itemCount: coursesController.getHotCourseList.length,
-                      controller: _controller,
-                      scrollDirection: Axis.horizontal,
-                      // padding: EdgeInsets.only(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: w*0.45,
-                          // height: h*0.2,
-                          margin: EdgeInsets.only(
-                            right: w*0.04
-                          ),
-                          child: InkWell(
-                            onTap: () {
-                                    Get.find<CoursesController>().coursecount(coursesController.getHotCourseList[index].id);
-
-                                         _mixpanel.track('Course Started', properties: {
-                                          "Course Name" : coursesController
-                                          .getHotCourseList[index].title
-                                          .toString()
-                                         });
-                          
-                                    shareCourse =  coursesController
-                                          .getHotCourseList[index].title
-                                          .toString();
-                                          Get.to(
-                                            ()=>DarkCourseDetail(
-                                          //   id: coursesController
-                                          // .getHotCourseList[index].id
-                                          // .toString(),
+            SizedBox(
+              height: h*0.38,
+              child: ListView.builder(
+                        itemCount: coursesController.getHotCourseList.length,
+                        controller: _controller,
+                        scrollDirection: Axis.horizontal,
+                        // padding: EdgeInsets.only(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            width: w*0.45,
+                            // height: h*0.2,
+                            margin: EdgeInsets.only(
+                              right: w*0.04
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                      Get.find<CoursesController>().coursecount(coursesController.getHotCourseList[index].id);
+          
+                                           _mixpanel.track('Course Started', properties: {
+                                            "Course Name" : coursesController
+                                            .getHotCourseList[index].title
+                                            .toString()
+                                           });
+                            
+                                      shareCourse =  coursesController
+                                            .getHotCourseList[index].title
+                                            .toString();
+                                            Get.to(
+                                              ()=>DarkCourseDetail(
+                                            //   id: coursesController
+                                            // .getHotCourseList[index].id
+                                            // .toString(),
+                                            ),
+                                            binding: DarkCourseDetailBinding(id:coursesController
+                                            .getHotCourseList[index].id
+                                            .toString(),
+                                            ),
+                                            
+                                            
+                                            );
+                            
+                                            //        Get.to(FlashCard(
+                                            //       id: coursesController
+                                            // .getHotCourseList[index].id
+                                            // .toString(),
+                                            // title: coursesController
+                                            // .getHotCourseList[index].title
+                                            // .toString(),
+                                                  
+                                                  
+                                            //       ));
+                              },
+                              child: 
+                              Column(
+                                      
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                             height: h*0.2,
+                                            
+                                            decoration: BoxDecoration(
+                                              color: kcardblue,
+                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(h*0.02),topRight: Radius.circular(h*0.02)),
+                                              image:  DecorationImage(image: 
+                                              // AssetImage("assets/images/img_9.png",),
+                                              NetworkImage(coursesController.getHotCourseList[index].image.toString()),
+                                              fit: BoxFit.fill)
+                                            ),
+                                          // child: Image.asset("assets/images/img_9.png")
+                                          )
                                           ),
-                                          binding: DarkCourseDetailBinding(id:coursesController
-                                          .getHotCourseList[index].id
-                                          .toString(),
-                                          ),
-                                          
-                                          
-                                          );
-                          
-                                          //        Get.to(FlashCard(
-                                          //       id: coursesController
-                                          // .getHotCourseList[index].id
-                                          // .toString(),
-                                          // title: coursesController
-                                          // .getHotCourseList[index].title
-                                          // .toString(),
-                                                
-                                                
-                                          //       ));
-                            },
-                            child: 
-                            Column(
-                                    
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                           height: h*0.2,
-                                          
-                                          decoration: BoxDecoration(
-                                            color: kcardblue,
-                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(h*0.02),topRight: Radius.circular(h*0.02)),
-                                            image:  DecorationImage(image: 
-                                            // AssetImage("assets/images/img_9.png",),
-                                            NetworkImage(coursesController.getHotCourseList[index].image.toString()),
-                                            fit: BoxFit.fill)
-                                          ),
-                                        // child: Image.asset("assets/images/img_9.png")
-                                        )
-                                        ),
-                                      Expanded(
-                                        child: Container(
-                                          height: h*0.1,
-                                          width: w,
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: h*0.015,
-                                            horizontal: w*0.03
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: kcardblue,
-                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(h*0.02),bottomRight: Radius.circular(h*0.02))
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                // "Bitcoin, Simplified",
-                                                coursesController.getHotCourseList[index].title.toString(),
-                                                
-                                                // softWrap: true,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                style: const TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight: FontWeight.w400,
-                                                                  color: kWhiteColor
-                                                                ),
-                                              ),
-                                               Spacer(),
-                                              Text(
-                                                // "12 Shorts",
-                                                "${coursesController.getHotCourseList[index].allModules} Modules",
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                                  fontSize: 10,
-                                                                  height: 1.5,
-                                                                  fontWeight: FontWeight.w400,
-                                                                  color: kWhiteColor
-                                                                ),
-                                              ),
-                                              // SizedBox(
-                                              //   height: h*0.01,
-                                              // ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  // Expanded(
-                                                  //   child: Row(
-                                                  //     children: [
-                                                  //       CircleAvatar( 
-                                                  //         radius: h*0.012,
-                                                  //         backgroundColor: kWhiteColor.withOpacity(0.5),
-                                                  //         foregroundColor: kcardblue,
-                                                  //         child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
-                                                  //       Text(
-                                                  //          "  ${coursesController.getHotCourseList[index].allLikes}%",
-                                                  //         // "",
-                                                  //          // controller.bigdata.value!.
-                                                  //          style: TextStyle(
-                                                  //   fontSize: 10,
-                                                  //   fontWeight: FontWeight.w300,
-                                                  //   color: kWhiteColor.withOpacity(0.5),
-                                                  //   height: 2,
-                                                  //          ),
-                                                  //        ),
-                                                  //     ],
-                                                  //   ),
-                                                  // ),
-                                                  Expanded(
-                                                    child: Row(
-                                                      children: [
-                                                         Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
-                                                        Text(
-                                                          "  "+coursesController.getHotCourseList[index].viewCount,
-                                                          style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: kWhiteColor.withOpacity(0.5),
-                                                    height: 2,
+                                        Expanded(
+                                          child: Container(
+                                            height: h*0.1,
+                                            width: w,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: h*0.015,
+                                              horizontal: w*0.03
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: kcardblue,
+                                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(h*0.02),bottomRight: Radius.circular(h*0.02))
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  // "Bitcoin, Simplified",
+                                                  coursesController.getHotCourseList[index].title.toString(),
+                                                  
+                                                  // softWrap: true,
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.start,
+                                                  style: const TextStyle(
+                                                                    fontSize: 14,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: kWhiteColor
+                                                                  ),
+                                                ),
+                                                 Spacer(),
+                                                Text(
+                                                  // "12 Shorts",
+                                                  "${coursesController.getHotCourseList[index].allModules} Modules",
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                                    fontSize: 10,
+                                                                    height: 1.5,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: kWhiteColor
+                                                                  ),
+                                                ),
+                                                // SizedBox(
+                                                //   height: h*0.01,
+                                                // ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    // Expanded(
+                                                    //   child: Row(
+                                                    //     children: [
+                                                    //       CircleAvatar( 
+                                                    //         radius: h*0.012,
+                                                    //         backgroundColor: kWhiteColor.withOpacity(0.5),
+                                                    //         foregroundColor: kcardblue,
+                                                    //         child: const Icon(Icons.thumb_up_off_alt_rounded,size: 15,)),
+                                                    //       Text(
+                                                    //          "  ${coursesController.getHotCourseList[index].allLikes}%",
+                                                    //         // "",
+                                                    //          // controller.bigdata.value!.
+                                                    //          style: TextStyle(
+                                                    //   fontSize: 10,
+                                                    //   fontWeight: FontWeight.w300,
+                                                    //   color: kWhiteColor.withOpacity(0.5),
+                                                    //   height: 2,
+                                                    //          ),
+                                                    //        ),
+                                                    //     ],
+                                                    //   ),
+                                                    // ),
+                                                    Expanded(
+                                                      child: Row(
+                                                        children: [
+                                                           Icon(Icons.groups,size: 20,color: kWhiteColor.withOpacity(0.5),),
+                                                          Text(
+                                                            "  "+coursesController.getHotCourseList[index].viewCount,
+                                                            style: TextStyle(
+                                                      fontSize: 10,
+                                                      fontWeight: FontWeight.w300,
+                                                      color: kWhiteColor.withOpacity(0.5),
+                                                      height: 2,
+                                                           ),
                                                          ),
-                                                       ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                                
-                                            ],
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                  
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),));
-                      },
-                    ),
-     
+                                      ],
+                                    ),));
+                        },
+                      ),
+               
+            ),
+            
+              ],
+            ),
           ),
           GestureDetector(
             onTap: (){
-                launchInBrowser(slackUrl);
+                // launchInBrowser(slackUrl);
+                addDatatofirebase("this is test user");
                 // askPermission();
                 // checkPermession();
             },
@@ -643,123 +656,136 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
           SizedBox(
             height: h*0.02,
           ),
-          const Text(
-            "🚀 Hot Learning Paths",
-            style: TextStyle(
-              fontSize: 24,
-              color: kWhiteColor,
-              // height: 2,
-              fontWeight: FontWeight.w700
-            ),
-          ),
-          const Text(
-            "Simplify your path to a career.",
-            style: TextStyle(
-              fontSize: 18,
-              height: 2,
-              color: kWhiteColor,
-              fontWeight: FontWeight.w300
-            ),
-          ),
-          SizedBox(
-            height: h*0.01,
-          ),
-          SizedBox(
-                  height: Get.height * 0.23,
-                  width: Get.width * 0.97,
-                  child: ListView.builder(
-                      padding: const EdgeInsets.only(top: 15),
-                      itemCount: coursesController.hotsubcatList.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: _controller,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.offAll(BottomNavigationScreen(
-                                  index: 1.obs,
-                                  learningPathIndex: index.obs,
-                                ));
-
-                                // Get.find<LearningPathIndex>().isShowIndex = index.obs ;
-                                // print("====="+Get.find<LearningPathIndex>().isShowIndex.toString());
-
-                                // Get.find<LearningPathIndex>().selectedModel = coursesController.learningPathList[index];
-
-                                print("press here..");
-                              },
-                              child: Container(
-                                width: Get.width * 0.38,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: kcardblue),
-                                child: Column(
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: Get.height * 0.1,
-                                      width: Get.width * 0.38,
-                                      margin: EdgeInsets.symmetric(
-                                        vertical: h*0.005
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(15),
-                                              topRight: Radius.circular(15)),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  coursesController
-                                                      .hotsubcatList[index]
-                                                      .image
-                                                      .toString()),
-                                              // fit: BoxFit.fill
-                                              )),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.only(left: 10),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          // paths[index]['name']
-                                          //     .toString(),
-                                    
-                                          coursesController
-                                              .hotsubcatList[index]
-                                              .subCategoryName
-                                              .toString(),
-                                              
-                                          maxLines: 2,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            color: kWhiteColor,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            )
-                          ],
-                        );
-                      }),
+          Visibility(
+            visible: coursesController.hotsubcatList.isNotEmpty,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "🚀 Hot Learning Paths",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: kWhiteColor,
+                    // height: 2,
+                    fontWeight: FontWeight.w700
+                  ),
+                ),
+                const Text(
+                  "Simplify your path to a career.",
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 2,
+                    color: kWhiteColor,
+                    fontWeight: FontWeight.w300
+                  ),
                 ),
                 SizedBox(
-            height: h*0.02,
+                  height: h*0.01,
+                ),
+                SizedBox(
+                        height: Get.height * 0.23,
+                        width: Get.width * 0.97,
+                        child: ListView.builder(
+                            padding: const EdgeInsets.only(top: 15),
+                            itemCount: coursesController.hotsubcatList.length,
+                            scrollDirection: Axis.horizontal,
+                            controller: _controller,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      // Get.offAll(BottomNavigationScreen(
+                                      //   index: 1.obs,
+                                      //   learningPathIndex: index.obs,
+                                      // ));
+                                      Get.to(
+                              () => 
+                              const DarkLearningPath2(),
+                              binding: DarkLearningBinding(courseListbyLearningPath: coursesController.hotsubcatList[index].courseListbyLearningPath, description: coursesController.hotsubcatList[index].description??"", image: coursesController.hotsubcatList[index].image.toString(), title: coursesController.hotsubcatList[index].subCategoryName.toString(),)
+                              );
+          
+                                      // Get.find<LearningPathIndex>().isShowIndex = index.obs ;
+                                      // print("====="+Get.find<LearningPathIndex>().isShowIndex.toString());
+          
+                                      // Get.find<LearningPathIndex>().selectedModel = coursesController.learningPathList[index];
+          
+                                      print("press here..");
+                                    },
+                                    child: Container(
+                                      width: Get.width * 0.38,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: kcardblue),
+                                      child: Column(
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: Get.height * 0.1,
+                                            width: Get.width * 0.38,
+                                            margin: EdgeInsets.symmetric(
+                                              vertical: h*0.005
+                                            ),
+                                            decoration: BoxDecoration(
+                                                borderRadius: const BorderRadius.only(
+                                                    topLeft: Radius.circular(15),
+                                                    topRight: Radius.circular(15)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        coursesController
+                                                            .hotsubcatList[index]
+                                                            .image
+                                                            .toString()),
+                                                    // fit: BoxFit.fill
+                                                    )),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(left: 10),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                // paths[index]['name']
+                                                //     .toString(),
+                                          
+                                                coursesController
+                                                    .hotsubcatList[index]
+                                                    .subCategoryName
+                                                    .toString(),
+                                                    
+                                                maxLines: 2,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                  color: kWhiteColor,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  )
+                                ],
+                              );
+                            }),
+                      ),
+                      SizedBox(
+                  height: h*0.02,
+                ),
+              ],
+            ),
           ),
           Visibility(
-            visible: eventController.homeloading.value,
+            visible: eventController.homeloading.value&&eventController.powerHours.value!.upcoming!.isNotEmpty,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

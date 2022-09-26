@@ -12,6 +12,7 @@ import '../controllers/study_material/study_material_controller.dart';
 import '../models/darkcoursemodel.dart';
 import '../testing/dammysotryview.dart';
 import '../utils/constant.dart';
+import 'dark_learning_path.dart';
 import 'flash_card.dart';
 
 class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
@@ -178,13 +179,13 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                             color: kBlackColor.withOpacity(0.5),
                                           ),
                                           Text(
-                                            "  123",
+                                            "  ${Get.find<DarkLearningPathController>().viewCount.value} ",
                                             style: TextStyle(
-                                              fontSize: 10,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w300,
                                               color:
                                                   kBlackColor.withOpacity(0.5),
-                                              height: 2,
+                                              // height: 2,
                                             ),
                                           ),
                                         ],

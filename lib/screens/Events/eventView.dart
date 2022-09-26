@@ -42,131 +42,134 @@ class EventView extends GetView<EventController>{
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                               Image.asset(
-                                "assets/images/label.png",
-                                height: h*0.03,
-                               ),
-                                const Text(
-                                  " Upcoming Power Hours",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: kWhiteColor
+                      Visibility(
+                        visible: controller.powerHours.value!.upcoming!.isNotEmpty,
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                 Image.asset(
+                                  "assets/images/label.png",
+                                  height: h*0.03,
+                                 ),
+                                  const Text(
+                                    " Upcoming Power Hours",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                      color: kWhiteColor
+                                    ),
                                   ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: h*0.01,
+                              ),
+                              const Text(
+                                "Register for an upcoming event to learn from a community leader live",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  
+                                  color: kWhiteColor,
+                          
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: h*0.01,
-                            ),
-                            const Text(
-                              "Register for an upcoming event to learn from a community leader live",
-                              style: TextStyle(
-                                fontSize: 14,
-                                
-                                color: kWhiteColor,
-                        
                               ),
-                            ),
-                        
-                           
-                        
-                            Container(
-                              height: h*0.38,
-                              margin: EdgeInsets.symmetric(
-                                vertical: h*0.015
-                              ),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.powerHours.value!.upcoming!.length,
-                                itemBuilder:(context, index) {
-                                  AllDatum data = controller.powerHours.value!.upcoming![index];
-                                  return GestureDetector(
-                                    onTap: (){
-                                      controller.data.value = data;
-                                      controller.showyoutube(false);
-                                      Get.to(
-                                        ()=>CurrentEventView(),
-                                        binding: CurrentEventBinding()
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding:  EdgeInsets.only(
-                                        right: w*0.04,
-                                      bottom: h*0.01
-                                      ),
-                                      child: CommunityCard(
-                                        flex2: 3,
-                                        url: 
-                                        // "assets/images/banner.png",
-                                        data.image.toString(),
-                                        child: Container(
-                                          width: w,
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: w*0.025,
-                                            vertical: h*0.01
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:  EdgeInsets.symmetric(
-                                                  vertical: h*0.01
+                          
+                             
+                          
+                              Container(
+                                height: h*0.38,
+                                margin: EdgeInsets.symmetric(
+                                  vertical: h*0.015
+                                ),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: const BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: controller.powerHours.value!.upcoming!.length,
+                                  itemBuilder:(context, index) {
+                                    AllDatum data = controller.powerHours.value!.upcoming![index];
+                                    return GestureDetector(
+                                      onTap: (){
+                                        controller.data.value = data;
+                                        controller.showyoutube(false);
+                                        Get.to(
+                                          ()=>CurrentEventView(),
+                                          binding: CurrentEventBinding()
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(
+                                          right: w*0.04,
+                                        bottom: h*0.01
+                                        ),
+                                        child: CommunityCard(
+                                          flex2: 3,
+                                          url: 
+                                          // "assets/images/banner.png",
+                                          data.image.toString(),
+                                          child: Container(
+                                            width: w,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: w*0.025,
+                                              vertical: h*0.01
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:  EdgeInsets.symmetric(
+                                                    vertical: h*0.01
+                                                  ),
+                                                  child: Text(
+                                                    // "Thursday July 21st".toUpperCase(),
+                                                    "${controller.convertdate(data.startTime!)}",
+                                                    // textAlign: TextAlign.start,
+                                                    style: const TextStyle(
+                                                      fontSize:12,
+                                                      fontWeight: FontWeight.w700,
+                                                      color: kWhiteColor
+                                                    ),
+                                                  ),
                                                 ),
-                                                child: Text(
-                                                  // "Thursday July 21st".toUpperCase(),
-                                                  "${controller.convertdate(data.startTime!)}",
+                                                Padding(
+                                                  padding:  EdgeInsets.symmetric(vertical: h*0.01),
+                                                  child: Text(
+                                                    // "Breaking Down The Blockchain",
+                                                    data.powerHouseTitle.toString(),
+                                                    // textAlign: TextAlign.start,
+                                                    style: const TextStyle(
+                                                      fontSize:16,
+                                                      fontWeight: FontWeight.w700,
+                                                      color: kWhiteColor
+                                                    ),
+                                                  ),
+                                                ),
+                                                const Text(
+                                                  "📲 In-App Event",
                                                   // textAlign: TextAlign.start,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontSize:12,
-                                                    fontWeight: FontWeight.w700,
+                                                    fontWeight: FontWeight.w400,
                                                     color: kWhiteColor
                                                   ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:  EdgeInsets.symmetric(vertical: h*0.01),
-                                                child: Text(
-                                                  // "Breaking Down The Blockchain",
-                                                  data.powerHouseTitle.toString(),
-                                                  // textAlign: TextAlign.start,
-                                                  style: const TextStyle(
-                                                    fontSize:16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: kWhiteColor
-                                                  ),
-                                                ),
-                                              ),
-                                              const Text(
-                                                "📲 In-App Event",
-                                                // textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                  fontSize:12,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: kWhiteColor
-                                                ),
-                                              ),
-                                            ],
-                                        
+                                              ],
+                                          
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                        
-                          ],
+                                    );
+                                  },
+                                ),
+                              )
+                          
+                            ],
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -183,102 +186,105 @@ class EventView extends GetView<EventController>{
                       SizedBox(
                         height: h*0.03,
                       ),
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
-                        child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                
-                               Image.asset(
-                                "assets/images/label.png",
-                                height: h*0.03,
-                               ),
-                                const Text(
-                                  " Watch On Demand",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: kWhiteColor
+                      Visibility(
+                        visible: controller.powerHours.value!.passed!.isNotEmpty,
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: w*0.02,vertical: h*0.01),
+                          child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  
+                                 Image.asset(
+                                  "assets/images/label.png",
+                                  height: h*0.03,
+                                 ),
+                                  const Text(
+                                    " Watch On Demand",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                      color: kWhiteColor
+                                    ),
                                   ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: h*0.01,
+                              ),
+                              const Text(
+                                "Missed a Power Hour, No Biggie, We got you :)",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  
+                                  color: kWhiteColor,
+                          
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: h*0.01,
-                            ),
-                            const Text(
-                              "Missed a Power Hour, No Biggie, We got you :)",
-                              style: TextStyle(
-                                fontSize: 14,
-                                
-                                color: kWhiteColor,
-                        
                               ),
-                            ),
-                        
-                           
-                        
-                            Container(
-                              height: h*0.3,
-                              margin: EdgeInsets.symmetric(
-                                vertical: h*0.015
-                              ),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.powerHours.value!.passed!.length,
-                                itemBuilder:(context, index) {
-                                  AllDatum data = controller.powerHours.value!.passed![index];
-                                  return GestureDetector(
-                                    onTap: (){
-                                      controller.data.value = data;
-                                      controller.showyoutube(true);
-                                      Get.to(
-                                        ()=>CurrentEventView(),
-                                        binding: CurrentEventBinding()
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding:  EdgeInsets.only(
-                                        right: w*0.04,
-                                        bottom: h*0.01
-                                      ),
-                                      child: CommunityCard(
-                                        flex2: 2,
-                                        url: 
-                                        // "assets/images/banner.png",
-                                        data.image.toString(),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: w*0.025,
-                                            vertical: h*0.01
-                                          ),
-                                          child: Container(
-                                            width: w,
-                                            padding:  EdgeInsets.symmetric(vertical: h*0.01),
-                                            child: Text(
-                                              // "Breaking Down The Blockchain",
-                                              data.powerHouseTitle.toString(),
-                                              textAlign: TextAlign.start,
-                                              style: const TextStyle(
-                                                fontSize:16,
-                                                fontWeight: FontWeight.w700,
-                                                color: kWhiteColor
+                          
+                             
+                          
+                              Container(
+                                height: h*0.3,
+                                margin: EdgeInsets.symmetric(
+                                  vertical: h*0.015
+                                ),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: const BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: controller.powerHours.value!.passed!.length,
+                                  itemBuilder:(context, index) {
+                                    AllDatum data = controller.powerHours.value!.passed![index];
+                                    return GestureDetector(
+                                      onTap: (){
+                                        controller.data.value = data;
+                                        controller.showyoutube(true);
+                                        Get.to(
+                                          ()=>CurrentEventView(),
+                                          binding: CurrentEventBinding()
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(
+                                          right: w*0.04,
+                                          bottom: h*0.01
+                                        ),
+                                        child: CommunityCard(
+                                          flex2: 2,
+                                          url: 
+                                          // "assets/images/banner.png",
+                                          data.image.toString(),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: w*0.025,
+                                              vertical: h*0.01
+                                            ),
+                                            child: Container(
+                                              width: w,
+                                              padding:  EdgeInsets.symmetric(vertical: h*0.01),
+                                              child: Text(
+                                                // "Breaking Down The Blockchain",
+                                                data.powerHouseTitle.toString(),
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                  fontSize:16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: kWhiteColor
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                        
-                          ],
+                                    );
+                                  },
+                                ),
+                              )
+                          
+                            ],
+                          ),
                         ),
                       ),
                       GestureDetector(
