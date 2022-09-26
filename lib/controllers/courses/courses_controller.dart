@@ -668,6 +668,7 @@ try {
               "courseId":courseId
             }
     );
+    
 
     String msg = "";
     var jsonArray;
@@ -699,6 +700,57 @@ try {
       isLoading(false);
       update();
     }
+  }
+
+Future<dynamic> addfcm(String fcm )async {
+try {
+   var request = http.post(
+      Uri.parse(RestDatasource.ADDFCMTOKEN_URL),
+      headers: {
+        "Authorization":
+            Preferences.pref!.getString("token").toString()},
+            body: {
+              "userid":Preferences.pref!.getString("id").toString(),
+              "FcmToken":Preferences.pref!.getString("fcmToken").toString()
+            }
+    );
+    
+
+    String msg = "";
+    var jsonArray;
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+      final JsonDecoder _decoder = new JsonDecoder();
+      jsonRes = _decoder.convert(response.body.toString());
+      print("Response: " + response.body.toString() + "_");
+      print("ResponseJSON: " + jsonRes.toString() + "_");
+      msg = jsonRes["message"].toString();
+      jsonArray = jsonRes['courseData'];
+    });
+
+    if (res.statusCode == 200) {
+     
+    } else {
+      Get.snackbar(
+        "",
+        "",
+        snackPosition: SnackPosition.TOP,
+        titleText: const Text("Please try later"),
+        messageText: const Text(""),
+        colorText: Colors.red,
+      );
+
+      isLoading(false);
+      update();
+    }
+  
+} catch (e) {
+  print("error $e");
+}
+   
   }
 
 }

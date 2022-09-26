@@ -250,6 +250,7 @@ return true;
         prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
       
         prefs.setString('status', jsonRes["user"]["status"].toString());
+        Preferences.pref!.setBool("isNotificationAllowed",jsonRes["user"]["isAllow"]=="true");
        
         prefs.setString(
             'token', jsonRes["token"].toString());
@@ -394,7 +395,8 @@ return true;
         prefs.setString('email', jsonRes["user"]["email"].toString());
       
         prefs.setString('status', jsonRes["user"]["status"].toString());
-        prefs.setString('firstname', firstName.toString());
+        prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
+
         
        
         prefs.setString(

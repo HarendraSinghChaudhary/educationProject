@@ -172,6 +172,7 @@ class EventView extends GetView<EventController>{
                           ),
                         ),
                       ),
+                      SizedBox(height: h*0.01,),
                       GestureDetector(
                         onTap:(){
                           // urllauncher(slackUrl);

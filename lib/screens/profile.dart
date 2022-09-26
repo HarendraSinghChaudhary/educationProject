@@ -479,6 +479,7 @@ class _SettingsState extends State<Profile> {
     prefs.setString('token', "");
 
     prefs.commit();
+    prefs.clear();
 
 
   }

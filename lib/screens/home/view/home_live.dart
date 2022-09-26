@@ -79,7 +79,6 @@ class _ProfileState extends State<HomeLive> {
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
     clearMethod();
-    token();
     
   }
 
@@ -535,13 +534,5 @@ class _ProfileState extends State<HomeLive> {
     setState(() {});
   }
 
-   token() {
-    var messaging = FirebaseMessaging.instance;
-    messaging.getToken().then((value) {
-      print("token: " + value.toString());
-      tokenId = value.toString();
-
-      print("new token: " + tokenId.toString());
-    });
-  }
+   
 }

@@ -312,6 +312,11 @@ NotificationSettings settings = await messaging.requestPermission(
 );
 if (settings.authorizationStatus == AuthorizationStatus.authorized) {
   Preferences.pref!.setBool("isNotificationAllowed",true);
+  fcmtoken().whenComplete(() {
+    addDatatofirebase(Preferences.pref!.getString("fcmToken").toString());
+    coursesController.addfcm(Preferences.pref!.getString("fcmToken").toString());
+  });
+  
   print('User granted permission');
 } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
   print('User granted provisional permission');
@@ -334,7 +339,6 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     coursesController.getHotCoursesApi();
     eventController.getpowerHourData();
     clearMethod();
-    token();
     Future.delayed(
       Duration(seconds: 2),(){
         var isthis = Preferences.pref?.get("isNotificationAllowed");
@@ -595,8 +599,7 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
           ),
           GestureDetector(
             onTap: (){
-                // launchInBrowser(slackUrl);
-                addDatatofirebase("this is test user");
+                launchInBrowser(slackUrl);
                 // askPermission();
                 // checkPermession();
             },
@@ -1000,13 +1003,5 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     setState(() {});
   }
 
-   token() {
-    var messaging = FirebaseMessaging.instance;
-    messaging.getToken().then((value) {
-      print("token: " + value.toString());
-      tokenId = value.toString();
-
-      print("new token: " + tokenId.toString());
-    });
-  }
+   
 }
