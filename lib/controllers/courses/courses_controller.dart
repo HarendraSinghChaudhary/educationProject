@@ -727,12 +727,12 @@ try {
       jsonRes = _decoder.convert(response.body.toString());
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
-      msg = jsonRes["message"].toString();
-      jsonArray = jsonRes['courseData'];
+      msg = jsonRes["msg"].toString();
+
     });
 
     if (res.statusCode == 200) {
-     
+     print(msg);
     } else {
       Get.snackbar(
         "",

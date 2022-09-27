@@ -1,20 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
-
-import 'package:Ambitious/reusable/url_launcher.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:crisp/crisp.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../controllers/courses/courses_controller.dart';
 import '../../controllers/courses/darkcourse_controller.dart';
 import '../../main.dart';
@@ -22,7 +18,6 @@ import '../../models/powerhourModel.dart';
 import '../../services/firbase.dart';
 import '../../services/launcher.dart';
 import '../../services/web_view.dart';
-import '../../testing/navigation_testing.dart';
 import '../../utils/endpoint_url.dart';
 import '../Events/CurrentEvent/currentEvent.dart';
 import '../Events/CurrentEvent/currentEventController.dart';
@@ -68,263 +63,6 @@ class _NewHomeLiveState extends State<NewHomeLive> {
   }
 
 FirebaseMessaging messaging = FirebaseMessaging.instance;
-Future checkPermession()async{
-  if(Platform.isAndroid){
-
-    showDialog(
-      useSafeArea: false,
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            scrollable: true,
-            contentPadding: EdgeInsets.zero,
-            // backgroundColor: kWhiteColor,
-            titlePadding: EdgeInsets.zero,
-            // backgroundColor: Colors.amber,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(h*0.02)),
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(h*0.02),
-                color: Colors.white,
-              ),
-              // height: h*0.3,
-              width: w*0.8,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     InkWell(
-                  //       onTap: () {
-
-                  //         Navigator.of(context, rootNavigator: true).pop();
-                  //       },
-                  //       child: SvgPicture.asset(
-                  //         "assets/icons/cross.svg",
-                  //         color: Colors.white,
-                  //         width: 4.w,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  SizedBox(
-                    height: h*0.02,
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: w*0.02),
-                    child: Text(
-                      "\"Ambitious\" Would Like to Send You Notification",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kBlackColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  SizedBox(
-                    height: h*0.01,
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: w*0.02),
-                    child: Text(
-                      "Notifications may include alerts, sounds and icon badges. These can be configured in Setting.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kGreyColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  SizedBox(
-                    height: h*0.02,
-                  ),
-
-                  Divider(
-                    // height: 0.2,
-                    height: 1,
-                    thickness: 0.2,
-                    color: kGreyColor,
-                  ),
-
-                  SizedBox(
-                    height: h*0.06,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "Don't Allow",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kPrimaryColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            // height: ,
-                            width: 0.2,
-                            color: kGreyColor,
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              onTap: () async {
-                                askPermission().whenComplete(() {
-                                  Get.back();
-                                });
-                              },
-                              child: Text(
-                                "Allow",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kPrimaryColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          )
-                        ]),
-                  )
-                
-                ],
-              ),
-            ));
-  });
-  }else{
-    askPermission();
-  }
-}
-Future askPermission()async{
-  // Get.defaultDialog(
-  //   title: "\"Ambitious\" Would Like to Send You Notification",
-  //   titlePadding: EdgeInsets.only(top: h*0.02,left: w*0.025,right: w*0.025),
-  //   titleStyle: TextStyle(
-  //     fontSize: 26,
-  //     fontWeight: FontWeight.w700
-  //   ),
-  //   // middleText: "Notifications may include alerts, sounds and icon badges. These can be configured in Setting.",
-  //   middleTextStyle:TextStyle(
-  //     fontSize: 18
-  //   ),
-  //   contentPadding:null,
-  //   // EdgeInsets.only(
-  //   //   left: w*0.025,
-  //   //   right: w*0.025,
-  //   // ),
-  //   // textConfirm:"Allow",
-  //   radius: h*0.02,
-  //   content: Column(
-  //     children: [
-  //       Container(
-  //         padding:EdgeInsets.only(
-  //           left: w*0.025,
-  //     right: w*0.025,
-  //     bottom: h*0.01
-  //         ),
-  //         child: Text(
-  //           "Notifications may include alerts, sounds and icon badges. These can be configured in Setting.",
-  //           textAlign: TextAlign.center,
-  //           style: TextStyle(
-  //     fontSize: 18
-  //   ),
-  //         ),
-
-  //       ),
-  //       Row(
-  //         children: [
-  //           Expanded(
-  //             child: Container(
-  //               height: h*0.06,
-  //                decoration: BoxDecoration(
-  //                 border: Border(
-  //                   top: BorderSide(
-  //                     width: 1,
-  //                     color: kBlackColor.withOpacity(0.2)
-  //                   ),
-  //                   right: BorderSide(
-  //                     width: 0.6,
-  //                     color: kBlackColor.withOpacity(0.2)
-  //                   ),
-  //                 )
-  //               ),
-  //               alignment: Alignment.center,
-  //                     child: Text(
-  //                       "Don't Allow",
-  //                       style: TextStyle(
-  //                         fontSize: 22,
-  //                         fontWeight: FontWeight.w500,
-  //                         color: Colors.blue
-  //                       ),
-  //                       ),
-  //                   ),
-  //           ),
-  //           Expanded(
-  //             child: Container(
-  //               decoration: BoxDecoration(
-  //                 border: Border(
-  //                   top: BorderSide(
-  //                     width: 1,
-  //                     color: kBlackColor.withOpacity(0.2)
-  //                   ),
-  //                   left: BorderSide(
-  //                     width: 0.5,
-  //                     color: kBlackColor.withOpacity(0.2)
-  //                   ),
-  //                 )
-  //               ),
-  //               height: h*0.06,
-  //               alignment: Alignment.center,
-  //                     child: Text(
-  //                       "Allow",
-  //                       style: TextStyle(
-  //                         fontSize: 22,
-  //                         color: Colors.blue,
-  //                         fontWeight: FontWeight.w500
-  //                       ),
-  //                       ),
-                      
-  //                   ),
-  //           ),
-        
-  //         ],
-  //       ),
-  //     ],
-  //   ),
-   
-
-  // );
-NotificationSettings settings = await messaging.requestPermission(
-  alert: true,
-  announcement: false,
-  badge: true,
-  carPlay: false,
-  criticalAlert: false,
-  provisional: false,
-  sound: true,
-);
-if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-  Preferences.pref!.setBool("isNotificationAllowed",true);
-  fcmtoken().whenComplete(() {
-    addDatatofirebase(Preferences.pref!.getString("fcmToken").toString());
-    coursesController.addfcm(Preferences.pref!.getString("fcmToken").toString());
-  });
-  
-  print('User granted permission');
-} else if (settings.authorizationStatus == AuthorizationStatus.denied) {
-  print('User granted provisional permission');
-} else {
-  Preferences.pref!.setBool("isNotificationAllowed",false);
-  print('User declined or has not accepted permission');
-}
-}
 
 
 
@@ -341,10 +79,10 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     clearMethod();
     Future.delayed(
       Duration(seconds: 2),(){
-        var isthis = Preferences.pref?.get("isNotificationAllowed");
-        if(isthis != true ){
-        checkPermession();
-        }
+        // var isthis = Preferences.pref?.get("isNotificationAllowed");
+        // if(isthis != true ){
+        askPermission();
+        // }
       }
     );
     // askPermission();
@@ -428,6 +166,7 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
                         controller: _controller,
                         scrollDirection: Axis.horizontal,
                         // padding: EdgeInsets.only(),
+                        physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
@@ -1003,5 +742,165 @@ if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     setState(() {});
   }
 
-   
+   Future askPermission()async{
+NotificationSettings settings = await messaging.requestPermission(
+  alert: true,
+  announcement: false,
+  badge: true,
+  carPlay: false,
+  criticalAlert: false,
+  provisional: false,
+  sound: true,
+);
+if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  Preferences.pref!.setBool("isNotificationAllowed",true);
+if(Platform.isAndroid){
+    showDialog(
+      useSafeArea: false,
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            scrollable: true,
+            contentPadding: EdgeInsets.zero,
+            // backgroundColor: kWhiteColor,
+            titlePadding: EdgeInsets.zero,
+            // backgroundColor: Colors.amber,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(h*0.02)),
+            title: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(h*0.02),
+                color: Colors.white,
+              ),
+              // height: h*0.3,
+              width: w*0.8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: () {
+
+                  //         Navigator.of(context, rootNavigator: true).pop();
+                  //       },
+                  //       child: SvgPicture.asset(
+                  //         "assets/icons/cross.svg",
+                  //         color: Colors.white,
+                  //         width: 4.w,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(
+                    height: h*0.02,
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: w*0.02),
+                    child: Text(
+                      "\"Ambitious\" Would Like to Send You Notification",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: kBlackColor,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  SizedBox(
+                    height: h*0.01,
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: w*0.02),
+                    child: Text(
+                      "Notifications may include alerts, sounds and icon badges. These can be configured in Setting.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: kGreyColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    height: h*0.02,
+                  ),
+
+                  Divider(
+                    // height: 0.2,
+                    height: 1,
+                    thickness: 0.2,
+                    color: kGreyColor,
+                  ),
+
+                  SizedBox(
+                    height: h*0.06,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: ()async {
+                               await openAppSettings();
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "Don't Allow",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kPrimaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            // height: ,
+                            width: 0.2,
+                            color: kGreyColor,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                fcmtoken().whenComplete(() {
+                                  addDatatofirebase(Preferences.pref!.getString("fcmToken").toString());
+                                  coursesController.addfcm(Preferences.pref!.getString("fcmToken").toString());
+                                });
+                                Get.back();
+                              },
+                              child: Text(
+                                "Allow",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kPrimaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          )
+                        ]),
+                  )
+                
+                ],
+              ),
+            ));
+  });
+  }else{
+    fcmtoken().whenComplete(() {
+    addDatatofirebase(Preferences.pref!.getString("fcmToken").toString());
+    coursesController.addfcm(Preferences.pref!.getString("fcmToken").toString());
+  });
+  }
+  
+  
+  print('User granted permission');
+} else if (settings.authorizationStatus == AuthorizationStatus.denied) {
+  print('User granted provisional permission');
+} else {
+  Preferences.pref!.setBool("isNotificationAllowed",false);
+  print('User declined or has not accepted permission');
+}
+}
+
+
 }
