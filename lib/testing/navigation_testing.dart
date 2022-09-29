@@ -136,7 +136,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                     ),
             
                     //Enquiry
-                    label: "Courses"),
+                    label: "Browse"),
 
                 BottomNavigationBarItem(
                     icon: Padding(
@@ -171,7 +171,7 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                     ),
             
                     //Menu
-                    label: "Profile")
+                    label: "Settings")
               
               
         ],

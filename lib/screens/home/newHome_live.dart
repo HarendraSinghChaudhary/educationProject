@@ -140,7 +140,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  Text(
-                  "🔥 Featured ",
+                  "🔥 Recommended Playbooks ",
                   style: TextStyle(
                     fontSize: 24,
                     color: kWhiteColor,
@@ -148,7 +148,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                   ),
                 ),
                 const Text(
-              "Members enjoy taking these courses",
+              "Based on your preferences",
               style: TextStyle(
                 fontSize: 18,
                 color: kWhiteColor,
@@ -405,7 +405,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "🚀 Hot Learning Paths",
+                  "🚀 All Categories",
                   style: TextStyle(
                     fontSize: 24,
                     color: kWhiteColor,
@@ -414,7 +414,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                   ),
                 ),
                 const Text(
-                  "Simplify your path to a career.",
+                  "Explore something new",
                   style: TextStyle(
                     fontSize: 18,
                     height: 2,

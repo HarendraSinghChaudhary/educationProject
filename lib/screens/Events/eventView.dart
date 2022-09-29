@@ -27,7 +27,7 @@ class EventView extends GetView<EventController>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Header(
-              des: "Tune in to a Live Power Hour, Watch On-Demand or Join a Slack Community", 
+              des: "Attend events and network with 1000+ other Ambitious members.", 
               heading: "Community", 
               image: "assets/images/OBJECTS.png"
               ),
@@ -215,7 +215,7 @@ class EventView extends GetView<EventController>{
                                 height: h*0.01,
                               ),
                               const Text(
-                                "Missed a Power Hour, No Biggie, We got you :)",
+                                "Replay a previous Power Hour",
                                 style: TextStyle(
                                   fontSize: 14,
                                   
