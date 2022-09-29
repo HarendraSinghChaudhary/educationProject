@@ -17,6 +17,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../screens/Events/eventView.dart';
 import '../screens/dark_course.dart';
+import '../screens/dark_learning_path.dart';
 import '../screens/home/newHome_live.dart';
 
 class BottomNavigationScreen extends StatefulWidget {

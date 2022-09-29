@@ -20,6 +20,7 @@ String ids ;
 DarkCourseDetail_Controller({required this.ids});
 Rxn<DarkCourseDetailModel> bigdata = Rxn<DarkCourseDetailModel>();
 RxBool isLoading = true.obs;
+RxInt viewCount= 0.obs;
 final scrollcontroller = ScrollController();
 String finishId = "";
 bool isread = false;

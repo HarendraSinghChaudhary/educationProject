@@ -57,7 +57,7 @@ bottomSheet(){
 
 Future<dynamic> gethotsubcatApi() async {
     print("token courses" + token.toString());
-
+    print(Preferences.pref!.getString("token").toString());
     isLoading(true);
 
     var request = http.get(
@@ -78,7 +78,7 @@ Future<dynamic> gethotsubcatApi() async {
       print("Response: " + response.body.toString() + "_");
       print("ResponseJSON: " + jsonRes.toString() + "_");
       msg = jsonRes["message"].toString();
-      jsonArray = jsonRes['subcategoryData'];
+      jsonArray = jsonRes['courseData'];
     });
 
     if (res.statusCode == 200) {
@@ -102,35 +102,36 @@ Future<dynamic> gethotsubcatApi() async {
             modelAgentSearch.image = jsonArray[i]["image"].toString();
           }
 
-          // var subcatList = jsonArray[i]["courseData"];
+          var subcatList = jsonArray[i]["courseData"];
 
 
-          // for (var j = 0; j < subcatList.length; j++) {
-          //   CoursesByCatModel courseModel = CoursesByCatModel();
+          for (var j = 0; j < subcatList.length; j++) {
+            CoursesByCatModel courseModel = CoursesByCatModel();
 
-          //   courseModel.id = subcatList[j]["_id"].toString();
-          //   courseModel.shortDescrition =
-          //       subcatList[j]["shortDescrition"].toString();
+            courseModel.id = subcatList[j]["_id"].toString();
+            courseModel.shortDescrition =
+                subcatList[j]["shortDescrition"].toString();
 
-          //   courseModel.image = subcatList[j]["image"].toString();
+            courseModel.image = subcatList[j]["image"].toString();
 
-          //   courseModel.description =
-          //       subcatList[j]["description"].toString();
-          //       courseModel.allLikes = subcatList[j]["allLikes"].toString();
+            courseModel.description =
+                subcatList[j]["description"].toString();
+                courseModel.allLikes = subcatList[j]["allLikes"].toString();
+                courseModel.viewCount = subcatList[j]['ViewsCount']??0;
 
         
-          //     courseModel.title = subcatList[j]["title"].toString();
-          //     courseModel.modules = subcatList[j]["allmodule"].length;
+              courseModel.title = subcatList[j]["title"].toString();
+              courseModel.modules = subcatList[j]["allmodule"].length;
           
 
-          // modelAgentSearch.courseListbyLearningPath.add(courseModel);
+          modelAgentSearch.courseListbyLearningPath.add(courseModel);
 
 
-          // print("title: "+subcatList[j]["title"].toString());
+          print("title: "+subcatList[j]["title"].toString());
 
 
           
-          // }
+          }
           
           hotsubcatList.add(modelAgentSearch);
 

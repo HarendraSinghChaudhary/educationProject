@@ -16,6 +16,7 @@ import 'dark_learning_path.dart';
 import 'flash_card.dart';
 
 class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
+  static String viewCount = "";
   DarkCourseDetail({Key? key}) : super(key: key);
   //  final String id ;
   // @override
@@ -179,7 +180,8 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                             color: kBlackColor.withOpacity(0.5),
                                           ),
                                           Text(
-                                            "  ${Get.find<DarkLearningPathController>().viewCount.value} ",
+                                            // "  ${Get.find<DarkLearningPathController>().viewCount.value} ",
+                                            DarkCourseDetail.viewCount,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w300,

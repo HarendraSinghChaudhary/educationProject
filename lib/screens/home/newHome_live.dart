@@ -188,6 +188,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                                       shareCourse =  coursesController
                                             .getHotCourseList[index].title
                                             .toString();
+                                            DarkCourseDetail.viewCount = coursesController.getHotCourseList[index].viewCount;
                                             Get.to(
                                               ()=>DarkCourseDetail(
                                             //   id: coursesController
@@ -445,7 +446,11 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                                       Get.to(
                               () => 
                               const DarkLearningPath2(),
-                              binding: DarkLearningBinding(courseListbyLearningPath: coursesController.hotsubcatList[index].courseListbyLearningPath, description: coursesController.hotsubcatList[index].description??"", image: coursesController.hotsubcatList[index].image.toString(), title: coursesController.hotsubcatList[index].subCategoryName.toString(),)
+                              binding: DarkLearningBinding(
+                                courseListbyLearningPath: coursesController.hotsubcatList[index].courseListbyLearningPath, 
+                                description: coursesController.hotsubcatList[index].description??"", 
+                                image: coursesController.hotsubcatList[index].image.toString(), 
+                                title: coursesController.hotsubcatList[index].subCategoryName.toString(),)
                               );
           
                                       // Get.find<LearningPathIndex>().isShowIndex = index.obs ;

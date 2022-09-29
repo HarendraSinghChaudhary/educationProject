@@ -210,7 +210,9 @@ class Learn extends GetView {
                                 InkWell(
                                   onTap: (){
                                     Get.find<CoursesController>().coursecount(list[index].id);
-                                    Get.find<DarkLearningPathController>().viewCount.value = list[index].viewCount!;
+                                    // Get.find<DarkLearningPathController>().viewCount.value = list[index].viewCount!;
+                                    DarkCourseDetail.viewCount = list[index].viewCount.toString();
+                                    
                                           Get.to(
                                             ()=>DarkCourseDetail(),
                                           binding: DarkCourseDetailBinding(id:
@@ -634,10 +636,11 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: (){
                                 controller.islearn.value= true;
                               },
+                              borderRadius: BorderRadius.circular(h*0.02),
                               child:  Center(
                                 child: Text(
                                   "LEARN",
@@ -649,10 +652,11 @@ class DarkLearningPath2 extends GetView<DarkLearningPathController> {
                             ),
                           ),
                           Expanded(
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: (){
                                 controller.islearn.value= false;
                               },
+                              borderRadius: BorderRadius.circular(h*0.02),
                               child:  Center(
                                 child: Text(
                                   "BUILD",
