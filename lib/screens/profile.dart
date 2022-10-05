@@ -44,10 +44,7 @@ class _SettingsState extends State<Profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (Platform.isAndroid) WebView.platform = AndroidWebView();
-    
-
-   
+    if (Platform.isAndroid) WebView.platform = AndroidWebView(); 
     getUserList();
 
   }
@@ -494,6 +491,11 @@ class _SettingsState extends State<Profile> {
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
+     if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
+
+    }
   
 
     setState(() {});

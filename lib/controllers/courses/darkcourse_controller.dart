@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/services/snackbar.dart';
 import 'package:Ambitious/testing/dammysotryview.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,10 @@ replace(){
 
 onpressed(){
   if(bigdata.value!.allmodule!.isEmpty){
-     Get.snackbar("No module availble", "");
+   showSnack(
+    "No Module Available",
+    "Modules Will Be Available Soon"
+   );
   }else if(!isCompleted.value){
     //  Get.snackbar("module completed", "");
     Get.back();

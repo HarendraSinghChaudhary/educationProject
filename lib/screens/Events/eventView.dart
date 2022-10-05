@@ -139,7 +139,7 @@ class EventView extends GetView<EventController>{
                                                   padding:  EdgeInsets.symmetric(vertical: h*0.01),
                                                   child: Text(
                                                     // "Breaking Down The Blockchain",
-                                                    data.powerHouseTitle.toString(),
+                                                    data.powerHoursTitle.toString(),
                                                     // textAlign: TextAlign.start,
                                                     style: const TextStyle(
                                                       fontSize:16,
@@ -267,7 +267,7 @@ class EventView extends GetView<EventController>{
                                               padding:  EdgeInsets.symmetric(vertical: h*0.01),
                                               child: Text(
                                                 // "Breaking Down The Blockchain",
-                                                data.powerHouseTitle.toString(),
+                                                data.powerHoursTitle.toString(),
                                                 textAlign: TextAlign.start,
                                                 style: const TextStyle(
                                                   fontSize:16,

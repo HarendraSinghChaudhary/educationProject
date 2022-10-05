@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../screens/onboarding/signIn/view/loginSignupview.dart';
 import '../../testing/navigation_testing.dart';
 
 class CreateUserController extends GetxController {

@@ -19,6 +19,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/list.dart';
+import '../../../../utils/sharedPreference.dart';
 
 class Category extends StatefulWidget {
   const Category({Key? key}) : super(key: key);
@@ -284,6 +285,11 @@ class _OnbaordingNotificationLikeState extends State<Category> {
     print("name: " + name.toString());
 
     token = pref.getString("name").toString();
+    if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
+
+    }
     print("name: " + name.toString());
   }
 }

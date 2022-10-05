@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/sharedPreference.dart';
 import 'courses_all.dart';
 class ProfileOne extends StatefulWidget {
   const ProfileOne({Key? key}) : super(key: key);
@@ -122,7 +123,11 @@ class _ProfileOneState extends State<ProfileOne> {
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
-  
+  if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
+
+    }
 
     setState(() {});
   }

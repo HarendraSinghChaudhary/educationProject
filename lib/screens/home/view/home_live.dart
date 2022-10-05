@@ -30,6 +30,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controllers/courses/darkcourse_controller.dart';
 import '../../../reusable/home_header.dart';
 import '../../../utils/list.dart';
+import '../../../utils/sharedPreference.dart';
 import '../../dark_course_detail.dart';
 
 class HomeLive extends StatefulWidget {
@@ -530,7 +531,11 @@ class _ProfileState extends State<HomeLive> {
     print("name: " + name.toString());
     firstName = pref.getString("firstname").toString();
     print("name: " + name.toString());
+if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
 
+    }
     setState(() {});
   }
 

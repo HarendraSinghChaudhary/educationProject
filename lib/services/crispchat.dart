@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/sharedPreference.dart';
+
 
 
 class CrispChat extends StatefulWidget {
@@ -73,7 +75,11 @@ class _MyAppState extends State<CrispChat> {
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
-  
+  if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
+
+    }
 
     setState(() {});
   }

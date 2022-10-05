@@ -100,7 +100,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           // "Influencer 101: Growing to 100K Followers",
-                          controller.data.value!.powerHouseTitle.toString(),
+                          controller.data.value!.powerHoursTitle.toString(),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 24,
@@ -179,7 +179,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
                              AddtoCalender(
                               starttime: controller.data.value!.startTime!.toLocal(),
                               endtime: controller.data.value!.startTime!.toLocal(),
-                              title: controller.data.value!.powerHouseTitle.toString(),
+                              title: controller.data.value!.powerHoursTitle.toString(),
                               des: controller.data.value!.joinUrl.toString(),
                              ),
                           ],
@@ -513,7 +513,7 @@ Future<bool> onWillPop()async{
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     // "Influencer 101: Growing to 100K Followers",
-                                    controller.data.value!.powerHouseTitle.toString(),
+                                    controller.data.value!.powerHoursTitle.toString(),
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontSize: 24,
@@ -629,7 +629,7 @@ Future<bool> onWillPop()async{
                                        AddtoCalender(
                                         starttime: controller.data.value!.startTime!.toLocal(),
                                         endtime: controller.data.value!.startTime!.toLocal(),
-                                        title: controller.data.value!.powerHouseTitle.toString(),
+                                        title: controller.data.value!.powerHoursTitle.toString(),
                                         des: controller.data.value!.joinUrl.toString(),
                                        ),
                                     ],

@@ -22,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
 import '../controllers/study_material/study_material_controller.dart';
+import '../utils/sharedPreference.dart';
 import 'dark_course_detail.dart';
 
 class QuizEnd extends StatefulWidget {
@@ -299,7 +300,11 @@ class _QuizendState extends State<QuizEnd> {
     print("email: " + email.toString());
     name = pref.getString("name").toString();
     print("name: " + name.toString());
+if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
 
+    }
     setState(() {});
   }
 }

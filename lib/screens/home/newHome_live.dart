@@ -79,10 +79,10 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
     clearMethod();
     Future.delayed(
       Duration(seconds: 2),(){
-        // var isthis = Preferences.pref?.get("isNotificationAllowed");
-        // if(isthis != true ){
+        var isthis = Preferences.pref?.get("isNotificationAllowed");
+        if(isthis != true ){
         askPermission();
-        // }
+        }
       }
     );
     // askPermission();
@@ -616,7 +616,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                                                       padding:  EdgeInsets.symmetric(vertical: h*0.01),
                                                       child: Text(
                                                         // "Breaking Down The Blockchain",
-                                                        data.powerHouseTitle.toString(),
+                                                        data.powerHoursTitle.toString(),
                                                         // textAlign: TextAlign.start,
                                                         style: const TextStyle(
                                                           fontSize:16,
@@ -743,7 +743,10 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
     print("name: " + name.toString());
     firstName = pref.getString("firstname").toString();
     print("name: " + name.toString());
-
+if(Preferences.pref!.getString("name").toString()=="null"){
+    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
+    print(name);
+    }
     setState(() {});
   }
 

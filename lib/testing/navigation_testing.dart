@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
 class SuperFaBottomNavigationBar extends StatelessWidget {
  
 
-  ProfileController profileController = Get.put(ProfileController(), permanent: false );
+  ProfileController profileController = Get.put(ProfileController(), permanent: false);
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,8 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                   
                   icon: Padding(
                      padding: const EdgeInsets.only(bottom: 5.0),
-                    child: SvgPicture.asset(
-                      'assets/images/home.svg',
+                    child: Image.asset(
+                      'assets/images/foryou.png',
                        width: 20,
                       color: profileController._selectedIndex == 0.obs ? kPrimaryColor : kWhiteColor,
                     ),
@@ -122,15 +122,12 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                   label: "For You",
                 ),
               
-              
-              
-              
                 BottomNavigationBarItem(
                     icon: Padding(
                       padding: const EdgeInsets.only(bottom: 5.0),
                       child: SvgPicture.asset(
-                        'assets/images/courses.svg',
-                         width: 18,
+                        'assets/images/search.svg',
+                         width: 20,
                         color: profileController._selectedIndex == 1.obs ? kPrimaryColor: kWhiteColor,
                       ),
                     ),
@@ -140,10 +137,10 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
 
                 BottomNavigationBarItem(
                     icon: Padding(
-                      padding: EdgeInsets.only(bottom: 4.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: SvgPicture.asset(
-                        'assets/images/profile.svg',
-                        width: 22,
+                        'assets/images/community.svg',
+                        width: 25,
                         color: profileController._selectedIndex == 2.obs ? kPrimaryColor : kWhiteColor,
                       ),
                     ),
@@ -162,9 +159,9 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
                 //     label: "Community"),
                 BottomNavigationBarItem(
                     icon: Padding(
-                     padding: const EdgeInsets.only(bottom: 3.0),
+                     padding: const EdgeInsets.only(bottom: 5.0),
                       child: SvgPicture.asset(
-                        'assets/images/profile.svg',
+                        'assets/images/profile2.svg',
                         width: 20,
                         color: profileController._selectedIndex == 3.obs ? kPrimaryColor : kWhiteColor,
                       ),

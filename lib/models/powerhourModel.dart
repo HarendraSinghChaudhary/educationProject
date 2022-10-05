@@ -39,7 +39,7 @@ class PowerHoursModel {
 class AllDatum {
     AllDatum({
         this.id,
-        this.powerHouseTitle,
+        this.powerHoursTitle,
         this.startTime,
         this.endTime,
         this.joinUrl,
@@ -49,7 +49,7 @@ class AllDatum {
     });
 
     String? id;
-    String? powerHouseTitle;
+    String? powerHoursTitle;
     DateTime? startTime;
     DateTime? endTime;
     String? joinUrl;
@@ -59,7 +59,7 @@ class AllDatum {
 
     factory AllDatum.fromJson(Map<String, dynamic> json) => AllDatum(
         id: json["_id"],
-        powerHouseTitle: json["PowerHouseTitle"],
+        powerHoursTitle: json["PowerHoursTitle"],
         startTime: DateTime.parse(json["startTime"]),
         endTime: DateTime.parse(json["EndTime"]),
         joinUrl: json["JoinUrl"],
@@ -70,7 +70,7 @@ class AllDatum {
 
     Map<String, dynamic> toJson() => {
         "_id": id,
-        "PowerHouseTitle": powerHouseTitle,
+        "PowerHoursTitle": powerHoursTitle,
         "startTime": startTime!.toIso8601String(),
         "EndTime": endTime!.toIso8601String(),
         "JoinUrl": joinUrl,
