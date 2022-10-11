@@ -22,7 +22,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
 
-   String token = "";
+   String id = "";
 
    @override
   void initState() {
@@ -56,20 +56,20 @@ class _SplashState extends State<Splash> {
 
     getLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString("token").toString();
+    id = prefs.getString("id").toString();
     var firstTime = true;
     firstTime = prefs.getBool("isFirstTimeLaunch")?? true;
-    print("id :" + token.toString() + "^");
+    print("id :" + id.toString() + "^");
 
     Future.delayed(const Duration(seconds: 2), () {
      
 
-      token.toString() == "" || token.toString() == "null" || token.toString() == ''
+      id.toString() == "" || id.toString() == "null" || id.toString() == ''
           ? firstTime == "null"  ?     firstTime?
      Get.offAll(()=>const Splash()):
      Get.offAll(()=>const Introduction()):
      Get.offAll(()=>const Introduction())
-          : token.toString() == '72' ? Get.offAll(()=>const Introduction())
+          : id.toString() == '72' ? Get.offAll(()=>const Introduction())
           :
            Get.offAll(()=>BottomNavigationScreen(index: 0.obs, learningPathIndex: 0.obs,));
     });
