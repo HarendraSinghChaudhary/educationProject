@@ -48,7 +48,7 @@ class _NameScreenState extends State<NameScreen> {
     print("id: "+id.toString());
     print("token======: " + token.toString());
     return Scaffold (
-      backgroundColor: kBackgroundColor,
+      backgroundColor: kcardblue,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -61,8 +61,8 @@ class _NameScreenState extends State<NameScreen> {
                 const Text(
                   "What's your name?",
                   style: TextStyle(
-                      color: kTitleColor,
-                      fontSize: 28,
+                      color: kWhiteColor,
+                      fontSize: 32,
                       fontWeight: FontWeight.w600),
                 ),
 
@@ -76,18 +76,20 @@ class _NameScreenState extends State<NameScreen> {
                      padding:EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                     child: TextFormField(
                       controller: firstNameController,
+                      keyboardType: TextInputType.name,
+                      textCapitalization: TextCapitalization.words,
                     style: const TextStyle(
-                        color: kTitleColor,
+                        color: kWhiteColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
                       contentPadding:
                           const EdgeInsets.only(top: 23, bottom: 23, left: 20),
-                      fillColor: Colors.white,
+                      fillColor: kdarkblue,
                       filled: true,
                       hintText: 'First Name',
                       hintStyle:
-                          const TextStyle(fontSize: 18, color: kTitleColor),
+                          const TextStyle(fontSize: 18, color: kWhiteColor),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide.none),
@@ -104,19 +106,20 @@ class _NameScreenState extends State<NameScreen> {
                     controller: lastNameController,
                     
          
+                      textCapitalization: TextCapitalization.words,
                     style: const TextStyle(
-                        color: kTitleColor,
+                        color: kWhiteColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
                       contentPadding:
                           const EdgeInsets.only(top: 23, bottom: 23, left: 20),
-                      fillColor: Colors.white,
+                      fillColor: kdarkblue,
                       filled: true,
                    
                       hintText: 'Last Name',
                       hintStyle:
-                          const TextStyle(fontSize: 18, color: kTitleColor),
+                          const TextStyle(fontSize: 18, color: kWhiteColor),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(15),

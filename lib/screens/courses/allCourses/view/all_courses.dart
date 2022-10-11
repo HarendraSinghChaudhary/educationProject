@@ -104,14 +104,14 @@ class _CoursesState extends State<AllCourses> {
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                                 _mixpanel.track('Course Started', properties: {
-                                          "Course Name" :  coursesController
-                                                      .allCourseList[index]
-                                                      .courseListbyCategory[
-                                                          j]
-                                                      .title
-                                                      .toString()
-                                         });
+                                        //          _mixpanel.track('Course Started', properties: {
+                                        //   "Course Name" :  coursesController
+                                        //               .allCourseList[index]
+                                        //               .courseListbyCategory[
+                                        //                   j]
+                                        //               .title
+                                        //               .toString()
+                                        //  });
 
                                               shareCourse =
                                                   coursesController

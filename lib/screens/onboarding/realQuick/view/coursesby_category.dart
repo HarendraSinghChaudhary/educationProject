@@ -121,12 +121,12 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
                   child: InkWell(
                     onTap: () {
 
-                        _mixpanel.track('Course Started', properties: {
-                                          "Course Name" :  coursesController
-                                                .coursesByCatList[index]
-                                                .title
-                                                .toString()
-                                         });
+                        // _mixpanel.track('Course Started', properties: {
+                        //                   "Course Name" :  coursesController
+                        //                         .coursesByCatList[index]
+                        //                         .title
+                        //                         .toString()
+                        //                  });
 Get.to(
                                             ()=>DarkCourseDetail(
                                           //   id: coursesController

@@ -330,12 +330,12 @@ class _LearningpathState extends State<LearningPath> {
                               return InkWell(
                                 onTap: () {
 
-                                          _mixpanel.track('Course Started', properties: {
-                                          "Course Name" :  selectedModel
-                                              .courseListbyLearningPath[index]
-                                              .title
-                                              .toString()
-                                         });
+                                        //   _mixpanel.track('Course Started', properties: {
+                                        //   "Course Name" :  selectedModel
+                                        //       .courseListbyLearningPath[index]
+                                        //       .title
+                                        //       .toString()
+                                        //  });
 
                                   shareCourse =  selectedModel
                                               .courseListbyLearningPath[index]

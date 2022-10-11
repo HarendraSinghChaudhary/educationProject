@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
 
     if (widget.index == 0.obs) {
 
-      clearMethod();
+      // clearMethod();
 
    
 

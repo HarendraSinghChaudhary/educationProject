@@ -58,7 +58,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
 
    clearMethod () async{
      await  _initMixpanel();
-    _mixpanel.track("Course Home Page");
+    _mixpanel.track("Home Page");
 
   }
 
@@ -91,6 +91,9 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
   }
   @override
   Widget build(BuildContext context) {
+    coursesController.learningPathApi();
+    coursesController.getHotCoursesApi();
+    eventController.getpowerHourData();
    return
    Obx(
     ()=> Scaffold(
@@ -179,11 +182,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                               onTap: () {
                                       Get.find<CoursesController>().coursecount(coursesController.getHotCourseList[index].id);
           
-                                           _mixpanel.track('Course Started', properties: {
-                                            "Course Name" : coursesController
-                                            .getHotCourseList[index].title
-                                            .toString()
-                                           });
+                                           
                             
                                       shareCourse =  coursesController
                                             .getHotCourseList[index].title

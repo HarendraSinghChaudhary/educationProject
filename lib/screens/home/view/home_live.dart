@@ -301,11 +301,11 @@ class _ProfileState extends State<HomeLive> {
                         children: [
                           InkWell(
                             onTap: () {
-                                         _mixpanel.track('Course Started', properties: {
-                                          "Course Name" : coursesController
-                                          .getHotCourseList[index].title
-                                          .toString()
-                                         });
+                                        //  _mixpanel.track('Course Started', properties: {
+                                        //   "Course Name" : coursesController
+                                        //   .getHotCourseList[index].title
+                                        //   .toString()
+                                        //  });
                       
                                     shareCourse =  coursesController
                                           .getHotCourseList[index].title

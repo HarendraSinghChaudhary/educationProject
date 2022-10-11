@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 // import 'package:story_view/controller/story_controller.dart';
 import '../../models/darkcoursemodel.dart';
 import '../../screens/dark_course_detail.dart';
@@ -31,6 +32,7 @@ String darkCourseId = "";
 String module_id = "";
 RxBool isCompleted = false.obs;
 Rx<bool> isstart = true.obs;
+RxBool ismixpanelsent = false.obs;
 String startid = "";
 String startTitle = "";
 replace(){
@@ -40,14 +42,28 @@ replace(){
     binding: DarkCourseDetailBinding(id: ids)
   );
 }
+late final Mixpanel mixpanel;
+Future<void> _initMixpanel() async {
+   mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
+  }
+
 @override
   void onInit() {
     // TODO: implement onInit
-    
+    _initMixpanel().whenComplete(() {
+mixpanel.track(
+        "Course Home Page",
+       properties: {
+        "Course Name":bigdata.value!.title.toString()
+       } 
+      );
+    });
     relode();
     darkCourseId = ids;
+    
     super.onInit();
   }
+
   relode(){
     getcourse_Module().whenComplete(() {
       for (var element in bigdata.value!.allmodule!) { 
@@ -60,21 +76,27 @@ replace(){
       update();
     });
   }
-  checkCopletion(){
-    print("start");
-    if(bigdata.value!.allmodule!.every((value){
+  firstcheck(){
+      bool what = bigdata.value!.allmodule!.every((value){
        if(value.IsCompleated!){
-          return true;
+
+        return true;
        }else{
         return false;
        }
-    })){
+        });
+       return what;
+  }
+  checkCopletion(){
+    print("start");
+    
+    if(firstcheck()){
       print("1212121212");
-      isCompleted(false);
+      isCompleted.value = false;
 
     }else{
       print("123123123");
-      isCompleted(true);
+      isCompleted.value=true;
     }
     // for (var element in bigdata.value!.allmodule!) { 
     //     if(!element.IsCompleated!){
@@ -101,7 +123,17 @@ replace(){
   @override
   // TODO: implement onDelete
   InternalFinalCallback<void> get onDelete => super.onDelete;
-
+Future<bool> goback()async{
+  if(!isCompleted.value){
+mixpanel.track(
+        "Course Finished",
+       properties: {
+        "Course Name":bigdata.value!.title.toString()
+       } 
+      );
+  }
+  return true;
+}
 onpressed(){
   if(bigdata.value!.allmodule!.isEmpty){
    showSnack(
@@ -110,6 +142,12 @@ onpressed(){
    );
   }else if(!isCompleted.value){
     //  Get.snackbar("module completed", "");
+    mixpanel.track(
+        "Course Finished",
+       properties: {
+        "Course Name":bigdata.value!.title.toString()
+       } 
+      );
     Get.back();
   } else {
 for (var element in bigdata.value!.allmodule!) { 
