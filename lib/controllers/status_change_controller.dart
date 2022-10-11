@@ -42,7 +42,8 @@ class StatusChangeController extends GetxController {
     var request = http.post(
       Uri.parse(RestDatasource.MODULESTATUSCHANGEAPI),
       body: {
-        "moduleid":id
+        "moduleid":id,
+        "userid":Preferences.pref!.getString("id").toString()
       },
       headers: {
         "Authorization":
@@ -56,7 +57,7 @@ class StatusChangeController extends GetxController {
     var jsonRes;
     var res;
 
-    await request.then((http.Response response) {
+    await request.then((http.Response response)async {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
@@ -71,7 +72,7 @@ class StatusChangeController extends GetxController {
 
       if (jsonRes["status"].toString() == "true") {
 
-     cont.getcourse_Module().whenComplete(() {
+    await cont.getcourse_Module().whenComplete(() {
      cont.checkCopletion();
      });
      cont.isstart(false);

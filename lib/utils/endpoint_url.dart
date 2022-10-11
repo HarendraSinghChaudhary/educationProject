@@ -9,7 +9,7 @@
 class RestDatasource {
   
 
-  static final BASE_URL = "http://34.199.211.207:8700/api/";
+  static final BASE_URL = "http://52.0.48.251:8700/api/";
 
   static final CREATEUSER = BASE_URL + "createuser";
   static final REGISTER_URL = BASE_URL + "Createnewuser";

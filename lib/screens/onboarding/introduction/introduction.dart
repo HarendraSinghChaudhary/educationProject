@@ -333,8 +333,39 @@ class _IntroductionState extends State<Introduction> {
             
             
                               // : Container(),
-            
-            
+            InkWell(
+                              onTap: () {
+                                controller.islogin.value = true;
+                                showBottumSheet(
+                                  LoginSignUp()
+                                );
+                                // Get.bottomSheet(
+                                //   const SentMail(),
+                                //   isScrollControlled: true
+                                // );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(left: 2),
+                                height: 56,
+                                width: 277,
+                                alignment: Alignment.center,
+                                // decoration: BoxDecoration(
+                                //   borderRadius: BorderRadius.circular(2),
+                                //   color: Color(0xff4f86eb),
+                                // ),
+                                child: Text(
+                                  'SIGN IN WITH EMAIL',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+            SizedBox(
+              height: h*0.02,
+            )
             
                  
             

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/screens/onboarding/signIn/view/loginSignupview.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -127,7 +128,7 @@ isLoading.value = false;
           showSnack("Incorrect Email or Password",data["msg"]);
         }
       }else{
-        showSnack(data["msg"]);
+        showSnack("Error",data["msg"]);
       }
     } catch (e) {
 isLoading.value = false;
@@ -264,26 +265,37 @@ showSnack("Something went wrong please try again later");
       var data = jsonDecode(response.body);
       if(response.statusCode ==200){
 
-showSnack("Update Password Successfully",data["message"]);
+        // Get.snackbar("Update Password Successfully",data["message"]);
+        // Get.back();
+        pass.clear();
+        conpass.clear();
+        return data["message"];
+
+await showSnack("Update Password Successfully",data["message"]);
+// .then((value) {
+//   Get.back();
+// // islogin.value = true;
+// // showBottumSheet(const LoginSignUp());
+// });
+
+await testing();
 print("msg show");
-isLoading.value = false;
+isLoading(false);
 print("loader going to false");
 pass.clear();
 conpass.clear();
 mail.clear();
 print("controller clear ho rhe hh");
-islogin.value = true;
-Get.back();
+
 print("get back ");
-showBottumSheet(const LoginSignUp());
 print("go to login");
       }else{
-isLoading.value = false;
+isLoading(false);
 showSnack(data["message"]);
 
       }
     } catch (e) {
-isLoading.value = false;
+isLoading(false);
 print("Error ===== $e");
 showSnack("Something went wrong please try again later");
       
@@ -327,5 +339,11 @@ showSnack("Something went wrong please try again later");
       
     }
   }
+
+Future testing ()async{
+  Get.back();
+  islogin.value = true;
+showBottumSheet(const LoginSignUp());
+}
 
 }

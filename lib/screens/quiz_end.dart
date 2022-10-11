@@ -339,12 +339,13 @@ class LessonEnd extends GetView<StatusChangeController>{
 
 
                     InkWell(
-                      onTap: () {
+                      onTap: () async{
                       //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
-                   Get.delete<StudyMaterialController>();
+                 await  Get.delete<StudyMaterialController>();
                    if(!controller.cont.isread){
-                    controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
+                 await   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
                   controller.cont.checkCopletion();
+                  Get.back();
                    });
                    }
                    
@@ -352,7 +353,6 @@ class LessonEnd extends GetView<StatusChangeController>{
                   //   ()=>DarkCourseDetail(),
                   //   binding: DarkCourseDetailBinding(id: controller.darkcourseId)
                   // );
-                  Get.back();
                        
                       },
                       child: const Icon(

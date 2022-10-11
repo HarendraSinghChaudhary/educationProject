@@ -24,7 +24,7 @@ class LoginSignUp extends StatefulWidget {
 class _LoginSignUpState extends State<LoginSignUp> {
   LoginSignUpConroller controller = Get.put<LoginSignUpConroller>(LoginSignUpConroller());
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return
     Obx(
       ()=>Container(
@@ -282,7 +282,9 @@ class Login extends GetView<LoginSignUpConroller> {
                 text: "LOGIN", 
                 press: ()async{
                   if(formkey.currentState!.validate()){
+                    controller.isLoading.value = true;
                    await controller.login(controller.mail.text, controller.pass.text);
+                    controller.isLoading.value = false;
 
                   }
                 },
@@ -608,7 +610,14 @@ class _ResetPassState extends State<ResetPass> {
                     if(formkey.currentState!.validate()){
                       controller.isLoading.value = true;
                     //  await controller.login(controller.mail.text, controller.pass.text);
-      controller.resetPassword();
+      controller.resetPassword().then((value)async {
+        if(value!=null){
+          await showSnack("Update Password Successfully",value);
+          Navigator.pop(context);
+          controller.islogin.value = true;
+          showBottumSheet(const LoginSignUp());
+        }
+      });
       controller.isLoading.value = false;
                     }
                   },
@@ -667,7 +676,7 @@ class _SentMailState extends State<SentMail> {
                ),
             ),
              Container(
-               padding: const EdgeInsets.only(left: 2,),
+              //  padding:  EdgeInsets.only(left: w*0.02,right: w*0.02),
                height: 56,
                width: 277,
                alignment: Alignment.center,
@@ -676,11 +685,11 @@ class _SentMailState extends State<SentMail> {
                //   color: Color(0xff4f86eb),
                // ),
                child:    Text(
-                'Enter your email and we will send you \na otp to reset your password'.toUpperCase(),
+                'Enter your email and we will send you a otp to reset your password'.toUpperCase(),
                 textAlign: TextAlign.center,
                  style: const TextStyle(
                    color: Colors.white,
-                   fontSize: 16,
+                   fontSize: 13,
                    fontWeight: FontWeight.w600,
                   //  decoration: TextDecoration.underline
                  ),
