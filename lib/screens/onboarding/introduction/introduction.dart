@@ -130,7 +130,7 @@ class _IntroductionState extends State<Introduction> {
           
 
            Container(
-            height: Get.height * 0.42,
+            height: Get.height * 0.45,
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 40),
             
@@ -139,7 +139,7 @@ class _IntroductionState extends State<Introduction> {
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20)
               ),
-              color: Colors.white,
+              color: kcardblue,
             ),
 
 
@@ -151,6 +151,7 @@ class _IntroductionState extends State<Introduction> {
                  SizedBox(height: 20,),
             
                   RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(
                     text: "Career Growth,",
                     style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
@@ -181,9 +182,10 @@ class _IntroductionState extends State<Introduction> {
             
                    SizedBox(height: 10,),
             
-                     Text("Learn, Build, and Grow with \n"
+                     Text("Learn, Build, and Grow with"
                      "1000+ other Ambitious learners",
-                    style: TextStyle(color: kSubTitleColor, fontSize: 16,
+                     textAlign: TextAlign.center,
+                    style: TextStyle(color: kWhiteColor, fontSize: 16,
                     height: 1.5, fontWeight: FontWeight.w400 ),
                    
                    ),
@@ -356,7 +358,7 @@ class _IntroductionState extends State<Introduction> {
                                 child: Text(
                                   'SIGN IN WITH EMAIL',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: kWhiteColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -364,7 +366,7 @@ class _IntroductionState extends State<Introduction> {
                               ),
                             ),
             SizedBox(
-              height: h*0.02,
+              height: h*0.04,
             )
             
                  

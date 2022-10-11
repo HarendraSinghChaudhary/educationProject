@@ -52,12 +52,18 @@ Future<UserCredential> signInWithApple() async {
     ],
     nonce: nonce,
   );
-
+  var test = appleCredential;
+  var tok = appleCredential.authorizationCode;
   // Create an `OAuthCredential` from the credential returned by Apple.
   final oauthCredential = OAuthProvider("apple.com").credential(
     idToken: appleCredential.identityToken,
     rawNonce: rawNonce,
+    accessToken: appleCredential.authorizationCode,
+    secret: appleCredential.userIdentifier
+
+    // secret: appleCredential./
   );
+  oauthCredential.secret;
   createUserController.isSubmitting(false);
 
   // Sign in the user with Firebase. If the nonce we generated earlier does
