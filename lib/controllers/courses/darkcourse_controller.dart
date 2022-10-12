@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Ambitious/main.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:Ambitious/testing/dammysotryview.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -42,10 +43,7 @@ replace(){
     binding: DarkCourseDetailBinding(id: ids)
   );
 }
-late final Mixpanel mixpanel;
-Future<void> _initMixpanel() async {
-   mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
+
 
 @override
   void onInit() {
@@ -53,13 +51,13 @@ Future<void> _initMixpanel() async {
    
     relode();
     darkCourseId = ids;
-    _initMixpanel();
+
     super.onInit();
   }
 
   relode(){
     getcourse_Module().whenComplete(() {
-mixpanel.track(
+Mixpanell.mixpanel!.track(
         "Course Home Page",
        properties: {
         "Course Name":bigdata.value!.title.toString(),
@@ -125,7 +123,7 @@ mixpanel.track(
   InternalFinalCallback<void> get onDelete => super.onDelete;
 Future<bool> goback()async{
   if(!isCompleted.value){
-mixpanel.track(
+Mixpanell.mixpanel!.track(
         "Course Finished",
        properties: {
         "Course Name":bigdata.value!.title.toString(),
@@ -143,7 +141,7 @@ onpressed(){
    );
   }else if(!isCompleted.value){
     //  Get.snackbar("module completed", "");
-    mixpanel.track(
+    Mixpanell.mixpanel!.track(
         "Course Finished",
        properties: {
         "Course Name":bigdata.value!.title.toString(),

@@ -33,12 +33,7 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
   CoursesController coursesController =
       Get.put(CoursesController(), permanent: true);
 
-        late final Mixpanel _mixpanel;
 
-  Future<void> _initMixpanel() async {
-    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-        optOutTrackingDefault: false);
-  }
 
 
 
@@ -46,7 +41,6 @@ class _OnboardingNextPageState extends State<CoursesbyCategory> {
 
   @override
   void initState() {
-     _initMixpanel();
     // TODO: implement initState
     super.initState();
     coursesController.coursesByCatApi(widget.catId.toString());

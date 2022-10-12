@@ -17,6 +17,7 @@ import '../../main.dart';
 import '../../models/powerhourModel.dart';
 import '../../services/firbase.dart';
 import '../../services/launcher.dart';
+import '../../services/mixpanel.dart';
 import '../../services/web_view.dart';
 import '../../utils/endpoint_url.dart';
 import '../Events/CurrentEvent/currentEvent.dart';
@@ -46,19 +47,10 @@ class _NewHomeLiveState extends State<NewHomeLive> {
       Get.put(CoursesController(), permanent: false);
       EventController eventController = Get.put(EventController(),permanent: false);
 
-         late final Mixpanel _mixpanel;
-
-
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
-
-
 
 
    clearMethod () async{
-     await  _initMixpanel();
-    _mixpanel.track(
+    Mixpanell.mixpanel!.track(
       "Home Page",
       properties: {
         "Email":Preferences.pref!.get("email")

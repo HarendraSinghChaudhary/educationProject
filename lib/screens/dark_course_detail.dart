@@ -12,6 +12,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../controllers/courses/darkcourse_controller.dart';
 import '../controllers/study_material/study_material_controller.dart';
 import '../models/darkcoursemodel.dart';
+import '../services/mixpanel.dart';
 import '../testing/dammysotryview.dart';
 import '../utils/constant.dart';
 import '../utils/sharedPreference.dart';
@@ -106,7 +107,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                   onPressed: (){
                                     Get.back();
                                     if(!controller.isCompleted.value){
-                                      controller.mixpanel.track(
+                                      Mixpanell.mixpanel!.track(
                                        "Course Finished",
                                       properties: {
                                        "Course Name":controller.bigdata.value!.title.toString(),
@@ -250,7 +251,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                     press: () {
                                       // Get.to(()=> StoryViews());
                                       if(controller.isstart.value){
-                                        controller.mixpanel.track('Course Started', properties: {
+                                        Mixpanell.mixpanel!.track('Course Started', properties: {
                                               "Course Name" : controller.bigdata.value!.title.toString(),
                                               "Email":Preferences.pref!.get("email")
                                               

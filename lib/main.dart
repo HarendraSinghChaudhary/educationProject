@@ -9,6 +9,7 @@ import 'package:Ambitious/screens/courses_empty_screen.dart';
 import 'package:Ambitious/screens/dark_course.dart';
 import 'package:Ambitious/screens/dark_course_detail.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/notification_services.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -57,6 +58,8 @@ void main() async {
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
+  // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
   // await Intercom.instance.initialize(
   //   'com.educationondemand',
   //   androidApiKey: 'androidApiKey',

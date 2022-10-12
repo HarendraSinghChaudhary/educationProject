@@ -22,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/courses/darkcourse_controller.dart';
 import '../controllers/study_material/study_material_controller.dart';
+import '../services/mixpanel.dart';
 import '../utils/sharedPreference.dart';
 import 'dark_course_detail.dart';
 
@@ -346,7 +347,7 @@ class LessonEnd extends GetView<StatusChangeController>{
                    if(!controller.cont.isread){
                  await   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
                   controller.cont.checkCopletion();
-                  controller.mixpanel.track(
+                  Mixpanell.mixpanel!.track(
                     "Module Finished",
                     properties: {
                       "Course Name":controller.cont.bigdata.value!.title,
@@ -501,7 +502,7 @@ class LessonEnd extends GetView<StatusChangeController>{
 
                   //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
                   //  Get.delete<DarkCourseDetail_Controller>();
-controller.mixpanel.track(
+Mixpanell.mixpanel!.track(
                     "Module Finished",
                     properties: {
                       "Course Name":controller.cont.bigdata.value!.title,

@@ -383,17 +383,10 @@ class _CustomStoryViewState extends State<CustomStoryView> {
   
   ScrollController scrollcontroller = ScrollController();
 
-  late final Mixpanel _mixpanel;
-  RxBool play = false.obs;
-
-  Future<void> _initMixpanel() async {
-    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-        optOutTrackingDefault: false);
-  }
+  
 
   @override
   void initState() {
-    _initMixpanel();
     controller.studyMaterialApi(widget.moduleId);
     print("start");
 // scrollcontroller.addListener(() { 

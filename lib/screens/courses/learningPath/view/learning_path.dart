@@ -31,14 +31,6 @@ class _LearningpathState extends State<LearningPath> {
 
 
 
-    late final Mixpanel _mixpanel;
-
-
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
-
-
   LearningPathModel selectedModel = LearningPathModel();
   final dataKey = GlobalKey();
   List keys = [];
@@ -48,7 +40,7 @@ class _LearningpathState extends State<LearningPath> {
   @override
   void initState() {
 
-     _initMixpanel();
+
   print("111====="+widget.indexPath.toString());
     super.initState();
  for (int i = 0; i < Get.find<CoursesController>().learningPathList.length; i++) {

@@ -19,6 +19,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../../../controllers/signup_controller.dart/loginSignUp_Controller.dart';
+import '../../../services/mixpanel.dart';
 
 
 
@@ -81,10 +82,6 @@ class _IntroductionState extends State<Introduction> {
 
   CreateUserController createUserController =
       Get.put(CreateUserController(), permanent: true);
-          late final Mixpanel _mixpanel;
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
   @override
   void initState() {
     // TODO: implement initState
@@ -94,8 +91,7 @@ class _IntroductionState extends State<Introduction> {
 
 
   clearMethod () async{
-     await  _initMixpanel();
-    _mixpanel.track("Welcome Page");
+    Mixpanell.mixpanel!.track("Welcome Page");
 
   }
 

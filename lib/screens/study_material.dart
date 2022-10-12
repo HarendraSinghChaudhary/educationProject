@@ -8,6 +8,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../services/mixpanel.dart';
+
 class StudyMaterial extends StatefulWidget {
   String title, id;
   StudyMaterial({Key? key, required this.title, required this.id})
@@ -24,19 +26,14 @@ class _MyHomePageState extends State<StudyMaterial> {
   StudyMaterialController studyMaterialController =
       Get.put(StudyMaterialController(), permanent: false);
 
-  late final Mixpanel _mixpanel;
-
-  Future<void> _initMixpanel() async {
-    _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-        optOutTrackingDefault: false);
-  }
+  
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     studyMaterialController.studyMaterialApi(widget.id);
-    _initMixpanel();
+
   }
 
   @override
@@ -135,11 +132,11 @@ class _MyHomePageState extends State<StudyMaterial> {
                             pageNumber = _curr / 4;
                             print(pageNumber);
 
-                            _mixpanel.track('Flashcard Swipe');
+                            Mixpanell.mixpanel!.track('Flashcard Swipe');
                           });
 
                           if (pageNumber == 4) {
-                            _mixpanel.track(' Course Finished');
+                            Mixpanell.mixpanel!.track(' Course Finished');
                           }
                         },
                         scrollDirection: Axis.vertical,

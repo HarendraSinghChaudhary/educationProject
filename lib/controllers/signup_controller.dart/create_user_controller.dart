@@ -11,31 +11,19 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../screens/onboarding/signIn/view/loginSignupview.dart';
+import '../../services/mixpanel.dart';
 import '../../testing/navigation_testing.dart';
 
 class CreateUserController extends GetxController {
 
-     late final Mixpanel _mixpanel;
-
-
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
 
 
 
-
-   clearMethod () async{
-     await  _initMixpanel();
-   
-
-  }
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    clearMethod();
   }
 
   
@@ -261,17 +249,17 @@ return true;
         prefs.commit();
 
 
-        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
-        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
-        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         _mixpanel.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
+        Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
+        Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
+        Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+         Mixpanell.mixpanel!.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
 
 
 
 
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
-        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
+        var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
 
          var splitData = name.split(' ');
         print("splitData: "+splitData.toString());
@@ -406,16 +394,16 @@ return true;
         prefs.commit();
 
 
-        _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
-        _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
-        _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+        Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
+        Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
+        Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+         Mixpanell.mixpanel!.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
 
 
 
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
-        var trying = _mixpanel.identify(jsonRes["user"]["email"].toString()) ;
+        var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
 
  
 // chackuserapi(email).then((value) {

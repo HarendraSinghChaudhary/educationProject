@@ -29,6 +29,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../controllers/courses/darkcourse_controller.dart';
 import '../../../reusable/home_header.dart';
+import '../../../services/mixpanel.dart';
 import '../../../utils/list.dart';
 import '../../../utils/sharedPreference.dart';
 import '../../dark_course_detail.dart';
@@ -52,19 +53,12 @@ class _ProfileState extends State<HomeLive> {
   CoursesController coursesController =
       Get.put(CoursesController(), permanent: false);
 
-         late final Mixpanel _mixpanel;
-
-
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
-
 
 
 
    clearMethod () async{
-     await  _initMixpanel();
-    _mixpanel.track("Course Home Page");
+
+    Mixpanell.mixpanel!.track("Course Home Page");
 
   }
 

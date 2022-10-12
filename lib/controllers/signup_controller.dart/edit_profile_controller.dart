@@ -13,33 +13,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../services/mixpanel.dart';
 import '../../utils/sharedPreference.dart';
 
 class EditProfileController extends GetxController {
 
-     late final Mixpanel _mixpanel;
-
-
-
-
-  Future<void> _initMixpanel() async {
-   _mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);
-  }
-
-
-
-
-   clearMethod () async{
-     await  _initMixpanel();
-   
-
-  }
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    clearMethod();
+
   }
 
   
@@ -132,15 +116,15 @@ class EditProfileController extends GetxController {
         prefs.commit();
 
 
-        _mixpanel.alias("New user", jsonRes["data"]["email"].toString(),);
-        _mixpanel.identify(jsonRes["data"]["email"].toString(), ) ;
-        _mixpanel.getPeople().set("Name", jsonRes["data"]["name"].toString(),  );
-         _mixpanel.getPeople().set("Email", jsonRes["data"]["email"].toString(),  );
+        Mixpanell.mixpanel!.alias("New user", jsonRes["data"]["email"].toString(),);
+        Mixpanell.mixpanel!.identify(jsonRes["data"]["email"].toString(), ) ;
+        Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["data"]["name"].toString(),  );
+         Mixpanell.mixpanel!.getPeople().set("Email", jsonRes["data"]["email"].toString(),  );
 
 
 
 
-        var trying = _mixpanel.identify(jsonRes["data"]["email"].toString()) ;
+        var trying = Mixpanell.mixpanel!.identify(jsonRes["data"]["email"].toString()) ;
 
   
      
