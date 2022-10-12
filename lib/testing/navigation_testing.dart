@@ -61,11 +61,11 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
    
   }
 
-  clearMethod () async{
-     await  _initMixpanel();
-    _mixpanel.track("Course Home Page");
+  // clearMethod () async{
+  //    await  _initMixpanel();
+  //   _mixpanel.track("Course Home Page");
 
-  }
+  // }
 
 
   @override

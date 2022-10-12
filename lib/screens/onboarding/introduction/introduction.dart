@@ -402,6 +402,7 @@ class _IntroductionState extends State<Introduction> {
                   SizedBox(height: 20,),
             
                   RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(
                     text: "Career Growth,",
                     style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
@@ -496,18 +497,20 @@ class _IntroductionState extends State<Introduction> {
                                         width: 10,
                                       ),
                                     ),
-                                   const  Padding(
-                                      padding:  EdgeInsets.only(
-                                          left: 10, right: 25),
+
+                                    SizedBox(width: w * 0.05,),
+
+                                    Expanded(
                                       child: Text(
-                                        'Sign in with Google',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
+                                          'Sign in with Google',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
-                                      ),
                                     ),
+                                
                                   ],
                                 ),
                               ),

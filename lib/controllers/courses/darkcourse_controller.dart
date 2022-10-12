@@ -50,14 +50,7 @@ Future<void> _initMixpanel() async {
 @override
   void onInit() {
     // TODO: implement onInit
-    _initMixpanel().whenComplete(() {
-mixpanel.track(
-        "Course Home Page",
-       properties: {
-        "Course Name":bigdata.value!.title.toString()
-       } 
-      );
-    });
+   
     relode();
     darkCourseId = ids;
     
@@ -66,6 +59,12 @@ mixpanel.track(
 
   relode(){
     getcourse_Module().whenComplete(() {
+mixpanel.track(
+        "Course Home Page",
+       properties: {
+        "Course Name":bigdata.value!.title.toString()
+       } 
+      );
       for (var element in bigdata.value!.allmodule!) { 
         if(element.IsCompleated!){
           isstart(false);
