@@ -360,7 +360,7 @@ return true;
           "name": name.toString().trim(),
           "firstname": firstName.toString().trim(),
           "lastname": lastName.toString().trim(),
-          "signintype": "Google SignIn",
+          "signintype": "Apple SignIn",
           
         });
 
