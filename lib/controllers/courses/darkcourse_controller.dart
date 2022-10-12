@@ -53,7 +53,7 @@ Future<void> _initMixpanel() async {
    
     relode();
     darkCourseId = ids;
-    
+    _initMixpanel();
     super.onInit();
   }
 
@@ -62,7 +62,8 @@ Future<void> _initMixpanel() async {
 mixpanel.track(
         "Course Home Page",
        properties: {
-        "Course Name":bigdata.value!.title.toString()
+        "Course Name":bigdata.value!.title.toString(),
+        "Email":Preferences.pref!.get("email")
        } 
       );
       for (var element in bigdata.value!.allmodule!) { 
@@ -127,7 +128,8 @@ Future<bool> goback()async{
 mixpanel.track(
         "Course Finished",
        properties: {
-        "Course Name":bigdata.value!.title.toString()
+        "Course Name":bigdata.value!.title.toString(),
+        "Email":Preferences.pref!.get("email")
        } 
       );
   }
@@ -144,7 +146,9 @@ onpressed(){
     mixpanel.track(
         "Course Finished",
        properties: {
-        "Course Name":bigdata.value!.title.toString()
+        "Course Name":bigdata.value!.title.toString(),
+        "Email":Preferences.pref!.get("email")
+
        } 
       );
     Get.back();

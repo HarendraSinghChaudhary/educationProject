@@ -58,7 +58,12 @@ class _NewHomeLiveState extends State<NewHomeLive> {
 
    clearMethod () async{
      await  _initMixpanel();
-    _mixpanel.track("Home Page");
+    _mixpanel.track(
+      "Home Page",
+      properties: {
+        "Email":Preferences.pref!.get("email")
+      }
+      );
 
   }
 

@@ -14,6 +14,7 @@ import '../controllers/study_material/study_material_controller.dart';
 import '../models/darkcoursemodel.dart';
 import '../testing/dammysotryview.dart';
 import '../utils/constant.dart';
+import '../utils/sharedPreference.dart';
 import 'dark_learning_path.dart';
 import 'flash_card.dart';
 
@@ -108,7 +109,8 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                       controller.mixpanel.track(
                                        "Course Finished",
                                       properties: {
-                                       "Course Name":controller.bigdata.value!.title.toString()
+                                       "Course Name":controller.bigdata.value!.title.toString(),
+                                       "Email":Preferences.pref!.get("email")
                                       } 
                                      );
     
@@ -249,7 +251,9 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                       // Get.to(()=> StoryViews());
                                       if(controller.isstart.value){
                                         controller.mixpanel.track('Course Started', properties: {
-                                              "Course Name" : controller.bigdata.value!.title.toString()
+                                              "Course Name" : controller.bigdata.value!.title.toString(),
+                                              "Email":Preferences.pref!.get("email")
+                                              
                                              });
                                       }
                                      controller.onpressed();

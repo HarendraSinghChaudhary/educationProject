@@ -264,7 +264,7 @@ return true;
         _mixpanel.alias("New user", jsonRes["user"]["email"].toString(),);
         _mixpanel.identify(jsonRes["user"]["email"].toString(), ) ;
         _mixpanel.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         _mixpanel.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+         _mixpanel.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
 
 
 

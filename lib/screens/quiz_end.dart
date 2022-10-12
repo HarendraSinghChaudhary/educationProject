@@ -341,10 +341,19 @@ class LessonEnd extends GetView<StatusChangeController>{
                     InkWell(
                       onTap: () async{
                       //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
+                      
                  await  Get.delete<StudyMaterialController>();
                    if(!controller.cont.isread){
                  await   controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
                   controller.cont.checkCopletion();
+                  controller.mixpanel.track(
+                    "Module Finished",
+                    properties: {
+                      "Course Name":controller.cont.bigdata.value!.title,
+                      "Module Name":controller.cont.lessonTitle,
+                      "Email":Preferences.pref!.getString("email")
+                    }
+                    );
                   Get.back();
                    });
                    }
@@ -492,6 +501,14 @@ class LessonEnd extends GetView<StatusChangeController>{
 
                   //  Get.to(()=>BottomNavigationScreen(index: 1.obs, learningPathIndex: 0.obs));
                   //  Get.delete<DarkCourseDetail_Controller>();
+controller.mixpanel.track(
+                    "Module Finished",
+                    properties: {
+                      "Course Name":controller.cont.bigdata.value!.title,
+                      "Module Name":controller.cont.lessonTitle,
+                      "Email":Preferences.pref!.getString("email")
+                    }
+                    );
                    Get.delete<StudyMaterialController>();
                    if(!controller.cont.isread){
                    controller.statusChangeApi(controller.cont.finishId).whenComplete(() {
@@ -499,6 +516,7 @@ class LessonEnd extends GetView<StatusChangeController>{
                   // controller.cont.checkCopletion();
                   //   });
                   controller.cont.checkCopletion();
+                  
                   // Get.off(
                   //   ()=>DarkCourseDetail(),
                   //                         binding: DarkCourseDetailBinding(id:

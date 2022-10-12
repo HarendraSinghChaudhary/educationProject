@@ -10,6 +10,7 @@ import 'package:Ambitious/models/category_model.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import 'courses/darkcourse_controller.dart';
 class LessonEndBinding implements Bindings{
@@ -26,10 +27,15 @@ class StatusChangeController extends GetxController {
    String title = "";
    String id = "";
    String darkcourseId = "";
+   late final Mixpanel mixpanel;
+Future<void> _initMixpanel() async {
+  //  mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);  // production mixpanel token
+   mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);   // development mixpanel token
+  }
    @override
   void onInit() {
     // TODO: implement onInit
-    
+    _initMixpanel();
     darkcourseId = cont.darkCourseId;
     cont.relode();
     super.onInit();
