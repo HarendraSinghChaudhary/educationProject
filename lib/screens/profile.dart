@@ -22,6 +22,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../services/firbase.dart';
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -398,6 +400,7 @@ class _SettingsState extends State<Profile> {
 
         ),
                               onPressed: () async {
+                                  await  deleteDatatofirebase();
                                 createUserController.deleteuserapi().then((value) {
                                   if(value){
                                     logout();

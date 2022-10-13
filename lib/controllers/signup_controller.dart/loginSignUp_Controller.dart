@@ -171,7 +171,7 @@ Future otpVerify(String otpp)async{
             const ResetPass()
           )
         }:
-        
+          otp.clear();
         Get.offAll(
           ()=>BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
         );

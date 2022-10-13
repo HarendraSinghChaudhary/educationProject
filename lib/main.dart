@@ -58,8 +58,8 @@ void main() async {
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
-  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
-  // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
+  // Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
+  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
   // await Intercom.instance.initialize(
   //   'com.educationondemand',
   //   androidApiKey: 'androidApiKey',
