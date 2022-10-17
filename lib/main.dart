@@ -1,56 +1,57 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:Ambitious/screens/Events/eventView.dart';
-import 'package:Ambitious/screens/course_detail.dart';
-import 'package:Ambitious/screens/courses/courseHeader/view/course_header.dart';
-import 'package:Ambitious/screens/courses/wip-course-player-new.dart';
-import 'package:Ambitious/screens/courses_all.dart';
-import 'package:Ambitious/screens/courses_empty_screen.dart';
-import 'package:Ambitious/screens/dark_course.dart';
-import 'package:Ambitious/screens/dark_course_detail.dart';
-import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
+import 'dart:collection';
+
 import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/notification_services.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
-import 'package:Ambitious/testing/navigation_testing.dart';
-
 import 'package:Ambitious/utils/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:Ambitious/screens/flash_card.dart';
-
-import 'package:Ambitious/screens/home/view/home_live.dart';
-import 'package:Ambitious/screens/homeNav/home_nav.dart';
-
-import 'package:Ambitious/screens/onboarding/realQuick/view/quick_notification.dart';
-import 'package:Ambitious/screens/onboarding/realQuick/view/real_quick.dart';
-import 'package:Ambitious/screens/onboarding/signIn/view/signin.dart';
-
-import 'package:Ambitious/screens/profile_edit.dart';
-import 'package:Ambitious/screens/quiz_end.dart';
-import 'package:Ambitious/screens/resource_center.dart';
-import 'package:Ambitious/screens/social_me_courses.dart';
-import 'package:Ambitious/screens/social_me_people.dart';
-import 'package:Ambitious/screens/socialme.dart';
-import 'package:Ambitious/screens/courses/courseDetails/view/course_details.dart';
-import 'package:Ambitious/screens/wipcourse_player.dart';
-import 'package:Ambitious/screens/wipscreentwo.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/rxdart.dart';
 
-import 'screens/Events/CurrentEvent/currentEvent.dart';
-import 'screens/dark_learning_path.dart';
-import 'testing/steper.dart';
+import 'testing/navigation_testing.dart';
 
-Future<void> backgroundHandler(RemoteMessage message) async {
-  print("handlor data: " + message.data.toString());
-  print("handlor notification: " + message.notification!.title.toString());
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'Ambitious', // id
+    'Ambitious',
+    description: "User Notification Channel", // name
+    importance: Importance.max,
+    enableLights: true,
+    playSound: true,
+    enableVibration: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+final BehaviorSubject<String?> selectNotificationSubject =
+    BehaviorSubject<String?>();
+final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
+    BehaviorSubject<ReceivedNotification>();
+String? selectedNotificationPayload;
+class ReceivedNotification {
+  ReceivedNotification({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.payload,
+  });
+
+  final int id;
+  final String? title;
+  final String? body;
+  final String? payload;
 }
+
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -58,16 +59,71 @@ void main() async {
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
-  // Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
-  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
+ await Firebase.initializeApp();
+
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final IOSInitializationSettings initializationSettingsIOS =
+      IOSInitializationSettings(
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true,
+          onDidReceiveLocalNotification: (
+            int id,
+            String? title,
+            String? body,
+            String? payload,
+          ) async {
+            didReceiveLocalNotificationSubject.add(
+              ReceivedNotification(
+                id: id,
+                title: title,
+                body: body,
+                payload: payload,
+              ),
+            );
+          });
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String? payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: $payload');
+      // navigatorKey.currentState!.pushNamed("/notification");
+
+    }
+    selectedNotificationPayload = payload;
+    selectNotificationSubject.add(payload);
+  });
+
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+
+
+
+
+  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
+  // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
   // await Intercom.instance.initialize(
   //   'com.educationondemand',
   //   androidApiKey: 'androidApiKey',
   //   iosApiKey: 'iosApiKey',
   // );
-
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
   Preferences.pref = await SharedPreferences.getInstance();
 
@@ -103,155 +159,220 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   List<String> notificationList = [];
 
+
+Future<void> _requestPermissions() async {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.notification].request();
+  }
+
+  void _configureDidReceiveLocalNotificationSubject() {
+    print("_configureDidReceiveLocalNotificationSubject");
+    didReceiveLocalNotificationSubject.stream
+        .listen((ReceivedNotification receivedNotification) async {
+      print("listion ios state");
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: receivedNotification.title != null
+              ? Text(receivedNotification.title!)
+              : null,
+          content: receivedNotification.body != null
+              ? Text(receivedNotification.body!)
+              : null,
+          actions: <Widget>[
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              onPressed: () async {
+                print("Clicked true ios");
+                Navigator.of(context, rootNavigator: true).pop();
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,),
+                  ),
+                );
+              },
+              child: const Text('Ok'),
+            )
+          ],
+        ),
+      );
+    });
+  }
+
+  void _configureSelectNotificationSubject() async {
+    print("_configureSelectNotificationSubject");
+
+    selectNotificationSubject.stream.listen((String? payload) async {
+      print("chacking payload" + payload.toString());
+      if (payload != null) {
+        if (payload != "") {
+          var listdata = await breakPayload(payload);
+          var type = "";
+          var review_id = "";
+          var reply_id = "";
+          listdata.forEach((element) {
+            if (element.contains("type")) {
+              int i = element.indexOf(":") + 2;
+              print("Type " + element.substring(i) + "^^");
+              type = element.substring(i).toString();
+            }
+
+            if (element.contains("businessreview_id")) {
+              int i = element.indexOf(":") + 2;
+              print("businessreview_id " + element.substring(i) + "^^");
+              review_id = element.substring(i).toString();
+            }
+
+            if (element.contains("reply_id")) {
+              int i = element.indexOf(":") + 2;
+              print("reply_id " + element.substring(i) + "^^");
+              reply_id = element.substring(i).toString();
+            }
+          });
+        
+        }
+  }});
+  }
+
+
+
+
   @override
   void initState() {
     super.initState();
+_configureDidReceiveLocalNotificationSubject();
+    _configureSelectNotificationSubject();
+////Forground notification
+    FirebaseMessaging.onMessage.listen((message) async {
+      print("here");
+      print("message " + message.notification!.title.toString() + "^^");
+      print("notification data" + message.data.toString());
+      print("notification notification" + message.notification.toString());
 
-    // 1. This method call when app in terminated state and you get a notification
-    // when you click on notification app open from terminated state and you can get notification data in this method
-
-    FirebaseMessaging.instance.getInitialMessage().then(
-      (message) {
-        print("fist Type" +
-            FirebaseMessaging.instance.getInitialMessage.toString());
-        if (message != null) {
-          print("fist Type" +
-              FirebaseMessaging.instance.getInitialMessage.toString());
-          print("New Notification");
-
-          if (message.notification != null) {
-            Map<String, dynamic> map = Map();
-            map["title"] = message.notification!.title.toString();
-            map["body"] = message.notification!.body.toString();
-            createListMap(map);
-          } else if (message.data != null) {
-            createListMap(message.data);
-          }
-
-          // if (message.data['_id'] != null) {
-          //   Navigator.of(context).push(
-          //     MaterialPageRoute(
-          //       builder: (context) => DemoScreen(
-          //         id: message.data['_id'],
-          //       ),
-          //     ),
-          //   );
-          // }
-        }
-      },
-    );
-
-    // 2. This method only call when App in forground it mean app must be opened
-    FirebaseMessaging.onMessage.listen(
-      (message) {
-        print("second Type " + FirebaseMessaging.onMessage.listen.toString());
-        if (message.notification != null) {
-          print("second Type " + FirebaseMessaging.onMessage.listen.toString());
-          print(message.notification!.title);
-
-          print(message.notification!.body);
-          notificationList.add(message.notification!.title.toString());
-          print("message.data11 ${message.data}");
-          LocalNotificationService.createanddisplaynotification(message);
-
-          if (message.notification != null) {
-            Map<String, dynamic> map = Map();
-            map["title"] = message.notification!.title.toString();
-            map["body"] = message.notification!.body.toString();
-            createListMap(map);
-          } else if (message.data != null) {
-            createListMap(message.data);
-          }
-        }
-      },
-    );
-
-    // 3. This method only call when App in background and not terminated(not closed)
-    FirebaseMessaging.onMessageOpenedApp.listen(
-      (message) {
-        print("third Type " +
-            FirebaseMessaging.onMessageOpenedApp.listen.toString());
-        if (message.notification != null) {
-          print("third Type" +
-              FirebaseMessaging.onMessageOpenedApp.listen.toString());
-          print(message.notification!.title);
-          title = message.notification!.title.toString();
-          print(message.notification!.body);
-          notificationList.add(message.notification!.title.toString());
-          print("message.data22 ${message.data['_id']}");
-
-          print("title three: " + title.toString());
-
-          if (message.notification != null) {
-            Map<String, dynamic> map = Map();
-            map["title"] = message.notification!.title.toString();
-            map["body"] = message.notification!.body.toString();
-            createListMap(map);
-          } else if (message.data != null) {
-            createListMap(message.data);
-          }
-        }
-      },
-    );
-
-    print("title one: " + title.toString());
-
-    print("list: " + notificationList.toString());
-  }
-
-  Future<void> createListMap(Map<String, dynamic> map) async {
-    print("ListSaveMap");
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String>? titleList = preferences.getStringList('titleList');
-    List<String>? bodyList = preferences.getStringList('bodyList');
-    List<String>? isReadList = preferences.getStringList('isRead');
-    // List<String>? idList = preferences.getStringList('idList');
-
-    // List<String> timeList = preferences.getStringList('timeList');
-    if (titleList != null && bodyList != null && isReadList != null
-        // && idList!=null
-        ) {
-      titleList.add(map["title"].toString());
-      bodyList.add(map["body"].toString());
-
-      isReadList.add("false");
-      preferences.setStringList("titleList", titleList);
-      preferences.setStringList("bodyList", bodyList);
-
-      // preferences.setStringList("idList", idList);
-
-      //  preferences.setStringList("timeList", timeList);
-      preferences.commit();
-    } else {
-      List<String> titleListNew = [];
-      List<String> bodyListNew = [];
-      List<String> isReadListNew = [];
-      List<String> idList = [];
-
-      titleListNew.add(map["title"].toString());
-      bodyListNew.add(map["body"].toString());
-
-      // if(map.containsKey("id")) {
-      //   idList.add(map["id"].toString());
-      // }else{
-      //   idList.add("");
-
+      if (message.notification != null) {
+        print("notification notification" +
+            message.notification!.title.toString());
+      }
+      if (message.notification != null) {
+        Map<String, dynamic> map = HashMap();
+        print(map.toString());
+        map["title"] = message.notification!.title;
+        map["body"] = message.notification!.body;
+        
+      }
+      // If `onMessage` is triggered with a notification, construct our own
+      // local notification to show to users using the created channel.
+      const AndroidNotificationDetails androidPlatformChannelSpecifics =
+          AndroidNotificationDetails(
+        'Ambitious',
+        'Ambitious',
+        channelDescription: 'User Notification Channel',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker',
+        enableLights: true,
+        enableVibration: true,
+        playSound: true,
+      );
+      const NotificationDetails platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.show(
+        10,
+        message.notification!.title,
+        message.notification!.body,
+        platformChannelSpecifics,
+        payload: message.data.toString(),
+      );
+      // if (notification != null && android != null) {
+      //   flutterLocalNotificationsPlugin.show(
+      //       notification.hashCode,
+      //       notification.title,
+      //       notification.body,
+      //       NotificationDetails(
+      //         android: AndroidNotificationDetails(
+      //           channel.id,
+      //           channel.name,
+      //           icon: android.smallIcon,
+      //           // other properties...
+      //         ),
+      //       ));
       // }
+      print("notification data" + message.data.toString());
 
-      isReadListNew.add("false");
+      if (message.notification != null) {
+        print(message.notification!.body);
+      }
+    });
+   //Routing on tap notification
+    // when app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      print("notification data" + message.data.toString());
 
-      preferences.setStringList("titleList", titleListNew);
-      preferences.setStringList("bodyList", bodyListNew);
-      preferences.setStringList("isRead", isReadListNew);
+      // If `onMessage` is triggered with a notification, construct our own
+      // local notification to show to users using the created channel.
+      if (message.notification != null) {
+        
+        Map<String, dynamic> map = HashMap();
 
-      // preferences.setStringList("idList", idList);
+        print(map.toString());
+        map["title"] = message.notification!.title;
+        map["body"] = message.notification!.body;
+        if (message.data.isNotEmpty) {
+          if (message.data.containsKey("type")) {
+            map["type"] = message.data["type"];
+          }
+        }
 
-      preferences.commit();
-    }
-    print("title: " + preferences.getStringList("titleList").toString());
-    print("body: " + preferences.getStringList("bodyList").toString());
 
-    // getNotify();
+      }
+      const AndroidNotificationDetails androidPlatformChannelSpecifics =
+          AndroidNotificationDetails(
+        'Ambitious',
+        'Ambitious',
+        channelDescription: 'User Notification Channel',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker',
+        enableLights: true,
+        enableVibration: true,
+        playSound: true,
+      );
+      const NotificationDetails platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.show(
+        10,
+        message.notification!.title,
+        message.notification!.body,
+        platformChannelSpecifics,
+        payload: message.data.toString(),
+      );
+      // if (notification != null && android != null) {
+      //   flutterLocalNotificationsPlugin.show(
+      //       notification.hashCode,
+      //       notification.title,
+      //       notification.body,
+      //       NotificationDetails(
+      //         android: AndroidNotificationDetails(
+      //           channel.id,
+      //           channel.name,
+      //           icon: android.smallIcon,
+      //           // other properties...
+      //         ),
+      //       ));
+      // }
+    });
   }
 
   @override
@@ -309,4 +430,16 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       // ],
     );
   }
+}
+
+
+Future<List<String>> breakPayload(String? _payload) async {
+  String a = _payload!.replaceAll("{", "");
+  String b = a.replaceAll("}", "");
+  print("B is" + b.toString());
+  List<String> listdata = b.split(",");
+  print(listdata.length);
+  print(listdata.toString());
+
+  return listdata;
 }

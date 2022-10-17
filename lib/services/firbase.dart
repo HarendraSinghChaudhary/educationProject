@@ -22,8 +22,8 @@ CollectionReference users = firestore.collection('Production');
 
 Future deleteDatatofirebase()async{
 FirebaseFirestore firestore = FirebaseFirestore.instance;
-CollectionReference users = firestore.collection('Production');
-// CollectionReference users = firestore.collection('Development');
+// CollectionReference users = firestore.collection('Production');
+CollectionReference users = firestore.collection('Development');
   users.doc(Preferences.pref!.getString("id")).delete().then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
 }
