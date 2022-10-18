@@ -4,8 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future addDatatofirebase(String fcm)async{
 FirebaseFirestore firestore = FirebaseFirestore.instance;
-CollectionReference users = firestore.collection('Production');
-// CollectionReference users = firestore.collection('Development');
+// CollectionReference users = firestore.collection('Production');
+CollectionReference users = firestore.collection('Development');
   // users.add(
   //   {
   //     'fcmToken':fcm

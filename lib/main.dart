@@ -75,6 +75,7 @@ void main() async {
             String? body,
             String? payload,
           ) async {
+            print("Notification recieved");
             didReceiveLocalNotificationSubject.add(
               ReceivedNotification(
                 id: id,
@@ -82,6 +83,7 @@ void main() async {
                 body: body,
                 payload: payload,
               ),
+              
             );
           });
 
@@ -106,6 +108,11 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
+      await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.initialize(initializationSettingsIOS);
+      
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -272,6 +279,11 @@ _configureDidReceiveLocalNotificationSubject();
       }
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
+     const IOSNotificationDetails ios = IOSNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true
+      );
       const AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
         'Ambitious',
@@ -285,7 +297,10 @@ _configureDidReceiveLocalNotificationSubject();
         playSound: true,
       );
       const NotificationDetails platformChannelSpecifics =
-          NotificationDetails(android: androidPlatformChannelSpecifics);
+          NotificationDetails(
+            android: androidPlatformChannelSpecifics,
+            iOS: ios
+            );
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -349,8 +364,16 @@ _configureDidReceiveLocalNotificationSubject();
         enableVibration: true,
         playSound: true,
       );
+      const IOSNotificationDetails ios = IOSNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true
+      );
       const NotificationDetails platformChannelSpecifics =
-          NotificationDetails(android: androidPlatformChannelSpecifics);
+          NotificationDetails(
+            android: androidPlatformChannelSpecifics,
+            iOS: ios
+            );
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
