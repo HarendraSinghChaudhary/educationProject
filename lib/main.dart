@@ -89,16 +89,16 @@ void main() async {
     android: initializationSettingsAndroid,
     iOS: initializationSettingsIOS,
   );
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onSelectNotification: (String? payload) async {
-    if (payload != null) {
-      debugPrint('notification payload: $payload');
-      // navigatorKey.currentState!.pushNamed("/notification");
+  // await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+  //     onSelectNotification: (String? payload) async {
+  //   if (payload != null) {
+  //     debugPrint('notification payload: $payload');
+  //     // navigatorKey.currentState!.pushNamed("/notification");
 
-    }
-    selectedNotificationPayload = payload;
-    selectNotificationSubject.add(payload);
-  });
+  //   }
+  //   selectedNotificationPayload = payload;
+  //   selectNotificationSubject.add(payload);
+  // });
 
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -106,10 +106,10 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-      ?.initialize(initializationSettingsIOS);
+  // await flutterLocalNotificationsPlugin
+  //     .resolvePlatformSpecificImplementation<
+  //         IOSFlutterLocalNotificationsPlugin>()
+  //     ?.initialize(initializationSettingsIOS);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -160,19 +160,19 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   List<String> notificationList = [];
 
-  Future<void> _requestPermissions() async {
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+  // Future<void> _requestPermissions() async {
+  //   flutterLocalNotificationsPlugin
+  //       .resolvePlatformSpecificImplementation<
+  //           IOSFlutterLocalNotificationsPlugin>()
+  //       ?.requestPermissions(
+  //         alert: true,
+  //         badge: true,
+  //         sound: true,
+  //       );
 
-    Map<Permission, PermissionStatus> statuses =
-        await [Permission.notification].request();
-  }
+  //   Map<Permission, PermissionStatus> statuses =
+  //       await [Permission.notification].request();
+  // }
 
   void _configureDidReceiveLocalNotificationSubject() {
     print("_configureDidReceiveLocalNotificationSubject");
@@ -250,14 +250,14 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   @override
   void initState() {
     super.initState();
-    _configureDidReceiveLocalNotificationSubject();
-    _configureSelectNotificationSubject();
+    // _configureDidReceiveLocalNotificationSubject();
+    // _configureSelectNotificationSubject();
 ////Forground notification
     FirebaseMessaging.onMessage.listen((message) async {
-      print("here");
-      print("message " + message.notification!.title.toString() + "^^");
-      print("notification data" + message.data.toString());
-      print("notification notification" + message.notification.toString());
+      print("Onmessage");
+      // print("message " + message.notification!.title.toString() + "^^");
+      // print("notification data" + message.data.toString());
+      // print("notification notification" + message.notification.toString());
 
       if (message.notification != null) {
         print("notification notification" +
@@ -287,6 +287,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       );
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
           android: androidPlatformChannelSpecifics, iOS: ios);
+          print("showing");
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -294,20 +295,6 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
         platformChannelSpecifics,
         payload: message.data.toString(),
       );
-      // if (notification != null && android != null) {
-      //   flutterLocalNotificationsPlugin.show(
-      //       notification.hashCode,
-      //       notification.title,
-      //       notification.body,
-      //       NotificationDetails(
-      //         android: AndroidNotificationDetails(
-      //           channel.id,
-      //           channel.name,
-      //           icon: android.smallIcon,
-      //           // other properties...
-      //         ),
-      //       ));
-      // }
       print("notification data" + message.data.toString());
 
       if (message.notification != null) {
@@ -319,7 +306,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
-      print("notification data" + message.data.toString());
+      // print("notification data" + message.data.toString());
+      print("on message opend app");
 
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
@@ -351,6 +339,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           presentAlert: true, presentBadge: true, presentSound: true);
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
           android: androidPlatformChannelSpecifics, iOS: ios);
+          print("showing noti in opened");
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,

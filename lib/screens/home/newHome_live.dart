@@ -91,6 +91,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
     eventController.getpowerHourData();
+    eventController.onInit();
    return
    Obx(
     ()=> Scaffold(
