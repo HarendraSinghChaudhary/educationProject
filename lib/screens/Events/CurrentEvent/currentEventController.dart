@@ -24,6 +24,7 @@ class CurrentEventController extends GetxController{
  RxString youtubeImage = "".obs;
 //  RxBool isfullscreen = 
  RxBool isYoutube = false.obs;
+ EventController eventController = Get.find<EventController>();
  
    @override
   void onInit() {

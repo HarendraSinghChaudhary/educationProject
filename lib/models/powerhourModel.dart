@@ -46,6 +46,8 @@ class AllDatum {
         this.description,
         this.image,
         this.video,
+        this.attendees_count,
+        this.is_user_attending
     });
 
     String? id;
@@ -56,6 +58,8 @@ class AllDatum {
     String? description;
     String? image;
     String? video;
+    int? attendees_count;
+    bool? is_user_attending;
 
     factory AllDatum.fromJson(Map<String, dynamic> json) => AllDatum(
         id: json["_id"],
@@ -66,6 +70,8 @@ class AllDatum {
         description: json["description"],
         image: json["Image"],
         video: json["Video"],
+        attendees_count: json["attendees_count"],
+        is_user_attending:json["is_user_attending"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -77,5 +83,7 @@ class AllDatum {
         "description": description,
         "Image": image,
         "Video": video,
+        "is_user_attending":is_user_attending,
+        "attendees_count":attendees_count
     };
 }

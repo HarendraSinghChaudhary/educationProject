@@ -95,7 +95,14 @@ class EventView extends GetView<EventController>{
                                     return GestureDetector(
                                       onTap: (){
                                         controller.data.value = data;
-                                        controller.showyoutube(false);
+                                        controller.showyoutube.value=false;
+                                        controller.is_user_attending.value = data.is_user_attending??false;
+                                        controller.selectedID.value = data.id??"";
+                                        controller.selectcount.value = data.attendees_count.toString();
+                                        print(
+                                          controller.selectcount.toString()+"======="
+                                        );
+                                        controller.selectedIndex.value = index;
                                         Get.to(
                                           ()=>CurrentEventView(),
                                           binding: CurrentEventBinding()

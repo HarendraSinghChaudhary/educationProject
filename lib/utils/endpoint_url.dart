@@ -34,6 +34,7 @@ class RestDatasource {
   static final USERDELETE_URL = BASE_URL + "Deleteuser?userid=";
   static final COURSEVIEWCOUNT_URL = BASE_URL + "Courseviews";
   static final ADDFCMTOKEN_URL = BASE_URL + "isAllow";
+  static final RSVP_URL = BASE_URL + "reservePowerHour";
   static final APPLEDELETE_URL = "https://appleid.apple.com/auth/revoke";
 }
 const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI";

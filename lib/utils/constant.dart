@@ -35,6 +35,7 @@
   const ksettingcardColor = Color(0xFF232048);
   const ksettingsubtitleColor =Color(0xFFD4DCE7);
   const kcardshedowColor =Color(0xFF3C80D1);
+  const kattendingColor = Color(0xFF00ACFF);
   const kbluegradiant = LinearGradient(
     colors: [kstartgradiant,kendgradiant],
     begin:Alignment.topCenter,

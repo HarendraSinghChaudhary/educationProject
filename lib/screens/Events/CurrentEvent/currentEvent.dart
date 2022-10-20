@@ -4,6 +4,7 @@ import 'package:Ambitious/services/web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -109,8 +110,10 @@ class CurrentEventView extends GetView<CurrentEventController>{
                           ),
                         ),
                       ),
+                      //  youtube player visibility
                       Visibility(
-                        visible: Get.find<EventController>().showyoutube.value,
+                        visible: controller.eventController.showyoutube.value,
+                        // &&controller.data.value!.video!="",
                         child: Column(
                           children: [
                             Container(
@@ -124,7 +127,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(h*0.01)
                               ),
-                              child:CustomYoutubeBuilder(url: controller.data.value!.video ?? "https://www.youtube.com/watch?v=-duwSMIgNMU",)
+                              child:CustomYoutubeBuilder(url: controller.data.value!.video.toString() ,)
                                
                               ),
                               ListTile(
@@ -156,36 +159,93 @@ class CurrentEventView extends GetView<CurrentEventController>{
                           ],
                         ),
                       ),
-
+                      
+                      
+                      //  rsvp, add to calender, join powerhour button   
                       Visibility(
-                        visible: !Get.find<EventController>().showyoutube.value,
+                        visible: !controller.eventController.showyoutube.value,
                         child: Column(
                           children: [
-                             Text(
-                              controller.convertdate(controller.data.value!.startTime!),
-                              style: const TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 12
+                            Text(
+                                controller.convertdate(controller.data.value!.startTime!),
+                                style: const TextStyle(
+                                  color: kWhiteColor,
+                                  fontSize: 12
+                                ),
+                      
                               ),
+                              SizedBox(
+                                height: h*0.01,
+                              ),
+                         // attending count visibility
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                            
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset(
+                        'assets/images/community.svg',
+                        height: 14,
+                        color:  kWhiteColor,
+                      ),
+                      Text(
+                        " ${controller.eventController.selectcount} Attending",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: kWhiteColor
+                        ),
+                      )
+                              ],
+                            ),
+                          ),
+                          //showing that you are attending powerhour
+                          Visibility(
+                            visible: controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!,
+                            child: const Text(
+                              "YOU ARE ATTENDING THIS POWER HOUR",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: kattendingColor
+                              ),
+                              ),
+                              ),
+                              // visibility of rsvp button
+                              Visibility(
+                        visible: !controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!&&!controller.eventController.showyoutube.value,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: w*0.15),
+                          child:controller.eventController.rsvploading.value?loader: RSVP(""))),
 
-                            ),
-                            SizedBox(
-                              height: h*0.01,
-                            ),
-                            controller.data.value!.startTime!.toLocal().isBefore(controller.currentdate)
-                            ?
-                             JoinButton(controller.data.value!.joinUrl)
-                             :
-                             AddtoCalender(
-                              starttime: controller.data.value!.startTime!.toLocal(),
-                              endtime: controller.data.value!.startTime!.toLocal(),
-                              title: controller.data.value!.powerHoursTitle.toString(),
-                              des: controller.data.value!.joinUrl.toString(),
-                             ),
+                          // visibility for join power hour or add to calendra
+
+
+                        Visibility(
+                          visible: controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!&&!controller.eventController.showyoutube.value,
+                          // condition to show between add to calendra or join power hour
+                          child: controller.data.value!.startTime!.toLocal().isBefore(controller.currentdate)
+                                ?
+                                 Padding(
+                        
+                            padding: EdgeInsets.symmetric(horizontal: w*0.15,vertical: h*0.01),
+                                   child: JoinButton(controller.data.value!.joinUrl),
+                                 )
+                                 :
+                                 Padding(
+                            padding: EdgeInsets.symmetric(horizontal: w*0.15,vertical: h*0.01),
+                                   child: AddtoCalender(
+                                    starttime: controller.data.value!.startTime!.toLocal(),
+                                    endtime: controller.data.value!.startTime!.toLocal(),
+                                    title: controller.data.value!.powerHoursTitle.toString(),
+                                    des: controller.data.value!.joinUrl.toString(),
+                                   ),
+                                 ),
+                        ),
                           ],
                         ),
-                        ),
-                      // AddtoCalender(),
+                      ),
                       SizedBox(
                               height: h*0.015,
                             ),
@@ -248,6 +308,45 @@ class JoinButton extends StatelessWidget{
 }
 
 
+class RSVP extends StatelessWidget{
+  final joinurl;
+  RSVP(this.joinurl);
+  @override
+  Widget build(BuildContext context){
+    return  TextButton(
+      onPressed: (){
+        // launchInBrowser(joinurl);
+        // print(DateTime.now().timeZoneOffset);
+        Get.find<EventController>().rsvpapi();
+        // Get.find<>()
+      },
+      style: TextButton.styleFrom(
+                  primary: kPrimaryColor,
+                  elevation: 2,
+                  backgroundColor: kPrimaryColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(h*0.02))
+                  ),
+      child: Padding(
+        padding:  EdgeInsets.symmetric(vertical: h*0.01),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/Alarm.png",height: h*0.034,color: kWhiteColor,),
+            const Text(
+              "   RSVP TO WORKSHOP",
+              style: TextStyle(
+                color: kWhiteColor,
+                fontSize: 16,
+                // height: 2,
+                fontWeight:FontWeight.w700
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class AddtoCalender extends StatelessWidget{
   final DateTime starttime;
