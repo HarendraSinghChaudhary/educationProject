@@ -1,24 +1,21 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class MyOfferings {
-  static const id_product1 = "ambitious_999_1m";
-  static const id_product2 = "ambitious_4999_1y";
+  static const id_product1 = "Ambitious Subscriptions";
 
-  static const allIds = [id_product1,id_product2];
+  static const allIds = [id_product1];
 }
 
 class PurchaseApi {
   //static const _apiKey = '';
-    static const _apiKey = '';
+  static const _apiKey = '';
   static Future init() async {
     await Purchases.setDebugLogsEnabled(true);
-  //  await Purchases.setup(_apiKey); //old
-   
+    //  await Purchases.setup(_apiKey); //old
+
     //PurchasesConfiguration(_apiKey);
     // Purchases.logIn(HelperFoos.userId);
     // Purchases.logOut();
@@ -28,7 +25,7 @@ class PurchaseApi {
     try {
       final offerings = await Purchases.getOfferings();
       print(
-          "\n================ inside fetchOffers ================\n${offerings.all.values.toList().first.identifier}\n================ inside fetchOffers ================");
+          "\n================ inside fetchOffers ================\n${offerings.all.values.toList().first}\n================ inside fetchOffers ================");
       if (!all) {
         final current = offerings.current;
         return current == null ? [] : [current];
@@ -44,6 +41,7 @@ class PurchaseApi {
 
   static Future<List<Offering>> fetchOffersByIds(List<String> ids) async {
     final offers = await fetchOffers();
+    print(offers.first);
     return offers.where((offer) => ids.contains(offer.identifier)).toList();
   }
 
@@ -53,16 +51,15 @@ class PurchaseApi {
       return true;
     } on Exception catch (e) {
       Fluttertoast.cancel();
-    Fluttertoast.showToast(
-        msg: "Purchase failed. Error: $e",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Color.fromARGB(117, 5, 5, 5),
-        textColor: Colors.white,
-        fontSize: 16.0);
-        
-    
+      Fluttertoast.showToast(
+          msg: "Purchase Failed",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Color.fromARGB(117, 5, 5, 5),
+          textColor: Colors.white,
+          fontSize: 16.0);
+
       return false;
     }
   }

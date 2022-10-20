@@ -3,12 +3,16 @@ import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
+import 'package:csslib/visitor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/app_data.dart';
 import '../services/purchase_api.dart';
 import '../utils/gradient_text.dart';
 
@@ -24,21 +28,30 @@ class _PaywallState extends State<Paywall> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    AppData.checkUserPurchaseStatus();
   }
 
+  bool _isLoading = false;
+
   Future<void> _fetchOffers() async {
+    setState(() {
+      _isLoading = true;
+    });
     // final offerings = await PurchaseApi.fetchOffers(all: false); //for subscription
     print(MyOfferings.allIds.first);
     print(MyOfferings.allIds.last);
     final offerings = await PurchaseApi.fetchOffersByIds(MyOfferings.allIds);
 
     if (offerings.isEmpty) {
+      setState(() {
+        _isLoading = false;
+      });
       Fluttertoast.cancel();
       Fluttertoast.showToast(
           msg: "No Subscriptions Found To Purchase",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
+          timeInSecForIosWeb: 5,
           backgroundColor: Color.fromARGB(117, 5, 5, 5),
           textColor: Colors.white,
           fontSize: 16.0);
@@ -51,16 +64,28 @@ class _PaywallState extends State<Paywall> {
           .expand((pair) => pair)
           .toList();
 
-var isSuccess=false;
- if(selected_plan=="monthly")
-     {
-      isSuccess  = await PurchaseApi.purchasePackage(packages.first);
-     }
-     else if(selected_plan=="annual")
-     {
-        isSuccess  = await PurchaseApi.purchasePackage(packages.last);
-     }
-     
+      var isSuccess = false;
+      if (selected_plan == "monthly") {
+        isSuccess =
+            await PurchaseApi.purchasePackage(packages.first).whenComplete(() {
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      } else if (selected_plan == "annual") {
+        isSuccess =
+            await PurchaseApi.purchasePackage(packages.last).whenComplete(() {
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        return;
+      }
+
       if (isSuccess) {
         Fluttertoast.cancel();
         Fluttertoast.showToast(
@@ -553,17 +578,24 @@ var isSuccess=false;
                 decoration: const BoxDecoration(
                     color: kstartgradiant,
                     borderRadius: BorderRadius.all(Radius.circular(30))),
-                child: const Center(
-                  child: Text(
-                    "TRY FOR FREE",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: kWhiteColor,
-                        fontSize: 22,
-                        height: 1.5,
-                        wordSpacing: 2.5,
-                        fontWeight: FontWeight.w400),
-                  ),
+                child: Center(
+                  child: _isLoading
+                      ? Container(
+                          width: 25,
+                          height: 25,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ))
+                      : Text(
+                          "TRY FOR FREE",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 22,
+                              height: 1.5,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w400),
+                        ),
                 ),
               ),
             ),
@@ -668,17 +700,49 @@ var isSuccess=false;
             const SizedBox(
               height: 15,
             ),
-            const Center(
-              child: Text(
-                "Restore Purchases",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: kWhiteColor,
-                    fontSize: 10,
-                    height: 1.5,
-                    decoration: TextDecoration.underline,
-                    wordSpacing: 2.5,
-                    fontWeight: FontWeight.w400),
+            Center(
+              child: InkWell(
+                onTap: () async {
+                  try {
+                    CustomerInfo restoredInfo =
+                        await Purchases.restorePurchases();
+
+                    AppData.isPro =
+                        restoredInfo.entitlements.all['pro']!.isActive;
+
+                    if (AppData.isPro) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Restored Purchases Success"),
+                        duration: Duration(seconds: 5),
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Restored Purchases Failed"),
+                        duration: Duration(seconds: 5),
+                      ));
+                    }
+
+                    // ... check restored purchaserInfo to see if entitlement is now active
+                  } on PlatformException catch (e) {
+                    AppData.isPro = false;
+                    // Error restoring purchases
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(e.toString()),
+                      duration: Duration(seconds: 5),
+                    ));
+                  }
+                },
+                child: const Text(
+                  "Restore Purchases",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: kWhiteColor,
+                      fontSize: 10,
+                      height: 1.5,
+                      decoration: TextDecoration.underline,
+                      wordSpacing: 2.5,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
             ),
             const SizedBox(
