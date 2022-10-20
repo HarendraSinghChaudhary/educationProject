@@ -569,6 +569,11 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
                                           onTap: (){
                                             eventController.data.value = data;
                                             eventController.showyoutube(false);
+                                        eventController.is_user_attending.value = data.is_user_attending??false;
+                                        eventController.selectedID.value = data.id??"";
+                                        eventController.selectcount.value = data.attendees_count.toString();
+                                        eventController.selectedIndex.value = index;
+
                                             Get.to(
                                               ()=>CurrentEventView(),
                                               binding: CurrentEventBinding()

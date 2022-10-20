@@ -214,7 +214,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
                               ),
                               // visibility of rsvp button
                               Visibility(
-                        visible: !controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!&&!controller.eventController.showyoutube.value,
+                        visible: !controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!,
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: w*0.15),
                           child:controller.eventController.rsvploading.value?loader: RSVP(""))),
@@ -223,7 +223,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
 
 
                         Visibility(
-                          visible: controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!&&!controller.eventController.showyoutube.value,
+                          visible: controller.eventController.powerHours.value!.upcoming![controller.eventController.selectedIndex.value].is_user_attending!,
                           // condition to show between add to calendra or join power hour
                           child: controller.data.value!.startTime!.toLocal().isBefore(controller.currentdate)
                                 ?
