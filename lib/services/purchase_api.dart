@@ -6,14 +6,15 @@ import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class MyOfferings {
-  static const id_product1 = "six_month_access";
+  static const id_product1 = "ambitious_999_1m";
+  static const id_product2 = "ambitious_4999_1y";
 
-  static const allIds = [id_product1];
+  static const allIds = [id_product1,id_product2];
 }
 
 class PurchaseApi {
-  //static const _apiKey = 'goog_IQEavWdyZNEDlbHfqvBpKJSKXMl';
-    static const _apiKey = 'appl_zxNBaoTfOXJyufiXfNnBDAHvVSl';
+  //static const _apiKey = '';
+    static const _apiKey = '';
   static Future init() async {
     await Purchases.setDebugLogsEnabled(true);
   //  await Purchases.setup(_apiKey); //old

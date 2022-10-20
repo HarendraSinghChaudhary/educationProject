@@ -58,10 +58,10 @@ class ReceivedNotification {
 }
 
 final _configuration2 =
-    PurchasesConfiguration("appl_zxNBaoTfOXJyufiXfNnBDAHvVSl");
+    PurchasesConfiguration("appl_hsOlzcwnCowLmWtVtNYwaiEQvjV");
 
 final _configuration =
-    PurchasesConfiguration("goog_IQEavWdyZNEDlbHfqvBpKJSKXMl");
+    PurchasesConfiguration("");
 
 
 void main() async {

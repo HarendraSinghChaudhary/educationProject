@@ -29,6 +29,7 @@ class _PaywallState extends State<Paywall> {
   Future<void> _fetchOffers() async {
     // final offerings = await PurchaseApi.fetchOffers(all: false); //for subscription
     print(MyOfferings.allIds.first);
+    print(MyOfferings.allIds.last);
     final offerings = await PurchaseApi.fetchOffersByIds(MyOfferings.allIds);
 
     if (offerings.isEmpty) {
@@ -50,8 +51,16 @@ class _PaywallState extends State<Paywall> {
           .expand((pair) => pair)
           .toList();
 
-      // await PurchaseApi.purchasePackage(packages.first); //for subscription
-      final isSuccess = await PurchaseApi.purchasePackage(packages.first);
+var isSuccess=false;
+ if(selected_plan=="monthly")
+     {
+      isSuccess  = await PurchaseApi.purchasePackage(packages.first);
+     }
+     else if(selected_plan=="annual")
+     {
+        isSuccess  = await PurchaseApi.purchasePackage(packages.last);
+     }
+     
       if (isSuccess) {
         Fluttertoast.cancel();
         Fluttertoast.showToast(
@@ -636,7 +645,7 @@ class _PaywallState extends State<Paywall> {
                     color: kWhiteColor,
                     fontSize: 10,
                     height: 1.5,
-                    wordSpacing: 5.5,
+                    wordSpacing: 2.5,
                     fontWeight: FontWeight.w400),
               ),
             ),
@@ -651,7 +660,8 @@ class _PaywallState extends State<Paywall> {
                     color: kWhiteColor,
                     fontSize: 10,
                     height: 1.5,
-                    wordSpacing: 5.5,
+                    decoration: TextDecoration.underline,
+                    wordSpacing: 2.5,
                     fontWeight: FontWeight.w400),
               ),
             ),
@@ -666,7 +676,8 @@ class _PaywallState extends State<Paywall> {
                     color: kWhiteColor,
                     fontSize: 10,
                     height: 1.5,
-                    wordSpacing: 5.5,
+                    decoration: TextDecoration.underline,
+                    wordSpacing: 2.5,
                     fontWeight: FontWeight.w400),
               ),
             ),
