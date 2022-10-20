@@ -30,6 +30,7 @@
   const kendgradiant = Color(0xFF242659);
   const kdarkblue = Color(0xFF171531);
   const kcardblue = Color(0xFF1D1F41);
+  const kcardcyangradient = Color(0xFF00ACFF);
   const ktabtextselcetedColor = Color(0xFF00D9CD);
   const kstatusgreyColor = Color(0xFFD4DCE7);
   const ksettingcardColor = Color(0xFF232048);

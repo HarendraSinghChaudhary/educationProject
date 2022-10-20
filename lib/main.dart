@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:collection';
+import 'dart:io';
 
+import 'package:Ambitious/screens/paywall.dart';
 import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/notification_services.dart';
+import 'package:Ambitious/services/purchase_api.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -16,6 +19,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:purchases_flutter/models/purchases_configuration.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -52,6 +57,12 @@ class ReceivedNotification {
   final String? payload;
 }
 
+final _configuration2 =
+    PurchasesConfiguration("appl_zxNBaoTfOXJyufiXfNnBDAHvVSl");
+
+final _configuration =
+    PurchasesConfiguration("goog_IQEavWdyZNEDlbHfqvBpKJSKXMl");
+
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -61,6 +72,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
  await Firebase.initializeApp();
 
+ if (Platform.isAndroid) {
+    await Purchases.configure(_configuration);
+  } else if (Platform.isIOS) {
+    await Purchases.configure(_configuration2);
+  }
+
+  await PurchaseApi.init();
+  
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -412,7 +431,8 @@ _configureDidReceiveLocalNotificationSubject();
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
-          Splash(),
+          Paywall(),
+          //Splash(),
       // EventView()
       // CurrentEventView()
 
