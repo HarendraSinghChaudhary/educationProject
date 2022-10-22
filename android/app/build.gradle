@@ -42,6 +42,8 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+     
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.educationondemand"
@@ -49,7 +51,10 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+   
     }
+
+   
 
     buildTypes {
         release {
@@ -58,9 +63,33 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+// 1
+flavorDimensions "env"
+
+// 2
+productFlavors {
+    // 3
+    dev {
+        dimension "env"
+        applicationId "com.educationondemand"
+        versionNameSuffix "-dev"
+        //applicationIdSuffix ".dev"
+        resValue "string", "app_name", "DEV Ambitious"
+    }
+    // 4
+    prod {
+        dimension "env"
+        applicationId "com.educationondemand"
+        resValue "string", "app_name", "Ambitious"
+    }
+}
+    
+
     lintOptions {
         checkReleaseBuilds false
     }
+
+    
 }
 
 flutter {

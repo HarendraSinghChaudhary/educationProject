@@ -73,7 +73,7 @@ void main() async {
  await Firebase.initializeApp();
 
  if (Platform.isAndroid) {
-    await Purchases.configure(_configuration);
+    //await Purchases.configure(_configuration);
   } else if (Platform.isIOS) {
     await Purchases.configure(_configuration2);
   }
