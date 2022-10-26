@@ -57,11 +57,10 @@ class ReceivedNotification {
   final String? payload;
 }
 
-final _configuration2 =
+final _inAppPurchasesConfigurationApple =
     PurchasesConfiguration("appl_hsOlzcwnCowLmWtVtNYwaiEQvjV");
 
-final _configuration =
-    PurchasesConfiguration("");
+final _inAppPurchasesConfigurationGoogle = PurchasesConfiguration("");
 
 
 void main() async {
@@ -73,9 +72,9 @@ void main() async {
  await Firebase.initializeApp();
 
  if (Platform.isAndroid) {
-    //await Purchases.configure(_configuration);
+    //await Purchases.configure(_inAppPurchasesConfigurationGoogle);
   } else if (Platform.isIOS) {
-    await Purchases.configure(_configuration2);
+    await Purchases.configure(_inAppPurchasesConfigurationApple);
   }
 
   await PurchaseApi.init();

@@ -6,6 +6,12 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -54,21 +60,29 @@ android {
    
     }
 
+ signingConfigs {
+       release {
+           keyAlias keystoreProperties['keyAlias']
+           keyPassword keystoreProperties['keyPassword']
+           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           storePassword keystoreProperties['storePassword']
+       }
+      }
    
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
-// 1
+
 flavorDimensions "env"
 
-// 2
+
 productFlavors {
-    // 3
+    
     dev {
         dimension "env"
         applicationId "com.educationondemand"
@@ -76,7 +90,7 @@ productFlavors {
         //applicationIdSuffix ".dev"
         resValue "string", "app_name", "DEV Ambitious"
     }
-    // 4
+    
     prod {
         dimension "env"
         applicationId "com.educationondemand"
