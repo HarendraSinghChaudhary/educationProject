@@ -4,9 +4,8 @@ import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class MyOfferings {
-  static const id_product1 = "Ambitious Subscriptions";
-
-  static const allIds = [id_product1];
+  static const revnueCatSubscriptionsParentID = "Ambitious Subscriptions";
+  static const allIds = [revnueCatSubscriptionsParentID];
 }
 
 class PurchaseApi {
