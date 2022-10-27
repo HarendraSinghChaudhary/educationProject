@@ -237,7 +237,7 @@ class CurrentEventView extends GetView<CurrentEventController>{
                             padding: EdgeInsets.symmetric(horizontal: w*0.15,vertical: h*0.01),
                                    child: AddtoCalender(
                                     starttime: controller.data.value!.startTime!.toLocal(),
-                                    endtime: controller.data.value!.startTime!.toLocal(),
+                                    endtime: controller.data.value!.endTime!.toLocal(),
                                     title: controller.data.value!.powerHoursTitle.toString(),
                                     des: controller.data.value!.joinUrl.toString(),
                                    ),

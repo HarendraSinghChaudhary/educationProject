@@ -539,7 +539,8 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                           padding:
                                                               const EdgeInsets
                                                                       .only(
-                                                                  left: 10),
+                                                                  left: 10,right: 10),
+                                                                  
                                                           alignment:
                                                               Alignment.center,
                                                           child: Text(

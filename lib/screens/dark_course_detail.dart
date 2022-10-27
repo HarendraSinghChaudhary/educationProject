@@ -129,15 +129,24 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                height: h*0.015,
+                              ),
                               Center(
-                                child: Text(
-                                  // "Bitcoin, Simplified",
-                                  controller.bigdata.value!.title.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w700,
-                                    color: kWhiteColor,
-                                    height: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15
+                                  ),
+                                  child: Text(
+                                    // "Bitcoin, Simplified",
+                                    controller.bigdata.value!.title.toString(),
+                                                textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700,
+                                      color: kWhiteColor,
+                                      height: 1,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -180,34 +189,30 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                     //     ),
                                     //   ),
                                     // ),
-                                    Card(
-                                      color: kWhiteColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(h * 0.012),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.groups,
-                                              size: 20,
-                                              color: kBlackColor.withOpacity(0.5),
+                                    Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          const Icon(
+                                            Icons.groups,
+                                            size: 25,
+                                            color: kWhiteColor,
+                                          ),
+                                          Text(
+                                            // "  ${Get.find<DarkLearningPathController>().viewCount.value} ",
+                                            " "+DarkCourseDetail.viewCount+" Learners",
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color:
+                                                  kWhiteColor,
+                                              height: 1.5,
                                             ),
-                                            Text(
-                                              // "  ${Get.find<DarkLearningPathController>().viewCount.value} ",
-                                              DarkCourseDetail.viewCount,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color:
-                                                    kBlackColor.withOpacity(0.5),
-                                                // height: 2,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     )
                                   ],
