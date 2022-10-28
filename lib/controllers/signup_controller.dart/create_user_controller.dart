@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../screens/onboarding/signIn/view/loginSignupview.dart';
 import '../../services/mixpanel.dart';
 import '../../testing/navigation_testing.dart';
 
@@ -249,17 +246,17 @@ return true;
         prefs.commit();
 
 
-        Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
-        Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
-        Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         Mixpanell.mixpanel!.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
+        // Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString());
+        // // Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
+        // Mixpanell.mixpanel!.getPeople().set("\$Name", jsonRes["user"]["name"].toString(),  );
+        //  Mixpanell.mixpanel!.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
 
 
 
 
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
-        var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
+        // var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
 
          var splitData = name.split(' ');
         print("splitData: "+splitData.toString());
@@ -268,6 +265,15 @@ return true;
         // chackuserapi(email).then((value) {
         //   value
         //   ?
+        if(isUserExist){
+          Mixpanell.mixpanel!.track(
+             "User Login",
+             properties: {
+           "Name":jsonRes["user"]["name"].toString(),
+           "Email":jsonRes["user"]["email"].toString()
+             }
+           );
+        }
         isUserExist ? 
           Get.offAll(
             BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,))
@@ -394,22 +400,30 @@ return true;
         prefs.commit();
 
 
-        Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
-        Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
-        Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-         Mixpanell.mixpanel!.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
+        // Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
+        // Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
+        // Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
+        //  Mixpanell.mixpanel!.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
 
 
 
         // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
 
-        var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
+        // var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
 
  
 // chackuserapi(email).then((value) {
 // value
 // ?
-
+if(isUserExist){
+          Mixpanell.mixpanel!.track(
+             "User Login",
+             properties: {
+           "Name":jsonRes["user"]["name"].toString(),
+           "Email":jsonRes["user"]["email"].toString()
+             }
+           );
+        }
 isUserExist?
 Get.offAll(
   BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)

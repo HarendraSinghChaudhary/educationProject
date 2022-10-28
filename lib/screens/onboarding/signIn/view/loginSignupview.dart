@@ -715,7 +715,7 @@ class _SentMailState extends State<SentMail> {
                     InkWell(
                       onTap: (){
                         Get.back();
-                        controller.islogin.value = true;
+                        controller.isforgot.value = true;
                         showBottumSheet(const LoginSignUp());
                       },
                       child:  Row(

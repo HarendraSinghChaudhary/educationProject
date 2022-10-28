@@ -104,14 +104,53 @@ class _IntroductionState extends State<Introduction> {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Column(
+       
         children: [
           Expanded(
             child: Container(
               width: double.infinity,
-             
+              
+             child: 
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Image.asset("assets/images/logoe.png", height:h*0.15),
+
+                 SizedBox(height:  h * 0.02
+                 
+                 ),
+                 RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                    text: "Career Growth,",
+                    style: TextStyle(color: kWhiteColor, fontSize: 36, fontWeight: FontWeight.w700,fontFamily: "HK Grotesk" ),
+            
+            
+                    children: const[
+                      TextSpan(
+                        text: " \nSimplified 🚀",
+                         style: TextStyle(color: Color(0xff9EC9FF), fontSize: 36, fontWeight: FontWeight.w700 ,fontFamily: "HK Grotesk"),
+                      ),
+            
+            
+                    
+            
+                    ]
+                  ),
+            
+                 
+            
+                  
+                  
+                  
+                  
+                  
+                  ),
+               ],
+             ),
            
      
-              child: Lottie.asset('assets/icons/data2.json', fit: BoxFit.cover),
+              // child: Lottie.asset('assets/icons/data2.json', fit: BoxFit.cover),
             
           
             ),
@@ -397,24 +436,24 @@ class _IntroductionState extends State<Introduction> {
             
                   SizedBox(height: 20,),
             
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                    text: "Career Growth,",
-                    style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
+                  // RichText(
+                  //   textAlign: TextAlign.center,
+                  //   text: TextSpan(
+                  //   text: "Career Growth,",
+                  //   style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
             
             
-                    children: const[
-                      TextSpan(
-                        text: " Simplified",
-                         style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
-                      ),
+                  //   children: const[
+                  //     TextSpan(
+                  //       text: " Simplified",
+                  //        style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
+                  //     ),
             
             
                     
             
-                    ]
-                  ),
+                  //   ]
+                  // ),
             
                  
             
@@ -423,14 +462,13 @@ class _IntroductionState extends State<Introduction> {
                   
                   
                   
-                  ),
+                  // ),
             
             
             
                    SizedBox(height: 10,),
             
-                     Text("Learn, Build, and Grow with \n"
-                     "1000+ other Ambitious learners",
+                     Text("Join 1000+ Ambitious learners worldwide",
                      textAlign: TextAlign.center,
                     style: TextStyle(color: kWhiteColor, fontSize: 16,
                     height: 1.5, fontWeight: FontWeight.w400 ),

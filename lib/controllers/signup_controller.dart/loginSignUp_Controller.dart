@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 
+import '../../services/mixpanel.dart';
 import '../../testing/navigation_testing.dart';
 import '../../utils/endpoint_url.dart';
 class LoginSignUpConroller extends GetxController{
@@ -112,7 +113,13 @@ isLoading.value = false;
             'token', data["token"].toString());
 
             print("token: "+ data["token"].toString());
-
+           Mixpanell.mixpanel!.track(
+             "User Login",
+             properties: {
+           "Name":data["data"][0]["name"].toString(),
+           "Email":data["data"][0]["email"].toString()
+             }
+           );
             mail.clear();
             pass.clear();
             // Get.back();
@@ -163,18 +170,28 @@ Future otpVerify(String otpp)async{
       
         Preferences.pref!.setString('status', data["data"]["status"].toString());
         Preferences.pref!.setBool("isNotificationAllowed",data["data"]["isAllow"]=="true");
-        isforgot.value?{
-          // Get.back(),
-          Get.back(),
-          otp.clear(),
+       if(isforgot.value){
+          Get.back();
+          otp.clear();
           showBottumSheet(
             const ResetPass()
-          )
-        }:
-          otp.clear();
+          );
+       }else{
+        otp.clear();
+         Mixpanell.mixpanel!
+         ..alias("New user", data["data"]["email"].toString(),)
+         ..identify(data["data"]["email"].toString(),)
+         ..getPeople().set("\$name", data["data"]["name"].toString())
+         ..getPeople().set("\$email", data["data"]["email"].toString());
+        // Mixpanell.mixpanel!.identify(data["data"]["email"].toString(),) ;
+        // Mixpanell.mixpanel!.getPeople().set("Name", data["data"]["name"].toString(),  );
+        //  Mixpanell.mixpanel!.getPeople().set("\$Email", data["data"]["email"].toString(),  );
+
         Get.offAll(
-          ()=>BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
-        );
+          ()=>BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,));
+       }
+        
+        
 
 isLoading.value = false;
 first.clear();
