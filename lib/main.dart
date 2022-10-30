@@ -4,12 +4,14 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:Ambitious/screens/paywall.dart';
+import 'package:Ambitious/services/firebase_analytics.dart';
 import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/notification_services.dart';
 import 'package:Ambitious/services/purchase_api.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/utils/constant.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,6 +45,7 @@ final BehaviorSubject<String?> selectNotificationSubject =
 final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
     BehaviorSubject<ReceivedNotification>();
 String? selectedNotificationPayload;
+
 class ReceivedNotification {
   ReceivedNotification({
     required this.id,
@@ -60,8 +63,8 @@ class ReceivedNotification {
 final _inAppPurchasesConfigurationApple =
     PurchasesConfiguration("appl_hsOlzcwnCowLmWtVtNYwaiEQvjV");
 
-final _inAppPurchasesConfigurationGoogle = PurchasesConfiguration("goog_kYxSWDfYKsJRgIUfxgOaYSlKACj");
-
+final _inAppPurchasesConfigurationGoogle =
+    PurchasesConfiguration("goog_kYxSWDfYKsJRgIUfxgOaYSlKACj");
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -69,16 +72,16 @@ void main() async {
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
- await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
- if (Platform.isAndroid) {
+  if (Platform.isAndroid) {
     await Purchases.configure(_inAppPurchasesConfigurationGoogle);
   } else if (Platform.isIOS) {
     await Purchases.configure(_inAppPurchasesConfigurationApple);
   }
 
   await PurchaseApi.init();
-  
+
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -101,7 +104,6 @@ void main() async {
                 body: body,
                 payload: payload,
               ),
-              
             );
           });
 
@@ -126,11 +128,10 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
-      await flutterLocalNotificationsPlugin
+  await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin>()
       ?.initialize(initializationSettingsIOS);
-      
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -138,11 +139,8 @@ void main() async {
     sound: true,
   );
 
-
-
-
-
-  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4", optOutTrackingDefault: false);// development mixpanel token
+  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+      optOutTrackingDefault: false); // development mixpanel token
   // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
   // await Intercom.instance.initialize(
   //   'com.educationondemand',
@@ -184,8 +182,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   List<String> notificationList = [];
 
-
-Future<void> _requestPermissions() async {
+  Future<void> _requestPermissions() async {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
@@ -222,7 +219,10 @@ Future<void> _requestPermissions() async {
                 await Navigator.push(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,),
+                    builder: (BuildContext context) => BottomNavigationScreen(
+                      index: 0.obs,
+                      learningPathIndex: 0.obs,
+                    ),
                   ),
                 );
               },
@@ -264,18 +264,15 @@ Future<void> _requestPermissions() async {
               reply_id = element.substring(i).toString();
             }
           });
-        
         }
-  }});
+      }
+    });
   }
-
-
-
 
   @override
   void initState() {
     super.initState();
-_configureDidReceiveLocalNotificationSubject();
+    _configureDidReceiveLocalNotificationSubject();
     _configureSelectNotificationSubject();
 ////Forground notification
     FirebaseMessaging.onMessage.listen((message) async {
@@ -293,15 +290,11 @@ _configureDidReceiveLocalNotificationSubject();
         print(map.toString());
         map["title"] = message.notification!.title;
         map["body"] = message.notification!.body;
-        
       }
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
-     const IOSNotificationDetails ios = IOSNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true
-      );
+      const IOSNotificationDetails ios = IOSNotificationDetails(
+          presentAlert: true, presentBadge: true, presentSound: true);
       const AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
         'Ambitious',
@@ -314,11 +307,8 @@ _configureDidReceiveLocalNotificationSubject();
         enableVibration: true,
         playSound: true,
       );
-      const NotificationDetails platformChannelSpecifics =
-          NotificationDetails(
-            android: androidPlatformChannelSpecifics,
-            iOS: ios
-            );
+      const NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: androidPlatformChannelSpecifics, iOS: ios);
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -346,7 +336,7 @@ _configureDidReceiveLocalNotificationSubject();
         print(message.notification!.body);
       }
     });
-   //Routing on tap notification
+    //Routing on tap notification
     // when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       RemoteNotification? notification = message.notification;
@@ -356,7 +346,6 @@ _configureDidReceiveLocalNotificationSubject();
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (message.notification != null) {
-        
         Map<String, dynamic> map = HashMap();
 
         print(map.toString());
@@ -367,8 +356,6 @@ _configureDidReceiveLocalNotificationSubject();
             map["type"] = message.data["type"];
           }
         }
-
-
       }
       const AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
@@ -383,15 +370,9 @@ _configureDidReceiveLocalNotificationSubject();
         playSound: true,
       );
       const IOSNotificationDetails ios = IOSNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true
-      );
-      const NotificationDetails platformChannelSpecifics =
-          NotificationDetails(
-            android: androidPlatformChannelSpecifics,
-            iOS: ios
-            );
+          presentAlert: true, presentBadge: true, presentSound: true);
+      const NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: androidPlatformChannelSpecifics, iOS: ios);
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -416,6 +397,9 @@ _configureDidReceiveLocalNotificationSubject();
     });
   }
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -424,6 +408,7 @@ _configureDidReceiveLocalNotificationSubject();
       initialRoute:
           "/", // Starting app route. Navigate to EducationOnDemand Class
       theme: ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
+      navigatorObservers: <NavigatorObserver>[observer],
 
       home:
           // Dark_Course()
@@ -431,7 +416,7 @@ _configureDidReceiveLocalNotificationSubject();
           // DarkCourseDetail()
           // Stepernew()
           Paywall(),
-          //Splash(),
+      //Splash(),
       // EventView()
       // CurrentEventView()
 
@@ -473,7 +458,6 @@ _configureDidReceiveLocalNotificationSubject();
     );
   }
 }
-
 
 Future<List<String>> breakPayload(String? _payload) async {
   String a = _payload!.replaceAll("{", "");

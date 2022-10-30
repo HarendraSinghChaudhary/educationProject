@@ -22,7 +22,7 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
-    Get.to(Paywall());
+   // Get.to(Paywall());
     getLoginStatus();
     // TODO: implement initState
     super.initState();

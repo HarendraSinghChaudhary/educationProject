@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:Ambitious/screens/homeNav/home_nav.dart';
 import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
 import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
 import 'package:Ambitious/testing/navigation_testing.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:csslib/visitor.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,22 +16,24 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/app_data.dart';
+import '../services/firebase_analytics.dart';
 import '../services/purchase_api.dart';
 import '../utils/gradient_text.dart';
 
 class Paywall extends StatefulWidget {
-  const Paywall({Key? key}) : super(key: key);
-
   @override
   State<Paywall> createState() => _PaywallState();
 }
 
 class _PaywallState extends State<Paywall> {
+ 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    AppData.checkUserPurchaseStatus();
+
+    //AppData.checkUserPurchaseStatus();
+
   }
 
   bool _isLoading = false;

@@ -9,13 +9,9 @@ class MyOfferings {
 }
 
 class PurchaseApi {
-  //static const _apiKey = '';
-  static const _apiKey = '';
+ 
   static Future init() async {
-    await Purchases.setDebugLogsEnabled(true);
-    //  await Purchases.setup(_apiKey); //old
-
-    //PurchasesConfiguration(_apiKey);
+    await Purchases.setDebugLogsEnabled(false);
     // Purchases.logIn(HelperFoos.userId);
     // Purchases.logOut();
   }
@@ -23,8 +19,8 @@ class PurchaseApi {
   static Future<List<Offering>> fetchOffers({bool all = true}) async {
     try {
       final offerings = await Purchases.getOfferings();
-      print(
-          "\n================ inside fetchOffers ================\n${offerings.all.values.toList().first}\n================ inside fetchOffers ================");
+      // print(
+      //     "\n================ inside fetchOffers ================\n${offerings.all.values.toList().first}\n================ inside fetchOffers ================");
       if (!all) {
         final current = offerings.current;
         return current == null ? [] : [current];
