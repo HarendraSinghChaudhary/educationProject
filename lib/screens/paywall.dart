@@ -1,22 +1,10 @@
-import 'dart:developer';
-
-import 'package:Ambitious/screens/homeNav/home_nav.dart';
-import 'package:Ambitious/screens/onboarding/createUser/create_user.dart';
-import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
-import 'package:Ambitious/testing/navigation_testing.dart';
+import 'package:Ambitious/services/firebase_analytics.dart';
 import 'package:Ambitious/utils/constant.dart';
-import 'package:csslib/visitor.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../services/app_data.dart';
-import '../services/firebase_analytics.dart';
 import '../services/purchase_api.dart';
 import '../utils/gradient_text.dart';
 
@@ -26,14 +14,17 @@ class Paywall extends StatefulWidget {
 }
 
 class _PaywallState extends State<Paywall> {
- 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     //AppData.checkUserPurchaseStatus();
-
+    // MyFirebaseAnalytics.appInstanceId();
+    // MyFirebaseAnalytics.setAnalyticsCollectionEnabled();
+    // MyFirebaseAnalytics.setSessionTimeoutDuration();
+    // MyFirebaseAnalytics.setUserId("Sohaib");
+    // MyFirebaseAnalytics.setCurrentScreen("Paywall");
+    // MyFirebaseAnalytics.setUserProperty("status", "checking analytics");
   }
 
   bool _isLoading = false;
@@ -43,8 +34,8 @@ class _PaywallState extends State<Paywall> {
       _isLoading = true;
     });
     // final offerings = await PurchaseApi.fetchOffers(all: false); //for subscription
-    print(MyOfferings.allIds.first);
-    print(MyOfferings.allIds.last);
+    // print(MyOfferings.allIds.first);
+    // print(MyOfferings.allIds.last);
     final offerings = await PurchaseApi.fetchOffersByIds(MyOfferings.allIds);
 
     if (offerings.isEmpty) {
@@ -61,8 +52,8 @@ class _PaywallState extends State<Paywall> {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      final offer = offerings.first;
-      print("Offer====: $offer");
+      //final offer = offerings.first;
+      //print("Offer====: $offer");
 
       final packages = offerings
           .map((offer) => offer.availablePackages)

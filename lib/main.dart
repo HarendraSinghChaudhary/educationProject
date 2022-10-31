@@ -398,7 +398,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   }
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -415,8 +416,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
-          Paywall(),
-      //Splash(),
+          //Paywall(),
+          Splash(),
       // EventView()
       // CurrentEventView()
 
