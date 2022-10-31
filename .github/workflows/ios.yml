@@ -1,4 +1,4 @@
-name: iOS CI
+.name: iOS CI
 
 on:
   push:
@@ -56,11 +56,11 @@ jobs:
       runs_on: ${{ needs.config.outputs.runner }}
       is_hosted: ${{ toJSON(contains(needs.config.outputs.runner, 'self-hosted')) }}
     steps:
-      # - name: Checkout Source
-      #   uses: actions/checkout@v3
-      #   with:
-      #     fetch-depth: 2
-      #     token: ${{ env.GH_TOKEN }}
+      - name: Checkout Source
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+          token: ${{ env.GH_TOKEN }}
 
       # - name: Inject slug/short variables
       #   uses: rlespinasse/github-slug-action@v4
