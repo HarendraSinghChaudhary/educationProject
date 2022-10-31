@@ -1,0 +1,93 @@
+name: iOS CI
+
+on:
+  push:
+    branch: [master]
+
+# I know we do not need to assign secrets to the environment like this.
+# However, for override and text purposes this allows us the greatest
+# flexibility and self-documentation for doing iOS builds.
+env:
+  PP_RUNS_ON: self-hosted
+
+jobs:
+  # We need this to dynamically toggle between job "runs-on" configurations
+  # that will allow us to handle self-hosted runners as well as GitHub hosted
+  # runners.
+  config:
+    name: iOS Build Configuration
+    runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.runner.outputs.runner }}
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      # Extract the git tag information.
+      - name: Extract Git Tag
+        id: tag
+        shell: bash
+        run: echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
+
+      # Configure the dynamic runner, default to 'macos-latest'.
+      - name: Detect Dynamic Runner
+        id: runner
+        shell: bash
+        run: |
+          RUNS_ON="${{ env.PP_RUNS_ON }}"
+          RUNS_ON="${RUNS_ON:-'macos-latest'}"
+          echo "::set-output name=runner::${RUNS_ON}"
+
+      # Visual logging of the resulting dynamic runner.
+      - name: Runner ${{ steps.runner.outputs.runner }}
+        run: ""
+
+      # Visual logging of the resulting dynamic runner.
+      - name: Tag ${{ steps.tag.outputs.tag }}
+        run: ""
+
+  # Performs the build but relies on the "config" job to dynamically set the
+  # jobs "runs-os" property and also uses that value to determine how setup
+  # should work, based ont he build environment.
+  build:
+    name: iOS Build & Deployment
+    needs: [config]
+    runs-on: ${{ needs.config.outputs.runner }}
+    env:
+      tag: ${{ needs.config.outputs.tag }}
+      runs_on: ${{ needs.config.outputs.runner }}
+      is_hosted: ${{ toJSON(contains(needs.config.outputs.runner, 'self-hosted')) }}
+    steps:
+      # - name: Checkout Source
+      #   uses: actions/checkout@v3
+      #   with:
+      #     fetch-depth: 2
+      #     token: ${{ env.GH_TOKEN }}
+
+      # - name: Inject slug/short variables
+      #   uses: rlespinasse/github-slug-action@v4
+
+      # # Just run whatever setup commands are needed for the self-hosted runner.
+      # - name: Self-Hosted Setup iOS Environment
+      #   uses: ./.github/actions/ios-hosted-setup
+      #   if: env.is_hosted == 'true'
+
+      # # Setup for ONLY on GitHub hosted runners: Xcode, dependencies, and caching.
+      # - name: GitHub Hosted Setup iOS Environment
+      #   uses: ./.github/actions/ios-github-setup
+      #   if: env.is_hosted == 'false'
+
+      # - name: Install app dependencies
+      #   shell: bash
+      #   run: yarn
+      #   working-directory: .
+
+      # - name: Build iOS App
+      #   shell: bash
+      #   run: yarn ios --runtime production
+      #   working-directory: .
+
+      # - name: Fastlane Release
+      #   shell: bash
+      #   working-directory: apps/capacitor/_dist/ios/App
+      #   run: fastlane release
+      #   env:
+      #     PP_IOS_VERSION_TAG: ${{env.tag}}

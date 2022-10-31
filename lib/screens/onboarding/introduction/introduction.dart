@@ -31,7 +31,6 @@ class _IntroductionState extends State<Introduction> {
 
   bool asign = false;
   Future googleLogin() async {
-    var familyname;
     createUserController.isLoading(true);
     GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
@@ -304,20 +303,12 @@ class _IntroductionState extends State<Introduction> {
                             onTap: () {
                               controller.islogin.value = true;
                               showBottumSheet(LoginSignUp());
-                              // Get.bottomSheet(
-                              //   const SentMail(),
-                              //   isScrollControlled: true
-                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(left: 2),
                               height: 56,
                               width: 277,
                               alignment: Alignment.center,
-                              // decoration: BoxDecoration(
-                              //   borderRadius: BorderRadius.circular(2),
-                              //   color: Color(0xff4f86eb),
-                              // ),
                               child: Text(
                                 'SIGN IN WITH EMAIL',
                                 style: TextStyle(
@@ -352,28 +343,9 @@ class _IntroductionState extends State<Introduction> {
                           SizedBox(
                             height: 20,
                           ),
-
-                          // RichText(
-                          //   textAlign: TextAlign.center,
-                          //   text: TextSpan(
-                          //   text: "Career Growth,",
-                          //   style: TextStyle(color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.w700 ),
-
-                          //   children: const[
-                          //     TextSpan(
-                          //       text: " Simplified",
-                          //        style: TextStyle(color: kPrimaryColor, fontSize: 24, fontWeight: FontWeight.w700 ),
-                          //     ),
-
-                          //   ]
-                          // ),
-
-                          // ),
-
                           SizedBox(
                             height: 10,
                           ),
-
                           Text(
                             "Join 1000+ Ambitious learners worldwide",
                             textAlign: TextAlign.center,
@@ -383,11 +355,9 @@ class _IntroductionState extends State<Introduction> {
                                 height: 1.5,
                                 fontWeight: FontWeight.w400),
                           ),
-
                           SizedBox(
                             height: 20,
                           ),
-
                           createUserController.isLoading.value
                               ? Align(
                                   alignment: Alignment.center,
@@ -464,20 +434,12 @@ class _IntroductionState extends State<Introduction> {
                             onTap: () {
                               controller.islogin.value = true;
                               showBottumSheet(LoginSignUp());
-                              // Get.bottomSheet(
-                              //   const SentMail(),
-                              //   isScrollControlled: true
-                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(left: 2),
                               height: 56,
                               width: 277,
                               alignment: Alignment.center,
-                              // decoration: BoxDecoration(
-                              //   borderRadius: BorderRadius.circular(2),
-                              //   color: Color(0xff4f86eb),
-                              // ),
                               child: Text(
                                 'SIGN IN WITH EMAIL',
                                 style: TextStyle(
@@ -488,7 +450,6 @@ class _IntroductionState extends State<Introduction> {
                               ),
                             ),
                           ),
-
                           SizedBox(
                             height: 10,
                           ),
