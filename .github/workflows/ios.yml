@@ -58,9 +58,6 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-          token: ${{ env.GH_TOKEN }}
 
       # - name: Inject slug/short variables
       #   uses: rlespinasse/github-slug-action@v4
