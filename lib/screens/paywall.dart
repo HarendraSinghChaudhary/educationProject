@@ -19,10 +19,16 @@ class Paywall extends StatefulWidget {
 
 class _PaywallState extends State<Paywall> {
   final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
+  Future<void> checkPurchase() async {
+    AppData.checkUserPurchaseStatus().whenComplete(() {
+      setState(() {});
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    AppData.checkUserPurchaseStatus();
+    checkPurchase();
   }
 
   bool _isLoading = false;
@@ -74,9 +80,15 @@ class _PaywallState extends State<Paywall> {
       }
 
       if (isSuccess) {
+        AppData.isPro = true;
+        AppData.currentActiveSubscription = selected_plan;
+        setState(() {});
         showSnack("Subscription Purchase Alert",
             "You have successfully purchased subscription.");
       } else {
+        AppData.isPro = false;
+        AppData.currentActiveSubscription = "null";
+        setState(() {});
         showSnack("Subscription Purchase Alert",
             "Spmething went wrong. Purchase Failed");
       }
@@ -548,11 +560,11 @@ class _PaywallState extends State<Paywall> {
                   ? () {
                       if (AppData.currentActiveSubscription == "annual") {
                         showSnack("Subscription Alert",
-                            "You have already a active Annual Subscription");
+                            "You have already an active Annual Subscription");
                       } else if (AppData.currentActiveSubscription ==
                           "monthly") {
                         showSnack("Subscription Alert",
-                            "You have already a active Monthly Subscription");
+                            "You have already an active Monthly Subscription");
                       }
                     }
                   : _fetchOffers,
@@ -810,8 +822,13 @@ class _PaywallState extends State<Paywall> {
                             showSnack("Subscription Alert",
                                 "You have not subscribed to any subscription.");
                             Future.delayed(const Duration(seconds: 3), () {
-                              launchUrl(Uri.parse(
-                                  'https://play.google.com/store/account/subscriptions'));
+                              if (Platform.isAndroid) {
+                                launchUrl(Uri.parse(
+                                    'https://play.google.com/store/account/subscriptions'));
+                              } else if (Platform.isIOS) {
+                                launchUrl(Uri.parse(
+                                    'https://apps.apple.com/account/subscriptions'));
+                              }
                             });
                           }
                         },
