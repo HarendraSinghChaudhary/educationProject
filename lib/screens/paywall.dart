@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,15 +40,8 @@ class _PaywallState extends State<Paywall> {
       setState(() {
         _isLoading = false;
       });
-      Fluttertoast.cancel();
-      Fluttertoast.showToast(
-          msg: "No Subscriptions Found To Purchase",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 5,
-          backgroundColor: Color.fromARGB(117, 5, 5, 5),
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showSnack(
+          "Subscription Purchase Alert", "No Subscriptions Found To Purchase");
     } else {
       //final offer = offerings.first;
       //print("Offer====: $offer");
@@ -791,19 +786,33 @@ class _PaywallState extends State<Paywall> {
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
                       recognizer: _tapGestureRecognizer
-                        ..onTap = () {
+                        ..onTap = () async {
                           if (AppData.isPro) {
                             if (AppData.currentActiveSubscription == "annual") {
-                              launchUrl(Uri.parse(
-                                  'https://play.google.com/store/account/subscriptions?sku=ambitious_4999_1y&com.educationondemand'));
+                              if (Platform.isAndroid) {
+                                launchUrl(Uri.parse(
+                                    'https://play.google.com/store/account/subscriptions?sku=ambitious_4999_1y&com.educationondemand'));
+                              } else if (Platform.isIOS) {
+                                launchUrl(Uri.parse(
+                                    'https://apps.apple.com/account/subscriptions'));
+                              }
                             } else if (AppData.currentActiveSubscription ==
                                 "monthly") {
-                              launchUrl(Uri.parse(
-                                  'https://play.google.com/store/account/subscriptions?sku=ambitious_999_1m&com.educationondemand'));
+                              if (Platform.isAndroid) {
+                                launchUrl(Uri.parse(
+                                    'https://play.google.com/store/account/subscriptions?sku=ambitious_999_1m&com.educationondemand'));
+                              } else if (Platform.isIOS) {
+                                launchUrl(Uri.parse(
+                                    'https://apps.apple.com/account/subscriptions'));
+                              }
                             }
                           } else {
                             showSnack("Subscription Alert",
-                                "You have not subscribed to any subscription");
+                                "You have not subscribed to any subscription.");
+                            Future.delayed(const Duration(seconds: 3), () {
+                              launchUrl(Uri.parse(
+                                  'https://play.google.com/store/account/subscriptions'));
+                            });
                           }
                         },
                     ),
