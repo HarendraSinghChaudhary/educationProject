@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/sharedPreference.dart';
 
-
-
 class CrispChat extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -23,7 +21,7 @@ class _MyAppState extends State<CrispChat> {
   void initState() {
     super.initState();
     getUserList();
-       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       // systemNavigationBarColor: Colors.blue, // navigation bar color
       statusBarColor: kPrimaryColor, // status bar color
     ));
@@ -38,10 +36,8 @@ class _MyAppState extends State<CrispChat> {
         email: email.toString(),
         avatar: '',
         nickname: name.toString(),
-      
         phone: "",
       ),
-      
     );
 
     // crispMain.setMessage("");
@@ -55,35 +51,29 @@ class _MyAppState extends State<CrispChat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: kPrimaryColor,
-          centerTitle: true,
-          title: const Text('Welcome to Ambitious'),
-        ),
-        body: CrispView(
-          crispMain: crispMain,
-          clearCache: false,
-        ),
-      );
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        title: const Text('Welcome to Ambitious'),
+      ),
+      body: CrispView(
+        crispMain: crispMain,
+        clearCache: false,
+      ),
+    );
   }
 
-   Future<dynamic> getUserList() async {
+  Future<dynamic> getUserList() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     id = pref.getString("id").toString();
-    print("id: " + id.toString());
     email = pref.getString("email").toString();
-    print("email: " + email.toString());
     name = pref.getString("name").toString();
-    print("name: " + name.toString());
-  if(Preferences.pref!.getString("name").toString()=="null"){
-    name = (Preferences.pref!.getString("firstname")??"")+" "+(Preferences.pref!.getString("lastname")??"");
-    print(name);
-
+    if (Preferences.pref!.getString("name").toString() == "null") {
+      name = (Preferences.pref!.getString("firstname") ?? "") +
+          " " +
+          (Preferences.pref!.getString("lastname") ?? "");
     }
 
     setState(() {});
   }
-
-
-  
 }

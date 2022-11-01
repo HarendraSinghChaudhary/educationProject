@@ -18,7 +18,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'testing/navigation_testing.dart';
+import 'screens/homeNav/navigationBottomBar.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'Ambitious', // id
@@ -54,7 +54,6 @@ class ReceivedNotification {
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    // systemNavigationBarColor: Colors.blue, // navigation bar color
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +73,6 @@ void main() async {
             String? body,
             String? payload,
           ) async {
-            print("Notification recieved");
             didReceiveLocalNotificationSubject.add(
               ReceivedNotification(
                 id: id,
@@ -89,27 +87,10 @@ void main() async {
     android: initializationSettingsAndroid,
     iOS: initializationSettingsIOS,
   );
-  // await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-  //     onSelectNotification: (String? payload) async {
-  //   if (payload != null) {
-  //     debugPrint('notification payload: $payload');
-  //     // navigatorKey.currentState!.pushNamed("/notification");
-
-  //   }
-  //   selectedNotificationPayload = payload;
-  //   selectNotificationSubject.add(payload);
-  // });
-
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
-  // await flutterLocalNotificationsPlugin
-  //     .resolvePlatformSpecificImplementation<
-  //         IOSFlutterLocalNotificationsPlugin>()
-  //     ?.initialize(initializationSettingsIOS);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -119,12 +100,8 @@ void main() async {
 
   // Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
   //     optOutTrackingDefault: false); // development mixpanel token
-  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
-  // await Intercom.instance.initialize(
-  //   'com.educationondemand',
-  //   androidApiKey: 'androidApiKey',
-  //   iosApiKey: 'iosApiKey',
-  // );
+  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918",
+      optOutTrackingDefault: false); // production mixpanel token
 
   Preferences.pref = await SharedPreferences.getInstance();
 
@@ -160,25 +137,9 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   List<String> notificationList = [];
 
-  // Future<void> _requestPermissions() async {
-  //   flutterLocalNotificationsPlugin
-  //       .resolvePlatformSpecificImplementation<
-  //           IOSFlutterLocalNotificationsPlugin>()
-  //       ?.requestPermissions(
-  //         alert: true,
-  //         badge: true,
-  //         sound: true,
-  //       );
-
-  //   Map<Permission, PermissionStatus> statuses =
-  //       await [Permission.notification].request();
-  // }
-
   void _configureDidReceiveLocalNotificationSubject() {
-    print("_configureDidReceiveLocalNotificationSubject");
     didReceiveLocalNotificationSubject.stream
         .listen((ReceivedNotification receivedNotification) async {
-      print("listion ios state");
       await showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -192,7 +153,6 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
             CupertinoDialogAction(
               isDefaultAction: true,
               onPressed: () async {
-                print("Clicked true ios");
                 Navigator.of(context, rootNavigator: true).pop();
                 await Navigator.push(
                   context,
@@ -213,10 +173,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   }
 
   void _configureSelectNotificationSubject() async {
-    print("_configureSelectNotificationSubject");
-
     selectNotificationSubject.stream.listen((String? payload) async {
-      print("chacking payload" + payload.toString());
       if (payload != null) {
         if (payload != "") {
           var listdata = await breakPayload(payload);
@@ -226,19 +183,16 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           listdata.forEach((element) {
             if (element.contains("type")) {
               int i = element.indexOf(":") + 2;
-              print("Type " + element.substring(i) + "^^");
               type = element.substring(i).toString();
             }
 
             if (element.contains("businessreview_id")) {
               int i = element.indexOf(":") + 2;
-              print("businessreview_id " + element.substring(i) + "^^");
               review_id = element.substring(i).toString();
             }
 
             if (element.contains("reply_id")) {
               int i = element.indexOf(":") + 2;
-              print("reply_id " + element.substring(i) + "^^");
               reply_id = element.substring(i).toString();
             }
           });
@@ -250,22 +204,9 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   @override
   void initState() {
     super.initState();
-    // _configureDidReceiveLocalNotificationSubject();
-    // _configureSelectNotificationSubject();
-////Forground notification
     FirebaseMessaging.onMessage.listen((message) async {
-      print("Onmessage");
-      // print("message " + message.notification!.title.toString() + "^^");
-      // print("notification data" + message.data.toString());
-      // print("notification notification" + message.notification.toString());
-
-      if (message.notification != null) {
-        print("notification notification" +
-            message.notification!.title.toString());
-      }
       if (message.notification != null) {
         Map<String, dynamic> map = HashMap();
-        print(map.toString());
         map["title"] = message.notification!.title;
         map["body"] = message.notification!.body;
       }
@@ -287,7 +228,6 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       );
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
           android: androidPlatformChannelSpecifics, iOS: ios);
-          print("showing");
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -295,26 +235,18 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
         platformChannelSpecifics,
         payload: message.data.toString(),
       );
-      print("notification data" + message.data.toString());
-
-      if (message.notification != null) {
-        print(message.notification!.body);
-      }
     });
     //Routing on tap notification
     // when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
-      // print("notification data" + message.data.toString());
-      print("on message opend app");
 
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (message.notification != null) {
         Map<String, dynamic> map = HashMap();
 
-        print(map.toString());
         map["title"] = message.notification!.title;
         map["body"] = message.notification!.body;
         if (message.data.isNotEmpty) {
@@ -339,7 +271,6 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           presentAlert: true, presentBadge: true, presentSound: true);
       const NotificationDetails platformChannelSpecifics = NotificationDetails(
           android: androidPlatformChannelSpecifics, iOS: ios);
-          print("showing noti in opened");
       await flutterLocalNotificationsPlugin.show(
         10,
         message.notification!.title,
@@ -347,20 +278,6 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
         platformChannelSpecifics,
         payload: message.data.toString(),
       );
-      // if (notification != null && android != null) {
-      //   flutterLocalNotificationsPlugin.show(
-      //       notification.hashCode,
-      //       notification.title,
-      //       notification.body,
-      //       NotificationDetails(
-      //         android: AndroidNotificationDetails(
-      //           channel.id,
-      //           channel.name,
-      //           icon: android.smallIcon,
-      //           // other properties...
-      //         ),
-      //       ));
-      // }
     });
   }
 
@@ -373,50 +290,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           "/", // Starting app route. Navigate to EducationOnDemand Class
       theme: ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
 
-      home:
-          // Dark_Course()
-          // DarkLearningPath()
-          // DarkCourseDetail()
-          // Stepernew()
-          Splash(),
-      // EventView()
-      // CurrentEventView()
-
-      // Application Routes
-
-      // getPages: [
-      //   GetPage(name: "/", page: () =>const EducationOnDemand()),
-      //   GetPage(
-      //       name: "/homeNav",
-      //       page: () =>  BottomNavigationScreen(index: 0.obs,
-
-      //           )),
-
-      //   GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
-      //   GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
-      //   GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
-      //   // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
-      //   GetPage(name: "/courseHeader", page: () =>  CourseHeader(), ),
-      //   GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
-      //   GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
-      //   GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
-      //   GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
-      //   GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
-      //   GetPage(name: "/socialme", page: () => const Socialme() ),
-      //   GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
-      //   GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
-      //   GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
-      //   // GetPage(name: "/settings", page: () => const Settings() ),
-      //   GetPage(name: "/flashCard", page: () => const FlashCard() ),
-      //   GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
-      //   GetPage(name: "/editprofile", page: () => const EditProfile() ),
-      //   // GetPage(name: "/introduction", page: () => const Introduction() ),
-      //   GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
-      //   GetPage(name: "/homeLive", page: () => const HomeLive() ),
-      //   // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
-      //   // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
-
-      // ],
+      home: Splash(),
     );
   }
 }
@@ -424,10 +298,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 Future<List<String>> breakPayload(String? _payload) async {
   String a = _payload!.replaceAll("{", "");
   String b = a.replaceAll("}", "");
-  print("B is" + b.toString());
   List<String> listdata = b.split(",");
-  print(listdata.length);
-  print(listdata.toString());
 
   return listdata;
 }

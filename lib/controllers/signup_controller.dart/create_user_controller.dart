@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:Ambitious/screens/name.dart';
+import 'package:Ambitious/screens/onboarding/name.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -9,142 +9,79 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/mixpanel.dart';
-import '../../testing/navigation_testing.dart';
+import '../../screens/homeNav/navigationBottomBar.dart';
 
+//in working
 class CreateUserController extends GetxController {
-
-
-
-
-
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
   }
 
-  
-
-
-
-
-
-
   RxBool isLoading = false.obs;
   RxBool isSubmitting = false.obs;
 
   var response = "";
   var tokenId = "";
-
-
-
-Future appledeleteAPI()async{
-  
-}
-
-
-
-
- Future<dynamic> chackuserapi(
+  Future appledeleteAPI() async {}
+  Future<dynamic> chackuserapi(
     String email,
   ) async {
     isLoading(true);
-    print("email Print: "+email);
-
-    print("avialble token : " + tokenId.toString());
     String msg = "";
     var jsonRes;
     http.Response? res;
     var request = http.get(
-        Uri.parse(
-          RestDatasource.USERCHECK_URL+"?email=" +email.toString().trim(),
-
-        ),
-        headers: {
-          "Authorization":Preferences.pref!.getString("token").toString()
-        },
-        // body: {
-        //   "email": email.toString().trim(),
-        // }
-        );
+      Uri.parse(
+        RestDatasource.USERCHECK_URL + "?email=" + email.toString().trim(),
+      ),
+      headers: {
+        "Authorization": Preferences.pref!.getString("token").toString()
+      },
+    );
 
     await request.then((http.Response response) {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
-      print("status: " + jsonRes["status"].toString() + "_");
-      print("message: " + jsonRes["message"].toString() + "_");
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
       if (jsonRes["status"] == true) {
-
-         SharedPreferences prefs = await SharedPreferences.getInstance();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["data"]["_id"].toString());
         prefs.setString('name', jsonRes["data"]["name"].toString());
-      
+
         prefs.setString('email', jsonRes["data"]["email"].toString());
         prefs.setString('firstname', jsonRes["data"]["firstname"].toString());
         prefs.setString('lastname', jsonRes["data"]["lastname"].toString());
-      
+
         prefs.setString('status', jsonRes["data"]["status"].toString());
-       
-        // prefs.setString(
-        //     'token', jsonRes["token"].toString());
 
-            print("token: "+ jsonRes["token"].toString());
-       
-
-    return jsonRes["isUserExist"];
+        return jsonRes["isUserExist"];
       } else {
-        // isLoading(false);
         return false;
       }
     } else {
-      // response = msg.toString();
-
-      print("..... " + response.toString());
       return false;
-
-      // Get.snackbar(
-      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black,
-      //   padding: const EdgeInsets.only(top: 0)
-
-      // );
-
-      // Fluttertoast.showToast(
-      //     msg: msg.toString(),
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.BOTTOM,
-      //     timeInSecForIosWeb: 1,
-      //     backgroundColor: kPrimaryColor,
-      //     textColor: Colors.white,
-      //     fontSize: 14.0);
-
-      // isLoading(false);
     }
   }
-Future<dynamic> deleteuserapi() async {
+
+  Future<dynamic> deleteuserapi() async {
     isLoading(true);
-    print("avialble token : " + tokenId.toString());
     String msg = "";
     var jsonRes;
     http.Response? res;
     var request = http.post(
-        Uri.parse(
-          RestDatasource.USERDELETE_URL+Preferences.pref!.getString("id").toString(),
-
-        ),
-        headers: {
-          "Authorization":Preferences.pref!.getString("token").toString()
-        },
-        // body: {
-        //   "email": email.toString().trim(),
-        // }
-        );
+      Uri.parse(
+        RestDatasource.USERDELETE_URL +
+            Preferences.pref!.getString("id").toString(),
+      ),
+      headers: {
+        "Authorization": Preferences.pref!.getString("token").toString()
+      },
+    );
 
     await request.then((http.Response response) {
       res = response;
@@ -154,51 +91,18 @@ Future<dynamic> deleteuserapi() async {
     });
     if (res!.statusCode == 200) {
       if (jsonRes["status"] == true) {
-       
-return true;
-    // return jsonRes["isUserExist"];
+        return true;
       } else {
-        // isLoading(false);
         return false;
       }
     } else {
-      // response = msg.toString();
-
-      print("..... " + response.toString());
       return false;
-
-      // Get.snackbar(
-      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black,
-      //   padding: const EdgeInsets.only(top: 0)
-
-      // );
-
-      // Fluttertoast.showToast(
-      //     msg: msg.toString(),
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.BOTTOM,
-      //     timeInSecForIosWeb: 1,
-      //     backgroundColor: kPrimaryColor,
-      //     textColor: Colors.white,
-      //     fontSize: 14.0);
-
-      // isLoading(false);
     }
   }
 
-
   Future<dynamic> createGoogleUserApi(
-    String email,
-    String name,
-    String firstName,
-    String lastName
-  ) async {
+      String email, String name, String firstName, String lastName) async {
     isLoading(true);
-    print("email Print: "+email);
-    print("name Print: "+name);
-
-    print("avialble token : " + tokenId.toString());
     String msg = "";
     var jsonRes;
     http.Response? res;
@@ -218,10 +122,6 @@ return true;
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
-      print("status: " + jsonRes["status"].toString() + "_");
-      print("message: " + jsonRes["message"].toString() + "_");
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
@@ -230,87 +130,47 @@ return true;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
         prefs.setString('name', jsonRes["user"]["name"].toString());
-      
+
         prefs.setString('email', jsonRes["user"]["email"].toString());
         prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
         prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
-      
-        prefs.setString('status', jsonRes["user"]["status"].toString());
-        Preferences.pref!.setBool("isNotificationAllowed",jsonRes["user"]["isAllow"]=="true");
-       
-        prefs.setString(
-            'token', jsonRes["token"].toString());
 
-            print("token: "+ jsonRes["token"].toString());
-       
+        prefs.setString('status', jsonRes["user"]["status"].toString());
+        Preferences.pref!.setBool(
+            "isNotificationAllowed", jsonRes["user"]["isAllow"] == "true");
+
+        prefs.setString('token', jsonRes["token"].toString());
+
         prefs.commit();
 
+        var splitData = name.split(' ');
 
-        // Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString());
-        // // Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
-        // Mixpanell.mixpanel!.getPeople().set("\$Name", jsonRes["user"]["name"].toString(),  );
-        //  Mixpanell.mixpanel!.getPeople().set("\$email", jsonRes["user"]["email"].toString(),  );
-
-
-
-
-        // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
-
-        // var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
-
-         var splitData = name.split(' ');
-        print("splitData: "+splitData.toString());
-     
-
-        // chackuserapi(email).then((value) {
-        //   value
-        //   ?
-        if(isUserExist){
-          Mixpanell.mixpanel!.track(
-             "User Login",
-             properties: {
-           "Name":jsonRes["user"]["name"].toString(),
-           "Email":jsonRes["user"]["email"].toString()
-             }
-           );
+        if (isUserExist) {
+          Mixpanell.mixpanel!.track("User Login", properties: {
+            "Name": jsonRes["user"]["name"].toString(),
+            "Email": jsonRes["user"]["email"].toString()
+          });
         }
-        isUserExist ? 
-          Get.offAll(
-            BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,))
-            :
-             Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,))!.whenComplete(() {
-                  isLoading(false);
-            
-        //   )!.whenComplete(() {
-        //           isLoading(false);
-        //   }):
-                  
-          // });
-
-        });
-
-
-        // update();
-
-    
+        isUserExist
+            ? Get.offAll(BottomNavigationScreen(
+                index: 0.obs,
+                learningPathIndex: 0.obs,
+              ))
+            : Get.offAll(() => NameScreen(
+                      firstName: firstName,
+                      lastName: lastName,
+                      name: name,
+                    ))!
+                .whenComplete(() {
+                isLoading(false);
+              });
 
         isLoading(false);
-
-    
       } else {
         isLoading(false);
       }
     } else {
       response = msg.toString();
-
-      print("..... " + response.toString());
-
-      // Get.snackbar(
-      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black,
-      //   padding: const EdgeInsets.only(top: 0)
-
-      // );
 
       Fluttertoast.showToast(
           msg: msg.toString(),
@@ -325,35 +185,23 @@ return true;
     }
   }
 
-
-
-   Future<dynamic> createAppleUserApi(
+  Future<dynamic> createAppleUserApi(
     String email,
     String name,
-  
   ) async {
     var firstName;
     var lastName;
     isSubmitting(true);
-    print("email Print: "+email);
-    print("name Print: "+name);
-
 
     if (name.toString() != "null") {
+      var splitData = name.split(' ');
 
-        var splitData = name.split(' ');
-        print("splitData: "+splitData.toString());
-       firstName = splitData[0].toString() ;
-       lastName = splitData[1].toString() ;
-        print(firstName);
-        print(lastName);
-    }else {
+      firstName = splitData[0].toString();
+      lastName = splitData[1].toString();
+    } else {
       firstName = "";
       lastName = "";
-
     }
-
-    print("avialble token : " + tokenId.toString());
     String msg = "";
     var jsonRes;
     http.Response? res;
@@ -367,17 +215,12 @@ return true;
           "firstname": firstName.toString().trim(),
           "lastname": lastName.toString().trim(),
           "signintype": "Apple SignIn",
-          
         });
 
     await request.then((http.Response response) {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
-      print("status: " + jsonRes["status"].toString() + "_");
-      print("message: " + jsonRes["message"].toString() + "_");
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
@@ -386,78 +229,39 @@ return true;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
         prefs.setString('name', jsonRes["user"]["name"].toString());
-      
+
         prefs.setString('email', jsonRes["user"]["email"].toString());
-      
+
         prefs.setString('status', jsonRes["user"]["status"].toString());
         prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
 
-        
-       
-        prefs.setString(
-            'token', jsonRes["token"].toString());
-       
+        prefs.setString('token', jsonRes["token"].toString());
+
         prefs.commit();
 
-
-        // Mixpanell.mixpanel!.alias("New user", jsonRes["user"]["email"].toString(),);
-        // Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString(), ) ;
-        // Mixpanell.mixpanel!.getPeople().set("Name", jsonRes["user"]["name"].toString(),  );
-        //  Mixpanell.mixpanel!.getPeople().set("Email", jsonRes["user"]["email"].toString(),  );
-
-
-
-        // Get.snackbar(msg.toString(), "",  snackPosition: SnackPosition.TOP,);
-
-        // var trying = Mixpanell.mixpanel!.identify(jsonRes["user"]["email"].toString()) ;
-
- 
-// chackuserapi(email).then((value) {
-// value
-// ?
-if(isUserExist){
-          Mixpanell.mixpanel!.track(
-             "User Login",
-             properties: {
-           "Name":jsonRes["user"]["name"].toString(),
-           "Email":jsonRes["user"]["email"].toString()
-             }
-           );
+        if (isUserExist) {
+          Mixpanell.mixpanel!.track("User Login", properties: {
+            "Name": jsonRes["user"]["name"].toString(),
+            "Email": jsonRes["user"]["email"].toString()
+          });
         }
-isUserExist?
-Get.offAll(
-  BottomNavigationScreen(index: 0.obs,learningPathIndex: 0.obs,)
-):
-         Get.offAll(()=>NameScreen(firstName: firstName, lastName: lastName, name: name,));
+        isUserExist
+            ? Get.offAll(BottomNavigationScreen(
+                index: 0.obs,
+                learningPathIndex: 0.obs,
+              ))
+            : Get.offAll(() => NameScreen(
+                  firstName: firstName,
+                  lastName: lastName,
+                  name: name,
+                ));
 
-        // });
-
-    //  Get.offAll(NameScreen(firstName: firstName, lastName: lastName, name: name,));
-
-        // _handleRemeberme(remember);
-        // Get.offAll( NameScreen(firstName: firstName, lastName: lastName, name: name,));
-
-        // update();
-
-    
-
-       isSubmitting(true);
-
-      
+        isSubmitting(true);
       } else {
         isSubmitting(true);
       }
     } else {
       response = msg.toString();
-
-      print("..... " + response.toString());
-
-      // Get.snackbar(
-      //   'Please enter valid credentials', "",  snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black,
-      //   padding: const EdgeInsets.only(top: 0)
-
-      // );
 
       Fluttertoast.showToast(
           msg: msg.toString(),
@@ -468,18 +272,7 @@ Get.offAll(
           textColor: Colors.white,
           fontSize: 14.0);
 
-     isSubmitting(true);
+      isSubmitting(true);
     }
   }
-
-  // token() {
-  //   var messaging = FirebaseMessaging.instance;
-  //   messaging.getToken().then((value) {
-  //     print("token: " + value.toString());
-  //     tokenId = value.toString();
-
-  //     print("new token: " + tokenId.toString());
-  //   });
-  // }
 }
-

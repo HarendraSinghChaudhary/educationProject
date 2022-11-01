@@ -1,5 +1,4 @@
 class GetHotCoursesModel {
-
   var id = "";
   var title = "";
   var shortDescrition = "";
@@ -13,8 +12,4 @@ class GetHotCoursesModel {
   var allModules = "";
   var viewCount = "";
   bool isSelected = false;
-  
-
-
-
 }

@@ -1,10 +1,10 @@
-
 // ignore_for_file: sized_box_for_whitespace
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-Future<bool> showExitPopup(context) async{
+
+Future<bool> showExitPopup(context) async {
   return await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -14,14 +14,13 @@ Future<bool> showExitPopup(context) async{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               const Text("Do you want to exit?"),
-               const SizedBox(height: 20),
+                const Text("Do you want to exit?"),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                         print('yes selected');
                           exit(0);
                         },
                         child: const Text("Yes"),
@@ -29,14 +28,14 @@ Future<bool> showExitPopup(context) async{
                             primary: Colors.red.shade800),
                       ),
                     ),
-                   const SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Expanded(
                         child: ElevatedButton(
                       onPressed: () {
-                        print('no selected');
                         Navigator.of(context).pop();
                       },
-                      child:const Text("No", style: TextStyle(color: Colors.black)),
+                      child: const Text("No",
+                          style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,
                       ),
@@ -48,4 +47,4 @@ Future<bool> showExitPopup(context) async{
           ),
         );
       });
-} 
+}

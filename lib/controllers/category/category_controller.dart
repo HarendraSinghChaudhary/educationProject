@@ -22,8 +22,8 @@ class CategoryController extends GetxController {
     var request = http.get(
       Uri.parse(RestDatasource.GETCATEGORY),
       headers: {
-        "Authorization":
-            Preferences.pref!.getString("token").toString()      },
+        "Authorization": Preferences.pref!.getString("token").toString()
+      },
     );
 
     String msg = "";
@@ -35,15 +35,11 @@ class CategoryController extends GetxController {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
       msg = jsonRes["message"].toString();
       jsonArray = jsonRes['CategoryData'];
     });
 
     if (res.statusCode == 200) {
-      print(jsonRes["status"]);
-
       if (jsonRes["status"].toString() == "true") {
         categoryList.clear();
         for (var i = 0; i < jsonArray.length; i++) {
@@ -55,21 +51,10 @@ class CategoryController extends GetxController {
 
           categoryList.add(modelAgentSearch);
 
-          print("name: " + jsonArray[i]["category"].toString());
-
           isLoading(false);
 
           update();
         }
-
-        // Get.snackbar(
-        //   "",
-        //   "",
-        //   snackPosition: SnackPosition.TOP,
-        //   titleText: Text(jsonRes["message"].toString()),
-        //   messageText: Text(""),
-        //   colorText: Colors.red,
-        // );
 
         isLoading(false);
         update();
@@ -100,7 +85,4 @@ class CategoryController extends GetxController {
       update();
     }
   }
-
-
-  
 }

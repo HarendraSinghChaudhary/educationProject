@@ -3,13 +3,6 @@
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 
-
-
-
-
-
-
-
 class DefaultButtonPlus extends StatelessWidget {
   const DefaultButtonPlus({
     required this.width,
@@ -28,20 +21,19 @@ class DefaultButtonPlus extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child:  TextButton(
-
-         style: TextButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: TextButton(
+        style: TextButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             // foregroundColor: kPrimaryColor
-            backgroundColor: kPrimaryColor
-
-        ),
-       
+            backgroundColor: kPrimaryColor),
         onPressed: press,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             Text(
               text,
               textAlign: TextAlign.center,
