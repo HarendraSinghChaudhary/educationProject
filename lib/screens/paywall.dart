@@ -693,7 +693,7 @@ class _PaywallState extends State<Paywall> {
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
-                      recognizer: new TapGestureRecognizer()
+                      recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           launchUrl(Uri.parse(
                               'https://theambitiousapp.com/terms-of-service'));
@@ -717,7 +717,7 @@ class _PaywallState extends State<Paywall> {
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
-                      recognizer: _tapGestureRecognizer
+                      recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           launchUrl(Uri.parse(
                               'https://www.theambitiousapp.com/privacy-policy'));
@@ -797,7 +797,7 @@ class _PaywallState extends State<Paywall> {
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
-                      recognizer: _tapGestureRecognizer
+                      recognizer: TapGestureRecognizer()
                         ..onTap = () async {
                           if (AppData.isPro) {
                             if (AppData.currentActiveSubscription == "annual") {
