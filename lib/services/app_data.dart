@@ -1,25 +1,28 @@
 import 'package:flutter/services.dart';
-import 'package:purchases_flutter/object_wrappers.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class AppData {
   static bool isPro = false;
+  static String currentActiveSubscription = 'null';
 
   static checkUserPurchaseStatus() async {
     try {
-      CustomerInfo restoredInfo = await Purchases.getCustomerInfo();
+      CustomerInfo customerInfo = await Purchases.getCustomerInfo();
 
-      AppData.isPro = restoredInfo.entitlements.all['pro']!.isActive;
-
-      if (AppData.isPro) {
-        print("====Pro");
+      if (customerInfo.entitlements.all.isNotEmpty) {
+        if (customerInfo.entitlements.all['pro']!.isActive) {
+          AppData.isPro = true;
+          currentActiveSubscription = 'annual';
+        } else if (customerInfo.entitlements.all['promonthly']!.isActive) {
+          AppData.isPro = true;
+          currentActiveSubscription = 'monthly';
+        }
       } else {
-        print("===NotPro");
+        AppData.isPro = false;
+        currentActiveSubscription = 'null';
       }
 
-      // ... check restored purchaserInfo to see if entitlement is now active
     } on PlatformException catch (e) {
-      // Error restoring purchases
       AppData.isPro = false;
     }
   }

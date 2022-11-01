@@ -416,8 +416,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
-          //Paywall(),
-          Splash(),
+          Paywall(),
+      //Splash(),
       // EventView()
       // CurrentEventView()
 

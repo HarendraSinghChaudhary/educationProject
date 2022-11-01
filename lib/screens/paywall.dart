@@ -1,4 +1,6 @@
-import 'package:Ambitious/services/firebase_analytics.dart';
+import 'package:Ambitious/services/snackbar.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,17 +16,11 @@ class Paywall extends StatefulWidget {
 }
 
 class _PaywallState extends State<Paywall> {
+  final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
   @override
   void initState() {
     super.initState();
-
-    //AppData.checkUserPurchaseStatus();
-    // MyFirebaseAnalytics.appInstanceId();
-    // MyFirebaseAnalytics.setAnalyticsCollectionEnabled();
-    // MyFirebaseAnalytics.setSessionTimeoutDuration();
-    // MyFirebaseAnalytics.setUserId("Sohaib");
-    // MyFirebaseAnalytics.setCurrentScreen("Paywall");
-    // MyFirebaseAnalytics.setUserProperty("status", "checking analytics");
+    AppData.checkUserPurchaseStatus();
   }
 
   bool _isLoading = false;
@@ -83,25 +79,11 @@ class _PaywallState extends State<Paywall> {
       }
 
       if (isSuccess) {
-        Fluttertoast.cancel();
-        Fluttertoast.showToast(
-            msg: "Purchase Success",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Color.fromARGB(117, 5, 5, 5),
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showSnack("Subscription Purchase Alert",
+            "You have successfully purchased subscription.");
       } else {
-        Fluttertoast.cancel();
-        Fluttertoast.showToast(
-            msg: "Purchase Failed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Color.fromARGB(117, 5, 5, 5),
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showSnack("Subscription Purchase Alert",
+            "Spmething went wrong. Purchase Failed");
       }
     }
   }
@@ -302,11 +284,11 @@ class _PaywallState extends State<Paywall> {
                             height: 55,
                             width: 70,
                             // color: Colors.white,
-                            child: Image(
+                            child: const Image(
                                 image:
                                     AssetImage("assets/images/paywall5.png")),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 3,
                           ),
                           const Text(
@@ -333,7 +315,7 @@ class _PaywallState extends State<Paywall> {
                             height: 55,
                             width: 70,
                             // color: Colors.white,
-                            child: Image(
+                            child: const Image(
                                 image:
                                     AssetImage("assets/images/paywall4.png")),
                           ),
@@ -413,7 +395,7 @@ class _PaywallState extends State<Paywall> {
                         children: [
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 "ANNUAL",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -423,7 +405,7 @@ class _PaywallState extends State<Paywall> {
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Container(
@@ -433,7 +415,7 @@ class _PaywallState extends State<Paywall> {
                                     color: kArrowBackgroundColor,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "BEST VALUE",
                                     textAlign: TextAlign.center,
@@ -448,7 +430,7 @@ class _PaywallState extends State<Paywall> {
                               ),
                             ],
                           ),
-                          Text(
+                          const Text(
                             "3 day free trial, then \$49.99/year",
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -466,7 +448,7 @@ class _PaywallState extends State<Paywall> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Center(
                             child: Text(
                               "\$49.99",
@@ -567,7 +549,18 @@ class _PaywallState extends State<Paywall> {
               height: 20,
             ),
             InkWell(
-              onTap: _fetchOffers,
+              onTap: AppData.isPro
+                  ? () {
+                      if (AppData.currentActiveSubscription == "annual") {
+                        showSnack("Subscription Alert",
+                            "You have already a active Annual Subscription");
+                      } else if (AppData.currentActiveSubscription ==
+                          "monthly") {
+                        showSnack("Subscription Alert",
+                            "You have already a active Monthly Subscription");
+                      }
+                    }
+                  : _fetchOffers,
               child: Container(
                 height: 58,
                 width: 340,
@@ -579,13 +572,13 @@ class _PaywallState extends State<Paywall> {
                       ? Container(
                           width: 25,
                           height: 25,
-                          child: CircularProgressIndicator(
+                          child: const CircularProgressIndicator(
                             color: Colors.white,
                           ))
                       : Text(
-                          "TRY FOR FREE",
+                          AppData.isPro ? "Pro User" : "TRY FOR FREE",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: kWhiteColor,
                               fontSize: 22,
                               height: 1.5,
@@ -680,21 +673,55 @@ class _PaywallState extends State<Paywall> {
             const SizedBox(
               height: 5,
             ),
-            const Center(
-              child: Text(
-                "Terms, Conditions & Privacy Policy",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: kWhiteColor,
-                    fontSize: 10,
-                    height: 1.5,
-                    decoration: TextDecoration.underline,
-                    wordSpacing: 2.5,
-                    fontWeight: FontWeight.w400),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Terms & Conditions',
+                      style: const TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10,
+                          height: 1.5,
+                          decoration: TextDecoration.underline,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                      recognizer: new TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              'https://theambitiousapp.com/terms-of-service'));
+                        },
+                    ),
+                    const TextSpan(
+                      text: ' and ',
+                      style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10,
+                          height: 1.5,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    TextSpan(
+                      text: 'Privacy Policy',
+                      style: const TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10,
+                          height: 1.5,
+                          decoration: TextDecoration.underline,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                      recognizer: _tapGestureRecognizer
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              'https://www.theambitiousapp.com/privacy-policy'));
+                        },
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             Center(
               child: InkWell(
@@ -703,41 +730,84 @@ class _PaywallState extends State<Paywall> {
                     CustomerInfo restoredInfo =
                         await Purchases.restorePurchases();
 
-                    AppData.isPro =
-                        restoredInfo.entitlements.all['pro']!.isActive;
-
-                    if (AppData.isPro) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Restored Purchases Success"),
-                        duration: Duration(seconds: 5),
-                      ));
+                    if (restoredInfo.entitlements.all.isNotEmpty) {
+                      if (restoredInfo.entitlements.all['pro']!.isActive) {
+                        AppData.isPro = true;
+                        AppData.currentActiveSubscription = 'annual';
+                        showSnack("Subscription Alert",
+                            "Restored Annual Subscription Successfully");
+                      } else if (restoredInfo
+                          .entitlements.all['promonthly']!.isActive) {
+                        AppData.isPro = true;
+                        AppData.currentActiveSubscription = 'monthly';
+                        showSnack("Subscription Alert",
+                            "Restored Monthly Subscription Successfully");
+                      }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Restored Purchases Failed"),
-                        duration: Duration(seconds: 5),
-                      ));
+                      AppData.isPro = false;
+                      AppData.currentActiveSubscription = 'null';
+                      showSnack("Subscription Alert",
+                          "Restore purchases failed. You have not subscribed to any subscription");
                     }
-
-                    // ... check restored purchaserInfo to see if entitlement is now active
                   } on PlatformException catch (e) {
                     AppData.isPro = false;
-                    // Error restoring purchases
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.toString()),
-                      duration: Duration(seconds: 5),
-                    ));
+                    AppData.currentActiveSubscription = 'null';
+
+                    showSnack(
+                        "Subscription Alert", "Restore purchases failed.");
                   }
                 },
-                child: const Text(
-                  "Restore Purchases",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: kWhiteColor,
-                      fontSize: 10,
-                      height: 1.5,
-                      decoration: TextDecoration.underline,
-                      wordSpacing: 2.5,
-                      fontWeight: FontWeight.w400),
+                child: RichText(
+                    text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Restore Purchases',
+                      style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10,
+                          height: 1.5,
+                          decoration: TextDecoration.underline,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                )),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Cancel Current Subscription',
+                      style: const TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10,
+                          height: 1.5,
+                          decoration: TextDecoration.underline,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                      recognizer: _tapGestureRecognizer
+                        ..onTap = () {
+                          if (AppData.isPro) {
+                            if (AppData.currentActiveSubscription == "annual") {
+                              launchUrl(Uri.parse(
+                                  'https://play.google.com/store/account/subscriptions?sku=ambitious_4999_1y&com.educationondemand'));
+                            } else if (AppData.currentActiveSubscription ==
+                                "monthly") {
+                              launchUrl(Uri.parse(
+                                  'https://play.google.com/store/account/subscriptions?sku=ambitious_999_1m&com.educationondemand'));
+                            }
+                          } else {
+                            showSnack("Subscription Alert",
+                                "You have not subscribed to any subscription");
+                          }
+                        },
+                    ),
+                  ],
                 ),
               ),
             ),

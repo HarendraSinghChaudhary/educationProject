@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class MyOfferings {
@@ -9,7 +6,6 @@ class MyOfferings {
 }
 
 class PurchaseApi {
- 
   static Future init() async {
     await Purchases.setDebugLogsEnabled(false);
     // Purchases.logIn(HelperFoos.userId);
@@ -36,7 +32,7 @@ class PurchaseApi {
 
   static Future<List<Offering>> fetchOffersByIds(List<String> ids) async {
     final offers = await fetchOffers();
-    print(offers.first);
+    //print(offers.first);
     return offers.where((offer) => ids.contains(offer.identifier)).toList();
   }
 
@@ -45,16 +41,7 @@ class PurchaseApi {
       await Purchases.purchasePackage(package);
       return true;
     } on Exception catch (e) {
-      Fluttertoast.cancel();
-      Fluttertoast.showToast(
-          msg: "Purchase Failed",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 5,
-          backgroundColor: Color.fromARGB(117, 5, 5, 5),
-          textColor: Colors.white,
-          fontSize: 16.0);
-
+      //Report Error
       return false;
     }
   }
