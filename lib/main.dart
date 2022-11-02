@@ -3,6 +3,7 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_welcome.dart';
 import 'package:Ambitious/screens/paywall.dart';
 import 'package:Ambitious/services/firebase_analytics.dart';
 import 'package:Ambitious/services/mixpanel.dart';
@@ -416,7 +417,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
-          Paywall(),
+          //Paywall(),
+          OnboardingWelcome(),
       //Splash(),
       // EventView()
       // CurrentEventView()
