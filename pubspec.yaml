@@ -67,6 +67,7 @@ dependencies:
   rxdart: ^0.27.5
   percent_indicator: ^4.2.2
   flutter_switch: ^0.3.2
+  app_tracking_transparency: ^2.0.3
   
 
 dev_dependencies:
