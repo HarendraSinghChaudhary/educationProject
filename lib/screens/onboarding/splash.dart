@@ -1,11 +1,12 @@
 import 'package:Ambitious/screens/onboarding/introduction.dart';
-import 'package:Ambitious/screens/homeNav/navigationBottomBar.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // in working
+import '../homeNav/navigationBottomBar.dart';
+import '../paywall.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
+   // Get.to(Paywall());
     getLoginStatus();
     // TODO: implement initState
     super.initState();
@@ -42,6 +44,8 @@ class _SplashState extends State<Splash> {
     id = prefs.getString("id").toString();
     var firstTime = true;
     firstTime = prefs.getBool("isFirstTimeLaunch") ?? true;
+    print("id :" + id.toString() + "^");
+
     Future.delayed(const Duration(seconds: 2), () {
       id.toString() == "" || id.toString() == "null" || id.toString() == ''
           ? firstTime == "null"
