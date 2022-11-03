@@ -617,11 +617,11 @@ PODS:
     - firebase_core
     - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - Firebase/Analytics (10.0.0):
+    - Firebase/Core
   - Firebase/Auth (10.0.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.0.0)
-  - Firebase/Analytics (10.0.0):
-    - Firebase/Core
   - Firebase/Core (10.0.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 10.0.0)
