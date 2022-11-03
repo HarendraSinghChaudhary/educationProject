@@ -1,11 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:collection';
+import 'dart:io';
 
+import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_welcome.dart';
+import 'package:Ambitious/screens/paywall.dart';
+import 'package:Ambitious/services/firebase_analytics.dart';
 import 'package:Ambitious/services/mixpanel.dart';
+import 'package:Ambitious/services/notification_services.dart';
+import 'package:Ambitious/services/purchase_api.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
 import 'package:Ambitious/utils/constant.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +22,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:purchases_flutter/models/purchases_configuration.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -52,12 +61,26 @@ class ReceivedNotification {
   final String? payload;
 }
 
+final _inAppPurchasesConfigurationApple =
+    PurchasesConfiguration("appl_hsOlzcwnCowLmWtVtNYwaiEQvjV");
+
+final _inAppPurchasesConfigurationGoogle =
+    PurchasesConfiguration("goog_kYxSWDfYKsJRgIUfxgOaYSlKACj");
+
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  if (Platform.isAndroid) {
+    await Purchases.configure(_inAppPurchasesConfigurationGoogle);
+  } else if (Platform.isIOS) {
+    await Purchases.configure(_inAppPurchasesConfigurationApple);
+  }
+
+  await PurchaseApi.init();
 
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -91,6 +114,10 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.initialize(initializationSettingsIOS);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -102,6 +129,14 @@ void main() async {
   //     optOutTrackingDefault: false); // development mixpanel token
   Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918",
       optOutTrackingDefault: false); // production mixpanel token
+  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
+      optOutTrackingDefault: false); // development mixpanel token
+  // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
+  // await Intercom.instance.initialize(
+  //   'com.educationondemand',
+  //   androidApiKey: 'androidApiKey',
+  //   iosApiKey: 'iosApiKey',
+  // );
 
   Preferences.pref = await SharedPreferences.getInstance();
 
@@ -136,6 +171,20 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   var title = "";
 
   List<String> notificationList = [];
+
+  Future<void> _requestPermissions() async {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.notification].request();
+  }
 
   void _configureDidReceiveLocalNotificationSubject() {
     didReceiveLocalNotificationSubject.stream
@@ -204,6 +253,9 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   @override
   void initState() {
     super.initState();
+    _configureDidReceiveLocalNotificationSubject();
+    _configureSelectNotificationSubject();
+////Forground notification
     FirebaseMessaging.onMessage.listen((message) async {
       if (message.notification != null) {
         Map<String, dynamic> map = HashMap();
@@ -281,6 +333,10 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
     });
   }
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -289,8 +345,55 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       initialRoute:
           "/", // Starting app route. Navigate to EducationOnDemand Class
       theme: ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
+      navigatorObservers: <NavigatorObserver>[observer],
 
       home: Splash(),
+     
+          // Dark_Course()
+          // DarkLearningPath()
+          // DarkCourseDetail()
+          // Stepernew()
+          //Paywall(),
+          //OnboardingWelcome(),
+      //Splash(),
+      // EventView()
+      // CurrentEventView()
+
+      // Application Routes
+
+      // getPages: [
+      //   GetPage(name: "/", page: () =>const EducationOnDemand()),
+      //   GetPage(
+      //       name: "/homeNav",
+      //       page: () =>  BottomNavigationScreen(index: 0.obs,
+
+      //           )),
+
+      //   GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
+      //   GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
+      //   GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
+      //   // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
+      //   GetPage(name: "/courseHeader", page: () =>  CourseHeader(), ),
+      //   GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
+      //   GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
+      //   GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
+      //   GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
+      //   GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
+      //   GetPage(name: "/socialme", page: () => const Socialme() ),
+      //   GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
+      //   GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
+      //   GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
+      //   // GetPage(name: "/settings", page: () => const Settings() ),
+      //   GetPage(name: "/flashCard", page: () => const FlashCard() ),
+      //   GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
+      //   GetPage(name: "/editprofile", page: () => const EditProfile() ),
+      //   // GetPage(name: "/introduction", page: () => const Introduction() ),
+      //   GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
+      //   GetPage(name: "/homeLive", page: () => const HomeLive() ),
+      //   // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
+      //   // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
+
+      // ],
     );
   }
 }

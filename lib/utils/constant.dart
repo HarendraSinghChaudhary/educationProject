@@ -44,6 +44,31 @@ const loader = Center(
   child: CircularProgressIndicator.adaptive(),
 );
 
+
+  const kcardcyangradient = Color(0xFF00ACFF);
+ 
+  
+
+
+
+  
+
+
+
+
+
+
+
+  
+    //  Future<void> share(String title, String text, String link, ) async {
+    //   await FlutterShare.share(
+    //       title: 'Example share',
+    //       text: 'Example share text',
+    //       linkUrl: 'https://flutter.dev/',
+    //       chooserTitle: 'Example Chooser Title');
+    // }
+
+
 class Abc {
   late ScrollController _scrollControllerr;
 }

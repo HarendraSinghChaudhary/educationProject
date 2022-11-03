@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+ambitious_keystore.jks
 
 # IntelliJ related
 *.iml
