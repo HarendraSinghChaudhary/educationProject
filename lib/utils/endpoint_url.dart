@@ -1,10 +1,11 @@
 // ignore_for_file: constant_identifier_names, unused_element, non_constant_identifier_names, prefer_const_declarations
 
 class RestDatasource {
-  static final BASE_URL =
+  static String BASE_URL =
       "https://theambitiousapp.co/v1/api/"; // production base url
   // static final BASE_URL = "http://52.0.48.251:8700/api/";    // production base url
   // static final BASE_URL = "http://34.199.211.207:8700/api/";    // development base url
+
 
   static final CREATEUSER = BASE_URL + "createuser";
   static final REGISTER_URL = BASE_URL + "Createnewuser";
