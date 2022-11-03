@@ -1,17 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:Ambitious/controllers/study_material/study_material_controller.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import '../../../reusable/url_launcher.dart';
 import '../../../services/customStory.view/storyview.dart';
+import '../../../utils/sharedPreference.dart';
 
 class CustomStoryView extends StatefulWidget {
-  String id, title, moduleId;
+  String id, title, moduleId, courseTitile;
   CustomStoryView(
-      {Key? key, required this.id, required this.title, required this.moduleId})
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.moduleId,
+      required this.courseTitile})
       : super(key: key);
 
   @override
@@ -32,6 +38,11 @@ class _CustomStoryViewState extends State<CustomStoryView> {
   void initState() {
     controller.studyMaterialApi(widget.moduleId);
     super.initState();
+    mixpanelTracking("Module Started", {
+      "Module Title": widget.title,
+      "Email": Preferences.pref!.getString("email") ?? "",
+      "Course Title": widget.courseTitile
+    });
     pageNumber = 0.0;
   }
 
@@ -319,7 +330,7 @@ class HtmlView extends StatelessWidget {
                           ? FlutterLogoStyle.horizontal
                           : FlutterLogoStyle.markOnly,
                   textColor: context.style.color!,
-                  size: context.style.fontSize!.size! * 5,
+                  // size: context.style.fontSize!.size! * 5,
                 )),
         tagMatcher("table"): CustomRender.widget(
             widget: (context, buildChildren) => SingleChildScrollView(

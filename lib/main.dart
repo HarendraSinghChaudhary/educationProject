@@ -25,7 +25,7 @@ import 'package:purchases_flutter/models/purchases_configuration.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
-
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'screens/homeNav/navigationBottomBar.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -113,29 +113,15 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-      ?.initialize(initializationSettingsIOS);
+
+  await AppTrackingTransparency.requestTrackingAuthorization();
+  getInstance();
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
-
-  // Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-  //     optOutTrackingDefault: false); // development mixpanel token
-  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918",
-      optOutTrackingDefault: false); // production mixpanel token
-  Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-      optOutTrackingDefault: false); // development mixpanel token
-  // Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918", optOutTrackingDefault: false);// production mixpanel token
-  // await Intercom.instance.initialize(
-  //   'com.educationondemand',
-  //   androidApiKey: 'androidApiKey',
-  //   iosApiKey: 'iosApiKey',
-  // );
 
   Preferences.pref = await SharedPreferences.getInstance();
 
@@ -168,7 +154,7 @@ class EducationOnDemand extends StatefulWidget {
 
 class _EducationOnDemandState extends State<EducationOnDemand> {
   var title = "";
-
+  String _authStatus = 'Unknown';
   List<String> notificationList = [];
 
   Future<void> _requestPermissions() async {
@@ -252,9 +238,9 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   @override
   void initState() {
     super.initState();
+
     _configureDidReceiveLocalNotificationSubject();
     _configureSelectNotificationSubject();
-////Forground notification
     FirebaseMessaging.onMessage.listen((message) async {
       if (message.notification != null) {
         Map<String, dynamic> map = HashMap();
@@ -331,6 +317,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
       );
     });
   }
+
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =

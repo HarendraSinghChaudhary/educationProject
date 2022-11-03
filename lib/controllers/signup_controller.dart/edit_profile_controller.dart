@@ -69,19 +69,19 @@ class EditProfileController extends GetxController {
 
         prefs.commit();
 
-        Mixpanell.mixpanel!.alias(
-          "New user",
-          jsonRes["data"]["email"].toString(),
-        );
-        // Mixpanell.mixpanel!.identify(jsonRes["data"]["email"].toString(),) ;
-        Mixpanell.mixpanel!.getPeople().set(
-              "Name",
-              jsonRes["data"]["name"].toString(),
-            );
-        Mixpanell.mixpanel!.getPeople().set(
-              "Email",
-              jsonRes["data"]["email"].toString(),
-            );
+        // Mixpanell.mixpanel!.alias(
+        //   "New user",
+        //   jsonRes["data"]["email"].toString(),
+        // );
+        // // Mixpanell.mixpanel!.identify(jsonRes["data"]["email"].toString(),) ;
+        // Mixpanell.mixpanel!.getPeople().set(
+        //       "Name",
+        //       jsonRes["data"]["name"].toString(),
+        //     );
+        // Mixpanell.mixpanel!.getPeople().set(
+        //       "Email",
+        //       jsonRes["data"]["email"].toString(),
+        //     );
 
         Get.offAll(BottomNavigationScreen(
           index: 0.obs,

@@ -64,8 +64,7 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                 onPressed: () {
                                   Get.back();
                                   if (!controller.isCompleted.value) {
-                                    Mixpanell.mixpanel!
-                                        .track("Course Finished", properties: {
+                                    mixpanelTracking("Course Finished", {
                                       "Course Name": controller
                                           .bigdata.value!.title
                                           .toString(),
@@ -180,15 +179,13 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                             : "CONTINUE",
                                     press: () {
                                       if (controller.isstart.value) {
-                                        Mixpanell.mixpanel!.track(
-                                            'Course Started',
-                                            properties: {
-                                              "Course Name": controller
-                                                  .bigdata.value!.title
-                                                  .toString(),
-                                              "Email":
-                                                  Preferences.pref!.get("email")
-                                            });
+                                        mixpanelTracking('Course Started', {
+                                          "Course Name": controller
+                                              .bigdata.value!.title
+                                              .toString(),
+                                          "Email":
+                                              Preferences.pref!.get("email")
+                                        });
                                       }
                                       controller.onpressed();
                                     }),
@@ -225,11 +222,17 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                                 0) {
                                               Get.to(
                                                 () => CustomStoryView(
-                                                    id: mod.id.toString(),
-                                                    moduleId:
-                                                        mod.moduleId.toString(),
-                                                    title: mod.moduletitle
-                                                        .toString()),
+                                                  id: mod.id.toString(),
+                                                  moduleId:
+                                                      mod.moduleId.toString(),
+                                                  title: mod.moduletitle
+                                                      .toString(),
+                                                  courseTitile: controller
+                                                          .bigdata
+                                                          .value!
+                                                          .title ??
+                                                      "",
+                                                ),
                                               );
                                               controller.lessonTitle =
                                                   mod.moduletitle.toString();

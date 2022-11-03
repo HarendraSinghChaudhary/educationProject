@@ -210,6 +210,7 @@ class Login extends GetView<LoginSignUpConroller> {
               CustomTextField(
                 hintText: "Email Address",
                 controller: controller.mail,
+                keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (!GetUtils.isEmail(value!)) {
                     return "Please Enter Correct Email";

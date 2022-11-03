@@ -48,22 +48,18 @@ class _NewHomeLiveState extends State<NewHomeLive> {
   EventController eventController =
       Get.put(EventController(), permanent: false);
 
-  clearMethod() async {
-    Mixpanell.mixpanel!.track("Home Page",
-        properties: {"Email": Preferences.pref!.get("email")});
-  }
-
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
     super.initState();
+    mixpanelTracking(
+        "Home Page", {"Email": Preferences.pref!.getString("email") ?? ""});
 
     getUserList();
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
     eventController.getpowerHourData();
-    clearMethod();
     Future.delayed(Duration(seconds: 2), () {
       var isthis = Preferences.pref?.get("isNotificationAllowed");
       if (isthis != true) {
@@ -559,7 +555,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                     height: h * 0.01,
                                   ),
                                   Container(
-                                    height: h * 0.36,
+                                    height: h * 0.38,
                                     margin: EdgeInsets.symmetric(
                                         vertical: h * 0.015),
                                     child: ListView.builder(
@@ -590,7 +586,8 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                             Get.to(() => CurrentEventView(),
                                                 binding: CurrentEventBinding());
                                           },
-                                          child: Padding(
+                                          child: Container(
+                                            width: w * 0.48,
                                             padding: EdgeInsets.only(
                                                 right: w * 0.04,
                                                 bottom: h * 0.01),
@@ -634,6 +631,8 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                         datam.powerHoursTitle
                                                             .toString(),
                                                         // textAlign: TextAlign.start,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: const TextStyle(
                                                             fontSize: 16,
                                                             fontWeight:
