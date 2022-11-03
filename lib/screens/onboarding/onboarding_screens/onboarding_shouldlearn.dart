@@ -157,54 +157,58 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                   ),
                 ),
               ),
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                child: Container(
-                  color: ksettingcardColor,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage("assets/images/figma.png")),
-                      Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage("assets/images/w.png")),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        "Avg Salary:\$70+/hr",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: kGreyColor,
-                            fontSize: 13,
-                            height: 1.5,
-                            wordSpacing: 2.5,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Icon(
-                        Icons.people,
-                        color: kGreyColor,
-                      ),
-                      Text(
-                        "5150",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: kGreyColor,
-                            fontSize: 13,
-                            height: 1.5,
-                            wordSpacing: 2.5,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                    ],
+              Container(
+                width: 340,
+                height: 40,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  child: Container(
+                    color: ksettingcardColor,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage("assets/images/figma.png")),
+                        Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage("assets/images/w.png")),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          "Avg Salary:\$70+/hr",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kGreyColor,
+                              fontSize: 13,
+                              height: 1.5,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        Icon(
+                          Icons.people,
+                          color: kGreyColor,
+                        ),
+                        Text(
+                          "5150",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kGreyColor,
+                              fontSize: 13,
+                              height: 1.5,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

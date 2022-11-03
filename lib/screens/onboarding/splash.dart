@@ -1,11 +1,11 @@
-import 'package:Ambitious/screens/onboarding/introduction/introduction.dart';
-import 'package:Ambitious/testing/navigation_testing.dart';
+import 'package:Ambitious/screens/onboarding/introduction.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // in working
+import '../homeNav/navigationBottomBar.dart';
 import '../paywall.dart';
 
 class Splash extends StatefulWidget {

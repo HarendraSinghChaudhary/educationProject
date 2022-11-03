@@ -7,7 +7,6 @@ import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_welco
 import 'package:Ambitious/screens/paywall.dart';
 import 'package:Ambitious/services/firebase_analytics.dart';
 import 'package:Ambitious/services/mixpanel.dart';
-import 'package:Ambitious/services/notification_services.dart';
 import 'package:Ambitious/services/purchase_api.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:Ambitious/screens/onboarding/splash.dart';
