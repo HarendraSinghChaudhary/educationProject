@@ -144,26 +144,35 @@ class CreateUserController extends GetxController {
         prefs.commit();
 
         var splitData = name.split(' ');
-
+        mixPanelStart(
+          jsonRes["user"]["_id"] ?? "",
+          jsonRes["user"]["name"] ?? "",
+          jsonRes["user"]["email"] ?? "",
+        );
         if (isUserExist) {
-          Mixpanell.mixpanel!.track("User Login", properties: {
-            "Name": jsonRes["user"]["name"].toString(),
-            "Email": jsonRes["user"]["email"].toString()
-          });
+          mixpanelTracking(
+            "User Login",
+            {
+              "Name": jsonRes["user"]["name"].toString(),
+              "Email": jsonRes["user"]["email"].toString()
+            },
+          );
         }
-        isUserExist
-            ? Get.offAll(BottomNavigationScreen(
-                index: 0.obs,
-                learningPathIndex: 0.obs,
-              ))
-            : Get.offAll(() => NameScreen(
-                      firstName: firstName,
-                      lastName: lastName,
-                      name: name,
-                    ))!
-                .whenComplete(() {
-                isLoading(false);
-              });
+
+        // isUserExist
+        //     ?
+        Get.offAll(BottomNavigationScreen(
+          index: 0.obs,
+          learningPathIndex: 0.obs,
+        ));
+        // : Get.offAll(() => NameScreen(
+        //           firstName: firstName,
+        //           lastName: lastName,
+        //           name: name,
+        //         ))!
+        //     .whenComplete(() {
+        //     isLoading(false);
+        //   });
 
         isLoading(false);
       } else {
@@ -234,27 +243,54 @@ class CreateUserController extends GetxController {
 
         prefs.setString('status', jsonRes["user"]["status"].toString());
         prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
+        prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
 
         prefs.setString('token', jsonRes["token"].toString());
 
         prefs.commit();
+
+        firstName = prefs.getString("firstname") ?? "";
+        lastName = prefs.getString("lastname") ?? "";
 
         if (isUserExist) {
           Mixpanell.mixpanel!.track("User Login", properties: {
             "Name": jsonRes["user"]["name"].toString(),
             "Email": jsonRes["user"]["email"].toString()
           });
+        } else {
+          mixPanelStart(
+            jsonRes["user"]["_id"] ?? "",
+            jsonRes["user"]["name"] ?? "",
+            jsonRes["user"]["email"] ?? "",
+          );
         }
-        isUserExist
-            ? Get.offAll(BottomNavigationScreen(
-                index: 0.obs,
-                learningPathIndex: 0.obs,
-              ))
-            : Get.offAll(() => NameScreen(
-                  firstName: firstName,
-                  lastName: lastName,
-                  name: name,
-                ));
+        // Mixpanell.mixpanel!.alias(
+        //   "New user",
+        //   jsonRes["user"]["email"].toString(),
+        // );
+        // Mixpanell.mixpanel!.identify(
+        //   jsonRes["user"]["email"].toString(),
+        // );
+        // Mixpanell.mixpanel!.getPeople().set(
+        //       "Name",
+        //       jsonRes["user"]["name"].toString(),
+        //     );
+        // Mixpanell.mixpanel!.getPeople().set(
+        //       "Email",
+        //       jsonRes["user"]["email"].toString(),
+        //     );
+
+        // isUserExist
+        //     ?
+        Get.offAll(BottomNavigationScreen(
+          index: 0.obs,
+          learningPathIndex: 0.obs,
+        ));
+        // : Get.offAll(() => NameScreen(
+        //       firstName: firstName,
+        //       lastName: lastName,
+        //       name: name,
+        //     ));
 
         isSubmitting(true);
       } else {

@@ -92,11 +92,16 @@ class LoginSignUpConroller extends GetxController {
               "isNotificationAllowed", data["data"][0]["isAllow"] == "true");
 
           Preferences.pref!.setString('token', data["token"].toString());
-
-          Mixpanell.mixpanel!.track("User Login", properties: {
+          mixPanelStart(
+            data["data"][0]["_id"] ?? "",
+            data["data"][0]["name"] ?? "",
+            data["data"][0]["email"] ?? "",
+          );
+          mixpanelTracking("User Login", {
             "Name": data["data"][0]["name"].toString(),
             "Email": data["data"][0]["email"].toString()
           });
+
           mail.clear();
           pass.clear();
           Get.to(() => BottomNavigationScreen(
@@ -144,16 +149,21 @@ class LoginSignUpConroller extends GetxController {
             showBottumSheet(const ResetPass());
           } else {
             otp.clear();
-            Mixpanell.mixpanel!
-              ..alias(
-                "New user",
-                data["data"]["email"].toString(),
-              )
-              ..identify(
-                data["data"]["email"].toString(),
-              )
-              ..getPeople().set("\$name", data["data"]["name"].toString())
-              ..getPeople().set("\$email", data["data"]["email"].toString());
+            mixPanelStart(
+              data["data"]["_id"] ?? "",
+              data["data"]["name"] ?? "",
+              data["data"]["email"] ?? "",
+            );
+            // Mixpanell.mixpanel!
+            //   ..alias(
+            //     "New user",
+            //     data["data"]["email"].toString(),
+            //   )
+            //   ..identify(
+            //     data["data"]["email"].toString(),
+            //   )
+            //   ..getPeople().set("\$name", data["data"]["name"].toString())
+            //   ..getPeople().set("\$email", data["data"]["email"].toString());
 
             Get.offAll(() => BottomNavigationScreen(
                   index: 0.obs,

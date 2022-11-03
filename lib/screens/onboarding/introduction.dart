@@ -10,13 +10,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../controllers/signup_controller.dart/apple_signin_controller.dart';
 import '../../controllers/signup_controller.dart/loginSignUp_Controller.dart';
 import '../../services/mixpanel.dart';
 
 //in working
+
+String appleSignFirstName = "";
+String appleSignlasttName = "";
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
@@ -55,6 +60,7 @@ class _IntroductionState extends State<Introduction> {
       return false;
     } catch (error) {
       createUserController.isLoading(false);
+      return false;
     }
   }
 
@@ -66,11 +72,7 @@ class _IntroductionState extends State<Introduction> {
   @override
   void initState() {
     super.initState();
-    clearMethod();
-  }
-
-  clearMethod() async {
-    Mixpanell.mixpanel!.track("Welcome Page");
+    mixpanelTracking("Welcome Page");
   }
 
   @override
@@ -113,7 +115,7 @@ class _IntroductionState extends State<Introduction> {
               ),
             ),
             Container(
-              height: Get.height * 0.32,
+              height: Get.height * 0.38,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 40),
               decoration: BoxDecoration(
@@ -204,6 +206,81 @@ class _IntroductionState extends State<Introduction> {
                               ),
                             ),
                           ),
+                    createUserController.isSubmitting.value
+                        ? Align(
+                            alignment: Alignment.center,
+                            child: Platform.isAndroid
+                                ? CircularProgressIndicator()
+                                : CupertinoActivityIndicator())
+                        : Platform.isIOS
+                            ? InkWell(
+                                onTap: () {
+                                  signInWithApple().then((value) {
+                                    createUserController.isSubmitting(true);
+                                    print("response: " + value.toString());
+
+                                    name = value.user?.displayName ??
+                                        appleSignFirstName +
+                                            " " +
+                                            appleSignlasttName;
+
+                                    email = value.user?.email.toString();
+
+                                    print("apple email: " + email.toString());
+
+                                    if (email.toString() != "" ||
+                                        email.toString() != "null" ||
+                                        email != null) {
+                                      createUserController.createAppleUserApi(
+                                          email!, name!);
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: "EmailId not found!",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: kPrimaryColor,
+                                          textColor: Colors.white,
+                                          fontSize: 14.0);
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  height: 56,
+                                  width: 277,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                  ),
+                                  margin: EdgeInsets.only(
+                                    top: h * 0.01,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Icon(
+                                        Icons.apple,
+                                        color: Colors.white,
+                                        size: 35,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 25),
+                                        child: Text(
+                                          'Sign in with Apple',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Container(),
                     InkWell(
                       onTap: () {
                         controller.islogin.value = true;

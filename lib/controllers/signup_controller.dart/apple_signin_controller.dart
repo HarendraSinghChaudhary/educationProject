@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:Ambitious/controllers/signup_controller.dart/create_user_controller.dart';
+import 'package:Ambitious/screens/onboarding/introduction.dart';
+import 'package:Ambitious/utils/sharedPreference.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -44,6 +46,14 @@ Future<UserCredential> signInWithApple() async {
     ],
     nonce: nonce,
   );
+  appleSignFirstName = appleCredential.givenName ?? "";
+  appleSignlasttName = appleCredential.familyName ?? "";
+  final fixDisplayNameFromApple = [
+    appleCredential.givenName ?? '',
+    appleCredential.familyName ?? '',
+  ].join(' ').trim();
+  // Preferences.pref!.setString("applefirstname", appleCredential.givenName!);
+  // Preferences.pref!.setString("applelastname", appleCredential.familyName!);
   // Create an `OAuthCredential` from the credential returned by Apple.
   final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,

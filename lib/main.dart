@@ -17,7 +17,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
-
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'screens/homeNav/navigationBottomBar.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -91,17 +91,13 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
-
+  await AppTrackingTransparency.requestTrackingAuthorization();
+  getInstance();
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
-
-  // Mixpanell.mixpanel = await Mixpanel.init("bc1020e51bd5d65cb512f6e1906cf6c4",
-  //     optOutTrackingDefault: false); // development mixpanel token
-  Mixpanell.mixpanel = await Mixpanel.init("d0b9a45e61612a70e7a3f6bb8396a918",
-      optOutTrackingDefault: false); // production mixpanel token
 
   Preferences.pref = await SharedPreferences.getInstance();
 
@@ -134,7 +130,7 @@ class EducationOnDemand extends StatefulWidget {
 
 class _EducationOnDemandState extends State<EducationOnDemand> {
   var title = "";
-
+  String _authStatus = 'Unknown';
   List<String> notificationList = [];
 
   void _configureDidReceiveLocalNotificationSubject() {
@@ -204,6 +200,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
   @override
   void initState() {
     super.initState();
+
     FirebaseMessaging.onMessage.listen((message) async {
       if (message.notification != null) {
         Map<String, dynamic> map = HashMap();
@@ -281,6 +278,24 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
     });
   }
 
+  Future<void> showCustomTrackingDialog(BuildContext context) async =>
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Dear User'),
+          content: const Text(
+            'We care about your privacy and data security. We keep this app free by showing ads. '
+            'Can we continue to use your data to tailor ads for you?\n\nYou can change your choice anytime in the app settings. '
+            'Our partners will collect data and use a unique identifier on your device to show you ads.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

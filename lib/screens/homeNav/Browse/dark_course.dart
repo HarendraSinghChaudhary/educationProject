@@ -119,6 +119,9 @@ class Dark_Course extends GetView<CoursesController> {
                                   Image.network(
                                     controller.learningPathList[index].image
                                         .toString(),
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container();
+                                    },
                                     height: h * 0.12,
                                   ),
                                   Expanded(
