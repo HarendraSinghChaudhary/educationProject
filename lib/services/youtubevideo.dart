@@ -4,29 +4,26 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/material.dart';
-import '../screens/Events/CurrentEvent/currentEventController.dart';
+import '../controllers/EventController/currentEventController.dart';
 import 'launcher.dart';
 
 class YoutubeBinding implements Bindings {
- @override
- void dependencies() {
-
-  Get.create<Youtubecontroller>(() => Youtubecontroller()); 
-   } 
+  @override
+  void dependencies() {
+    Get.create<Youtubecontroller>(() => Youtubecontroller());
+  }
 }
 
-
 class YoutubeVideoPlayer extends StatefulWidget {
-  RxBool play ;
+  RxBool play;
   String url;
-  YoutubeVideoPlayer({required this.play,required this.url});
+  YoutubeVideoPlayer({required this.play, required this.url});
   @override
   _YoutubeVideoPlayerState createState() => _YoutubeVideoPlayerState();
 }
 
 class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
-  
-late YoutubePlayerController youtubecontroller;
+  late YoutubePlayerController youtubecontroller;
   late TextEditingController idController;
   late TextEditingController seekToController;
   late PlayerState playerState;
@@ -34,47 +31,12 @@ late YoutubePlayerController youtubecontroller;
   double volume = 100;
   bool muted = false;
   bool isPlayerReady = false;
-  // StudyMaterialController controller =
-  //     Get.put(StudyMaterialController(), permanent: false);
-  // Youtubecontroller controller = Get.put(Youtubecontroller(),permanent: false);
-  // Youtubecontroller controller = Get.lazyPut(() => Youtubecontroller());
-  // Youtubecontroller controller =
-  //  Get.create<Youtubecontroller>(() => Youtubecontroller());
-  String urlid= "";
-  
-
-  
+  String urlid = "";
 
   @override
   void initState() {
-
-    print("start");
     urlid = YoutubePlayer.convertUrlToId(widget.url).toString();
-// scrollcontroller.addListener(() { 
-// //   if(scrollcontroller.position.atEdge){
-// //     if(scrollcontroller.offset>=100.0){
-// // play(true);
-// // controller.youtubecontroller.play();
-// //     }
-// //   }else{
-// // controller.youtubecontroller.pause();
-// //     play(false);
-// //   }
-// print(scrollcontroller.positions.last);
-//     // print("========="+scrollcontroller.position.maxScrollExtent.toString());
-
-
-// if(scrollcontroller.offset>(scrollcontroller.position.maxScrollExtent-100)){
-// controller.youtubecontroller.play();
-// }else{
-// controller.youtubecontroller.pause();
-// }
-// });
-
-// if(scrollcontroller.position.maxScrollExtent<scrollcontroller.offset+1080.00){
-// controller.youtubecontroller.play();
-//     }
-youtubecontroller = YoutubePlayerController(
+    youtubecontroller = YoutubePlayerController(
       initialVideoId: urlid,
       flags: const YoutubePlayerFlags(
         mute: false,
@@ -86,22 +48,21 @@ youtubecontroller = YoutubePlayerController(
         enableCaption: true,
       ),
     )..addListener(listener);
-   idController = TextEditingController();
+    idController = TextEditingController();
     seekToController = TextEditingController();
     videoMetaData = const YoutubeMetaData();
     playerState = PlayerState.unknown;
     super.initState();
   }
+
   void listener() {
-    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen ) {
+    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen) {
       setState(() {
         playerState = youtubecontroller.value.playerState;
-         videoMetaData = youtubecontroller.metadata;
-
+        videoMetaData = youtubecontroller.metadata;
       });
     }
   }
-  
 
   @override
   void deactivate() {
@@ -114,7 +75,7 @@ youtubecontroller = YoutubePlayerController(
   @override
   void dispose() {
     youtubecontroller.dispose();
-     idController.dispose();
+    idController.dispose();
     seekToController.dispose();
     super.dispose();
   }
@@ -162,7 +123,6 @@ youtubecontroller = YoutubePlayerController(
           // youtubecontroller.reload();
           // youtubecontroller.reset();
           youtubecontroller.pause();
-          
         },
       ),
       builder: (context, player) => Scaffold(
@@ -198,8 +158,6 @@ youtubecontroller = YoutubePlayerController(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                 
-                  
                   TextField(
                     enabled: isPlayerReady,
                     controller: idController,
@@ -218,8 +176,6 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ),
                   ),
-
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -275,7 +231,6 @@ youtubecontroller = YoutubePlayerController(
                       // ),
                     ],
                   ),
-
                   Row(
                     children: <Widget>[
                       const Text(
@@ -302,7 +257,6 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ],
                   ),
-
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 800),
                     decoration: BoxDecoration(
@@ -327,7 +281,8 @@ youtubecontroller = YoutubePlayerController(
       ),
     );
   }
-    void _showSnackBar(String message) {
+
+  void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -349,7 +304,7 @@ youtubecontroller = YoutubePlayerController(
   }
 }
 
-class Youtubecontroller extends GetxController{
+class Youtubecontroller extends GetxController {
   late YoutubePlayerController youtubecontroller;
   late TextEditingController idController;
   late TextEditingController seekToController;
@@ -371,21 +326,19 @@ class Youtubecontroller extends GetxController{
   // ];
 }
 
-
-
-
 class CustomYoutubeBuilder extends StatefulWidget {
   final String url;
   final YoutubePlayerController? youtubecontroller;
-  const CustomYoutubeBuilder({Key? key,required this.url, this.youtubecontroller}) : super(key: key);
+  const CustomYoutubeBuilder(
+      {Key? key, required this.url, this.youtubecontroller})
+      : super(key: key);
 
   @override
   State<CustomYoutubeBuilder> createState() => _CustomYoutubeBuilderState();
 }
 
 class _CustomYoutubeBuilderState extends State<CustomYoutubeBuilder> {
-
-late YoutubePlayerController youtubecontroller;
+  late YoutubePlayerController youtubecontroller;
   late TextEditingController idController;
   late TextEditingController seekToController;
   late PlayerState playerState;
@@ -393,47 +346,12 @@ late YoutubePlayerController youtubecontroller;
   double volume = 100;
   bool muted = false;
   bool isPlayerReady = false;
-  // StudyMaterialController controller =
-  //     Get.put(StudyMaterialController(), permanent: false);
-  // Youtubecontroller controller = Get.put(Youtubecontroller(),permanent: false);
-  // Youtubecontroller controller = Get.lazyPut(() => Youtubecontroller());
-  // Youtubecontroller controller =
-  //  Get.create<Youtubecontroller>(() => Youtubecontroller());
-  String urlid= "";
-  
-
-  
+  String urlid = "";
 
   @override
   void initState() {
-
-    print("start");
     urlid = YoutubePlayer.convertUrlToId(widget.url).toString();
-// scrollcontroller.addListener(() { 
-// //   if(scrollcontroller.position.atEdge){
-// //     if(scrollcontroller.offset>=100.0){
-// // play(true);
-// // controller.youtubecontroller.play();
-// //     }
-// //   }else{
-// // controller.youtubecontroller.pause();
-// //     play(false);
-// //   }
-// print(scrollcontroller.positions.last);
-//     // print("========="+scrollcontroller.position.maxScrollExtent.toString());
-
-
-// if(scrollcontroller.offset>(scrollcontroller.position.maxScrollExtent-100)){
-// controller.youtubecontroller.play();
-// }else{
-// controller.youtubecontroller.pause();
-// }
-// });
-
-// if(scrollcontroller.position.maxScrollExtent<scrollcontroller.offset+1080.00){
-// controller.youtubecontroller.play();
-//     }
-youtubecontroller = YoutubePlayerController(
+    youtubecontroller = YoutubePlayerController(
       initialVideoId: urlid,
       flags: const YoutubePlayerFlags(
         mute: false,
@@ -445,23 +363,24 @@ youtubecontroller = YoutubePlayerController(
         enableCaption: true,
       ),
     )..addListener(listener);
-   idController = TextEditingController();
+    idController = TextEditingController();
     seekToController = TextEditingController();
     videoMetaData = const YoutubeMetaData();
     playerState = PlayerState.unknown;
     super.initState();
   }
+
   void listener() {
-    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen ) {
+    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen) {
       setState(() {
         playerState = youtubecontroller.value.playerState;
-         videoMetaData = youtubecontroller.metadata;
-    Get.find<CurrentEventController>().valueupdate(youtubecontroller.metadata.title, youtubecontroller.metadata.author);
-    
+        videoMetaData = youtubecontroller.metadata;
+        Get.find<CurrentEventController>().valueupdate(
+            youtubecontroller.metadata.title,
+            youtubecontroller.metadata.author);
       });
     }
   }
-  
 
   @override
   void deactivate() {
@@ -474,7 +393,7 @@ youtubecontroller = YoutubePlayerController(
   @override
   void dispose() {
     youtubecontroller.dispose();
-     idController.dispose();
+    idController.dispose();
     seekToController.dispose();
     super.dispose();
   }
@@ -482,38 +401,45 @@ youtubecontroller = YoutubePlayerController(
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag:"youtubeplayer",
+      tag: "youtubeplayer",
       child: YoutubePlayer(
-        controller:widget.youtubecontroller ?? youtubecontroller,
+        controller: widget.youtubecontroller ?? youtubecontroller,
         showVideoProgressIndicator: true,
         bottomActions: [
-      const SizedBox(width: 14.0),
-      CurrentPosition(),
-      const SizedBox(width: 8.0),
-      ProgressBar(
-      isExpanded: true,
-      colors: const ProgressBarColors(backgroundColor: kWhiteColor,playedColor: kPrimaryColor,bufferedColor: kPrimaryColor),
-      ),
-      RemainingDuration(),
-      const PlaybackSpeedButton(),
-      // FullScreenButton(),
-      IconButton(
-      onPressed: (){
-        // Get.to(
-        //   ()=>FullScreenYoutube(controller:widget.youtubecontroller ?? youtubecontroller)
-        // );
-        youtubecontroller.pause();
-        // Get.to(
-        //      ()=>WebViewExample(
-        //       url: "https://www.youtube.com/watch?v=6uVXqT_26pA",//widget.url, 
-        //       title: "Youtube")
-        //    );
-          //  urllauncher(url)
-           launchInBrowser(widget.url);
-      }, 
-      icon: Icon(youtubecontroller.value.isFullScreen?Icons.fullscreen_exit: Icons.fullscreen,color: kWhiteColor,),
-      )
-    
+          const SizedBox(width: 14.0),
+          CurrentPosition(),
+          const SizedBox(width: 8.0),
+          ProgressBar(
+            isExpanded: true,
+            colors: const ProgressBarColors(
+                backgroundColor: kWhiteColor,
+                playedColor: kPrimaryColor,
+                bufferedColor: kPrimaryColor),
+          ),
+          RemainingDuration(),
+          const PlaybackSpeedButton(),
+          // FullScreenButton(),
+          IconButton(
+            onPressed: () {
+              // Get.to(
+              //   ()=>FullScreenYoutube(controller:widget.youtubecontroller ?? youtubecontroller)
+              // );
+              youtubecontroller.pause();
+              // Get.to(
+              //      ()=>WebViewExample(
+              //       url: "https://www.youtube.com/watch?v=6uVXqT_26pA",//widget.url,
+              //       title: "Youtube")
+              //    );
+              //  urllauncher(url)
+              launchInBrowser(widget.url);
+            },
+            icon: Icon(
+              youtubecontroller.value.isFullScreen
+                  ? Icons.fullscreen_exit
+                  : Icons.fullscreen,
+              color: kWhiteColor,
+            ),
+          )
         ],
         progressIndicatorColor: Colors.blueAccent,
         // topActions: <Widget>[
@@ -542,18 +468,17 @@ youtubecontroller = YoutubePlayerController(
         //   // ),
         // ],
         onReady: () {
-      isPlayerReady = true;
+          isPlayerReady = true;
         },
         onEnded: (data) {
-      // youtubecontroller.reload();
-      // youtubecontroller.reset();
-      youtubecontroller.pause();
+          // youtubecontroller.reload();
+          // youtubecontroller.reset();
+          youtubecontroller.pause();
         },
       ),
     );
   }
 }
-
 
 class YoutubeVideoPlayer2 extends StatefulWidget {
   String url;
@@ -563,8 +488,7 @@ class YoutubeVideoPlayer2 extends StatefulWidget {
 }
 
 class _YoutubeVideoPlayer2State extends State<YoutubeVideoPlayer2> {
-  
-late YoutubePlayerController youtubecontroller;
+  late YoutubePlayerController youtubecontroller;
   late TextEditingController idController;
   late TextEditingController seekToController;
   late PlayerState playerState;
@@ -572,47 +496,13 @@ late YoutubePlayerController youtubecontroller;
   double volume = 100;
   bool muted = false;
   bool isPlayerReady = false;
-  // StudyMaterialController controller =
-  //     Get.put(StudyMaterialController(), permanent: false);
-  // Youtubecontroller controller = Get.put(Youtubecontroller(),permanent: false);
-  // Youtubecontroller controller = Get.lazyPut(() => Youtubecontroller());
-  // Youtubecontroller controller =
-  //  Get.create<Youtubecontroller>(() => Youtubecontroller());
-  String urlid= "";
-  
-
-  
+  String urlid = "";
 
   @override
   void initState() {
-
-    print("start");
     urlid = YoutubePlayer.convertUrlToId(widget.url).toString();
-// scrollcontroller.addListener(() { 
-// //   if(scrollcontroller.position.atEdge){
-// //     if(scrollcontroller.offset>=100.0){
-// // play(true);
-// // controller.youtubecontroller.play();
-// //     }
-// //   }else{
-// // controller.youtubecontroller.pause();
-// //     play(false);
-// //   }
-// print(scrollcontroller.positions.last);
-//     // print("========="+scrollcontroller.position.maxScrollExtent.toString());
 
-
-// if(scrollcontroller.offset>(scrollcontroller.position.maxScrollExtent-100)){
-// controller.youtubecontroller.play();
-// }else{
-// controller.youtubecontroller.pause();
-// }
-// });
-
-// if(scrollcontroller.position.maxScrollExtent<scrollcontroller.offset+1080.00){
-// controller.youtubecontroller.play();
-//     }
-youtubecontroller = YoutubePlayerController(
+    youtubecontroller = YoutubePlayerController(
       initialVideoId: urlid,
       flags: const YoutubePlayerFlags(
         mute: false,
@@ -624,23 +514,24 @@ youtubecontroller = YoutubePlayerController(
         enableCaption: true,
       ),
     )..addListener(listener);
-   idController = TextEditingController();
+    idController = TextEditingController();
     seekToController = TextEditingController();
     videoMetaData = const YoutubeMetaData();
     playerState = PlayerState.unknown;
     super.initState();
   }
+
   void listener() {
-    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen ) {
+    if (isPlayerReady && mounted && !youtubecontroller.value.isFullScreen) {
       setState(() {
         playerState = youtubecontroller.value.playerState;
-         videoMetaData = youtubecontroller.metadata;
-    Get.find<CurrentEventController>().valueupdate(youtubecontroller.metadata.title, youtubecontroller.metadata.author);
-    
+        videoMetaData = youtubecontroller.metadata;
+        Get.find<CurrentEventController>().valueupdate(
+            youtubecontroller.metadata.title,
+            youtubecontroller.metadata.author);
       });
     }
   }
-  
 
   @override
   void deactivate() {
@@ -653,7 +544,7 @@ youtubecontroller = YoutubePlayerController(
   @override
   void dispose() {
     youtubecontroller.dispose();
-     idController.dispose();
+    idController.dispose();
     seekToController.dispose();
     super.dispose();
   }
@@ -665,12 +556,11 @@ youtubecontroller = YoutubePlayerController(
         // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
         SystemChrome.setPreferredOrientations(DeviceOrientation.values);
       },
-      onEnterFullScreen: (){
+      onEnterFullScreen: () {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeLeft,
           DeviceOrientation.landscapeRight
-          ]
-        );
+        ]);
       },
       player: YoutubePlayer(
         controller: youtubecontroller,
@@ -691,23 +581,11 @@ youtubecontroller = YoutubePlayerController(
               maxLines: 1,
             ),
           ),
-          // IconButton(
-          //   icon: const Icon(
-          //     Icons.settings,
-          //     color: Colors.white,
-          //     size: 25.0,
-          //   ),
-          //   onPressed: () {
-          //     log('Settings Tapped!');
-          //   },
-          // ),
         ],
         onReady: () {
           isPlayerReady = true;
         },
         onEnded: (data) {
-          // youtubecontroller.reload();
-          // youtubecontroller.reset();
           youtubecontroller.pause();
         },
       ),
@@ -724,17 +602,6 @@ youtubecontroller = YoutubePlayerController(
             'Youtube Player Flutter',
             style: TextStyle(color: Colors.white),
           ),
-          actions: [
-            // IconButton(
-            //   icon: const Icon(Icons.video_library),
-            //   onPressed: () => Navigator.push(
-            //     context,
-            //     CupertinoPageRoute(
-            //       builder: (context) => VideoList(),
-            //     ),
-            //   ),
-            // ),
-          ],
         ),
         body: ListView(
           children: [
@@ -744,8 +611,6 @@ youtubecontroller = YoutubePlayerController(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                 
-                  
                   TextField(
                     enabled: isPlayerReady,
                     controller: idController,
@@ -764,20 +629,9 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ),
                   ),
-    
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // IconButton(
-                      //   icon: const Icon(Icons.skip_previous),
-                      //   onPressed: controller.isPlayerReady
-                      //       ? () => controller.youtubecontroller.load(controller.idsList[
-                      //           (controller.idsList.indexOf(controller.youtubecontroller.metadata.videoId) -
-                      //                   1) %
-                      //               controller.idsList.length])
-                      //       : null,
-                      // ),
                       IconButton(
                         icon: Icon(
                           youtubecontroller.value.isPlaying
@@ -806,27 +660,8 @@ youtubecontroller = YoutubePlayerController(
                               }
                             : null,
                       ),
-                      // IconButton(
-                      //   onPressed: (){
-                      //     youtubecontroller.pause();
-                      //     Get.to(()=>FullScreenYoutube(controller: youtubecontroller,));
-                      //   }, icon: const Icon(Icons.fullscreen))
-                      // FullScreenButton(
-                      //   controller: youtubecontroller,
-                      //   color: Colors.blueAccent,
-                      // ),
-                      // IconButton(
-                      //   icon: const Icon(Icons.skip_next),
-                      //   onPressed: controller.isPlayerReady
-                      //       ? () => controller.youtubecontroller.load(controller.idsList[
-                      //           (controller.idsList.indexOf(controller.youtubecontroller.metadata.videoId) +
-                      //                   1) %
-                      //               controller.idsList.length])
-                      //       : null,
-                      // ),
                     ],
                   ),
-    
                   Row(
                     children: <Widget>[
                       const Text(
@@ -853,7 +688,6 @@ youtubecontroller = YoutubePlayerController(
                       ),
                     ],
                   ),
-    
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 800),
                     decoration: BoxDecoration(
@@ -876,10 +710,10 @@ youtubecontroller = YoutubePlayerController(
           ],
         ),
       ),
-   
     );
   }
-    void _showSnackBar(String message) {
+
+  void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -901,11 +735,10 @@ youtubecontroller = YoutubePlayerController(
   }
 }
 
-
-
 class FullScreenYoutube extends StatefulWidget {
   final YoutubePlayerController controller;
-  const FullScreenYoutube({Key? key,required this.controller }) : super(key: key);
+  const FullScreenYoutube({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   State<FullScreenYoutube> createState() => _FullScreenYoutubeState();
@@ -914,34 +747,29 @@ class FullScreenYoutube extends StatefulWidget {
 class _FullScreenYoutubeState extends State<FullScreenYoutube> {
   @override
   Widget build(BuildContext context) {
-    return
-    WillPopScope(
-      onWillPop:()=> onWillPop(),
-      child: OrientationBuilder(builder: 
-             (BuildContext context, Orientation orientation) {
-              return 
-       Align(
-         alignment: Alignment.center,
-         child: FittedBox(
-           fit: BoxFit.fill,
-           child: Hero(
-            tag: "youtubeplayer",
-             child: YoutubePlayer(
-               controller: widget.controller,
-             ),
-           ),
-         ),
-       );
+    return WillPopScope(
+      onWillPop: () => onWillPop(),
+      child: OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+        return Align(
+          alignment: Alignment.center,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Hero(
+              tag: "youtubeplayer",
+              child: YoutubePlayer(
+                controller: widget.controller,
+              ),
+            ),
+          ),
+        );
       }),
     );
   }
-  Future<bool> onWillPop()async{
+
+  Future<bool> onWillPop() async {
     SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    // Get.off(
-    //    ()=>CurrentEventView(youtubeurl: widget.controller,),
-    //    binding: CurrentEventBinding()
-    //  );
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     Get.back();
     return false;
   }

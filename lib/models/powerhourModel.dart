@@ -1,74 +1,79 @@
-// To parse this JSON data, do
-//
-//     final powerHoursModel = powerHoursModelFromJson(jsonString);
-
 import 'dart:convert';
 
-PowerHoursModel powerHoursModelFromJson(String str) => PowerHoursModel.fromJson(json.decode(str));
+PowerHoursModel powerHoursModelFromJson(String str) =>
+    PowerHoursModel.fromJson(json.decode(str));
 
-String powerHoursModelToJson(PowerHoursModel data) => json.encode(data.toJson());
+String powerHoursModelToJson(PowerHoursModel data) =>
+    json.encode(data.toJson());
 
 class PowerHoursModel {
-    PowerHoursModel({
-        this.msg,
-        this.status,
-        this.upcoming,
-        this.passed,
-    });
+  PowerHoursModel({
+    this.msg,
+    this.status,
+    this.upcoming,
+    this.passed,
+  });
 
-    String? msg;
-    bool? status;
-    List<AllDatum>? upcoming;
-    List<AllDatum>? passed;
+  String? msg;
+  bool? status;
+  List<AllDatum>? upcoming;
+  List<AllDatum>? passed;
 
-    factory PowerHoursModel.fromJson(Map<String, dynamic> json) => PowerHoursModel(
+  factory PowerHoursModel.fromJson(Map<String, dynamic> json) =>
+      PowerHoursModel(
         msg: json["msg"],
         status: json["status"],
-        upcoming: List<AllDatum>.from(json["upcoming"].map((x) => AllDatum.fromJson(x))),
-        passed: List<AllDatum>.from(json["passed"].map((x) => AllDatum.fromJson(x))),
-    );
+        upcoming: List<AllDatum>.from(
+            json["upcoming"].map((x) => AllDatum.fromJson(x))),
+        passed: List<AllDatum>.from(
+            json["passed"].map((x) => AllDatum.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "msg": msg,
         "status": status,
         "upcoming": List<dynamic>.from(upcoming!.map((x) => x.toJson())),
         "passed": List<dynamic>.from(passed!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class AllDatum {
-    AllDatum({
-        this.id,
-        this.powerHoursTitle,
-        this.startTime,
-        this.endTime,
-        this.joinUrl,
-        this.description,
-        this.image,
-        this.video,
-    });
+  AllDatum(
+      {this.id,
+      this.powerHoursTitle,
+      this.startTime,
+      this.endTime,
+      this.joinUrl,
+      this.description,
+      this.image,
+      this.video,
+      this.attendees_count,
+      this.is_user_attending});
 
-    String? id;
-    String? powerHoursTitle;
-    DateTime? startTime;
-    DateTime? endTime;
-    String? joinUrl;
-    String? description;
-    String? image;
-    String? video;
+  String? id;
+  String? powerHoursTitle;
+  DateTime? startTime;
+  DateTime? endTime;
+  String? joinUrl;
+  String? description;
+  String? image;
+  String? video;
+  int? attendees_count;
+  bool? is_user_attending;
 
-    factory AllDatum.fromJson(Map<String, dynamic> json) => AllDatum(
-        id: json["_id"],
-        powerHoursTitle: json["PowerHoursTitle"],
-        startTime: DateTime.parse(json["startTime"]),
-        endTime: DateTime.parse(json["EndTime"]),
-        joinUrl: json["JoinUrl"],
-        description: json["description"],
-        image: json["Image"],
-        video: json["Video"],
-    );
+  factory AllDatum.fromJson(Map<String, dynamic> json) => AllDatum(
+      id: json["_id"],
+      powerHoursTitle: json["PowerHoursTitle"],
+      startTime: DateTime.parse(json["startTime"]),
+      endTime: DateTime.parse(json["EndTime"]),
+      joinUrl: json["JoinUrl"],
+      description: json["description"],
+      image: json["Image"],
+      video: json["Video"],
+      attendees_count: json["attendees_count"],
+      is_user_attending: json["is_user_attending"]);
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "_id": id,
         "PowerHoursTitle": powerHoursTitle,
         "startTime": startTime!.toIso8601String(),
@@ -77,5 +82,7 @@ class AllDatum {
         "description": description,
         "Image": image,
         "Video": video,
-    };
+        "is_user_attending": is_user_attending,
+        "attendees_count": attendees_count
+      };
 }

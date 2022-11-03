@@ -13,22 +13,22 @@ import 'package:http/http.dart' as http;
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import 'courses/darkcourse_controller.dart';
-class LessonEndBinding implements Bindings{
+
+class LessonEndBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StatusChangeController>(() => StatusChangeController()); 
-    
+    Get.lazyPut<StatusChangeController>(() => StatusChangeController());
   }
 }
 
 class StatusChangeController extends GetxController {
   RxBool isLoading = false.obs;
   DarkCourseDetail_Controller cont = Get.find<DarkCourseDetail_Controller>();
-   String title = "";
-   String id = "";
-   String darkcourseId = "";
-   
-   @override
+  String title = "";
+  String id = "";
+  String darkcourseId = "";
+
+  @override
   void onInit() {
     // TODO: implement onInit
 
@@ -37,20 +37,18 @@ class StatusChangeController extends GetxController {
     super.onInit();
   }
 
-
   Future<dynamic> statusChangeApi(String id) async {
     isLoading(true);
 
     var request = http.post(
       Uri.parse(RestDatasource.MODULESTATUSCHANGEAPI),
       body: {
-        "moduleid":id,
-        "userid":Preferences.pref!.getString("id").toString()
+        "moduleid": id,
+        "userid": Preferences.pref!.getString("id").toString()
       },
       headers: {
-        "Authorization":
-           Preferences.pref!.getString("token").toString()
-            // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
+        "Authorization": Preferences.pref!.getString("token").toString()
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI1NzhjNzNlMWY2ODNhZTcwM2JhNGMiLCJlbWFpbCI6ImNoYWl0YW55YUBnbWFpbC5jb20iLCJpYXQiOjE2NTYwNjAzMzN9.xQy5ZCyQrXu_y54fXIV5VOo5fsNvt__R8L6wWrTshWI"
       },
     );
 
@@ -59,26 +57,19 @@ class StatusChangeController extends GetxController {
     var jsonRes;
     var res;
 
-    await request.then((http.Response response)async {
+    await request.then((http.Response response) async {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
       msg = jsonRes["message"].toString();
-     
     });
 
     if (res.statusCode == 200) {
-      print(jsonRes["status"]);
-
       if (jsonRes["status"].toString() == "true") {
-
-    await cont.getcourse_Module().whenComplete(() {
-     cont.checkCopletion();
-     });
-     cont.isstart(false);
-      
+        await cont.getcourse_Module().whenComplete(() {
+          cont.checkCopletion();
+        });
+        cont.isstart(false);
 
         isLoading(false);
         update();
@@ -109,7 +100,4 @@ class StatusChangeController extends GetxController {
       update();
     }
   }
-
-
-  
 }

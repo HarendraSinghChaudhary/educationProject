@@ -1,8 +1,4 @@
-
-
-
 class CoursesByCatModel {
-
   var id = "";
 
   var shortDescrition = "";
@@ -12,8 +8,5 @@ class CoursesByCatModel {
   var allLikes;
   int? modules;
   int? viewCount;
-  List <dynamic> courseData =[];
-
-
-
+  List<dynamic> courseData = [];
 }

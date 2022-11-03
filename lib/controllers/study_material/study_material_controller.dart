@@ -16,20 +16,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../utils/sharedPreference.dart';
 
-// class StudayMaterialBinding extends Bindings{
-//   String id, title,moduleId;
-//   StudayMaterialBinding({required this.id, required this.moduleId, required this.title});
-//   @override
-//   void dependencies() {
-//     // TODO: implement dependencies
-//     Get.lazyPut<StudyMaterialController>(() => StudyMaterialController(id: id,moduleId: moduleId, title: title));
-//   }
-// }
 
 
 class StudyMaterialController extends GetxController {
-  // String id, title,moduleId;
-  // StudyMaterialController({required this.id,required this.moduleId,required this.title});
   RxBool isLoading = true.obs;
   RxList<StudyMaterialModel> studyMaterialList = RxList();
 
@@ -37,15 +26,13 @@ class StudyMaterialController extends GetxController {
 @override
   void onInit() {
     // TODO: implement onInit
-    // studyMaterialApi(id);
     super.onInit();
   }
 
   
 
   Future<dynamic> studyMaterialApi(String id) async {
-    // isLoading(true);
-    print("...."+ id.toString());
+
 
     var request = http.get(
       Uri.parse(RestDatasource.STUDYMETERIAL_URL + id),
@@ -62,14 +49,11 @@ class StudyMaterialController extends GetxController {
       res = response;
       final JsonDecoder _decoder = new JsonDecoder();
       jsonRes = _decoder.convert(response.body.toString());
-      print("Response: " + response.body.toString() + "_");
-      print("ResponseJSON: " + jsonRes.toString() + "_");
       msg = jsonRes["message"].toString();
       jsonArray = jsonRes['Moduledata'];
     });
 
     if (res.statusCode == 200) {
-      print(jsonRes["status"]);
 
       if (jsonRes["status"].toString() == "true") {
         studyMaterialList.clear();
@@ -84,18 +68,7 @@ class StudyMaterialController extends GetxController {
           modelAgentSearch.r = jsonArray[i]["R"];
           modelAgentSearch.g = jsonArray[i]["G"];
           modelAgentSearch.b = jsonArray[i]["B"];
-
-        
-
-     
-        
-
           studyMaterialList.add(modelAgentSearch);
-
-          print("name: " + jsonArray[i]["courseData"].toString());
-
-
-          // update();
         }
 
 

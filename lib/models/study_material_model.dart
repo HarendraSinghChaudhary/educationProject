@@ -1,8 +1,4 @@
-
-
-
-
-class StudyMaterialModel{
+class StudyMaterialModel {
   String? id;
   String? title;
   String? StudayMaterial;
@@ -13,5 +9,4 @@ class StudyMaterialModel{
   int? r;
   int? g;
   int? b;
-  
 }
