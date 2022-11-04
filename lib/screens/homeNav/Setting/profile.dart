@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:Ambitious/controllers/signup_controller.dart/create_user_controller.dart';
@@ -366,19 +367,24 @@ class _SettingsState extends State<Profile> {
   }
 
   Future<void> logout() async {
-    createUserController.isSubmitting(false);
-    mixpanelLogout();
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setString('id', "");
-    prefs.setString('name', "");
-    prefs.setString('email', "");
-    prefs.setString('status', "");
-    prefs.setString('token', "");
+    try {
+      createUserController.isSubmitting(false);
+      mixpanelLogout();
+      var prefs = await SharedPreferences.getInstance();
+      prefs.setString('id', "");
+      prefs.setString('name', "");
+      prefs.setString('email', "");
+      prefs.setString('status', "");
+      prefs.setString('token', "");
 
-    prefs.commit();
-    prefs.clear();
-    await GoogleSignIn().disconnect();
-    FirebaseAuth.instance.signOut();
+      prefs.commit();
+      prefs.clear();
+      await GoogleSignIn().disconnect();
+      FirebaseAuth.instance.signOut();
+    } on Exception catch (e) {
+      // TODO
+      log("Exception: ${e.toString()}");
+    }
   }
 
   Future<dynamic> getUserList() async {
