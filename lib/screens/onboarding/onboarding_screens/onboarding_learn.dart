@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -30,26 +31,26 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const Text(
+            Text(
               "STEP 4 OF 5",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 12,
-                  height: 1.5,
+                  fontSize: 12.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
-             TweenAnimationBuilder<double>(
+            TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 2500),
               curve: Curves.easeInOut,
               tween: Tween<double>(
@@ -57,9 +58,9 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                 end: 0.8,
               ),
               builder: (context, value, _) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
                     minHeight: 10,
                     backgroundColor: kGreyColor,
@@ -71,212 +72,209 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const Text(
+            Text(
               'How do you like to learn?',
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 24,
-                  height: 1.5,
+                  fontSize: 24.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
-            const Text(
+            Text(
               "Choose your favorite 2 methods",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 14,
-                  height: 1.3,
+                  fontSize: 14.sp,
+                  height: 1.3.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: 40.h,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        splashFactory: NoSplash.splashFactory,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          insta = !insta;
-                          setState(() {});
-                        },
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: kcardblue,
-                                border: insta == true
-                                    ? Border.all(color: kCyanColor, width: 2.5)
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Image(
-                                    width: 50,
-                                    height: 50,
-                                    image: AssetImage(
-                                        "assets/images/instagram.png")),
-                                Text(
-                                  "Watching\nStories",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: kWhiteColor,
-                                      fontSize: 20,
-                                      height: 1.3,
-                                      wordSpacing: 2.5,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            )),
-                      ),
-                      InkWell(
-                        splashFactory: NoSplash.splashFactory,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          youtube = !youtube;
-                          setState(() {});
-                        },
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: kcardblue,
-                                border: youtube == true
-                                    ? Border.all(color: kCyanColor, width: 2.5)
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Image(
-                                    width: 50,
-                                    height: 50,
-                                    image: AssetImage(
-                                        "assets/images/youtube.png")),
-                                Text(
-                                  "Live\nWorkshops",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: kWhiteColor,
-                                      fontSize: 20,
-                                      height: 1.3,
-                                      wordSpacing: 2.5,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            )),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        splashFactory: NoSplash.splashFactory,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          linkedin = !linkedin;
-                          setState(() {});
-                        },
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: kcardblue,
-                                border: linkedin == true
-                                    ? Border.all(color: kCyanColor, width: 2.5)
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Image(
-                                    width: 50,
-                                    height: 50,
-                                    image: AssetImage(
-                                        "assets/images/linkedin.png")),
-                                Text(
-                                  "Reading\nShort Text",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: kWhiteColor,
-                                      fontSize: 20,
-                                      height: 1.3,
-                                      wordSpacing: 2.5,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            )),
-                      ),
-                      InkWell(
-                        splashFactory: NoSplash.splashFactory,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          audio = !audio;
-                          setState(() {});
-                        },
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: kcardblue,
-                                border: audio == true
-                                    ? Border.all(color: kCyanColor, width: 2.5)
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Image(
-                                    width: 50,
-                                    height: 50,
-                                    image: AssetImage(
-                                        "assets/images/spotify.png")),
-                                Text(
-                                  "Listening\nTo Audio",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: kWhiteColor,
-                                      fontSize: 20,
-                                      height: 1.3,
-                                      wordSpacing: 2.5,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            )),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        insta = !insta;
+                        setState(() {});
+                      },
+                      child: Container(
+                          height: 150.h,
+                          width: 150.h,
+                          decoration: BoxDecoration(
+                              color: kcardblue,
+                              border: insta == true
+                                  ? Border.all(color: kCyanColor, width: 2.5.w)
+                                  : null,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.r))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  image: const AssetImage(
+                                      "assets/images/instagram.png")),
+                              Text(
+                                "Watching\nStories",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 20.sp,
+                                    height: 1.3.h,
+                                    wordSpacing: 2.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                    ),
+                    InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        youtube = !youtube;
+                        setState(() {});
+                      },
+                      child: Container(
+                          height: 150.h,
+                          width: 150.h,
+                          decoration: BoxDecoration(
+                              color: kcardblue,
+                              border: youtube == true
+                                  ? Border.all(color: kCyanColor, width: 2.5.w)
+                                  : null,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.r))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  image: const AssetImage(
+                                      "assets/images/youtube.png")),
+                              Text(
+                                "Live\nWorkshops",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 20.sp,
+                                    height: 1.3.h,
+                                    wordSpacing: 2.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        linkedin = !linkedin;
+                        setState(() {});
+                      },
+                      child: Container(
+                          height: 150.h,
+                          width: 150.h,
+                          decoration: BoxDecoration(
+                              color: kcardblue,
+                              border: linkedin == true
+                                  ? Border.all(color: kCyanColor, width: 2.5.w)
+                                  : null,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.r))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  image: const AssetImage(
+                                      "assets/images/linkedin.png")),
+                              Text(
+                                "Reading\nShort Text",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 20.sp,
+                                    height: 1.3.h,
+                                    wordSpacing: 2.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                    ),
+                    InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        audio = !audio;
+                        setState(() {});
+                      },
+                      child: Container(
+                          height: 150.h,
+                          width: 150.h,
+                          decoration: BoxDecoration(
+                              color: kcardblue,
+                              border: audio == true
+                                  ? Border.all(color: kCyanColor, width: 2.5.w)
+                                  : null,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.r))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  image: const AssetImage(
+                                      "assets/images/spotify.png")),
+                              Text(
+                                "Listening\nTo Audio",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 20.sp,
+                                    height: 1.3.h,
+                                    wordSpacing: 2.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             InkWell(
               onTap: () {
@@ -288,30 +286,30 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
               child:
                   Stack(alignment: AlignmentDirectional.centerEnd, children: [
                 Container(
-                  height: 58,
-                  width: 400,
-                  decoration: const BoxDecoration(
+                  height: 58.h,
+                  width: 400.w,
+                  decoration: BoxDecoration(
                       color: kPrimaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: const Center(
+                      borderRadius: BorderRadius.all(Radius.circular(10.r))),
+                  child: Center(
                     child: Text(
                       "CONTINUE",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 18,
-                          height: 1.5,
+                          fontSize: 18.sp,
+                          height: 1.5.h,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: CircleAvatar(
-                    radius: 15,
+                    radius: 15.r,
                     backgroundColor: kArrowBackgroundColor,
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_forward,
                       color: kBackgroundColor,
                       size: 20,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -101,48 +102,48 @@ class _PaywallState extends State<Paywall> {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
         child: ListView(
           children: [
-            const Center(
+            Center(
               child: GradientText(
                 "Become a Member",
-                gradient: LinearGradient(colors: [
+                gradient: const LinearGradient(colors: [
                   kCyanColor,
                   kcardcyangradient,
                 ]),
                 style: TextStyle(
                     color: kCyanColor,
-                    fontSize: 32,
-                    height: 1.5,
+                    fontSize: 32.sp,
+                    height: 1.5.h,
                     fontWeight: FontWeight.w800),
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
-            const Text(
+            Text(
               "When you join Ambitious, you\nget unlimited access to all\nAmbitious resources.",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 22,
-                  height: 1.5,
+                  fontSize: 22.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             Container(
-                height: 37,
-                width: 308,
-                decoration: const BoxDecoration(
+                height: 37.h,
+                width: 308.w,
+                decoration:  BoxDecoration(
                     color: kcardblue,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.r))),
                 child: Row(
-                  children: const [
-                    CircleAvatar(
+                  children: [
+                    const CircleAvatar(
                       backgroundColor: kCyanColor,
                       child: Icon(
                         Icons.check,
@@ -150,31 +151,31 @@ class _PaywallState extends State<Paywall> {
                       ),
                     ),
                     SizedBox(
-                      width: 12,
+                      width: 12.w,
                     ),
                     Text(
                       "New playbooks added every week",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 15,
-                          height: 1.5,
+                          fontSize: 15.sp,
+                          height: 1.5.h,
                           fontWeight: FontWeight.w600),
                     )
                   ],
                 )),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 15.h,
             ),
             Container(
-                height: 37,
-                width: 308,
-                decoration: const BoxDecoration(
+                height: 37.h,
+                width: 308.w,
+                decoration:  BoxDecoration(
                     color: kcardblue,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.r))),
                 child: Row(
-                  children: const [
-                    CircleAvatar(
+                  children: [
+                    const CircleAvatar(
                       backgroundColor: kCyanColor,
                       child: Icon(
                         Icons.check,
@@ -182,31 +183,31 @@ class _PaywallState extends State<Paywall> {
                       ),
                     ),
                     SizedBox(
-                      width: 12,
+                      width: 12.w,
                     ),
                     Text(
                       "Live project based workshops",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 15,
-                          height: 1.5,
+                          fontSize: 15.sp,
+                          height: 1.5.h,
                           fontWeight: FontWeight.w600),
                     )
                   ],
                 )),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 15.h,
             ),
             Container(
-                height: 37,
-                width: 308,
-                decoration: const BoxDecoration(
+                height: 37.h,
+                width: 308.w,
+                decoration:  BoxDecoration(
                     color: kcardblue,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.r))),
                 child: Row(
-                  children: const [
-                    CircleAvatar(
+                  children: [
+                    const CircleAvatar(
                       backgroundColor: kCyanColor,
                       child: Icon(
                         Icons.check,
@@ -214,169 +215,162 @@ class _PaywallState extends State<Paywall> {
                       ),
                     ),
                     SizedBox(
-                      width: 12,
+                      width: 12.w,
                     ),
                     Text(
                       "Slack commuinity access",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 15,
-                          height: 1.5,
+                          fontSize: 15.sp,
+                          height: 1.5.h,
                           fontWeight: FontWeight.w600),
                     )
                   ],
                 )),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: 40.h,
             ),
-            const Text(
+            Text(
               "Learn the hottest skills of\n2022 in 5 minutes a day",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 24,
-                  height: 1.5,
+                  fontSize: 24.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      height: 90,
-                      width: 78,
-                      decoration: const BoxDecoration(
-                          color: kcardblue,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 70,
-                            // color: Colors.white,
-                            child: const Image(
-                                image:
-                                    AssetImage("assets/images/paywall1.png")),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            "UI UX\nDesign",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 10,
-                                height: 1.3,
-                                wordSpacing: 2.5,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )),
-                  Container(
-                      height: 90,
-                      width: 78,
-                      decoration: const BoxDecoration(
-                          color: kcardblue,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 70,
-                            // color: Colors.white,
-                            child: const Image(
-                                image:
-                                    AssetImage("assets/images/paywall5.png")),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            "Web\nDevelopment",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 10,
-                                height: 1.3,
-                                wordSpacing: 2.5,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )),
-                  Container(
-                      height: 90,
-                      width: 78,
-                      decoration: const BoxDecoration(
-                          color: kcardblue,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 70,
-                            // color: Colors.white,
-                            child: const Image(
-                                image:
-                                    AssetImage("assets/images/paywall4.png")),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            "Digital\nMarketing",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 10,
-                                height: 1.3,
-                                wordSpacing: 2.5,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )),
-                  Container(
-                      height: 90,
-                      width: 78,
-                      decoration: const BoxDecoration(
-                          color: kcardblue,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 70,
-                            // color: Colors.white,
-                            child: const Image(
-                                image:
-                                    AssetImage("assets/images/paywall6.png")),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            "Startup\nBusiness",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 10,
-                                height: 1.3,
-                                wordSpacing: 2.5,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    height: 90.h,
+                    width: 78.w,
+                    decoration:  BoxDecoration(
+                        color: kcardblue,
+                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 55.h,
+                          width: 70.w,
+                          // color: Colors.white,
+                          child: const Image(
+                              image: AssetImage("assets/images/paywall1.png")),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Text(
+                          "UI UX\nDesign",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 10.sp,
+                              height: 1.3.h,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    )),
+                Container(
+                    height: 90.h,
+                    width: 78.w,
+                    decoration:  BoxDecoration(
+                        color: kcardblue,
+                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 55.h,
+                          width: 70.w,
+                          // color: Colors.white,
+                          child: const Image(
+                              image: AssetImage("assets/images/paywall5.png")),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Text(
+                          "Web\nDevelopment",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 10.sp,
+                              height: 1.3.h,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    )),
+                Container(
+                    height: 90.h,
+                    width: 78.w,
+                    decoration:  BoxDecoration(
+                        color: kcardblue,
+                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 55.h,
+                          width: 70.w,
+                          // color: Colors.white,
+                          child: const Image(
+                              image: AssetImage("assets/images/paywall4.png")),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Text(
+                          "Digital\nMarketing",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 10.sp,
+                              height: 1.3.h,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    )),
+                Container(
+                    height: 90.h,
+                    width: 78.w,
+                    decoration:  BoxDecoration(
+                        color: kcardblue,
+                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 55.h,
+                          width: 70.w,
+                          // color: Colors.white,
+                          child: const Image(
+                              image: AssetImage("assets/images/paywall6.png")),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Text(
+                          "Startup\nBusiness",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontSize: 10.sp,
+                              height: 1.3.h,
+                              wordSpacing: 2.5,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    )),
+              ],
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             InkWell(
               onTap: () {
@@ -385,30 +379,31 @@ class _PaywallState extends State<Paywall> {
                 });
               },
               child: Container(
-                height: 75,
-                width: 338,
+                height: 75.h,
+                width: 338.w,
                 decoration: BoxDecoration(
                     color: kcardblue,
                     border: selected_plan == "annual"
                         ? Border.all(color: kCyanColor, width: 2.5)
                         : null,
-                    borderRadius: BorderRadius.all(Radius.circular(18))),
+                    borderRadius:  BorderRadius.all(Radius.circular(18.r))),
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "ANNUAL",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
-                                    fontSize: 14,
-                                    height: 1.5,
+                                    fontSize: 14.sp,
+                                    height: 1.5.h,
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -416,20 +411,20 @@ class _PaywallState extends State<Paywall> {
                                 width: 5,
                               ),
                               Container(
-                                height: 17,
-                                width: 60,
-                                decoration: const BoxDecoration(
+                                height: 17.h,
+                                width: 60.w,
+                                decoration:  BoxDecoration(
                                     color: kArrowBackgroundColor,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: const Center(
+                                        BorderRadius.all(Radius.circular(10.r))),
+                                child: Center(
                                   child: Text(
                                     "BEST VALUE",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 8,
-                                        height: 1.5,
+                                        fontSize: 8.sp,
+                                        height: 1.5.h,
                                         wordSpacing: 2.5,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -437,13 +432,13 @@ class _PaywallState extends State<Paywall> {
                               ),
                             ],
                           ),
-                          const Text(
+                          Text(
                             "3 day free trial, then \$49.99/year",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kWhiteColor,
-                                fontSize: 14,
-                                height: 1.5,
+                                fontSize: 14.sp,
+                                height: 1.5.h,
                                 wordSpacing: 2.5,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -451,19 +446,20 @@ class _PaywallState extends State<Paywall> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Center(
                             child: Text(
                               "\$49.99",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: kWhiteColor,
-                                  fontSize: 20,
-                                  height: 1.5,
+                                  fontSize: 20.sp,
+                                  height: 1.5.h,
                                   wordSpacing: 2.5,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -475,8 +471,8 @@ class _PaywallState extends State<Paywall> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             InkWell(
               onTap: () {
@@ -485,42 +481,43 @@ class _PaywallState extends State<Paywall> {
                 });
               },
               child: Container(
-                height: 75,
-                width: 338,
+                height: 75.h,
+                width: 338.w,
                 decoration: BoxDecoration(
                     color: kcardblue,
                     border: selected_plan == "monthly"
                         ? Border.all(color: kCyanColor, width: 2.5)
                         : null,
-                    borderRadius: BorderRadius.all(Radius.circular(18))),
+                    borderRadius:  BorderRadius.all(Radius.circular(18.r))),
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: const [
+                            children: [
                               Text(
                                 "MONTHLY",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
-                                    fontSize: 14,
-                                    height: 1.5,
+                                    fontSize: 14.sp,
+                                    height: 1.5.h,
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
                             ],
                           ),
-                          const Text(
+                          Text(
                             "3 day free trial, then \$9.99/month",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kWhiteColor,
-                                fontSize: 14,
-                                height: 1.5,
+                                fontSize: 14.sp,
+                                height: 1.5.h,
                                 wordSpacing: 2.5,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -528,19 +525,20 @@ class _PaywallState extends State<Paywall> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Center(
                             child: Text(
                               "\$9.99",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: kWhiteColor,
-                                  fontSize: 20,
-                                  height: 1.5,
+                                  fontSize: 20.sp,
+                                  height: 1.5.h,
                                   wordSpacing: 2.5,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -552,8 +550,8 @@ class _PaywallState extends State<Paywall> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
             InkWell(
               onTap: AppData.isPro
@@ -569,91 +567,93 @@ class _PaywallState extends State<Paywall> {
                     }
                   : _fetchOffers,
               child: Container(
-                height: 58,
-                width: 340,
-                decoration: const BoxDecoration(
+                height: 58.h,
+                width: 340.w,
+                decoration:  BoxDecoration(
                     color: kstartgradiant,
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                    borderRadius: BorderRadius.all(Radius.circular(30.r))),
                 child: Center(
                   child: _isLoading
                       ? Container(
-                          width: 25,
-                          height: 25,
+                          width: 25.h,
+                          height: 25.w,
                           child: const CircularProgressIndicator(
                             color: Colors.white,
                           ))
                       : Text(
                           AppData.isPro ? "Pro User" : "TRY FOR FREE",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: kWhiteColor,
-                              fontSize: 22,
-                              height: 1.5,
+                              fontSize: 22.sp,
+                              height: 1.5.h,
                               wordSpacing: 2.5,
                               fontWeight: FontWeight.w400),
                         ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
-            const Center(
+            Center(
               child: Text(
                 "Join over 5000+ Ambitious people",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: kWhiteColor,
-                    fontSize: 14,
-                    height: 1.5,
+                    fontSize: 14.sp,
+                    height: 1.5.h,
                     wordSpacing: 2.5,
                     fontWeight: FontWeight.w400),
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             Container(
-                height: 125,
-                width: 321,
-                decoration: const BoxDecoration(
+                height: 130.h,
+                width: 337.w,
+                decoration:  BoxDecoration(
                     color: kcardblue,
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                    borderRadius: BorderRadius.all(Radius.circular(5.r))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(12.0),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Text(
                         "MEET THE FOUNDER, ALIM",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: kWhiteColor,
-                            fontSize: 14,
-                            height: 1.5,
+                            fontSize: 14.sp,
+                            height: 1.5.h,
                             wordSpacing: 2.5,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       child: Row(
-                        children: const [
+                        children: [
                           CircleAvatar(
-                            radius: 30,
-                            backgroundImage:
-                                AssetImage("assets/images/paywall_dp.png"),
+                            radius: 30.r,
+                            backgroundImage: const AssetImage(
+                                "assets/images/paywall_dp.png"),
                           ),
                           SizedBox(
-                            width: 25,
+                            width: 25.w,
                           ),
                           Text(
                             "“My goal is to provide all the\ntools to be successful in the\npocket of 1 million people.”",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: kWhiteColor,
-                                fontSize: 14,
-                                height: 1.5,
+                                fontSize: 14.sp,
+                                height: 1.5.h,
                                 wordSpacing: 5.5,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -662,23 +662,23 @@ class _PaywallState extends State<Paywall> {
                     ),
                   ],
                 )),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const Center(
+            Center(
               child: Text(
                 "Recurring billing. Cancel anytime.",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: kWhiteColor,
-                    fontSize: 10,
-                    height: 1.5,
+                    fontSize: 10.sp,
+                    height: 1.5.h,
                     wordSpacing: 2.5,
                     fontWeight: FontWeight.w400),
               ),
             ),
-            const SizedBox(
-              height: 5,
+            SizedBox(
+              height: 5.h,
             ),
             Center(
               child: RichText(
@@ -686,10 +686,10 @@ class _PaywallState extends State<Paywall> {
                   children: [
                     TextSpan(
                       text: 'Terms & Conditions',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 10,
-                          height: 1.5,
+                          fontSize: 10.sp,
+                          height: 1.5.h,
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
@@ -699,21 +699,21 @@ class _PaywallState extends State<Paywall> {
                               'https://theambitiousapp.com/terms-of-service'));
                         },
                     ),
-                    const TextSpan(
+                    TextSpan(
                       text: ' and ',
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 10,
-                          height: 1.5,
+                          fontSize: 10.sp,
+                          height: 1.5.h,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
                     ),
                     TextSpan(
                       text: 'Privacy Policy',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 10,
-                          height: 1.5,
+                          fontSize: 10.sp,
+                          height: 1.5.h,
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
@@ -727,62 +727,8 @@ class _PaywallState extends State<Paywall> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: InkWell(
-                onTap: () async {
-                  try {
-                    CustomerInfo restoredInfo =
-                        await Purchases.restorePurchases();
-
-                    if (restoredInfo.entitlements.all.isNotEmpty) {
-                      if (restoredInfo.entitlements.all['pro']!.isActive) {
-                        AppData.isPro = true;
-                        AppData.currentActiveSubscription = 'annual';
-                        showSnack("Subscription Alert",
-                            "Restored Annual Subscription Successfully");
-                      } else if (restoredInfo
-                          .entitlements.all['promonthly']!.isActive) {
-                        AppData.isPro = true;
-                        AppData.currentActiveSubscription = 'monthly';
-                        showSnack("Subscription Alert",
-                            "Restored Monthly Subscription Successfully");
-                      }
-                    } else {
-                      AppData.isPro = false;
-                      AppData.currentActiveSubscription = 'null';
-                      showSnack("Subscription Alert",
-                          "Restore purchases failed. You have not subscribed to any subscription");
-                    }
-                  } on PlatformException catch (e) {
-                    AppData.isPro = false;
-                    AppData.currentActiveSubscription = 'null';
-
-                    showSnack(
-                        "Subscription Alert", "Restore purchases failed.");
-                  }
-                },
-                child: RichText(
-                    text: const TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Restore Purchases',
-                      style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 10,
-                          height: 1.5,
-                          decoration: TextDecoration.underline,
-                          wordSpacing: 2.5,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                )),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 15.h,
             ),
             Center(
               child: RichText(
@@ -790,10 +736,10 @@ class _PaywallState extends State<Paywall> {
                   children: [
                     TextSpan(
                       text: 'Cancel Current Subscription',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 10,
-                          height: 1.5,
+                          fontSize: 10.sp,
+                          height: 1.5.h,
                           decoration: TextDecoration.underline,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w400),
@@ -837,8 +783,62 @@ class _PaywallState extends State<Paywall> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 185,
+            SizedBox(
+              height: 15.h,
+            ),
+            Center(
+              child: InkWell(
+                onTap: () async {
+                  try {
+                    CustomerInfo restoredInfo =
+                        await Purchases.restorePurchases();
+
+                    if (restoredInfo.entitlements.all.isNotEmpty) {
+                      if (restoredInfo.entitlements.all['pro']!.isActive) {
+                        AppData.isPro = true;
+                        AppData.currentActiveSubscription = 'annual';
+                        showSnack("Subscription Alert",
+                            "Restored Annual Subscription Successfully");
+                      } else if (restoredInfo
+                          .entitlements.all['promonthly']!.isActive) {
+                        AppData.isPro = true;
+                        AppData.currentActiveSubscription = 'monthly';
+                        showSnack("Subscription Alert",
+                            "Restored Monthly Subscription Successfully");
+                      }
+                    } else {
+                      AppData.isPro = false;
+                      AppData.currentActiveSubscription = 'null';
+                      showSnack("Subscription Alert",
+                          "Restore purchases failed. You have not subscribed to any subscription");
+                    }
+                  } on PlatformException catch (e) {
+                    AppData.isPro = false;
+                    AppData.currentActiveSubscription = 'null';
+
+                    showSnack(
+                        "Subscription Alert", "Restore purchases failed.");
+                  }
+                },
+                child: RichText(
+                    text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Restore Purchases',
+                      style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 10.sp,
+                          height: 1.5.h,
+                          decoration: TextDecoration.underline,
+                          wordSpacing: 2.5,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                )),
+              ),
+            ),
+            SizedBox(
+              height: 185.h,
             ),
           ],
         ),

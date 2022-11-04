@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_interests.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -19,24 +20,24 @@ class OnboardingWelcome extends StatelessWidget {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: 20.h,
             ),
-            const Text(
+             Text(
               "STEP 1 OF 5",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 12,
-                  height: 1.5,
+                  fontSize: 12.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 2500),
@@ -47,11 +48,11 @@ class OnboardingWelcome extends StatelessWidget {
               ),
               builder: (context, value, _) => Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                     EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: LinearProgressIndicator(
-                    minHeight: 10,
+                    minHeight: 10.h,
                     backgroundColor: kGreyColor,
                     valueColor: const AlwaysStoppedAnimation<Color>(
                       kCyanColor,
@@ -61,27 +62,27 @@ class OnboardingWelcome extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 50,
+             SizedBox(
+              height: 50.h,
             ),
             Container(
-              height: 200,
-              width: 200,
+              height: 200.h,
+              width: 200.w,
               child: const Image(
                   image: AssetImage("assets/images/onboarding_rocket.png")),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: 30.h,
             ),
             RichText(
-              text: const TextSpan(
+              text:  TextSpan(
                 children: [
                   TextSpan(
                     text: 'Welcome, Sophia! 👋🏻',
                     style: TextStyle(
                         color: kWhiteColor,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w500),
                   ),
@@ -89,8 +90,8 @@ class OnboardingWelcome extends StatelessWidget {
                     text: '\nLet\'s ',
                     style: TextStyle(
                         color: kWhiteColor,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w500),
                   ),
@@ -98,29 +99,29 @@ class OnboardingWelcome extends StatelessWidget {
                     text: 'Get Started',
                     style: TextStyle(
                         color: kCyanColor,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 15,
+             SizedBox(
+              height: 15.h,
             ),
-            const Text(
+             Text(
               "Not all Ambitious people are alike! Let’s discover your learning style so we can personalize your plan.",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 18,
-                  height: 1.3,
+                  fontSize: 18.sp,
+                  height: 1.3.h,
                   wordSpacing: 1,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: 20.h,
             ),
             InkWell(
               onTap: () {
@@ -132,30 +133,30 @@ class OnboardingWelcome extends StatelessWidget {
               child:
                   Stack(alignment: AlignmentDirectional.centerEnd, children: [
                 Container(
-                  height: 58,
-                  width: 400,
+                  height: 58.h,
+                  width: 400.w,
                   decoration: const BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
                       "BUILD MY PLAN",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kWhiteColor,
-                          fontSize: 18,
-                          height: 1.5,
+                          fontSize: 18.sp,
+                          height: 1.5.h,
                           wordSpacing: 2.5,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                 Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: CircleAvatar(
-                    radius: 15,
+                    radius: 15.r,
                     backgroundColor: kArrowBackgroundColor,
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_forward,
                       color: kBackgroundColor,
                       size: 20,
@@ -164,16 +165,16 @@ class OnboardingWelcome extends StatelessWidget {
                 )
               ]),
             ),
-            const SizedBox(
-              height: 15,
+             SizedBox(
+              height: 15.h,
             ),
-            const Text(
+             Text(
               "It will only take 2 minutes",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 14,
-                  height: 1.3,
+                  fontSize: 14.sp,
+                  height: 1.3.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),

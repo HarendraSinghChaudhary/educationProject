@@ -18,6 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -72,7 +73,7 @@ void main() async {
   ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await ScreenUtil.ensureScreenSize();
   if (Platform.isAndroid) {
     await Purchases.configure(_inAppPurchasesConfigurationGoogle);
   } else if (Platform.isIOS) {
@@ -325,61 +326,69 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Ambitious",
-      initialRoute:
-          "/", // Starting app route. Navigate to EducationOnDemand Class
-      theme: ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
-      navigatorObservers: <NavigatorObserver>[observer],
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Ambitious",
+          initialRoute:
+              "/", // Starting app route. Navigate to EducationOnDemand Class
+          theme:
+              ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
+          navigatorObservers: <NavigatorObserver>[observer],
 
-      home: Splash(),
-     
+          home: Splash(),
+
           // Dark_Course()
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
           //Paywall(),
           //OnboardingWelcome(),
-      //Splash(),
-      // EventView()
-      // CurrentEventView()
+          //Splash(),
+          // EventView()
+          // CurrentEventView()
 
-      // Application Routes
+          // Application Routes
 
-      // getPages: [
-      //   GetPage(name: "/", page: () =>const EducationOnDemand()),
-      //   GetPage(
-      //       name: "/homeNav",
-      //       page: () =>  BottomNavigationScreen(index: 0.obs,
+          // getPages: [
+          //   GetPage(name: "/", page: () =>const EducationOnDemand()),
+          //   GetPage(
+          //       name: "/homeNav",
+          //       page: () =>  BottomNavigationScreen(index: 0.obs,
 
-      //           )),
+          //           )),
 
-      //   GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
-      //   GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
-      //   GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
-      //   // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
-      //   GetPage(name: "/courseHeader", page: () =>  CourseHeader(), ),
-      //   GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
-      //   GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
-      //   GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
-      //   GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
-      //   GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
-      //   GetPage(name: "/socialme", page: () => const Socialme() ),
-      //   GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
-      //   GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
-      //   GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
-      //   // GetPage(name: "/settings", page: () => const Settings() ),
-      //   GetPage(name: "/flashCard", page: () => const FlashCard() ),
-      //   GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
-      //   GetPage(name: "/editprofile", page: () => const EditProfile() ),
-      //   // GetPage(name: "/introduction", page: () => const Introduction() ),
-      //   GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
-      //   GetPage(name: "/homeLive", page: () => const HomeLive() ),
-      //   // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
-      //   // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
+          //   GetPage(name: "/signIn", page: () => const SignIn(), transition: Transition.rightToLeft ),
+          //   GetPage(name: "/realQuick", page: () => const RealQuick(), transition: Transition.leftToRight ),
+          //   GetPage(name: "/quickNotification", page: () => const QuickNotification(), ),
+          //   // GetPage(name: "/homeNav", page: () =>  HomeNav(index: 0,), ),
+          //   GetPage(name: "/courseHeader", page: () =>  CourseHeader(), ),
+          //   GetPage(name: "/coursesAll", page: () => const CoursesAll() ),
+          //   GetPage(name: "/socialmePeople", page: () => const SocialmePeople() ),
+          //   GetPage(name: "/resourceCenter", page: () => const ResourceCenter() ),
+          //   GetPage(name: "/socialmeCourses", page: () => const SocialmeCourses() ),
+          //   GetPage(name: "/courseDetails", page: () => const CourseDetails() ),
+          //   GetPage(name: "/socialme", page: () => const Socialme() ),
+          //   GetPage(name: "/wipScreenTwo", page: () => const Wipscreentwo() ),
+          //   GetPage(name: "/wipCoursePlayer", page: () => const WIPCoursesPlayer() ),
+          //   GetPage(name: "/coursesEmptyScreen", page: () => const CoursesEmptyScreen() ),
+          //   // GetPage(name: "/settings", page: () => const Settings() ),
+          //   GetPage(name: "/flashCard", page: () => const FlashCard() ),
+          //   GetPage(name: "/quizEnd", page: () => const QuizEnd() ),
+          //   GetPage(name: "/editprofile", page: () => const EditProfile() ),
+          //   // GetPage(name: "/introduction", page: () => const Introduction() ),
+          //   GetPage(name: "/wipCoursePlayerNew", page: () => const WipCoursePlayerNew() ),
+          //   GetPage(name: "/homeLive", page: () => const HomeLive() ),
+          //   // GetPage(name: "/onbaordingNotificationLike", page: () => const  OnbaordingNotificationLike() ),
+          //   // GetPage(name: "/onboardingNextPage", page: () => const OnboardingNextPage() ),
 
-      // ],
+          // ],
+        );
+      },
     );
   }
 }

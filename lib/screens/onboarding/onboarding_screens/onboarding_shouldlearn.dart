@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -31,23 +32,23 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
     return Scaffold(
         backgroundColor: kdarkblue,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: ListView(children: [
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: 20.h,
             ),
-            const Text(
+             Text(
               "STEP 5 OF 5",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 12,
-                  height: 1.5,
+                  fontSize: 12.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 2500),
@@ -58,9 +59,9 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
               ),
               builder: (context, value, _) => Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                     EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
                     minHeight: 10,
                     backgroundColor: kGreyColor,
@@ -72,37 +73,37 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: 20.h,
             ),
-            const Text(
+             Text(
               'Sophia, 66% of Ambitious members are just like you!',
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 24,
-                  height: 1.5,
+                  fontSize: 24.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: 30.h,
             ),
-            const Text(
+             Text(
               'You should learn:',
               style: TextStyle(
                   color: kWhiteColor,
-                  fontSize: 18,
-                  height: 1.5,
+                  fontSize: 18.sp,
+                  height: 1.5.h,
                   wordSpacing: 2.5,
                   fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               Container(
-                width: 340,
-                height: 170,
+                width: 340.w,
+                height: 170.h,
                 decoration: const BoxDecoration(
                     color: kcardblue,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -113,41 +114,41 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                       Text(
                         "No Code Development",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: kWhiteColor,
-                            fontSize: 24,
-                            height: 1.5,
+                            fontSize: 24.sp,
+                            height: 1.5.h,
                             wordSpacing: 2.5,
                             fontWeight: FontWeight.w600),
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
+                        children:  [
                           CircleAvatar(
-                            radius: 15,
+                            radius: 15.r,
                             backgroundColor: kCyanColor,
-                            child: Icon(
+                            child: const Icon(
                               Icons.check,
                               color: kBlackColor,
                               size: 20,
                             ),
                           ),
-                          SizedBox(
-                            width: 15,
+                           SizedBox(
+                            width: 15.w,
                           ),
                           Text(
                             "Build websites and apps without\nhaving to write code",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 color: kWhiteColor,
-                                fontSize: 16,
-                                height: 1.5,
+                                fontSize: 16.sp,
+                                height: 1.5.h,
                                 wordSpacing: 2.5,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -158,8 +159,8 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                 ),
               ),
               Container(
-                width: 340,
-                height: 40,
+                width: 340.w,
+                height: 40.h,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10),
@@ -168,29 +169,29 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                     color: ksettingcardColor,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
+                      children:  [
                         Image(
-                            width: 40,
-                            height: 40,
+                            width: 40.h,
+                            height: 40.h,
                             image: AssetImage("assets/images/figma.png")),
                         Image(
-                            width: 40,
-                            height: 40,
+                            width: 40.h,
+                            height: 40.h,
                             image: AssetImage("assets/images/w.png")),
                         SizedBox(
-                          width: 30,
+                          width: 30.w,
                         ),
                         Text(
                           "Avg Salary:\$70+/hr",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: kGreyColor,
-                              fontSize: 13,
-                              height: 1.5,
+                              fontSize: 13.sp,
+                              height: 1.5.h,
                               wordSpacing: 2.5,
                               fontWeight: FontWeight.w400),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.people,
                           color: kGreyColor,
                         ),
@@ -199,13 +200,13 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: kGreyColor,
-                              fontSize: 13,
-                              height: 1.5,
+                              fontSize: 13.sp,
+                              height: 1.5.h,
                               wordSpacing: 2.5,
                               fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
-                          width: 5,
+                          width: 5.w,
                         ),
                       ],
                     ),

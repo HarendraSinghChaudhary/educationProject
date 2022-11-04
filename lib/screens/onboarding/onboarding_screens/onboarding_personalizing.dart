@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -41,46 +42,46 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
         backgroundColor: kdarkblue,
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding:  EdgeInsets.symmetric(horizontal: 20.w),
             child: Container(
-              width: 340,
-              height: 200,
-              decoration: const BoxDecoration(
+              width: 340.w,
+              height: 200.h,
+              decoration:  BoxDecoration(
                   color: kcardblue,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+                  borderRadius: BorderRadius.all(Radius.circular(15.r))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                   Text(
                     "Almost done!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kWhiteColor,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
-                    height: 20,
+                   SizedBox(
+                    height: 20.h,
                   ),
-                  const Text(
+                   Text(
                     "We are personalizing your",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kWhiteColor,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w400),
                   ),
-                  const Text(
+                   Text(
                     "learning experience",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kcardcyangradient,
-                        fontSize: 24,
-                        height: 1.5,
+                        fontSize: 24.sp,
+                        height: 1.5.h,
                         wordSpacing: 2.5,
                         fontWeight: FontWeight.w400),
                   ),
@@ -93,9 +94,9 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
                     ),
                     builder: (context, value, _) => Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
                         child: LinearProgressIndicator(
                           minHeight: 10,
                           backgroundColor: kGreyColor,
