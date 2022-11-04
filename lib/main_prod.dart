@@ -357,14 +357,14 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
               ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
           navigatorObservers: <NavigatorObserver>[observer],
 
-          home: //Splash(),
+          home: Splash(),
 
           // Dark_Course()
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
           //Paywall(),
-          OnboardingWelcome(),
+          //OnboardingWelcome(),
           //Splash(),
           // EventView()
           // CurrentEventView()
