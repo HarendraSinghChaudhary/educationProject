@@ -42,47 +42,47 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
         backgroundColor: kdarkblue,
         body: Center(
           child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Container(
               width: 340.w,
               height: 200.h,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                   color: kcardblue,
                   borderRadius: BorderRadius.all(Radius.circular(15.r))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
+                  Text(
                     "Almost done!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kWhiteColor,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w600),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 20.h,
                   ),
-                   Text(
+                  Text(
                     "We are personalizing your",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kWhiteColor,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w400),
                   ),
-                   Text(
+                  Text(
                     "learning experience",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kcardcyangradient,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w400),
                   ),
                   TweenAnimationBuilder<double>(
@@ -93,8 +93,8 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
                       end: 1,
                     ),
                     builder: (context, value, _) => Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.h),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(10.r)),
                         child: LinearProgressIndicator(

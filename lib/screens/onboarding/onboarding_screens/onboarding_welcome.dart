@@ -20,23 +20,23 @@ class OnboardingWelcome extends StatelessWidget {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
           children: [
-             SizedBox(
+            SizedBox(
               height: 20.h,
             ),
-             Text(
+            Text(
               "STEP 1 OF 5",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 12.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
-             SizedBox(
+            SizedBox(
               height: 10.h,
             ),
             TweenAnimationBuilder<double>(
@@ -47,8 +47,7 @@ class OnboardingWelcome extends StatelessWidget {
                 end: 0.2,
               ),
               builder: (context, value, _) => Padding(
-                padding:
-                     EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: LinearProgressIndicator(
@@ -62,20 +61,19 @@ class OnboardingWelcome extends StatelessWidget {
                 ),
               ),
             ),
-             SizedBox(
+            SizedBox(
+              height: 70.h,
+            ),
+            Image(
+                height: 200.w,
+                width: 200.w,
+                fit: BoxFit.scaleDown,
+                image: AssetImage("assets/images/onboarding_rocket.png")),
+            SizedBox(
               height: 50.h,
             ),
-            Container(
-              height: 200.h,
-              width: 200.w,
-              child: const Image(
-                  image: AssetImage("assets/images/onboarding_rocket.png")),
-            ),
-             SizedBox(
-              height: 30.h,
-            ),
             RichText(
-              text:  TextSpan(
+              text: TextSpan(
                 children: [
                   TextSpan(
                     text: 'Welcome, Sophia! 👋🏻',
@@ -83,7 +81,7 @@ class OnboardingWelcome extends StatelessWidget {
                         color: kWhiteColor,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),
                   TextSpan(
@@ -92,7 +90,7 @@ class OnboardingWelcome extends StatelessWidget {
                         color: kWhiteColor,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),
                   TextSpan(
@@ -101,27 +99,27 @@ class OnboardingWelcome extends StatelessWidget {
                         color: kCyanColor,
                         fontSize: 24.sp,
                         height: 1.5.h,
-                        wordSpacing: 2.5,
+                        wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: 15.h,
             ),
-             Text(
+            Text(
               "Not all Ambitious people are alike! Let’s discover your learning style so we can personalize your plan.",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 18.sp,
                   height: 1.3.h,
-                  wordSpacing: 1,
+                  wordSpacing: 1.w,
                   fontWeight: FontWeight.w400),
             ),
-             SizedBox(
-              height: 20.h,
+            SizedBox(
+              height: 30.h,
             ),
             InkWell(
               onTap: () {
@@ -134,11 +132,11 @@ class OnboardingWelcome extends StatelessWidget {
                   Stack(alignment: AlignmentDirectional.centerEnd, children: [
                 Container(
                   height: 58.h,
-                  width: 400.w,
+                  width: 338.w,
                   decoration: const BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child:  Center(
+                  child: Center(
                     child: Text(
                       "BUILD MY PLAN",
                       textAlign: TextAlign.center,
@@ -146,12 +144,12 @@ class OnboardingWelcome extends StatelessWidget {
                           color: kWhiteColor,
                           fontSize: 18.sp,
                           height: 1.5.h,
-                          wordSpacing: 2.5,
+                          wordSpacing: 2.5.w,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
-                 Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: CircleAvatar(
                     radius: 15.r,
@@ -165,17 +163,17 @@ class OnboardingWelcome extends StatelessWidget {
                 )
               ]),
             ),
-             SizedBox(
+            SizedBox(
               height: 15.h,
             ),
-             Text(
+            Text(
               "It will only take 2 minutes",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 14.sp,
                   height: 1.3.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
           ],

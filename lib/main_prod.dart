@@ -346,7 +346,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      splitScreenMode: true,
+      splitScreenMode: false,
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,

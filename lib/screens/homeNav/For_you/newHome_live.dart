@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -78,80 +79,77 @@ class _NewHomeLiveState extends State<NewHomeLive> {
     eventController.onInit();
     return Obx(() => Scaffold(
           backgroundColor: kdarkblue,
-          body: SizedBox(
-            height: h,
-            width: w,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(
-                      left: w * 0.05, right: w * 0.08, top: h * 0.08),
-                  height: h * 0.15,
-                  width: w,
-                  decoration: BoxDecoration(
-                    gradient: kbluegradiant,
-                    borderRadius: BorderRadius.circular(h * 0.01),
-                  ),
-                  child: Text(
-                    // "Community ",
-                    "Hi, " + firstName.toString() + " 👋🏼",
-                    style: const TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w700,
-                        color: kWhiteColor),
-                  ),
+          body: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 70),
+                height: 130,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: kbluegradiant,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10.r),
+                      bottomRight: Radius.circular(10.r)),
                 ),
-                Expanded(
-                  child: !eventController.homeloading.value
-                      ? loader
-                      : ListView(
-                          physics: const BouncingScrollPhysics(),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: w * 0.03, vertical: h * 0.02),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          children: [
-                            Visibility(
-                              visible:
-                                  coursesController.getHotCourseList.isNotEmpty,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "🔥 Recommended Playbooks ",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: kWhiteColor,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  const Text(
-                                    "Based on your preferences",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: kWhiteColor,
-                                        height: 2,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  SizedBox(
-                                    height: h * 0.01,
-                                  ),
-                                  SizedBox(
-                                    height: h * 0.38,
-                                    child: ListView.builder(
-                                      itemCount: coursesController
-                                          .getHotCourseList.length,
-                                      controller: _controller,
-                                      scrollDirection: Axis.horizontal,
-                                      // padding: EdgeInsets.only(),
-                                      physics: BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Container(
-                                            width: w * 0.45,
-                                            // height: h*0.2,
-                                            margin: EdgeInsets.only(
-                                                right: w * 0.04),
+                child: Text(
+                  // "Community ",
+                  "Hi, " + firstName.toString() + " 👋🏼",
+                  style: TextStyle(
+                      fontSize: 36.sp,
+                      fontWeight: FontWeight.w700,
+                      color: kWhiteColor),
+                ),
+              ),
+              Expanded(
+                child: !eventController.homeloading.value
+                    ? loader
+                    : ListView(
+                        physics: const BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 12.h),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        children: [
+                          Visibility(
+                            visible:
+                                coursesController.getHotCourseList.isNotEmpty,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "🔥 Recommended Playbooks ",
+                                  style: TextStyle(
+                                      fontSize: 24.sp,
+                                      color: kWhiteColor,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  "Based on your preferences",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: kWhiteColor,
+                                      height: 2.h,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                SizedBox(
+                                  height: 300.h,
+                                  child: ListView.builder(
+                                    itemCount: coursesController
+                                        .getHotCourseList.length,
+                                    controller: _controller,
+                                    scrollDirection: Axis.horizontal,
+                                    // padding: EdgeInsets.only(),
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(right: 12.w),
+                                        child: Container(
+                                            width: 170.w,
                                             child: InkWell(
                                               onTap: () {
                                                 Get.find<CoursesController>()
@@ -185,7 +183,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                   Expanded(
                                                       flex: 2,
                                                       child: Container(
-                                                        height: h * 0.2,
+                                                        height: h * 0.2, //@mini
 
                                                         decoration:
                                                             BoxDecoration(
@@ -313,409 +311,399 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                   ),
                                                 ],
                                               ),
-                                            ));
-                                      },
-                                    ),
+                                            )),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              launchInBrowser(slackUrl);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: w * 0.1, vertical: h * 0.018),
+                              margin: EdgeInsets.only(top: h * 0.02),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(h * 0.02),
+                                  color: kcardblue,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: kPrimaryColor.withOpacity(0.2),
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 4)),
+                                  ]),
+                              width: w,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/prefix.png",
+                                    height: h * 0.05,
+                                  ),
+                                  const Text(
+                                    "Join our Slack community",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 16,
+                                        height: 2,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  const Text(
+                                    "Network with Ambitious people like yourself and participate in events.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300),
                                   ),
                                 ],
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                launchInBrowser(slackUrl);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: w * 0.1, vertical: h * 0.018),
-                                margin: EdgeInsets.only(top: h * 0.02),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(h * 0.02),
-                                    color: kcardblue,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: kPrimaryColor.withOpacity(0.2),
-                                          blurRadius: 5,
-                                          offset: const Offset(0, 4)),
-                                    ]),
-                                width: w,
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/prefix.png",
-                                      height: h * 0.05,
-                                    ),
-                                    const Text(
-                                      "Join our Slack community",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 16,
-                                          height: 2,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    const Text(
-                                      "Network with Ambitious people like yourself and participate in events.",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                  ],
+                          ),
+                          SizedBox(
+                            height: h * 0.02,
+                          ),
+                          Visibility(
+                            visible: coursesController.hotsubcatList.isNotEmpty,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "🚀 All Categories",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: kWhiteColor,
+                                      // height: 2,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: h * 0.02,
-                            ),
-                            Visibility(
-                              visible:
-                                  coursesController.hotsubcatList.isNotEmpty,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "🚀 All Categories",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: kWhiteColor,
-                                        // height: 2,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  const Text(
-                                    "Explore something new",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        height: 2,
-                                        color: kWhiteColor,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  SizedBox(
-                                    height: h * 0.01,
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.23,
-                                    width: Get.width * 0.97,
-                                    child: ListView.builder(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        itemCount: coursesController
-                                            .hotsubcatList.length,
-                                        scrollDirection: Axis.horizontal,
-                                        controller: _controller,
-                                        physics: const BouncingScrollPhysics(),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Row(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Get.to(
-                                                      () =>
-                                                          const DarkLearningPath2(),
-                                                      binding:
-                                                          DarkLearningBinding(
-                                                        courseListbyLearningPath:
-                                                            coursesController
-                                                                .hotsubcatList[
-                                                                    index]
-                                                                .courseListbyLearningPath,
-                                                        description: coursesController
-                                                                .hotsubcatList[
-                                                                    index]
-                                                                .description ??
-                                                            "",
-                                                        image: coursesController
-                                                            .hotsubcatList[
-                                                                index]
-                                                            .image
-                                                            .toString(),
-                                                        title: coursesController
-                                                            .hotsubcatList[
-                                                                index]
-                                                            .subCategoryName
-                                                            .toString(),
-                                                      ));
-                                                },
-                                                child: Container(
-                                                  width: Get.width * 0.38,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      color: kcardblue),
-                                                  child: Column(
-                                                    // crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.1,
-                                                        width: Get.width * 0.38,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                vertical:
-                                                                    h * 0.005),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                borderRadius: const BorderRadius
-                                                                        .only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            15),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            15)),
-                                                                image:
-                                                                    DecorationImage(
-                                                                  image: NetworkImage(coursesController
-                                                                      .hotsubcatList[
-                                                                          index]
-                                                                      .image
-                                                                      .toString()),
-                                                                  // fit: BoxFit.fill
-                                                                )),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          padding:
-                                                              const EdgeInsets
+                                const Text(
+                                  "Explore something new",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      height: 2,
+                                      color: kWhiteColor,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                SizedBox(
+                                  height: h * 0.01,
+                                ),
+                                SizedBox(
+                                  height: Get.height * 0.23,
+                                  width: Get.width * 0.97,
+                                  child: ListView.builder(
+                                      padding: const EdgeInsets.only(top: 15),
+                                      itemCount: coursesController
+                                          .hotsubcatList.length,
+                                      scrollDirection: Axis.horizontal,
+                                      controller: _controller,
+                                      physics: const BouncingScrollPhysics(),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Get.to(
+                                                    () =>
+                                                        const DarkLearningPath2(),
+                                                    binding:
+                                                        DarkLearningBinding(
+                                                      courseListbyLearningPath:
+                                                          coursesController
+                                                              .hotsubcatList[
+                                                                  index]
+                                                              .courseListbyLearningPath,
+                                                      description:
+                                                          coursesController
+                                                                  .hotsubcatList[
+                                                                      index]
+                                                                  .description ??
+                                                              "",
+                                                      image: coursesController
+                                                          .hotsubcatList[index]
+                                                          .image
+                                                          .toString(),
+                                                      title: coursesController
+                                                          .hotsubcatList[index]
+                                                          .subCategoryName
+                                                          .toString(),
+                                                    ));
+                                              },
+                                              child: Container(
+                                                width: Get.width * 0.38,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    color: kcardblue),
+                                                child: Column(
+                                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      height: Get.height * 0.1,
+                                                      width: Get.width * 0.38,
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              vertical:
+                                                                  h * 0.005),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              const BorderRadius
                                                                       .only(
-                                                                  left: 10,
-                                                                  right: 10),
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Text(
-                                                            coursesController
-                                                                .hotsubcatList[
-                                                                    index]
-                                                                .subCategoryName
-                                                                .toString(),
-                                                            maxLines: 2,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style:
-                                                                const TextStyle(
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              color:
-                                                                  kWhiteColor,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                            ),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15)),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                                coursesController
+                                                                    .hotsubcatList[
+                                                                        index]
+                                                                    .image
+                                                                    .toString()),
+                                                            // fit: BoxFit.fill
+                                                          )),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 10,
+                                                                right: 10),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          coursesController
+                                                              .hotsubcatList[
+                                                                  index]
+                                                              .subCategoryName
+                                                              .toString(),
+                                                          maxLines: 2,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style:
+                                                              const TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            color: kWhiteColor,
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              )
-                                            ],
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    height: h * 0.02,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Visibility(
-                              visible: eventController.homeloading.value &&
-                                  eventController
-                                      .powerHours.value!.upcoming!.isNotEmpty,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "🎤 Upcoming Power Hours",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: kWhiteColor,
-                                        // height: 2,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  const Text(
-                                    "Join a live talk from an industry expert.",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: kWhiteColor,
-                                        height: 2,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  SizedBox(
-                                    height: h * 0.01,
-                                  ),
-                                  Container(
-                                    height: h * 0.38,
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: h * 0.015),
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      physics: const BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: eventController
-                                          .powerHours.value!.upcoming!.length,
-                                      itemBuilder: (context, index) {
-                                        AllDatum datam = eventController
-                                            .powerHours.value!.upcoming![index];
-                                        return GestureDetector(
-                                          onTap: () {
-                                            eventController.data.value = datam;
-                                            eventController.showyoutube(false);
-                                            eventController
-                                                    .is_user_attending.value =
-                                                datam.is_user_attending ??
-                                                    false;
-                                            eventController.selectedID.value =
-                                                datam.id ?? "";
-                                            eventController.selectcount.value =
-                                                datam.attendees_count
-                                                    .toString();
-                                            eventController
-                                                .selectedIndex.value = index;
-
-                                            Get.to(() => CurrentEventView(),
-                                                binding: CurrentEventBinding());
-                                          },
-                                          child: Container(
-                                            width: w * 0.48,
-                                            padding: EdgeInsets.only(
-                                                right: w * 0.04,
-                                                bottom: h * 0.01),
-                                            child: CommunityCard(
-                                              flex2: 3,
-                                              url:
-                                                  // "assets/images/banner.png",
-                                                  datam.image.toString(),
-                                              child: Container(
-                                                width: w,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: w * 0.025,
-                                                    vertical: h * 0.01),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  h * 0.01),
-                                                      child: Text(
-                                                        // "Thursday July 21st".toUpperCase(),
-                                                        "${eventController.convertdate(datam.startTime!)}",
-                                                        // textAlign: TextAlign.start,
-                                                        style: const TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: kWhiteColor),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  h * 0.01),
-                                                      child: Text(
-                                                        // "Breaking Down The Blockchain",
-                                                        datam.powerHoursTitle
-                                                            .toString(),
-                                                        // textAlign: TextAlign.start,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: kWhiteColor),
-                                                      ),
-                                                    ),
-                                                    const Text(
-                                                      "📲 In-App Event",
-                                                      // textAlign: TextAlign.start,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: kWhiteColor),
-                                                    ),
+                                                    )
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          ),
+                                            const SizedBox(
+                                              width: 15,
+                                            )
+                                          ],
                                         );
-                                      },
-                                    ),
+                                      }),
+                                ),
+                                SizedBox(
+                                  height: h * 0.02,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: eventController.homeloading.value &&
+                                eventController
+                                    .powerHours.value!.upcoming!.isNotEmpty,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "🎤 Upcoming Power Hours",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: kWhiteColor,
+                                      // height: 2,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                const Text(
+                                  "Join a live talk from an industry expert.",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kWhiteColor,
+                                      height: 2,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                SizedBox(
+                                  height: h * 0.01,
+                                ),
+                                Container(
+                                  height: h * 0.38,
+                                  margin:
+                                      EdgeInsets.symmetric(vertical: h * 0.015),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: eventController
+                                        .powerHours.value!.upcoming!.length,
+                                    itemBuilder: (context, index) {
+                                      AllDatum datam = eventController
+                                          .powerHours.value!.upcoming![index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          eventController.data.value = datam;
+                                          eventController.showyoutube(false);
+                                          eventController
+                                                  .is_user_attending.value =
+                                              datam.is_user_attending ?? false;
+                                          eventController.selectedID.value =
+                                              datam.id ?? "";
+                                          eventController.selectcount.value =
+                                              datam.attendees_count.toString();
+                                          eventController.selectedIndex.value =
+                                              index;
+
+                                          Get.to(() => CurrentEventView(),
+                                              binding: CurrentEventBinding());
+                                        },
+                                        child: Container(
+                                          width: w * 0.48,
+                                          padding: EdgeInsets.only(
+                                              right: w * 0.04,
+                                              bottom: h * 0.01),
+                                          child: CommunityCard(
+                                            flex2: 3,
+                                            url:
+                                                // "assets/images/banner.png",
+                                                datam.image.toString(),
+                                            child: Container(
+                                              width: w,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: w * 0.025,
+                                                  vertical: h * 0.01),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: h * 0.01),
+                                                    child: Text(
+                                                      // "Thursday July 21st".toUpperCase(),
+                                                      "${eventController.convertdate(datam.startTime!)}",
+                                                      // textAlign: TextAlign.start,
+                                                      style: const TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: kWhiteColor),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: h * 0.01),
+                                                    child: Text(
+                                                      // "Breaking Down The Blockchain",
+                                                      datam.powerHoursTitle
+                                                          .toString(),
+                                                      // textAlign: TextAlign.start,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: kWhiteColor),
+                                                    ),
+                                                  ),
+                                                  const Text(
+                                                    "📲 In-App Event",
+                                                    // textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: kWhiteColor),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // launchurl(suggessionUrl);
+                              Get.to(() => WebViewExample(
+                                    title: "Provide Feedback",
+                                    url: suggessionUrl,
+                                  ));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: w * 0.1, vertical: h * 0.018),
+                              margin: EdgeInsets.only(top: h * 0.02),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(h * 0.02),
+                                  color: kcardblue,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: kPrimaryColor.withOpacity(0.2),
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 4)),
+                                  ]),
+                              width: w,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/idea.png",
+                                    height: h * 0.05,
+                                  ),
+                                  const Text(
+                                    "Provide Feedback",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 16,
+                                        height: 2,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  const Text(
+                                    "Have a suggestion for courses or learning paths? Tap here to contact us. We`d love to hear from you.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300),
                                   ),
                                 ],
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                // launchurl(suggessionUrl);
-                                Get.to(() => WebViewExample(
-                                      title: "Provide Feedback",
-                                      url: suggessionUrl,
-                                    ));
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: w * 0.1, vertical: h * 0.018),
-                                margin: EdgeInsets.only(top: h * 0.02),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(h * 0.02),
-                                    color: kcardblue,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: kPrimaryColor.withOpacity(0.2),
-                                          blurRadius: 5,
-                                          offset: const Offset(0, 4)),
-                                    ]),
-                                width: w,
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/idea.png",
-                                      height: h * 0.05,
-                                    ),
-                                    const Text(
-                                      "Provide Feedback",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 16,
-                                          height: 2,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    const Text(
-                                      "Have a suggestion for courses or learning paths? Tap here to contact us. We`d love to hear from you.",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                ),
-              ],
-            ),
+                          ),
+                        ],
+                      ),
+              ),
+            ],
           ),
         ));
   }

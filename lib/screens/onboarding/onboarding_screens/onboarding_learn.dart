@@ -44,7 +44,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                   color: kWhiteColor,
                   fontSize: 12.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
             SizedBox(
@@ -81,7 +81,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                   color: kWhiteColor,
                   fontSize: 24.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
@@ -93,8 +93,8 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 14.sp,
-                  height: 1.3.h,
-                  wordSpacing: 2.5,
+                  height: 1.5.h,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
             SizedBox(
@@ -103,7 +103,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
             Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -114,8 +114,8 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: insta == true
@@ -126,19 +126,23 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
-                                  width: 50.w,
-                                  height: 50.h,
-                                  image: const AssetImage(
-                                      "assets/images/instagram.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 56.w,
+                                    height: 56.w,
+                                    image: const AssetImage(
+                                        "assets/images/instagram.png")),
+                              ),
                               Text(
                                 "Watching\nStories",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -153,8 +157,8 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: youtube == true
@@ -165,19 +169,23 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
-                                  width: 50.w,
-                                  height: 50.h,
-                                  image: const AssetImage(
-                                      "assets/images/youtube.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 56.w,
+                                    height: 56.w,
+                                    image: const AssetImage(
+                                        "assets/images/youtube.png")),
+                              ),
                               Text(
                                 "Live\nWorkshops",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -186,10 +194,10 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                   ],
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 6.w,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -200,8 +208,8 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: linkedin == true
@@ -212,19 +220,23 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
-                                  width: 50.w,
-                                  height: 50.h,
-                                  image: const AssetImage(
-                                      "assets/images/linkedin.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 56.w,
+                                    height: 56.w,
+                                    image: const AssetImage(
+                                        "assets/images/paywall1.png")),
+                              ),
                               Text(
-                                "Reading\nShort Text",
+                                "Building\nProjects",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -239,8 +251,8 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: audio == true
@@ -251,19 +263,23 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
-                                  width: 50.w,
-                                  height: 50.h,
-                                  image: const AssetImage(
-                                      "assets/images/spotify.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 56.w,
+                                    height: 56.w,
+                                    image: const AssetImage(
+                                        "assets/images/spotify.png")),
+                              ),
                               Text(
                                 "Listening\nTo Audio",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -287,7 +303,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                   Stack(alignment: AlignmentDirectional.centerEnd, children: [
                 Container(
                   height: 58.h,
-                  width: 400.w,
+                  width: 338.w,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10.r))),
@@ -299,7 +315,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           color: kWhiteColor,
                           fontSize: 18.sp,
                           height: 1.5.h,
-                          wordSpacing: 2.5,
+                          wordSpacing: 2.5.w,
                           fontWeight: FontWeight.w600),
                     ),
                   ),

@@ -161,6 +161,7 @@ class CreateUserController extends GetxController {
 
         // isUserExist
         //     ?
+         //@mini
         Get.offAll(BottomNavigationScreen(
           index: 0.obs,
           learningPathIndex: 0.obs,
@@ -282,6 +283,7 @@ class CreateUserController extends GetxController {
 
         // isUserExist
         //     ?
+         //@mini
         Get.offAll(BottomNavigationScreen(
           index: 0.obs,
           learningPathIndex: 0.obs,

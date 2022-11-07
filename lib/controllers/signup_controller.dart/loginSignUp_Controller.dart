@@ -165,6 +165,7 @@ class LoginSignUpConroller extends GetxController {
             //   ..getPeople().set("\$name", data["data"]["name"].toString())
             //   ..getPeople().set("\$email", data["data"]["email"].toString());
 
+            //@mini
             Get.offAll(() => BottomNavigationScreen(
                   index: 0.obs,
                   learningPathIndex: 0.obs,

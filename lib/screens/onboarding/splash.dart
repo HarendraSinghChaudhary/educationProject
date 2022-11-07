@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
-   // Get.to(Paywall());
+    // Get.to(Paywall());
     getLoginStatus();
     // TODO: implement initState
     super.initState();
@@ -47,18 +47,28 @@ class _SplashState extends State<Splash> {
     print("id :" + id.toString() + "^");
 
     Future.delayed(const Duration(seconds: 2), () {
-      id.toString() == "" || id.toString() == "null" || id.toString() == ''
-          ? firstTime == "null"
-              ? firstTime
-                  ? Get.offAll(() => const Splash())
-                  : Get.offAll(() => const Introduction())
-              : Get.offAll(() => const Introduction())
-          : id.toString() == '72'
-              ? Get.offAll(() => const Introduction())
-              : Get.offAll(() => BottomNavigationScreen(
-                    index: 0.obs,
-                    learningPathIndex: 0.obs,
-                  ));
+      if (id.toString() == "" ||
+          id.toString() == "null" ||
+          id.toString() == '') {
+        if (firstTime == "null") {
+          if (firstTime) {
+            Get.offAll(() => const Splash());
+          } else {
+            Get.offAll(() => const Introduction());
+          }
+        } else {
+          Get.offAll(() => const Introduction());
+        }
+      } else {
+        if (id.toString() == '72') {
+          Get.offAll(() => const Introduction());
+        } else {
+          Get.offAll(() => BottomNavigationScreen(
+                index: 0.obs,
+                learningPathIndex: 0.obs,
+              ));
+        }
+      }
     });
   }
 }

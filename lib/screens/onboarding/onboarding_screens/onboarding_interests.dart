@@ -30,7 +30,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
     return Scaffold(
       backgroundColor: kdarkblue,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
           children: [
             SizedBox(
@@ -43,7 +43,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                   color: kWhiteColor,
                   fontSize: 12.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
             SizedBox(
@@ -80,7 +80,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                   color: kWhiteColor,
                   fontSize: 24.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
@@ -93,7 +93,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                   color: kWhiteColor,
                   fontSize: 14.sp,
                   height: 1.3,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
             SizedBox(
@@ -102,7 +102,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
             Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -113,8 +113,8 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: ui == true
@@ -131,15 +131,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Image(
-                                  width: 70.w,
-                                  height: 70.h,
-                                  image: const AssetImage(
-                                      "assets/images/paywall1.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 67.w,
+                                    height: 62.h,
+                                    image: const AssetImage(
+                                        "assets/images/paywall1.png")),
+                              ),
                             ],
                           )),
                     ),
@@ -152,8 +156,8 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: web == true
@@ -170,25 +174,29 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Image(
-                                  width: 70.w,
-                                  height: 70.h,
-                                  image: const AssetImage(
-                                      "assets/images/paywall5.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 56.w,
+                                    height: 56.h,
+                                    image: const AssetImage(
+                                        "assets/images/paywall5.png")),
+                              ),
                             ],
                           )),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 6.w,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -199,8 +207,8 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: marketing == true
@@ -217,15 +225,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Image(
-                                  width: 70.w,
-                                  height: 70.h,
-                                  image: const AssetImage(
-                                      "assets/images/paywall4.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 73.w,
+                                    height: 70.h,
+                                    image: const AssetImage(
+                                        "assets/images/paywall4.png")),
+                              ),
                             ],
                           )),
                     ),
@@ -238,8 +250,8 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: startup == true
@@ -256,15 +268,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Image(
-                                  width: 70.w,
-                                  height: 70.h,
-                                  image:
-                                      AssetImage("assets/images/paywall6.png")),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.h),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 60.w,
+                                    height: 60.h,
+                                    image: const AssetImage(
+                                        "assets/images/paywall6.png")),
+                              ),
                             ],
                           )),
                     ),
@@ -298,7 +314,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           color: kWhiteColor,
                           fontSize: 18.sp,
                           height: 1.5.h,
-                          wordSpacing: 2.5,
+                          wordSpacing: 2.5.w,
                           fontWeight: FontWeight.w600),
                     ),
                   ),

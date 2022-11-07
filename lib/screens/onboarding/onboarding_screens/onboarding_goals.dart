@@ -43,7 +43,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                   color: kWhiteColor,
                   fontSize: 12.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w400),
             ),
             SizedBox(
@@ -80,7 +80,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                   color: kWhiteColor,
                   fontSize: 24.sp,
                   height: 1.5.h,
-                  wordSpacing: 2.5,
+                  wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
@@ -102,7 +102,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
             Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -113,8 +113,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: job == true
@@ -131,8 +131,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
@@ -144,7 +144,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 14.sp,
-                                    height: 1.3.h,
+                                    height: 1.5.h,
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -160,8 +160,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: salary == true
@@ -178,8 +178,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
@@ -191,7 +191,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 14.sp,
-                                    height: 1.3.h,
+                                    height: 1.5.h,
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -201,10 +201,10 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                   ],
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 6.w,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       splashFactory: NoSplash.splashFactory,
@@ -215,8 +215,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: business == true
@@ -233,8 +233,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
@@ -246,7 +246,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 14.sp,
-                                    height: 1.3.h,
+                                    height: 1.5.h,
                                     wordSpacing: 2.5,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -262,8 +262,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                         setState(() {});
                       },
                       child: Container(
-                          height: 150.h,
-                          width: 150.h,
+                          height: 164.w,
+                          width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
                               border: skills == true
@@ -280,8 +280,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
@@ -293,8 +293,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 14.sp,
-                                    height: 1.3.h,
-                                    wordSpacing: 2.5,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w400),
                               ),
                             ],
@@ -318,7 +318,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                   Stack(alignment: AlignmentDirectional.centerEnd, children: [
                 Container(
                   height: 58.h,
-                  width: 400.w,
+                  width: 338.w,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10.r))),
@@ -330,7 +330,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                           color: kWhiteColor,
                           fontSize: 18.sp,
                           height: 1.5.h,
-                          wordSpacing: 2.5,
+                          wordSpacing: 2.5.w,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
