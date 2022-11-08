@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:Ambitious/screens/onboarding/name.dart';
+import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_welcome.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -128,7 +130,9 @@ class CreateUserController extends GetxController {
       bool isUserExist = jsonRes["isUserExist"];
       if (jsonRes["status"] == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
+        log("Google ID: ${jsonRes["user"]["_id"].toString()}");
         prefs.setString('id', jsonRes["user"]["_id"].toString());
+        prefs.setString('id_forOnboarding', jsonRes["user"]["_id"].toString());
         prefs.setString('name', jsonRes["user"]["name"].toString());
 
         prefs.setString('email', jsonRes["user"]["email"].toString());
@@ -161,11 +165,26 @@ class CreateUserController extends GetxController {
 
         // isUserExist
         //     ?
-         //@mini
-        Get.offAll(BottomNavigationScreen(
-          index: 0.obs,
-          learningPathIndex: 0.obs,
-        ));
+        //@mini
+        if (!prefs.containsKey(
+            "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}")) {
+          log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
+          Get.offAll(const OnboardingWelcome());
+          // prefs.setBool(
+          //     "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}",
+          //     true);
+        } else {
+          Get.offAll(BottomNavigationScreen(
+            index: 0.obs,
+            learningPathIndex: 0.obs,
+          ));
+        }
+
+        // Get.offAll(BottomNavigationScreen(
+        //   index: 0.obs,
+        //   learningPathIndex: 0.obs,
+        // ));
+
         // : Get.offAll(() => NameScreen(
         //           firstName: firstName,
         //           lastName: lastName,
@@ -238,6 +257,7 @@ class CreateUserController extends GetxController {
       if (jsonRes["status"] == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
+        prefs.setString('id_forOnboarding', jsonRes["user"]["_id"].toString());
         prefs.setString('name', jsonRes["user"]["name"].toString());
 
         prefs.setString('email', jsonRes["user"]["email"].toString());
@@ -283,11 +303,23 @@ class CreateUserController extends GetxController {
 
         // isUserExist
         //     ?
-         //@mini
-        Get.offAll(BottomNavigationScreen(
-          index: 0.obs,
-          learningPathIndex: 0.obs,
-        ));
+        //@mini
+        if (!prefs.containsKey(
+            "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
+          Get.offAll(const OnboardingWelcome());
+          // prefs.setBool(
+          //     "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}",
+          //     true);
+        } else {
+          Get.offAll(BottomNavigationScreen(
+            index: 0.obs,
+            learningPathIndex: 0.obs,
+          ));
+        }
+        // Get.offAll(BottomNavigationScreen(
+        //   index: 0.obs,
+        //   learningPathIndex: 0.obs,
+        // ));
         // : Get.offAll(() => NameScreen(
         //       firstName: firstName,
         //       lastName: lastName,

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:Ambitious/services/snackbar.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import '../../../controllers/onboarding_controller/onboarding_controller.dart';
 import 'onboarding_learn.dart';
 
 class OnboardingGoals extends StatefulWidget {
@@ -21,6 +23,32 @@ class OnboardingGoals extends StatefulWidget {
 }
 
 class _OnboardingGoalsState extends State<OnboardingGoals> {
+  final onbardingController = Get.find<OnBoardingController>();
+  void updateGoals() {
+    onbardingController.goalsSelectedList.clear();
+    if (job) {
+      onbardingController.goalsSelectedList.add("Land a job in tech.");
+    }
+    if (salary) {
+      onbardingController.goalsSelectedList.add("Increase my salary.");
+    }
+    if (business) {
+      onbardingController.goalsSelectedList.add("Start my own business.");
+    }
+    if (skills) {
+      onbardingController.goalsSelectedList.add("Learn new skills.");
+    }
+
+    onbardingController.update();
+  }
+
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    onbardingController.goalsSelectedList.clear();
+  }
+
   bool job = false;
   bool salary = false;
   bool business = false;
@@ -109,8 +137,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        job = !job;
-                        setState(() {});
+                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                            (onbardingController.goalsSelectedList.length ==
+                                    2 &&
+                                job)) {
+                          job = !job;
+                          updateGoals();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Goals");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -156,8 +192,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        salary = !salary;
-                        setState(() {});
+                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                            (onbardingController.goalsSelectedList.length ==
+                                    2 &&
+                                salary)) {
+                          salary = !salary;
+                          updateGoals();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Goals");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -211,8 +255,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        business = !business;
-                        setState(() {});
+                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                            (onbardingController.goalsSelectedList.length ==
+                                    2 &&
+                                business)) {
+                          business = !business;
+                          updateGoals();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Goals");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -258,8 +310,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        skills = !skills;
-                        setState(() {});
+                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                            (onbardingController.goalsSelectedList.length ==
+                                    2 &&
+                                skills)) {
+                          skills = !skills;
+                          updateGoals();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Goals");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -309,6 +369,10 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
             ),
             InkWell(
               onTap: () {
+                   if (onbardingController.goalsSelectedList.isEmpty) {
+                  showSnack("Please select atleast 1 Goal");
+                  return;
+                }
                 Get.to(const OnboardingLearn());
               },
               splashFactory: NoSplash.splashFactory,

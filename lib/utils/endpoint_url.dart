@@ -32,6 +32,7 @@ class RestDatasource {
   static final ADDFCMTOKEN_URL = BASE_URL + "isAllow";
   static final RSVP_URL = BASE_URL + "reservePowerHour";
   static final APPLEDELETE_URL = "https://appleid.apple.com/auth/revoke";
+  static final FINISH_ONBOARDING_URL = "https://prodapi.theambitiousapp.co/api/onboarding/finish_onboarding";
 }
 
 const authToken =

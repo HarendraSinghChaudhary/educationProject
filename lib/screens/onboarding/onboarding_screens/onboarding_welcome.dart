@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
 import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_interests.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
@@ -12,8 +13,17 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-class OnboardingWelcome extends StatelessWidget {
+class OnboardingWelcome extends StatefulWidget {
   const OnboardingWelcome({Key? key}) : super(key: key);
+
+  @override
+  State<OnboardingWelcome> createState() => _OnboardingWelcomeState();
+}
+
+class _OnboardingWelcomeState extends State<OnboardingWelcome> {
+  OnBoardingController onboardingController =
+      Get.put(OnBoardingController(), permanent: true);
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +59,7 @@ class OnboardingWelcome extends StatelessWidget {
               builder: (context, value, _) => Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
                     minHeight: 10.h,
                     backgroundColor: kGreyColor,
@@ -68,7 +78,7 @@ class OnboardingWelcome extends StatelessWidget {
                 height: 200.w,
                 width: 200.w,
                 fit: BoxFit.scaleDown,
-                image: AssetImage("assets/images/onboarding_rocket.png")),
+                image: const AssetImage("assets/images/onboarding_rocket.png")),
             SizedBox(
               height: 50.h,
             ),

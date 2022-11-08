@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,10 +23,37 @@ class OnboardingInterests extends StatefulWidget {
 }
 
 class _OnboardingInterestsState extends State<OnboardingInterests> {
+  final onbardingController = Get.find<OnBoardingController>();
+  void updateInterests() {
+    onbardingController.interestedInSelectedList.clear();
+    if (ui) {
+      onbardingController.interestedInSelectedList.add("UI UX Designing");
+    }
+    if (web) {
+      onbardingController.interestedInSelectedList.add("Web Development");
+    }
+    if (marketing) {
+      onbardingController.interestedInSelectedList.add("Digital Marketing");
+    }
+    if (startup) {
+      onbardingController.interestedInSelectedList.add("Startups & Business");
+    }
+
+    onbardingController.update();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    onbardingController.interestedInSelectedList.clear();
+  }
+
   bool ui = false;
   bool web = false;
   bool marketing = false;
   bool startup = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,8 +138,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        ui = !ui;
-                        setState(() {});
+                        if (onbardingController
+                                    .interestedInSelectedList.length <=
+                                1 ||
+                            (onbardingController
+                                        .interestedInSelectedList.length ==
+                                    2 &&
+                                ui)) {
+                          ui = !ui;
+                          updateInterests();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Interests");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -152,8 +192,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        web = !web;
-                        setState(() {});
+                        if (onbardingController
+                                    .interestedInSelectedList.length <=
+                                1 ||
+                            (onbardingController
+                                        .interestedInSelectedList.length ==
+                                    2 &&
+                                web)) {
+                          web = !web;
+                          updateInterests();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Interests");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -203,8 +254,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        marketing = !marketing;
-                        setState(() {});
+                        if (onbardingController
+                                    .interestedInSelectedList.length <=
+                                1 ||
+                            (onbardingController
+                                        .interestedInSelectedList.length ==
+                                    2 &&
+                                marketing)) {
+                          marketing = !marketing;
+                          updateInterests();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Interests");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -246,8 +308,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        startup = !startup;
-                        setState(() {});
+                        if (onbardingController
+                                    .interestedInSelectedList.length <=
+                                1 ||
+                            (onbardingController
+                                        .interestedInSelectedList.length ==
+                                    2 &&
+                                startup)) {
+                          startup = !startup;
+                          updateInterests();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Interests");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -293,6 +366,10 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
             ),
             InkWell(
               onTap: () {
+                if (onbardingController.interestedInSelectedList.isEmpty) {
+                  showSnack("Please select atleast 1 Interest");
+                  return;
+                }
                 Get.to(const OnboardingGoals());
               },
               splashFactory: NoSplash.splashFactory,

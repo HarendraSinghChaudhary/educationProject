@@ -25,7 +25,7 @@ class OnboardingPersonalizing extends StatefulWidget {
 class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
   Future<void> waitTillPersonalizingDone() async {
     Future.delayed(const Duration(milliseconds: 3500), () {
-      Get.to(const OnboardingShouldLearn());
+      Get.offAll(const OnboardingShouldLearn());
     });
   }
 

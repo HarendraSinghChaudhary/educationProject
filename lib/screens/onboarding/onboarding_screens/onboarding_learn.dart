@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +24,38 @@ class OnboardingLearn extends StatefulWidget {
 }
 
 class _OnboardingLearnState extends State<OnboardingLearn> {
+  final onbardingController = Get.find<OnBoardingController>();
+  bool _isLoading = false;
+  void updateLearningMethods() {
+    onbardingController.learningPreferencesSelectedList.clear();
+    if (insta) {
+      onbardingController.learningPreferencesSelectedList
+          .add("Watching Stories");
+    }
+    if (youtube) {
+      onbardingController.learningPreferencesSelectedList.add("Live Workshops");
+    }
+    if (projects) {
+      onbardingController.learningPreferencesSelectedList
+          .add("Building Projects");
+    }
+    if (audio) {
+      onbardingController.learningPreferencesSelectedList
+          .add("Listening To Audio.");
+    }
+    onbardingController.update();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    onbardingController.learningPreferencesSelectedList.clear();
+  }
+
   bool insta = false;
   bool youtube = false;
-  bool linkedin = false;
+  bool projects = false;
   bool audio = false;
   @override
   Widget build(BuildContext context) {
@@ -110,8 +141,19 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        insta = !insta;
-                        setState(() {});
+                        if (onbardingController
+                                    .learningPreferencesSelectedList.length <=
+                                1 ||
+                            (onbardingController.learningPreferencesSelectedList
+                                        .length ==
+                                    2 &&
+                                insta)) {
+                          insta = !insta;
+                          updateLearningMethods();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Learning Preferences");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -153,8 +195,19 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        youtube = !youtube;
-                        setState(() {});
+                        if (onbardingController
+                                    .learningPreferencesSelectedList.length <=
+                                1 ||
+                            (onbardingController.learningPreferencesSelectedList
+                                        .length ==
+                                    2 &&
+                                youtube)) {
+                          youtube = !youtube;
+                          updateLearningMethods();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Learning Preferences");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -204,15 +257,26 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        linkedin = !linkedin;
-                        setState(() {});
+                        if (onbardingController
+                                    .learningPreferencesSelectedList.length <=
+                                1 ||
+                            (onbardingController.learningPreferencesSelectedList
+                                        .length ==
+                                    2 &&
+                                projects)) {
+                          projects = !projects;
+                          updateLearningMethods();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Learning Preferences");
+                        }
                       },
                       child: Container(
                           height: 164.w,
                           width: 164.w,
                           decoration: BoxDecoration(
                               color: kcardblue,
-                              border: linkedin == true
+                              border: projects == true
                                   ? Border.all(color: kCyanColor, width: 2.5.w)
                                   : null,
                               borderRadius:
@@ -247,8 +311,19 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        audio = !audio;
-                        setState(() {});
+                        if (onbardingController
+                                    .learningPreferencesSelectedList.length <=
+                                1 ||
+                            (onbardingController.learningPreferencesSelectedList
+                                        .length ==
+                                    2 &&
+                                audio)) {
+                          audio = !audio;
+                          updateLearningMethods();
+                          setState(() {});
+                        } else {
+                          showSnack("Can select max 2 Learning Preferences");
+                        }
                       },
                       child: Container(
                           height: 164.w,
@@ -293,8 +368,27 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
               height: 30.h,
             ),
             InkWell(
-              onTap: () {
-                Get.to(const OnboardingPersonalizing());
+              onTap: () async {
+                if (onbardingController
+                    .learningPreferencesSelectedList.isEmpty) {
+                  showSnack("Please select atleast 1 Learning Preference");
+                  return;
+                }
+                setState(() {
+                  _isLoading = true;
+                });
+                int res = await onbardingController
+                    .finishOnBoarding()
+                    .whenComplete(() {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                });
+                if (res == 200) {
+                  Get.offAll(const OnboardingPersonalizing());
+                } else {
+                  showSnack("Something went wrong please try again.");
+                }
               },
               splashFactory: NoSplash.splashFactory,
               splashColor: Colors.transparent,
@@ -308,16 +402,20 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10.r))),
                   child: Center(
-                    child: Text(
-                      "CONTINUE",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 18.sp,
-                          height: 1.5.h,
-                          wordSpacing: 2.5.w,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: _isLoading
+                        ? const CircularProgressIndicator(
+                            color: kWhiteColor,
+                          )
+                        : Text(
+                            "CONTINUE",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: kWhiteColor,
+                                fontSize: 18.sp,
+                                height: 1.5.h,
+                                wordSpacing: 2.5.w,
+                                fontWeight: FontWeight.w600),
+                          ),
                   ),
                 ),
                 Padding(

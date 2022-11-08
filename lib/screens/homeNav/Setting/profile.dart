@@ -381,9 +381,7 @@ class _SettingsState extends State<Profile> {
       prefs.setString('email', "");
       prefs.setString('status', "");
       prefs.setString('token', "");
-
-      prefs.commit();
-      prefs.clear();
+   
       await GoogleSignIn().disconnect();
       FirebaseAuth.instance.signOut();
     } on Exception catch (e) {
