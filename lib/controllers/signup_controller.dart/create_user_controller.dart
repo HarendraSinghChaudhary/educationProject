@@ -104,113 +104,100 @@ class CreateUserController extends GetxController {
 
   Future<dynamic> createGoogleUserApi(
       String email, String name, String firstName, String lastName) async {
-    isLoading(true);
-    String msg = "";
-    var jsonRes;
-    http.Response? res;
-    var request = http.post(
-        Uri.parse(
-          RestDatasource.CREATEUSER,
-        ),
-        body: {
-          "email": email.toString().trim(),
-          "name": name.toString().trim(),
-          "firstname": firstName.toString().trim(),
-          "lastname": lastName.toString().trim(),
-          "signintype": "Google SignIn",
-        });
+    try {
+      isLoading(true);
+      String msg = "";
+      var jsonRes;
+      http.Response? res;
+      var request = http.post(
+          Uri.parse(
+            RestDatasource.CREATEUSER,
+          ),
+          body: {
+            "email": email.toString().trim(),
+            "name": name.toString().trim(),
+            "firstname": firstName.toString().trim(),
+            "lastname": lastName.toString().trim(),
+            "signintype": "Google SignIn",
+          });
 
-    await request.then((http.Response response) {
-      res = response;
-      final JsonDecoder _decoder = new JsonDecoder();
-      jsonRes = _decoder.convert(response.body.toString());
-      msg = jsonRes["message"].toString();
-    });
-    if (res!.statusCode == 200) {
-      bool isUserExist = jsonRes["isUserExist"];
-      if (jsonRes["status"] == true) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        log("Google ID: ${jsonRes["user"]["_id"].toString()}");
-        prefs.setString('id', jsonRes["user"]["_id"].toString());
-        prefs.setString('id_forOnboarding', jsonRes["user"]["_id"].toString());
-        prefs.setString('name', jsonRes["user"]["name"].toString());
+      await request.then((http.Response response) {
+        res = response;
+        final JsonDecoder _decoder = new JsonDecoder();
+        jsonRes = _decoder.convert(response.body.toString());
+        msg = jsonRes["message"].toString();
+      });
+      if (res!.statusCode == 200) {
+        bool isUserExist = jsonRes["isUserExist"]??false;
+        if (jsonRes["status"] == true) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          log("Google ID: ${jsonRes["user"]["_id"].toString()}");
+          prefs.setString('id', jsonRes["user"]["_id"].toString());
+          prefs.setString(
+              'id_forOnboarding', jsonRes["user"]["_id"].toString());
+          prefs.setString('name', jsonRes["user"]["name"].toString());
 
-        prefs.setString('email', jsonRes["user"]["email"].toString());
-        prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
-        prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
+          prefs.setString('email', jsonRes["user"]["email"].toString());
+          prefs.setString('firstname', jsonRes["user"]["firstname"].toString());
+          prefs.setString('lastname', jsonRes["user"]["lastname"].toString());
 
-        prefs.setString('status', jsonRes["user"]["status"].toString());
-        Preferences.pref!.setBool(
-            "isNotificationAllowed", jsonRes["user"]["isAllow"] == "true");
+          prefs.setString('status', jsonRes["user"]["status"].toString());
+          Preferences.pref!.setBool(
+              "isNotificationAllowed", jsonRes["user"]["isAllow"] == "true");
 
-        prefs.setString('token', jsonRes["token"].toString());
+          prefs.setString('token', jsonRes["token"].toString());
 
-        prefs.commit();
+          prefs.commit();
 
-        var splitData = name.split(' ');
-        mixPanelStart(
-          jsonRes["user"]["_id"] ?? "",
-          jsonRes["user"]["name"] ?? "",
-          jsonRes["user"]["email"] ?? "",
-        );
-        if (isUserExist) {
-          mixpanelTracking(
-            "User Login",
-            {
-              "Name": jsonRes["user"]["name"].toString(),
-              "Email": jsonRes["user"]["email"].toString()
-            },
+          var splitData = name.split(' ');
+          mixPanelStart(
+            jsonRes["user"]["_id"] ?? "",
+            jsonRes["user"]["name"] ?? "",
+            jsonRes["user"]["email"] ?? "",
           );
-        }
+          if (isUserExist) {
+            mixpanelTracking(
+              "User Login",
+              {
+                "Name": jsonRes["user"]["name"].toString(),
+                "Email": jsonRes["user"]["email"].toString()
+              },
+            );
+          }
 
-        // isUserExist
-        //     ?
-        //@mini
-        if (!prefs.containsKey(
-            "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}")) {
-          log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
-          Get.offAll(const OnboardingWelcome());
-          // prefs.setBool(
-          //     "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}",
-          //     true);
+          //@mini
+          if (!prefs.containsKey(
+              "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}")) {
+            log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
+            Get.offAll(const OnboardingWelcome());
+          } else {
+            Get.offAll(BottomNavigationScreen(
+              index: 0.obs,
+              learningPathIndex: 0.obs,
+            ));
+          }
+
+          isLoading(false);
         } else {
-          Get.offAll(BottomNavigationScreen(
-            index: 0.obs,
-            learningPathIndex: 0.obs,
-          ));
+          isLoading(false);
         }
-
-        // Get.offAll(BottomNavigationScreen(
-        //   index: 0.obs,
-        //   learningPathIndex: 0.obs,
-        // ));
-
-        // : Get.offAll(() => NameScreen(
-        //           firstName: firstName,
-        //           lastName: lastName,
-        //           name: name,
-        //         ))!
-        //     .whenComplete(() {
-        //     isLoading(false);
-        //   });
-
-        isLoading(false);
       } else {
+        response = msg.toString();
+
+        Fluttertoast.showToast(
+            msg: msg.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: kPrimaryColor,
+            textColor: Colors.white,
+            fontSize: 14.0);
+
         isLoading(false);
       }
-    } else {
-      response = msg.toString();
-
-      Fluttertoast.showToast(
-          msg: msg.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: kPrimaryColor,
-          textColor: Colors.white,
-          fontSize: 14.0);
-
-      isLoading(false);
+    } on Exception catch (e) {
+      // TODO
+      log("Google Siginin Error: ${e.toString()}");
     }
   }
 
@@ -301,30 +288,18 @@ class CreateUserController extends GetxController {
         //       jsonRes["user"]["email"].toString(),
         //     );
 
-        // isUserExist
-        //     ?
+
         //@mini
         if (!prefs.containsKey(
             "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
           Get.offAll(const OnboardingWelcome());
-          // prefs.setBool(
-          //     "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}",
-          //     true);
+
         } else {
           Get.offAll(BottomNavigationScreen(
             index: 0.obs,
             learningPathIndex: 0.obs,
           ));
         }
-        // Get.offAll(BottomNavigationScreen(
-        //   index: 0.obs,
-        //   learningPathIndex: 0.obs,
-        // ));
-        // : Get.offAll(() => NameScreen(
-        //       firstName: firstName,
-        //       lastName: lastName,
-        //       name: name,
-        //     ));
 
         isSubmitting(true);
       } else {

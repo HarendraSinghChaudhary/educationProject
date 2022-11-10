@@ -6,6 +6,7 @@ import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,21 @@ class OnboardingWelcome extends StatefulWidget {
 }
 
 class _OnboardingWelcomeState extends State<OnboardingWelcome> {
+  String? name = "";
   OnBoardingController onboardingController =
       Get.put(OnBoardingController(), permanent: true);
+  Future<void> setName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = prefs.getString('firstname');
+    setState(() {});
+  }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +99,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Welcome, Sophia! 👋🏻',
+                    text: 'Welcome, $name! 👋🏻',
                     style: TextStyle(
                         color: kWhiteColor,
                         fontSize: 24.sp,

@@ -27,6 +27,20 @@ class OnboardingShouldLearn extends StatefulWidget {
 class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
   final onbardingController = Get.find<OnBoardingController>();
 
+  String? name = "";
+  Future<void> setName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = prefs.getString('firstname');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setName();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +90,7 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
               height: 20.h,
             ),
             Text(
-              'Sophia, ${onbardingController.onBoardingFinishModel!.header}',
+              '$name, ${onbardingController.onBoardingFinishModel!.header}',
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 24.sp,

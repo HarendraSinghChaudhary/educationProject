@@ -84,7 +84,7 @@ void main() async {
 
   await PurchaseApi.init();
 
-  RestDatasource.BASE_URL = "http://34.199.211.207:8700/api/";
+  RestDatasource.BASE_URL = "https://devapi.theambitiousapp.co/api/";
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 

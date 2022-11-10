@@ -6,7 +6,6 @@ class RestDatasource {
   // static final BASE_URL = "http://52.0.48.251:8700/api/";    // production base url
   // static final BASE_URL = "http://34.199.211.207:8700/api/";    // development base url
 
-
   static final CREATEUSER = BASE_URL + "createuser";
   static final REGISTER_URL = BASE_URL + "Createnewuser";
   static final OTP_URL = BASE_URL + "verifyOtp";
@@ -32,7 +31,8 @@ class RestDatasource {
   static final ADDFCMTOKEN_URL = BASE_URL + "isAllow";
   static final RSVP_URL = BASE_URL + "reservePowerHour";
   static final APPLEDELETE_URL = "https://appleid.apple.com/auth/revoke";
-  static final FINISH_ONBOARDING_URL = "https://prodapi.theambitiousapp.co/api/onboarding/finish_onboarding";
+  static final FINISH_ONBOARDING_URL =
+      BASE_URL + "onboarding/finish_onboarding";
 }
 
 const authToken =

@@ -149,6 +149,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           updateInterests();
                           setState(() {});
                         } else {
+                         
                           showSnack("Can select max 2 Interests");
                         }
                       },
