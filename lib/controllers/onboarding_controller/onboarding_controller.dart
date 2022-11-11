@@ -58,13 +58,14 @@ class OnBoardingController extends GetxController {
         log("${jsonRes["learningPath"]["suggestedPath"]["tagline"]}");
         log("${jsonRes["learningPath"]["suggestedPath"]["learnerCount"]}");
 
-        onBoardingFinishModel= OnBoardingFinishModel(
-          header: jsonRes["learningPath"]["header"], 
-          title: jsonRes["learningPath"]["suggestedPath"]["title"], 
-          reasons: jsonRes["learningPath"]["suggestedPath"]["reasons"],
-           tools: jsonRes["learningPath"]["suggestedPath"]["tools"],
+        onBoardingFinishModel = OnBoardingFinishModel(
+            header: jsonRes["learningPath"]["header"],
+            title: jsonRes["learningPath"]["suggestedPath"]["title"],
+            reasons: jsonRes["learningPath"]["suggestedPath"]["reasons"],
+            tools: jsonRes["learningPath"]["suggestedPath"]["tools"],
             tagline: jsonRes["learningPath"]["suggestedPath"]["tagline"],
-             learnerCount: jsonRes["learningPath"]["suggestedPath"]["learnerCount"]);
+            learnerCount: jsonRes["learningPath"]["suggestedPath"]
+                ["learnerCount"]);
 
         update();
         return 200;
@@ -74,6 +75,7 @@ class OnBoardingController extends GetxController {
       }
     } catch (e) {
       log("Error : ${e.toString()}");
+      return 400;
     }
   }
 }
