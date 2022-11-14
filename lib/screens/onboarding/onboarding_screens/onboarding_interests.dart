@@ -27,7 +27,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
   void updateInterests() {
     onbardingController.interestedInSelectedList.clear();
     if (ui) {
-      onbardingController.interestedInSelectedList.add("UI UX Designing");
+      onbardingController.interestedInSelectedList.add("UI UX Design");
     }
     if (web) {
       onbardingController.interestedInSelectedList.add("Web Development");
@@ -86,7 +86,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                 end: 0.4,
               ),
               builder: (context, value, _) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
@@ -108,7 +108,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 24.sp,
-                  height: 1.5.h,
+                  height: 1.2.h,
                   wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
@@ -149,8 +149,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           updateInterests();
                           setState(() {});
                         } else {
-                         
-                          showSnack("Can select max 2 Interests");
+                          //showSnack("Can select max 2 Interests");
                         }
                       },
                       child: Container(
@@ -204,7 +203,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           updateInterests();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Interests");
+                          //showSnack("Can select max 2 Interests");
                         }
                       },
                       child: Container(
@@ -266,7 +265,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           updateInterests();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Interests");
+                          //showSnack("Can select max 2 Interests");
                         }
                       },
                       child: Container(
@@ -320,7 +319,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                           updateInterests();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Interests");
+                          //showSnack("Can select max 2 Interests");
                         }
                       },
                       child: Container(
@@ -365,52 +364,52 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
             SizedBox(
               height: 30.h,
             ),
-            InkWell(
-              onTap: () {
-                if (onbardingController.interestedInSelectedList.isEmpty) {
-                  showSnack("Please select atleast 1 Interest");
-                  return;
-                }
-                Get.to(const OnboardingGoals());
-              },
-              splashFactory: NoSplash.splashFactory,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child:
-                  Stack(alignment: AlignmentDirectional.centerEnd, children: [
-                Container(
-                  height: 58.h,
-                  width: 400.w,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10.r))),
-                  child: Center(
-                    child: Text(
-                      "CONTINUE",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 18.sp,
-                          height: 1.5.h,
-                          wordSpacing: 2.5.w,
-                          fontWeight: FontWeight.w600),
-                    ),
+            onbardingController.interestedInSelectedList.isEmpty
+                ? Container()
+                : InkWell(
+                    onTap: () {
+                      Get.to(const OnboardingGoals());
+                    },
+                    splashFactory: NoSplash.splashFactory,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: [
+                          Container(
+                            height: 58.h,
+                            width: 400.w,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.r))),
+                            child: Center(
+                              child: Text(
+                                "CONTINUE",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 18.sp,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: CircleAvatar(
+                              radius: 15.r,
+                              backgroundColor: kArrowBackgroundColor,
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: kBackgroundColor,
+                                size: 20,
+                              ),
+                            ),
+                          )
+                        ]),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: CircleAvatar(
-                    radius: 15.r,
-                    backgroundColor: kArrowBackgroundColor,
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: kBackgroundColor,
-                      size: 20,
-                    ),
-                  ),
-                )
-              ]),
-            ),
           ],
         ),
       ),

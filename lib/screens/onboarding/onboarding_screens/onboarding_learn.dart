@@ -89,7 +89,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                 end: 0.8,
               ),
               builder: (context, value, _) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
@@ -111,7 +111,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 24.sp,
-                  height: 1.5.h,
+                  height: 1.2.h,
                   wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
@@ -152,7 +152,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           updateLearningMethods();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Learning Preferences");
+                          //showSnack("Can select max 2 Learning Preferences");
                         }
                       },
                       child: Container(
@@ -206,7 +206,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           updateLearningMethods();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Learning Preferences");
+                          // showSnack("Can select max 2 Learning Preferences");
                         }
                       },
                       child: Container(
@@ -268,7 +268,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           updateLearningMethods();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Learning Preferences");
+                          // showSnack("Can select max 2 Learning Preferences");
                         }
                       },
                       child: Container(
@@ -322,7 +322,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                           updateLearningMethods();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Learning Preferences");
+                          //showSnack("Can select max 2 Learning Preferences");
                         }
                       },
                       child: Container(
@@ -367,71 +367,70 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
             SizedBox(
               height: 30.h,
             ),
-            InkWell(
-              onTap: () async {
-                if (onbardingController
-                    .learningPreferencesSelectedList.isEmpty) {
-                  showSnack("Please select atleast 1 Learning Preference");
-                  return;
-                }
-                setState(() {
-                  _isLoading = true;
-                });
-                int res = await onbardingController
-                    .finishOnBoarding()
-                    .whenComplete(() {
-                  setState(() {
-                    _isLoading = false;
-                  });
-                });
-                if (res == 200) {
-                  Get.offAll(const OnboardingPersonalizing());
-                } else {
-                  showSnack("Something went wrong please try again.");
-                }
-              },
-              splashFactory: NoSplash.splashFactory,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child:
-                  Stack(alignment: AlignmentDirectional.centerEnd, children: [
-                Container(
-                  height: 58.h,
-                  width: 338.w,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10.r))),
-                  child: Center(
-                    child: _isLoading
-                        ? const CircularProgressIndicator(
-                            color: kWhiteColor,
-                          )
-                        : Text(
-                            "CONTINUE",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 18.sp,
-                                height: 1.5.h,
-                                wordSpacing: 2.5.w,
-                                fontWeight: FontWeight.w600),
+            onbardingController.learningPreferencesSelectedList.isEmpty
+                ? Container()
+                : InkWell(
+                    onTap: () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      int res = await onbardingController
+                          .finishOnBoarding()
+                          .whenComplete(() {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      });
+                      if (res == 200) {
+                        Get.offAll(const OnboardingPersonalizing());
+                      } else {
+                        showSnack("Something went wrong please try again.");
+                      }
+                    },
+                    splashFactory: NoSplash.splashFactory,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: [
+                          Container(
+                            height: 58.h,
+                            width: 338.w,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.r))),
+                            child: Center(
+                              child: _isLoading
+                                  ? const CircularProgressIndicator(
+                                      color: kWhiteColor,
+                                    )
+                                  : Text(
+                                      "CONTINUE",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: kWhiteColor,
+                                          fontSize: 18.sp,
+                                          height: 1.5.h,
+                                          wordSpacing: 2.5.w,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                            ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: CircleAvatar(
+                              radius: 15.r,
+                              backgroundColor: kArrowBackgroundColor,
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: kBackgroundColor,
+                                size: 20,
+                              ),
+                            ),
+                          )
+                        ]),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: CircleAvatar(
-                    radius: 15.r,
-                    backgroundColor: kArrowBackgroundColor,
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: kBackgroundColor,
-                      size: 20,
-                    ),
-                  ),
-                )
-              ]),
-            ),
           ],
         ),
       ),

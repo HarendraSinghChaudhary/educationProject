@@ -125,10 +125,10 @@ class CreateUserController extends GetxController {
         res = response;
         final JsonDecoder _decoder = new JsonDecoder();
         jsonRes = _decoder.convert(response.body.toString());
-        msg = jsonRes["message"].toString();
+        msg = jsonRes["msg"].toString();
       });
       if (res!.statusCode == 200) {
-        bool isUserExist = jsonRes["isUserExist"]??false;
+        bool isUserExist = jsonRes["isUserExist"] ?? false;
         if (jsonRes["status"] == true) {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           log("Google ID: ${jsonRes["user"]["_id"].toString()}");
@@ -167,7 +167,7 @@ class CreateUserController extends GetxController {
 
           //@mini
           if (!prefs.containsKey(
-              "onBoarding_isFirstTime_${jsonRes["user"]["_id"].toString()}")) {
+              "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
             log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
             Get.offAll(const OnboardingWelcome());
           } else {
@@ -240,9 +240,10 @@ class CreateUserController extends GetxController {
       msg = jsonRes["message"].toString();
     });
     if (res!.statusCode == 200) {
-      bool isUserExist = jsonRes["isUserExist"];
+      bool isUserExist = jsonRes["isUserExist"] ?? false;
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       if (jsonRes["status"] == true) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('id', jsonRes["user"]["_id"].toString());
         prefs.setString('id_forOnboarding', jsonRes["user"]["_id"].toString());
         prefs.setString('name', jsonRes["user"]["name"].toString());
@@ -288,12 +289,11 @@ class CreateUserController extends GetxController {
         //       jsonRes["user"]["email"].toString(),
         //     );
 
-
         //@mini
         if (!prefs.containsKey(
             "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
+          log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
           Get.offAll(const OnboardingWelcome());
-
         } else {
           Get.offAll(BottomNavigationScreen(
             index: 0.obs,

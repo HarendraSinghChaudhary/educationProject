@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:Ambitious/models/powerhourModel.dart';
 import 'package:Ambitious/services/snackbar.dart';
@@ -30,6 +31,7 @@ class EventController extends GetxController {
   RxBool homeloading = false.obs;
   RxBool showyoutube = false.obs;
   String timezonename = "";
+  String timezonenamemini = "";
   RxString selectedID = "".obs;
   RxString selectcount = "".obs;
   RxBool rsvploading = false.obs;
@@ -69,10 +71,13 @@ class EventController extends GetxController {
         },
       );
       if (request.statusCode == 200) {
+        //log(request.body.toString());
         powerHours.value = powerHoursModelFromJson(request.body);
         homeloading(true);
       }
-    } catch (e) {}
+    } catch (e) {
+      //log(e.toString());
+    }
   }
 
   Future rsvpapi() async {
@@ -123,6 +128,7 @@ class EventController extends GetxController {
   }
 
   convertdate(DateTime date) {
-    return DateFormat("EEEE MMMM dd").format(date.toLocal());
+    return DateFormat("EEEE MMMM dd\nh:mm a").format(date.toLocal()) +
+        " ${DateTime.now().timeZoneName}";
   }
 }

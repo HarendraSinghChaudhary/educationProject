@@ -27,7 +27,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
       Get.put(OnBoardingController(), permanent: true);
   Future<void> setName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('firstname');
+    name = prefs.getString('firstname') ?? "";
     setState(() {});
   }
 
@@ -70,7 +70,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
                 end: 0.2,
               ),
               builder: (context, value, _) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
@@ -99,11 +99,11 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Welcome, $name! 👋🏻',
+                    text: 'Welcome! $name 👋🏻',
                     style: TextStyle(
                         color: kWhiteColor,
                         fontSize: 24.sp,
-                        height: 1.5.h,
+                        height: 1.0.h,
                         wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),
@@ -112,7 +112,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
                     style: TextStyle(
                         color: kWhiteColor,
                         fontSize: 24.sp,
-                        height: 1.5.h,
+                        height: 1.0.h,
                         wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),
@@ -121,7 +121,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
                     style: TextStyle(
                         color: kCyanColor,
                         fontSize: 24.sp,
-                        height: 1.5.h,
+                        height: 1.0.h,
                         wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
                   ),

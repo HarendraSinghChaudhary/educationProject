@@ -12,8 +12,11 @@ import '../../../controllers/study_material/study_material_controller.dart';
 import '../../../services/mixpanel.dart';
 import '../../../utils/sharedPreference.dart';
 
+import 'package:in_app_review/in_app_review.dart';
+
 class LessonEnd extends GetView<StatusChangeController> {
   LessonEnd({Key? key}) : super(key: key);
+  final InAppReview inAppReview = InAppReview.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,7 @@ class LessonEnd extends GetView<StatusChangeController> {
                               "Module Title": controller.cont.lessonTitle,
                               "Email": Preferences.pref!.getString("email")
                             });
+
                             Get.back();
                           });
                         }
@@ -158,22 +162,26 @@ class LessonEnd extends GetView<StatusChangeController> {
                   width: Get.width * 0.86,
                   height: Get.height * 0.075,
                   text: 'CONTINUE',
-                  press: () {
-                    mixpanelTracking("Module Finished", {
-                      "Course Name": controller.cont.bigdata.value!.title,
-                      "Module Title": controller.cont.lessonTitle,
-                      "Email": Preferences.pref!.getString("email")
-                    });
+                  press: () async {
+                    if (await inAppReview.isAvailable()) {
+                      inAppReview.requestReview().whenComplete(() {
+                        mixpanelTracking("Module Finished", {
+                          "Course Name": controller.cont.bigdata.value!.title,
+                          "Module Title": controller.cont.lessonTitle,
+                          "Email": Preferences.pref!.getString("email")
+                        });
 
-                    Get.delete<StudyMaterialController>();
-                    if (!controller.cont.isread) {
-                      controller
-                          .statusChangeApi(controller.cont.finishId)
-                          .whenComplete(() {
-                        controller.cont.checkCopletion();
+                        Get.delete<StudyMaterialController>();
+                        if (!controller.cont.isread) {
+                          controller
+                              .statusChangeApi(controller.cont.finishId)
+                              .whenComplete(() {
+                            controller.cont.checkCopletion();
+                          });
+                        }
+                        Get.back();
                       });
                     }
-                    Get.back();
                   }),
             ],
           ),

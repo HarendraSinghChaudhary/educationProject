@@ -30,7 +30,7 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
   String? name = "";
   Future<void> setName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('firstname');
+    name = prefs.getString('firstname') ?? "";
     setState(() {});
   }
 
@@ -72,7 +72,7 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                 end: 1,
               ),
               builder: (context, value, _) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   child: LinearProgressIndicator(
@@ -90,11 +90,13 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
               height: 20.h,
             ),
             Text(
-              '$name, ${onbardingController.onBoardingFinishModel!.header}',
+              name!.isEmpty
+                  ? "${onbardingController.onBoardingFinishModel!.header}"
+                  : '$name, ${onbardingController.onBoardingFinishModel!.header}',
               style: TextStyle(
                   color: kWhiteColor,
                   fontSize: 24.sp,
-                  height: 1.5.h,
+                  height: 1.2.h,
                   wordSpacing: 2.5.w,
                   fontWeight: FontWeight.w600),
             ),
@@ -246,7 +248,7 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
               ),
             ]),
             SizedBox(
-              height: 180.h,
+              height: 120.h,
             ),
             InkWell(
               onTap: () async {

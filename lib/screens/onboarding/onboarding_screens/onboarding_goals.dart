@@ -42,7 +42,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
     onbardingController.update();
   }
 
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -85,7 +85,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                 end: 0.6,
               ),
               builder: (context, value, _) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: LinearProgressIndicator(
@@ -102,27 +102,32 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
             SizedBox(
               height: 20.h,
             ),
-            Text(
-              'What are your goals?',
-              style: TextStyle(
-                  color: kWhiteColor,
-                  fontSize: 24.sp,
-                  height: 1.5.h,
-                  wordSpacing: 2.5.w,
-                  fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              "It’s OK if you don’t know. We can help!",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: kWhiteColor,
-                  fontSize: 14.sp,
-                  height: 1.3.h,
-                  wordSpacing: 2.5,
-                  fontWeight: FontWeight.w400),
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Why do you want to learn',
+                    style: TextStyle(
+                        color: kWhiteColor,
+                        fontSize: 24.sp,
+                        height: 1.2.h,
+                        wordSpacing: 2.5.w,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  TextSpan(
+                    text: onbardingController.interestedInSelectedList.length ==
+                            1
+                        ? ' ${onbardingController.interestedInSelectedList[0]}'
+                        : ' ${onbardingController.interestedInSelectedList[0]} and ${onbardingController.interestedInSelectedList[1]}',
+                    style: TextStyle(
+                        color: kCyanColor,
+                        fontSize: 24.sp,
+                        height: 1.2.h,
+                        wordSpacing: 2.5.w,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 40.h,
@@ -137,15 +142,15 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                        if (onbardingController.goalsSelectedList.isEmpty ||
                             (onbardingController.goalsSelectedList.length ==
-                                    2 &&
+                                    1 &&
                                 job)) {
                           job = !job;
                           updateGoals();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Goals");
+                          // showSnack("Can select only 1 Goal");
                         }
                       },
                       child: Container(
@@ -171,19 +176,19 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Use digital skills to\nrun an online\nbusiness",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kWhiteColor,
-                                    fontSize: 14.sp,
-                                    height: 1.5.h,
-                                    wordSpacing: 2.5,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                              // SizedBox(
+                              //   height: 10.h,
+                              // ),
+                              // Text(
+                              //   "Use digital skills to\nrun an online\nbusiness",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       color: kWhiteColor,
+                              //       fontSize: 14.sp,
+                              //       height: 1.5.h,
+                              //       wordSpacing: 2.5,
+                              //       fontWeight: FontWeight.w400),
+                              // ),
                             ],
                           )),
                     ),
@@ -192,15 +197,15 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                        if (onbardingController.goalsSelectedList.isEmpty ||
                             (onbardingController.goalsSelectedList.length ==
-                                    2 &&
+                                    1 &&
                                 salary)) {
                           salary = !salary;
                           updateGoals();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Goals");
+                          // showSnack("Can select only 1 Goal");
                         }
                       },
                       child: Container(
@@ -226,19 +231,19 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "You want to learn\nskills to increase\nyour salary",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kWhiteColor,
-                                    fontSize: 14.sp,
-                                    height: 1.5.h,
-                                    wordSpacing: 2.5,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                              // SizedBox(
+                              //   height: 10.h,
+                              // ),
+                              // Text(
+                              //   "You want to learn\nskills to increase\nyour salary",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       color: kWhiteColor,
+                              //       fontSize: 14.sp,
+                              //       height: 1.5.h,
+                              //       wordSpacing: 2.5,
+                              //       fontWeight: FontWeight.w400),
+                              // ),
                             ],
                           )),
                     ),
@@ -255,15 +260,15 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                        if (onbardingController.goalsSelectedList.isEmpty ||
                             (onbardingController.goalsSelectedList.length ==
-                                    2 &&
+                                    1 &&
                                 business)) {
                           business = !business;
                           updateGoals();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Goals");
+                          // showSnack("Can select only 1 Goal");
                         }
                       },
                       child: Container(
@@ -289,19 +294,19 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Build a startup or\nbecome a freelancer",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kWhiteColor,
-                                    fontSize: 14.sp,
-                                    height: 1.5.h,
-                                    wordSpacing: 2.5,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                              // SizedBox(
+                              //   height: 10.h,
+                              // ),
+                              // Text(
+                              //   "Build a startup or\nbecome a freelancer",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       color: kWhiteColor,
+                              //       fontSize: 14.sp,
+                              //       height: 1.5.h,
+                              //       wordSpacing: 2.5,
+                              //       fontWeight: FontWeight.w400),
+                              // ),
                             ],
                           )),
                     ),
@@ -310,15 +315,15 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.length <= 1 ||
+                        if (onbardingController.goalsSelectedList.isEmpty ||
                             (onbardingController.goalsSelectedList.length ==
-                                    2 &&
+                                    1 &&
                                 skills)) {
                           skills = !skills;
                           updateGoals();
                           setState(() {});
                         } else {
-                          showSnack("Can select max 2 Goals");
+                          // showSnack("Can select only 1 Goal");
                         }
                       },
                       child: Container(
@@ -344,19 +349,19 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "You love to learn\nand want to grow",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: kWhiteColor,
-                                    fontSize: 14.sp,
-                                    height: 1.5.h,
-                                    wordSpacing: 2.5.w,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                              // SizedBox(
+                              //   height: 10.h,
+                              // ),
+                              // Text(
+                              //   "You love to learn\nand want to grow",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       color: kWhiteColor,
+                              //       fontSize: 14.sp,
+                              //       height: 1.5.h,
+                              //       wordSpacing: 2.5.w,
+                              //       fontWeight: FontWeight.w400),
+                              // ),
                             ],
                           )),
                     ),
@@ -367,52 +372,56 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
             SizedBox(
               height: 30.h,
             ),
-            InkWell(
-              onTap: () {
-                   if (onbardingController.goalsSelectedList.isEmpty) {
-                  showSnack("Please select atleast 1 Goal");
-                  return;
-                }
-                Get.to(const OnboardingLearn());
-              },
-              splashFactory: NoSplash.splashFactory,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child:
-                  Stack(alignment: AlignmentDirectional.centerEnd, children: [
-                Container(
-                  height: 58.h,
-                  width: 338.w,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10.r))),
-                  child: Center(
-                    child: Text(
-                      "CONTINUE",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 18.sp,
-                          height: 1.5.h,
-                          wordSpacing: 2.5.w,
-                          fontWeight: FontWeight.w600),
-                    ),
+            onbardingController.goalsSelectedList.isEmpty
+                ? Container()
+                : InkWell(
+                    onTap: () {
+                      if (onbardingController.goalsSelectedList.isEmpty) {
+                        showSnack("Please select your Goal");
+                        return;
+                      }
+                      Get.to(const OnboardingLearn());
+                    },
+                    splashFactory: NoSplash.splashFactory,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: [
+                          Container(
+                            height: 58.h,
+                            width: 338.w,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.r))),
+                            child: Center(
+                              child: Text(
+                                "CONTINUE",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 18.sp,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: const CircleAvatar(
+                              radius: 15,
+                              backgroundColor: kArrowBackgroundColor,
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: kBackgroundColor,
+                                size: 20,
+                              ),
+                            ),
+                          )
+                        ]),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: const CircleAvatar(
-                    radius: 15,
-                    backgroundColor: kArrowBackgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: kBackgroundColor,
-                      size: 20,
-                    ),
-                  ),
-                )
-              ]),
-            ),
           ],
         ),
       ),

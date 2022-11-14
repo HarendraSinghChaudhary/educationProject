@@ -93,7 +93,9 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                 ),
                 child: Text(
                   // "Community ",
-                  "Hi, " + firstName.toString() + " 👋🏼",
+                  firstName.toString().isEmpty
+                      ? "Hi 👋🏼"
+                      : "Hi, " + firstName.toString() + " 👋🏼",
                   style: TextStyle(
                       fontSize: 36.sp,
                       fontWeight: FontWeight.w700,

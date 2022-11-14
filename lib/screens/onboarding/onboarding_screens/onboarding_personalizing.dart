@@ -45,7 +45,7 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Container(
               width: 340.w,
-              height: 200.h,
+              height: 220.h,
               decoration: BoxDecoration(
                   color: kcardblue,
                   borderRadius: BorderRadius.all(Radius.circular(15.r))),

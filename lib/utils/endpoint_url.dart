@@ -6,10 +6,10 @@ class RestDatasource {
   // static final BASE_URL = "http://52.0.48.251:8700/api/";    // production base url
   // static final BASE_URL = "http://34.199.211.207:8700/api/";    // development base url
 
-  static final CREATEUSER = BASE_URL + "createuser";
-  static final REGISTER_URL = BASE_URL + "Createnewuser";
+  static final CREATEUSER = BASE_URL + "users/oauth_signin";
+  static final REGISTER_URL = BASE_URL + "users/signup_email";
   static final OTP_URL = BASE_URL + "verifyOtp";
-  static final login_URL = BASE_URL + "userLogin";
+  static final login_URL = BASE_URL + "login_email_pass";
   static final forgotPass_URL = BASE_URL + "forgotpassword";
   static final reset_password_url = BASE_URL + "reset_password";
   static final resendOtp_url = BASE_URL + "resendOtp";
@@ -23,7 +23,9 @@ class RestDatasource {
   static final EDITPROFILE_URL = BASE_URL + "editprofile";
   static final GETCOURSEMODULE = BASE_URL + "getModule?courseid=";
   static final MODULESTATUSCHANGEAPI = BASE_URL + "ModuleStatus";
-  static final GETPOWERHOUR_URL = BASE_URL + "getPowerHours";
+  //static final GETPOWERHOUR_URL = BASE_URL + "getPowerHours";
+  static final GETPOWERHOUR_URL =
+      "https://theambitiousapp.co/v1/api/getPowerHours";
   static final SLACK_URL = BASE_URL + "getSlackData";
   static final USERCHECK_URL = BASE_URL + "usercheckEmail";
   static final USERDELETE_URL = BASE_URL + "Deleteuser?userid=";

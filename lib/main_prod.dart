@@ -359,12 +359,12 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
           home: Splash(),
 
-          // Dark_Course()
-          // DarkLearningPath()
-          // DarkCourseDetail()
-          // Stepernew()
-          //Paywall(),
-          //OnboardingWelcome(),
+              // Dark_Course()
+              // DarkLearningPath()
+              // DarkCourseDetail()
+              // Stepernew()
+              //Paywall(),
+              //OnboardingWelcome(),
           //Splash(),
           // EventView()
           // CurrentEventView()
