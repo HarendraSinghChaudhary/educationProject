@@ -47,6 +47,15 @@ class _OnboardingPersonalizingState extends State<OnboardingPersonalizing> {
               width: 340.w,
               height: 220.h,
               decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.4),
+                      spreadRadius: 0,
+                      blurRadius: 5,
+                      blurStyle: BlurStyle.normal,
+                      offset: Offset(5.w, 5.h), // changes position of shadow
+                    ),
+                  ],
                   color: kcardblue,
                   borderRadius: BorderRadius.all(Radius.circular(15.r))),
               child: Column(

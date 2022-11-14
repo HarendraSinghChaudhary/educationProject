@@ -64,6 +64,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             SizedBox(
               height: 20.h,

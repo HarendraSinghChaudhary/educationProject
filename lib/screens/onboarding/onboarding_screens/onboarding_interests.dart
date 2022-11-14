@@ -61,6 +61,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             SizedBox(
               height: 20.h,
@@ -138,19 +139,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController
-                                    .interestedInSelectedList.length <=
-                                1 ||
-                            (onbardingController
-                                        .interestedInSelectedList.length ==
-                                    2 &&
-                                ui)) {
-                          ui = !ui;
-                          updateInterests();
-                          setState(() {});
-                        } else {
-                          //showSnack("Can select max 2 Interests");
-                        }
+                        // if (onbardingController
+                        //             .interestedInSelectedList.length <=
+                        //         1 ||
+                        //     (onbardingController
+                        //                 .interestedInSelectedList.length ==
+                        //             2 &&
+                        //         ui)) {
+                        ui = !ui;
+                        updateInterests();
+                        setState(() {});
+                        // } else {
+                        //   //showSnack("Can select max 2 Interests");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -192,19 +193,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController
-                                    .interestedInSelectedList.length <=
-                                1 ||
-                            (onbardingController
-                                        .interestedInSelectedList.length ==
-                                    2 &&
-                                web)) {
-                          web = !web;
-                          updateInterests();
-                          setState(() {});
-                        } else {
-                          //showSnack("Can select max 2 Interests");
-                        }
+                        // if (onbardingController
+                        //             .interestedInSelectedList.length <=
+                        //         1 ||
+                        //     (onbardingController
+                        //                 .interestedInSelectedList.length ==
+                        //             2 &&
+                        //         web)) {
+                        web = !web;
+                        updateInterests();
+                        setState(() {});
+                        // } else {
+                        //   //showSnack("Can select max 2 Interests");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -254,19 +255,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController
-                                    .interestedInSelectedList.length <=
-                                1 ||
-                            (onbardingController
-                                        .interestedInSelectedList.length ==
-                                    2 &&
-                                marketing)) {
-                          marketing = !marketing;
-                          updateInterests();
-                          setState(() {});
-                        } else {
-                          //showSnack("Can select max 2 Interests");
-                        }
+                        // if (onbardingController
+                        //             .interestedInSelectedList.length <=
+                        //         1 ||
+                        //     (onbardingController
+                        //                 .interestedInSelectedList.length ==
+                        //             2 &&
+                        //         marketing)) {
+                        marketing = !marketing;
+                        updateInterests();
+                        setState(() {});
+                        // } else {
+                        //   //showSnack("Can select max 2 Interests");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -308,19 +309,19 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController
-                                    .interestedInSelectedList.length <=
-                                1 ||
-                            (onbardingController
-                                        .interestedInSelectedList.length ==
-                                    2 &&
-                                startup)) {
-                          startup = !startup;
-                          updateInterests();
-                          setState(() {});
-                        } else {
-                          //showSnack("Can select max 2 Interests");
-                        }
+                        // if (onbardingController
+                        //             .interestedInSelectedList.length <=
+                        //         1 ||
+                        //     (onbardingController
+                        //                 .interestedInSelectedList.length ==
+                        //             2 &&
+                        //         startup)) {
+                        startup = !startup;
+                        updateInterests();
+                        setState(() {});
+                        // } else {
+                        //   //showSnack("Can select max 2 Interests");
+                        // }
                       },
                       child: Container(
                           height: 164.w,

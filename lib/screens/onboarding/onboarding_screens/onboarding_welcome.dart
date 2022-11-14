@@ -45,6 +45,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             SizedBox(
               height: 20.h,
@@ -123,7 +124,7 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
                         fontSize: 24.sp,
                         height: 1.0.h,
                         wordSpacing: 2.5.w,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),

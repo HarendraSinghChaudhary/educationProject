@@ -60,6 +60,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             SizedBox(
               height: 20.h,
@@ -109,7 +110,11 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                     text: 'Why do you want to learn',
                     style: TextStyle(
                         color: kWhiteColor,
-                        fontSize: 24.sp,
+                        fontSize: onbardingController
+                                    .interestedInSelectedList.length >
+                                2
+                            ? 20.sp
+                            : 24.sp,
                         height: 1.2.h,
                         wordSpacing: 2.5.w,
                         fontWeight: FontWeight.w500),
@@ -118,13 +123,24 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                     text: onbardingController.interestedInSelectedList.length ==
                             1
                         ? ' ${onbardingController.interestedInSelectedList[0]}'
-                        : ' ${onbardingController.interestedInSelectedList[0]} and ${onbardingController.interestedInSelectedList[1]}',
+                        : onbardingController.interestedInSelectedList.length ==
+                                2
+                            ? ' ${onbardingController.interestedInSelectedList[0]} and ${onbardingController.interestedInSelectedList[1]}'
+                            : onbardingController
+                                        .interestedInSelectedList.length ==
+                                    3
+                                ? ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]} and ${onbardingController.interestedInSelectedList[2]}'
+                                : ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]}, ${onbardingController.interestedInSelectedList[2]} and ${onbardingController.interestedInSelectedList[3]}',
                     style: TextStyle(
                         color: kCyanColor,
-                        fontSize: 24.sp,
+                        fontSize: onbardingController
+                                    .interestedInSelectedList.length >
+                                2
+                            ? 20.sp
+                            : 24.sp,
                         height: 1.2.h,
                         wordSpacing: 2.5.w,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
@@ -142,16 +158,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.isEmpty ||
-                            (onbardingController.goalsSelectedList.length ==
-                                    1 &&
-                                job)) {
-                          job = !job;
-                          updateGoals();
-                          setState(() {});
-                        } else {
-                          // showSnack("Can select only 1 Goal");
-                        }
+                        // if (onbardingController.goalsSelectedList.isEmpty ||
+                        //     (onbardingController.goalsSelectedList.length ==
+                        //             1 &&
+                        //         job)) {
+                        job = !job;
+                        updateGoals();
+                        setState(() {});
+                        // } else {
+                        //   // showSnack("Can select only 1 Goal");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -197,16 +213,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.isEmpty ||
-                            (onbardingController.goalsSelectedList.length ==
-                                    1 &&
-                                salary)) {
-                          salary = !salary;
-                          updateGoals();
-                          setState(() {});
-                        } else {
-                          // showSnack("Can select only 1 Goal");
-                        }
+                        // if (onbardingController.goalsSelectedList.isEmpty ||
+                        //     (onbardingController.goalsSelectedList.length ==
+                        //             1 &&
+                        //         salary)) {
+                        salary = !salary;
+                        updateGoals();
+                        setState(() {});
+                        // } else {
+                        //   // showSnack("Can select only 1 Goal");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -260,16 +276,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.isEmpty ||
-                            (onbardingController.goalsSelectedList.length ==
-                                    1 &&
-                                business)) {
-                          business = !business;
-                          updateGoals();
-                          setState(() {});
-                        } else {
-                          // showSnack("Can select only 1 Goal");
-                        }
+                        // if (onbardingController.goalsSelectedList.isEmpty ||
+                        //     (onbardingController.goalsSelectedList.length ==
+                        //             1 &&
+                        //         business)) {
+                        business = !business;
+                        updateGoals();
+                        setState(() {});
+                        // } else {
+                        //   // showSnack("Can select only 1 Goal");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
@@ -315,16 +331,16 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () {
-                        if (onbardingController.goalsSelectedList.isEmpty ||
-                            (onbardingController.goalsSelectedList.length ==
-                                    1 &&
-                                skills)) {
-                          skills = !skills;
-                          updateGoals();
-                          setState(() {});
-                        } else {
-                          // showSnack("Can select only 1 Goal");
-                        }
+                        // if (onbardingController.goalsSelectedList.isEmpty ||
+                        //     (onbardingController.goalsSelectedList.length ==
+                        //             1 &&
+                        //         skills)) {
+                        skills = !skills;
+                        updateGoals();
+                        setState(() {});
+                        // } else {
+                        //   // showSnack("Can select only 1 Goal");
+                        // }
                       },
                       child: Container(
                           height: 164.w,
