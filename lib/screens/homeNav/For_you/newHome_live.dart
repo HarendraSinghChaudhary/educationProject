@@ -130,7 +130,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                   style: TextStyle(
                                       fontSize: 18.sp,
                                       color: kWhiteColor,
-                                      height: 2.h,
+                                      height: 1.2.h,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 SizedBox(
@@ -183,7 +183,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                               child: Column(
                                                 children: [
                                                   Container(
-                                                    height: 221.h, 
+                                                    height: 221.h,
 
                                                     decoration: BoxDecoration(
                                                         color: kcardblue,
@@ -211,7 +211,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                             vertical: 10.h,
-                                                            horizontal: 10.w),
+                                                            horizontal: 5.w),
                                                     decoration: BoxDecoration(
                                                         color: kcardblue,
                                                         borderRadius:
@@ -222,7 +222,8 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                                 bottomRight: Radius
                                                                     .circular(
                                                                         15.r))),
-                                                    child: Column(//@mini
+                                                    child: Column(
+                                                      //@mini
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
@@ -238,13 +239,13 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                               .toString(),
 
                                                           // softWrap: true,
-                                                          maxLines: 2,
+                                                          maxLines: 1,
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           textAlign:
                                                               TextAlign.start,
-                                                          style: const TextStyle(
-                                                              fontSize: 14,
+                                                          style: TextStyle(
+                                                              fontSize: 14.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
@@ -257,9 +258,9 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                           "${coursesController.getHotCourseList[index].allModules} Modules",
                                                           textAlign:
                                                               TextAlign.center,
-                                                          style: const TextStyle(
-                                                              fontSize: 10,
-                                                              height: 1.5,
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp,
+                                                              height: 1.5.h,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
@@ -290,14 +291,15 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                                     style:
                                                                         TextStyle(
                                                                       fontSize:
-                                                                          10,
+                                                                          10.sp,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w300,
                                                                       color: kWhiteColor
                                                                           .withOpacity(
                                                                               0.5),
-                                                                      height: 2,
+                                                                      height:
+                                                                          2.h,
                                                                     ),
                                                                   ),
                                                                 ],
@@ -324,39 +326,42 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: w * 0.1, vertical: h * 0.018),
-                              margin: EdgeInsets.only(top: h * 0.02),
+                                  horizontal: 10.w, vertical: 20.h),
+                              margin: EdgeInsets.only(top: 15.h),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(h * 0.02),
                                   color: kcardblue,
                                   boxShadow: [
                                     BoxShadow(
                                         color: kPrimaryColor.withOpacity(0.2),
-                                        blurRadius: 5,
+                                        blurRadius: 5.r,
                                         offset: const Offset(0, 4)),
                                   ]),
-                              width: w,
+                              //width: w,
                               child: Column(
                                 children: [
                                   Image.asset(
                                     "assets/images/prefix.png",
-                                    height: h * 0.05,
+                                    height: 40.w,
+                                    width: 40.w,
                                   ),
-                                  const Text(
+                                  Text(
                                     "Join our Slack community",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 16,
-                                        height: 2,
+                                        fontSize: 16.sp,
+                                        height: 2.h,
                                         fontWeight: FontWeight.w700),
                                   ),
-                                  const Text(
+                                  Text(
                                     "Network with Ambitious people like yourself and participate in events.",
                                     textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w300),
                                   ),
                                 ],
@@ -364,36 +369,37 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             ),
                           ),
                           SizedBox(
-                            height: h * 0.02,
+                            height: 15.h,
                           ),
                           Visibility(
                             visible: coursesController.hotsubcatList.isNotEmpty,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "🚀 All Categories",
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 24.sp,
                                       color: kWhiteColor,
-                                      // height: 2,
+                                      height: 2.h,
                                       fontWeight: FontWeight.w700),
                                 ),
-                                const Text(
+                                Text(
                                   "Explore something new",
                                   style: TextStyle(
-                                      fontSize: 18,
-                                      height: 2,
+                                      fontSize: 18.sp,
+                                      height: 1.2.h,
                                       color: kWhiteColor,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 SizedBox(
-                                  height: h * 0.01,
+                                  height: 8.h,
                                 ),
                                 SizedBox(
-                                  height: Get.height * 0.23,
-                                  width: Get.width * 0.97,
+                                  height: 184.h,
+                                  //width: Get.width * 0.97,
                                   child: ListView.builder(
+                                      shrinkWrap: true,
                                       padding: const EdgeInsets.only(top: 15),
                                       itemCount: coursesController
                                           .hotsubcatList.length,
@@ -433,7 +439,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                     ));
                                               },
                                               child: Container(
-                                                width: Get.width * 0.38,
+                                                width: 149.w,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -443,24 +449,21 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                   // crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Container(
-                                                      height: Get.height * 0.1,
-                                                      width: Get.width * 0.38,
+                                                      height: 84.h,
+                                                      width: 84.w,
                                                       margin:
                                                           EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  h * 0.005),
+                                                              vertical: 3.h),
                                                       decoration: BoxDecoration(
                                                           borderRadius:
-                                                              const BorderRadius
-                                                                      .only(
+                                                              BorderRadius.only(
                                                                   topLeft: Radius
                                                                       .circular(
-                                                                          15),
+                                                                          15.r),
                                                                   topRight: Radius
                                                                       .circular(
-                                                                          15)),
-                                                          image:
-                                                              DecorationImage(
+                                                                          15.r)),
+                                                          image: DecorationImage(
                                                             image: NetworkImage(
                                                                 coursesController
                                                                     .hotsubcatList[
@@ -470,16 +473,15 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                             // fit: BoxFit.fill
                                                           )),
                                                     ),
-                                                    const SizedBox(
-                                                      height: 10,
+                                                    SizedBox(
+                                                      height: 10.h,
                                                     ),
                                                     Expanded(
                                                       child: Container(
                                                         padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 10,
-                                                                right: 10),
+                                                            EdgeInsets.only(
+                                                                left: 10.w,
+                                                                right: 10.w),
                                                         alignment:
                                                             Alignment.center,
                                                         child: Text(
@@ -491,13 +493,9 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                           maxLines: 2,
                                                           textAlign:
                                                               TextAlign.center,
-                                                          style:
-                                                              const TextStyle(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
+                                                          style: TextStyle(
                                                             color: kWhiteColor,
-                                                            fontSize: 20,
+                                                            fontSize: 20.sp,
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                           ),
@@ -508,15 +506,15 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(
-                                              width: 15,
+                                            SizedBox(
+                                              width: 15.w,
                                             )
                                           ],
                                         );
                                       }),
                                 ),
                                 SizedBox(
-                                  height: h * 0.02,
+                                  height: 15.h,
                                 ),
                               ],
                             ),
@@ -528,29 +526,28 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "🎤 Upcoming Power Hours",
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 24.sp,
                                       color: kWhiteColor,
-                                      // height: 2,
+                                      height: 2.h,
                                       fontWeight: FontWeight.w700),
                                 ),
-                                const Text(
+                                Text(
                                   "Join a live talk from an industry expert.",
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                       color: kWhiteColor,
-                                      height: 2,
+                                      height: 1.2.h,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 SizedBox(
-                                  height: h * 0.01,
+                                  height: 5.h,
                                 ),
                                 Container(
-                                  height: h * 0.38,
-                                  margin:
-                                      EdgeInsets.symmetric(vertical: h * 0.015),
+                                  height: 300.h,
+                                  margin: EdgeInsets.symmetric(vertical: 8.h),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: const BouncingScrollPhysics(),
@@ -578,20 +575,22 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                               binding: CurrentEventBinding());
                                         },
                                         child: Container(
-                                          width: w * 0.48,
+                                          width: 157.w,
                                           padding: EdgeInsets.only(
-                                              right: w * 0.04,
-                                              bottom: h * 0.01),
+                                            top: 5.h,
+                                            bottom: 2.h,
+                                            right: 5.w,
+                                          ),
                                           child: CommunityCard(
                                             flex2: 3,
                                             url:
                                                 // "assets/images/banner.png",
                                                 datam.image.toString(),
                                             child: Container(
-                                              width: w,
+                                              //width: w,
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal: w * 0.025,
-                                                  vertical: h * 0.01),
+                                                  horizontal: 8.w,
+                                                  vertical: 2.h),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -599,41 +598,41 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            vertical: h * 0.01),
+                                                            vertical: 2.h),
                                                     child: Text(
                                                       // "Thursday July 21st".toUpperCase(),
                                                       "${eventController.convertdate(datam.startTime!)}",
                                                       // textAlign: TextAlign.start,
-                                                      style: const TextStyle(
-                                                          fontSize: 12,
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: kWhiteColor),
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: h * 0.01),
+                                                    padding: EdgeInsets.only(
+                                                        top: 6.h, bottom: 4.h),
                                                     child: Text(
                                                       // "Breaking Down The Blockchain",
                                                       datam.powerHoursTitle
                                                           .toString(),
                                                       // textAlign: TextAlign.start,
+                                                      maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          fontSize: 16,
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: kWhiteColor),
                                                     ),
                                                   ),
-                                                  const Text(
+                                                  Text(
                                                     "📲 In-App Event",
                                                     // textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontSize: 12,
+                                                        fontSize: 12.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: kWhiteColor),
@@ -660,39 +659,39 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: w * 0.1, vertical: h * 0.018),
-                              margin: EdgeInsets.only(top: h * 0.02),
+                                  horizontal: 10.w, vertical: 15.h),
+                              margin: EdgeInsets.only(top: 15.h),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(h * 0.02),
+                                  borderRadius: BorderRadius.circular(15.r),
                                   color: kcardblue,
                                   boxShadow: [
                                     BoxShadow(
                                         color: kPrimaryColor.withOpacity(0.2),
-                                        blurRadius: 5,
+                                        blurRadius: 5.r,
                                         offset: const Offset(0, 4)),
                                   ]),
-                              width: w,
+                              //width: w,
                               child: Column(
                                 children: [
                                   Image.asset(
                                     "assets/images/idea.png",
-                                    height: h * 0.05,
+                                    height: 40.w,
                                   ),
-                                  const Text(
+                                  Text(
                                     "Provide Feedback",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 16,
-                                        height: 2,
+                                        fontSize: 16.sp,
+                                        height: 2.h,
                                         fontWeight: FontWeight.w700),
                                   ),
-                                  const Text(
+                                  Text(
                                     "Have a suggestion for courses or learning paths? Tap here to contact us. We`d love to hear from you.",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w300),
                                   ),
                                 ],
@@ -776,7 +775,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kBlackColor,
-                                fontSize: 30,
+                                fontSize: 30.sp,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -790,7 +789,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kGreyColor,
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -819,7 +818,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: kPrimaryColor,
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
@@ -848,7 +847,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: kPrimaryColor,
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),

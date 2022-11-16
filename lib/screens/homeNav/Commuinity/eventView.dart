@@ -6,6 +6,7 @@ import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:Ambitious/utils/hearder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -18,8 +19,6 @@ class EventView extends GetView<EventController> {
     controller.onInit();
     return Obx(() => Scaffold(
           body: Container(
-            height: h,
-            width: w,
             color: kdarkblue,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -30,7 +29,7 @@ class EventView extends GetView<EventController> {
                   image: "assets/images/OBJECTS.png"),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: w * 0.04),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
@@ -42,7 +41,7 @@ class EventView extends GetView<EventController> {
                               controller.powerHours.value!.upcoming!.isNotEmpty,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: w * 0.02, vertical: h * 0.01),
+                                horizontal: 0.w, vertical: 10.h),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -50,31 +49,30 @@ class EventView extends GetView<EventController> {
                                   children: [
                                     Image.asset(
                                       "assets/images/label.png",
-                                      height: h * 0.03,
+                                      height: 20.h,
                                     ),
-                                    const Text(
+                                    Text(
                                       " Upcoming Power Hours",
                                       style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w700,
                                           color: kWhiteColor),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: h * 0.01,
+                                  height: 8.h,
                                 ),
-                                const Text(
+                                Text(
                                   "Register for an upcoming event to learn from a community leader live",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: kWhiteColor,
                                   ),
                                 ),
                                 Container(
-                                  height: h * 0.38,
-                                  margin:
-                                      EdgeInsets.symmetric(vertical: h * 0.015),
+                                  height: 300.h,
+                                  margin: EdgeInsets.symmetric(vertical: 15.h),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: const BouncingScrollPhysics(),
@@ -101,18 +99,20 @@ class EventView extends GetView<EventController> {
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.only(
-                                              right: w * 0.04,
-                                              bottom: h * 0.01),
+                                            top: 5.h,
+                                            bottom: 2.h,
+                                            right: 5.w,
+                                          ),
                                           child: CommunityCard(
                                             flex2: 3,
                                             url:
                                                 // "assets/images/banner.png",
                                                 data.image.toString(),
                                             child: Container(
-                                              width: w,
+                                              width: 157.w,
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal: w * 0.025,
-                                                  vertical: h * 0.01),
+                                                  horizontal: 8.w,
+                                                  vertical: 2.h),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -120,39 +120,41 @@ class EventView extends GetView<EventController> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            vertical: h * 0.01),
+                                                            vertical: 2.h),
                                                     child: Text(
                                                       // "Thursday July 21st".toUpperCase(),
                                                       "${controller.convertdate(data.startTime!)}",
                                                       // textAlign: TextAlign.start,
-                                                      style: const TextStyle(
-                                                          fontSize: 12,
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: kWhiteColor),
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: h * 0.01),
+                                                    padding: EdgeInsets.only(
+                                                        top: 6.h, bottom: 4.h),
                                                     child: Text(
                                                       // "Breaking Down The Blockchain",
                                                       data.powerHoursTitle
                                                           .toString(),
                                                       // textAlign: TextAlign.start,
-                                                      style: const TextStyle(
-                                                          fontSize: 16,
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: kWhiteColor),
                                                     ),
                                                   ),
-                                                  const Text(
+                                                  Text(
                                                     "📲 In-App Event",
                                                     // textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontSize: 12,
+                                                        fontSize: 12.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: kWhiteColor),
@@ -171,7 +173,7 @@ class EventView extends GetView<EventController> {
                           ),
                         ),
                         SizedBox(
-                          height: h * 0.01,
+                          height: 10.h,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -186,14 +188,14 @@ class EventView extends GetView<EventController> {
                           ),
                         ),
                         SizedBox(
-                          height: h * 0.03,
+                          height: 25.h,
                         ),
                         Visibility(
                           visible:
                               controller.powerHours.value!.passed!.isNotEmpty,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: w * 0.02, vertical: h * 0.01),
+                                horizontal: 5.h, vertical: 5.h),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -201,19 +203,19 @@ class EventView extends GetView<EventController> {
                                   children: [
                                     Image.asset(
                                       "assets/images/label.png",
-                                      height: h * 0.03,
+                                      height: 25.h,
                                     ),
-                                    const Text(
+                                    Text(
                                       " Watch On Demand",
                                       style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w700,
                                           color: kWhiteColor),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: h * 0.01,
+                                  height: 5.h,
                                 ),
                                 const Text(
                                   "Replay a previous Power Hour",
@@ -223,9 +225,8 @@ class EventView extends GetView<EventController> {
                                   ),
                                 ),
                                 Container(
-                                  height: h * 0.3,
-                                  margin:
-                                      EdgeInsets.symmetric(vertical: h * 0.015),
+                                  height: 250.h,
+                                  margin: EdgeInsets.symmetric(vertical: 15.h),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: const BouncingScrollPhysics(),
@@ -244,8 +245,10 @@ class EventView extends GetView<EventController> {
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.only(
-                                              right: w * 0.04,
-                                              bottom: h * 0.01),
+                                            top: 5.h,
+                                            bottom: 2.h,
+                                            right: 5.w,
+                                          ),
                                           child: CommunityCard(
                                             flex2: 2,
                                             url:
@@ -253,19 +256,21 @@ class EventView extends GetView<EventController> {
                                                 data.image.toString(),
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal: w * 0.025,
-                                                  vertical: h * 0.01),
+                                                  horizontal: 10.w,
+                                                  vertical: 2.h),
                                               child: Container(
-                                                width: w,
                                                 padding: EdgeInsets.symmetric(
-                                                    vertical: h * 0.01),
+                                                    vertical: 10.h),
                                                 child: Text(
                                                   // "Breaking Down The Blockchain",
                                                   data.powerHoursTitle
                                                       .toString(),
                                                   textAlign: TextAlign.start,
-                                                  style: const TextStyle(
-                                                      fontSize: 16,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       color: kWhiteColor),
@@ -284,7 +289,7 @@ class EventView extends GetView<EventController> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => WebViewExample(
+                            Get.to(() => const WebViewExample(
                                   title: "Suggest an idea",
                                   url: suggessionUrl,
                                 ));
@@ -297,7 +302,7 @@ class EventView extends GetView<EventController> {
                           ),
                         ),
                         SizedBox(
-                          height: h * 0.02,
+                          height: 20.h,
                         ),
                       ],
                     ),
@@ -321,7 +326,7 @@ class CommunityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: w * 0.42,
+      width: 157.w,
       child: Card(
         color: ksettingcardColor,
         shape: RoundedRectangleBorder(
@@ -333,12 +338,12 @@ class CommunityCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
-              flex: 4,
+              flex: 5,
               child: Container(
-                height: h * 0.2,
+                //height: 20.h,
                 //  width: w*0.42,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(h * 0.02),
+                    borderRadius: BorderRadius.circular(15.r),
                     //  color: kPrimaryColor,
                     image: DecorationImage(
                         image: NetworkImage(url), fit: BoxFit.fill)),
@@ -369,20 +374,20 @@ class SlackCard extends StatelessWidget {
         color: ksettingcardColor,
         elevation: 8,
         shadowColor: kPrimaryColor.withOpacity(0.5),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(h * 0.02)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Row(children: [
           Expanded(
             flex: 3,
             child: Image.asset(
               url,
-              height: h * 0.04,
+              height: 35.h,
             ),
           ),
           Expanded(
             flex: 9,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: h * 0.012),
+              padding: EdgeInsets.symmetric(vertical: 10.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -390,14 +395,14 @@ class SlackCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: kWhiteColor),
                   ),
                   Text(
                     subtitle,
                     style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w300,
                         color: kWhiteColor),
                   ),
@@ -410,10 +415,10 @@ class SlackCard extends StatelessWidget {
             child: CircleAvatar(
                 backgroundColor: kPrimaryColor,
                 foregroundColor: kWhiteColor,
-                radius: h * 0.015,
-                child: Icon(
+                radius: 12.r,
+                child: const Icon(
                   Icons.arrow_forward,
-                  size: h * 0.02,
+                  size: 20,
                 )),
           ),
         ]));
