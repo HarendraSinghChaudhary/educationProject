@@ -151,7 +151,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                       return Padding(
                                         padding: EdgeInsets.only(right: 12.w),
                                         child: Container(
-                                            width: 170.w,
+                                            width: 171.w,
                                             child: InkWell(
                                               onTap: () {
                                                 Get.find<CoursesController>()
@@ -182,133 +182,130 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                               },
                                               child: Column(
                                                 children: [
-                                                  Expanded(
-                                                      flex: 2,
-                                                      child: Container(
-                                                        height: h * 0.2, //@mini
+                                                  Container(
+                                                    height: 221.h, 
 
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color:
-                                                                    kcardblue,
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius
-                                                                        .circular(h *
-                                                                            0.02),
-                                                                    topRight: Radius
-                                                                        .circular(h *
-                                                                            0.02)),
-                                                                image: DecorationImage(
-                                                                    image:
-                                                                        // AssetImage("assets/images/img_9.png",),
-                                                                        NetworkImage(coursesController.getHotCourseList[index].image.toString()),
-                                                                    fit: BoxFit.fill)),
-                                                        // child: Image.asset("assets/images/img_9.png")
-                                                      )),
-                                                  Expanded(
-                                                    child: Container(
-                                                      height: h * 0.1,
-                                                      width: w,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  h * 0.015,
-                                                              horizontal:
-                                                                  w * 0.03),
-                                                      decoration: BoxDecoration(
-                                                          color: kcardblue,
-                                                          borderRadius: BorderRadius.only(
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      h * 0.02),
-                                                              bottomRight: Radius
-                                                                  .circular(h *
-                                                                      0.02))),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          Text(
-                                                            // "Bitcoin, Simplified",
-                                                            coursesController
-                                                                .getHotCourseList[
-                                                                    index]
-                                                                .title
-                                                                .toString(),
+                                                    decoration: BoxDecoration(
+                                                        color: kcardblue,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        15.r),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        15.r)),
+                                                        image: DecorationImage(
+                                                            image:
+                                                                // AssetImage("assets/images/img_9.png",),
+                                                                NetworkImage(coursesController
+                                                                    .getHotCourseList[
+                                                                        index]
+                                                                    .image
+                                                                    .toString()),
+                                                            fit: BoxFit.fill)),
+                                                    // child: Image.asset("assets/images/img_9.png")
+                                                  ),
+                                                  Container(
+                                                    height: 77.h,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10.h,
+                                                            horizontal: 10.w),
+                                                    decoration: BoxDecoration(
+                                                        color: kcardblue,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        15.r),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        15.r))),
+                                                    child: Column(//@mini
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          // "Bitcoin, Simplified",
+                                                          coursesController
+                                                              .getHotCourseList[
+                                                                  index]
+                                                              .title
+                                                              .toString(),
 
-                                                            // softWrap: true,
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: const TextStyle(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color:
-                                                                    kWhiteColor),
-                                                          ),
-                                                          Spacer(),
-                                                          Text(
-                                                            // "12 Shorts",
-                                                            "${coursesController.getHotCourseList[index].allModules} Modules",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: const TextStyle(
-                                                                fontSize: 10,
-                                                                height: 1.5,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color:
-                                                                    kWhiteColor),
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Expanded(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .groups,
-                                                                      size: 20,
+                                                          // softWrap: true,
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color:
+                                                                  kWhiteColor),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          // "12 Shorts",
+                                                          "${coursesController.getHotCourseList[index].allModules} Modules",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: const TextStyle(
+                                                              fontSize: 10,
+                                                              height: 1.5,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color:
+                                                                  kWhiteColor),
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Row(
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .groups,
+                                                                    size: 20,
+                                                                    color: kWhiteColor
+                                                                        .withOpacity(
+                                                                            0.5),
+                                                                  ),
+                                                                  Text(
+                                                                    "  " +
+                                                                        coursesController
+                                                                            .getHotCourseList[index]
+                                                                            .viewCount,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
                                                                       color: kWhiteColor
                                                                           .withOpacity(
                                                                               0.5),
+                                                                      height: 2,
                                                                     ),
-                                                                    Text(
-                                                                      "  " +
-                                                                          coursesController
-                                                                              .getHotCourseList[index]
-                                                                              .viewCount,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            10,
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        color: kWhiteColor
-                                                                            .withOpacity(0.5),
-                                                                        height:
-                                                                            2,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],

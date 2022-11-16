@@ -357,15 +357,24 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
               ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
           navigatorObservers: <NavigatorObserver>[observer],
 
-          home: //Splash(),
+          builder: (BuildContext context, Widget? child) {
+            final MediaQueryData data = MediaQuery.of(context);
+            return MediaQuery(
+              data: data.copyWith(
+                textScaleFactor: 1.00,
+              ),
+              child: child!,
+            );
+          },
 
-              // Dark_Course()
-              // DarkLearningPath()
-              // DarkCourseDetail()
-              // Stepernew()
-              //Paywall(),
-              OnboardingWelcome(),
-          //Splash(),
+          home: Splash(),
+
+          // Dark_Course()
+          // DarkLearningPath()
+          // DarkCourseDetail()
+          // Stepernew()
+          //Paywall(),
+          //OnboardingWelcome(),
           // EventView()
           // CurrentEventView()
 

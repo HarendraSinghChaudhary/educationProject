@@ -137,8 +137,8 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                         ],
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.w, vertical: 10.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,48 +215,51 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                           bottomRight: Radius.circular(10)),
                       child: Container(
                         color: ksettingcardColor,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image(
-                                width: 40.h,
-                                height: 40.h,
-                                image: AssetImage("assets/images/figma.png")),
-                            Image(
-                                width: 40.h,
-                                height: 40.h,
-                                image: AssetImage("assets/images/w.png")),
-                            SizedBox(
-                              width: 30.w,
-                            ),
-                            Text(
-                              "${onbardingController.onBoardingFinishModel!.tagline}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: kGreyColor,
-                                  fontSize: 13.sp,
-                                  height: 1.5.h,
-                                  wordSpacing: 2.5.w,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            const Icon(
-                              Icons.people,
-                              color: kGreyColor,
-                            ),
-                            Text(
-                              "${onbardingController.onBoardingFinishModel!.learnerCount}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: kGreyColor,
-                                  fontSize: 13.sp,
-                                  height: 1.5.h,
-                                  wordSpacing: 2.5.w,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                          ],
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image(
+                                  width: 40.h,
+                                  height: 40.h,
+                                  image: AssetImage("assets/images/figma.png")),
+                              Image(
+                                  width: 40.h,
+                                  height: 40.h,
+                                  image: AssetImage("assets/images/w.png")),
+                              SizedBox(
+                                width: 30.w,
+                              ),
+                              Text(
+                                "${onbardingController.onBoardingFinishModel!.tagline}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kGreyColor,
+                                    fontSize: 13.sp,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              const Icon(
+                                Icons.people,
+                                color: kGreyColor,
+                              ),
+                              Text(
+                                "${onbardingController.onBoardingFinishModel!.learnerCount}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kGreyColor,
+                                    fontSize: 13.sp,
+                                    height: 1.5.h,
+                                    wordSpacing: 2.5.w,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

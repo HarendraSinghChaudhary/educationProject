@@ -122,15 +122,15 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                   TextSpan(
                     text: onbardingController.interestedInSelectedList.length ==
                             1
-                        ? ' ${onbardingController.interestedInSelectedList[0]}'
+                        ? ' ${onbardingController.interestedInSelectedList[0]}?'
                         : onbardingController.interestedInSelectedList.length ==
                                 2
-                            ? ' ${onbardingController.interestedInSelectedList[0]} and ${onbardingController.interestedInSelectedList[1]}'
+                            ? ' ${onbardingController.interestedInSelectedList[0]} and ${onbardingController.interestedInSelectedList[1]}?'
                             : onbardingController
                                         .interestedInSelectedList.length ==
                                     3
-                                ? ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]} and ${onbardingController.interestedInSelectedList[2]}'
-                                : ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]}, ${onbardingController.interestedInSelectedList[2]} and ${onbardingController.interestedInSelectedList[3]}',
+                                ? ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]} and ${onbardingController.interestedInSelectedList[2]}?'
+                                : ' ${onbardingController.interestedInSelectedList[0]}, ${onbardingController.interestedInSelectedList[1]}, ${onbardingController.interestedInSelectedList[2]} and ${onbardingController.interestedInSelectedList[3]}?',
                     style: TextStyle(
                         color: kCyanColor,
                         fontSize: onbardingController
