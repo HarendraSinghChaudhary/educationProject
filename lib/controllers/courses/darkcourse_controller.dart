@@ -46,7 +46,7 @@ class DarkCourseDetail_Controller extends GetxController {
 
   relode() {
     getcourse_Module().whenComplete(() {
-      mixpanelTracking("Course Home Page", {
+      mixpanelTracking("Course Details", {
         "Course Name": bigdata.value!.title.toString(),
         "Email": Preferences.pref!.get("email")
       });
@@ -90,12 +90,6 @@ class DarkCourseDetail_Controller extends GetxController {
   // TODO: implement onDelete
   InternalFinalCallback<void> get onDelete => super.onDelete;
   Future<bool> goback() async {
-    if (!isCompleted.value) {
-      mixpanelTracking("Course Finished", {
-        "Course Name": bigdata.value!.title.toString(),
-        "Email": Preferences.pref!.get("email")
-      });
-    }
     return true;
   }
 
@@ -103,10 +97,6 @@ class DarkCourseDetail_Controller extends GetxController {
     if (bigdata.value!.allmodule!.isEmpty) {
       showSnack("No Module Available", "Modules Will Be Available Soon");
     } else if (!isCompleted.value) {
-      mixpanelTracking("Course Finished", {
-        "Course Name": bigdata.value!.title.toString(),
-        "Email": Preferences.pref!.get("email")
-      });
       Get.back();
     } else {
       for (var element in bigdata.value!.allmodule!) {

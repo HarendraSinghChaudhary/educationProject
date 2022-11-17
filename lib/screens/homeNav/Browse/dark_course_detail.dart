@@ -63,14 +63,6 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                 ),
                                 onPressed: () {
                                   Get.back();
-                                  if (!controller.isCompleted.value) {
-                                    mixpanelTracking("Course Finished", {
-                                      "Course Name": controller
-                                          .bigdata.value!.title
-                                          .toString(),
-                                      "Email": Preferences.pref!.get("email")
-                                    });
-                                  }
                                 },
                               ),
                             ),
@@ -178,15 +170,6 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                             ? "COMPLETED"
                                             : "CONTINUE",
                                     press: () {
-                                      if (controller.isstart.value) {
-                                        mixpanelTracking('Course Started', {
-                                          "Course Name": controller
-                                              .bigdata.value!.title
-                                              .toString(),
-                                          "Email":
-                                              Preferences.pref!.get("email")
-                                        });
-                                      }
                                       controller.onpressed();
                                     }),
                               ),
