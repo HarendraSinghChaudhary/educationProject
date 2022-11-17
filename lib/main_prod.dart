@@ -16,6 +16,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -30,6 +31,7 @@ import 'package:rxdart/rxdart.dart';
 import 'screens/homeNav/navigationBottomBar.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:device_preview/device_preview.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'Ambitious', // id
@@ -149,6 +151,10 @@ void main() async {
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+  // DevicePreview(
+  //   enabled: true,
+  //   builder: (context) => EducationOnDemand(), // Wrap your app
+  // );
   runApp(const EducationOnDemand());
 }
 
@@ -357,6 +363,9 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
               ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
           navigatorObservers: <NavigatorObserver>[observer],
 
+          locale: DevicePreview.locale(context),
+          //useInheritedMediaQuery: true,
+          //builder: DevicePreview.appBuilder,
           builder: (BuildContext context, Widget? child) {
             final MediaQueryData data = MediaQuery.of(context);
             return MediaQuery(
@@ -373,8 +382,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
           // DarkLearningPath()
           // DarkCourseDetail()
           // Stepernew()
-          //Paywall(),
-          //OnboardingWelcome(),
+          // Paywall(),
+          // OnboardingWelcome(),
           // EventView()
           // CurrentEventView()
 

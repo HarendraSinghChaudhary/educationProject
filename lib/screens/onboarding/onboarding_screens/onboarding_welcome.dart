@@ -86,15 +86,15 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
               ),
             ),
             SizedBox(
-              height: 70.h,
+              height: 40.h,
             ),
             Image(
-                height: 200.w,
-                width: 200.w,
+                height: 260.h,
                 fit: BoxFit.scaleDown,
-                image: const AssetImage("assets/images/onboarding_rocket.png")),
+                image: const AssetImage(
+                    "assets/images/onboarding_astronout_2.png")),
             SizedBox(
-              height: 50.h,
+              height: 20.h,
             ),
             RichText(
               text: TextSpan(

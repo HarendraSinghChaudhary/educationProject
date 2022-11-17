@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_html/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -177,14 +179,14 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 67.w,
-                                    height: 62.h,
-                                    image: const AssetImage(
-                                        "assets/images/paywall1.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.0.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/onboarding_interests3.svg",
+                                    height: 50.h,
+                                  )
+
+                            
+                                  ),
                             ],
                           )),
                     ),
@@ -231,14 +233,13 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 56.w,
-                                    height: 56.h,
-                                    image: const AssetImage(
-                                        "assets/images/paywall5.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.0.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/onboarding_interests2.svg",
+                                    height: 50.h,
+                                  )
+
+                                  ),
                             ],
                           )),
                     ),
@@ -293,14 +294,14 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 73.w,
-                                    height: 70.h,
-                                    image: const AssetImage(
-                                        "assets/images/paywall4.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.0.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/onboarding_interests4.svg",
+                                    height: 50.h,
+                                  )
+
+                            
+                                  ),
                             ],
                           )),
                     ),
@@ -347,14 +348,12 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 60.w,
-                                    height: 60.h,
-                                    image: const AssetImage(
-                                        "assets/images/paywall6.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.0.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/onboarding_interests1.svg",
+                                    height: 50.h,
+                                  )
+    ),
                             ],
                           )),
                     ),

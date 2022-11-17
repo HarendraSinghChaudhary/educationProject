@@ -5,6 +5,7 @@ import 'package:Ambitious/controllers/onboarding_controller/onboarding_controlle
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Ambitious/utils/constant.dart';
@@ -170,21 +171,21 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 56.w,
-                                    height: 56.w,
-                                    image: const AssetImage(
-                                        "assets/images/instagram.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.0.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/instagram2.svg",
+                                    height: 57.h,
+                                  )
+
+                                
+                                  ),
                               Text(
                                 "Watching\nStories",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.5.h,
+                                    height: 1.2.h,
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -224,21 +225,21 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 56.w,
-                                    height: 56.w,
-                                    image: const AssetImage(
-                                        "assets/images/youtube.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/youtube2.svg",
+                                    height: 57.h,
+                                  )
+
+                               
+                                  ),
                               Text(
                                 "Live\nWorkshops",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.5.h,
+                                    height: 1.2.h,
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -286,21 +287,21 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 56.w,
-                                    height: 56.w,
-                                    image: const AssetImage(
-                                        "assets/images/paywall1.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/figma3.svg",
+                                    height: 57.h,
+                                  )
+
+                          
+                                  ),
                               Text(
                                 "Building\nProjects",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.5.h,
+                                    height: 1.2.h,
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -340,21 +341,20 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0.h),
-                                child: Image(
-                                    fit: BoxFit.cover,
-                                    width: 56.w,
-                                    height: 56.w,
-                                    image: const AssetImage(
-                                        "assets/images/spotify.png")),
-                              ),
+                                  padding: EdgeInsets.all(8.h),
+                                  child: SvgPicture.asset(
+                                    "assets/images/spotify2.svg",
+                                    height: 57.h,
+                                  )
+
+                                  ),
                               Text(
                                 "Listening\nTo Audio",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: kWhiteColor,
                                     fontSize: 20.sp,
-                                    height: 1.5.h,
+                                    height: 1.2.h,
                                     wordSpacing: 2.5.w,
                                     fontWeight: FontWeight.w600),
                               ),
