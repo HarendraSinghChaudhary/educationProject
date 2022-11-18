@@ -48,11 +48,10 @@ class LessonEnd extends GetView<StatusChangeController> {
                               .statusChangeApi(controller.cont.finishId)
                               .whenComplete(() {
                             controller.cont.checkCopletion();
-                            mixpanelTracking("Module Finished", {
+                            mixpanelTrack("Module: Complete", {
                               "Course Name":
                                   controller.cont.bigdata.value!.title,
                               "Module Title": controller.cont.lessonTitle,
-                              "Email": Preferences.pref!.getString("email")
                             });
 
                             Get.back();
@@ -163,14 +162,12 @@ class LessonEnd extends GetView<StatusChangeController> {
                   height: Get.height * 0.075,
                   text: 'CONTINUE',
                   press: () async {
+                    mixpanelTrack("Module: Complete", {
+                      "Course Name": controller.cont.bigdata.value!.title,
+                      "Module Title": controller.cont.lessonTitle,
+                    });
                     if (await inAppReview.isAvailable()) {
                       inAppReview.requestReview().whenComplete(() {
-                        mixpanelTracking("Module Finished", {
-                          "Course Name": controller.cont.bigdata.value!.title,
-                          "Module Title": controller.cont.lessonTitle,
-                          "Email": Preferences.pref!.getString("email")
-                        });
-
                         Get.delete<StudyMaterialController>();
                         if (!controller.cont.isread) {
                           controller

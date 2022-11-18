@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_html/style.dart';
@@ -49,6 +50,8 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
     // TODO: implement initState
     super.initState();
     onbardingController.interestedInSelectedList.clear();
+    mixpanelTrack(
+              "Onboarding Step 2");
   }
 
   bool ui = false;
@@ -368,6 +371,7 @@ class _OnboardingInterestsState extends State<OnboardingInterests> {
                 ? Container()
                 : InkWell(
                     onTap: () {
+                       
                       Get.to(const OnboardingGoals());
                     },
                     splashFactory: NoSplash.splashFactory,

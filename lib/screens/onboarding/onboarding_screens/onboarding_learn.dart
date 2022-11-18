@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +52,10 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    
     onbardingController.learningPreferencesSelectedList.clear();
+    mixpanelTrack(
+              "Onboarding Step 4");
   }
 
   bool insta = false;
@@ -383,6 +387,7 @@ class _OnboardingLearnState extends State<OnboardingLearn> {
                         });
                       });
                       if (res == 200) {
+                        
                         Get.offAll(const OnboardingPersonalizing());
                       } else {
                         showSnack("Something went wrong please try again.");

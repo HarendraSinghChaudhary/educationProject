@@ -1,5 +1,6 @@
 import 'package:Ambitious/models/powerhourModel.dart';
 import 'package:Ambitious/controllers/EventController/eventController.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
@@ -26,6 +27,7 @@ class CurrentEventController extends GetxController {
   @override
   void onInit() {
     data = Get.find<EventController>().data;
+    mixpanelTrack("Power Hour: Details",{"Name" : data.value!.powerHoursTitle.toString().isEmpty?"No Title":data.value!.powerHoursTitle.toString()});
     super.onInit();
   }
 

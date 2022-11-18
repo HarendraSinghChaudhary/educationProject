@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -54,8 +55,15 @@ class _NewHomeLiveState extends State<NewHomeLive> {
   @override
   void initState() {
     super.initState();
-    mixpanelTracking(
-        "Home Page", {"Email": Preferences.pref!.getString("email") ?? ""});
+    mixpanelIdentify(
+      Preferences.pref!.getString('id') ?? "",
+      Preferences.pref!.getString('name') ?? "",
+      Preferences.pref!.getString('email') ?? "",
+    ).whenComplete(() {
+      mixpanelTrack("For You Page");
+    });
+
+    log("Email : ${Preferences.pref!.getString('email')} Name : ${Preferences.pref!.getString('name')} =======");
 
     getUserList();
     coursesController.learningPathApi();

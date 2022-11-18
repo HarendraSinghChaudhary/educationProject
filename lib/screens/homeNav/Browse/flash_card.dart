@@ -38,7 +38,7 @@ class _CustomStoryViewState extends State<CustomStoryView> {
   void initState() {
     controller.studyMaterialApi(widget.moduleId);
     super.initState();
-    mixpanelTracking("Module Started", {
+    mixpanelTrack("Module Started", {
       "Module Title": widget.title,
       "Email": Preferences.pref!.getString("email") ?? "",
       "Course Title": widget.courseTitile

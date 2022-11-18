@@ -150,25 +150,25 @@ class CreateUserController extends GetxController {
           prefs.commit();
 
           var splitData = name.split(' ');
-          mixPanelStart(
+
+          mixpanelIdentify(
             jsonRes["user"]["_id"] ?? "",
             jsonRes["user"]["name"] ?? "",
             jsonRes["user"]["email"] ?? "",
-          );
-          if (isUserExist) {
-            mixpanelTracking(
+          ).whenComplete(() {
+            mixpanelTrack(
               "User Login",
               {
                 "Name": jsonRes["user"]["name"].toString(),
                 "Email": jsonRes["user"]["email"].toString()
               },
             );
-          }
+          });
 
           //@mini
           if (!prefs.containsKey(
               "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
-            log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
+            //log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
             Get.offAll(const OnboardingWelcome());
           } else {
             Get.offAll(BottomNavigationScreen(
@@ -261,38 +261,23 @@ class CreateUserController extends GetxController {
         firstName = prefs.getString("firstname") ?? "";
         lastName = prefs.getString("lastname") ?? "";
 
-        if (isUserExist) {
-          Mixpanell.mixpanel!.track("User Login", properties: {
+        mixpanelIdentify(
+          jsonRes["user"]["_id"] ?? "",
+          jsonRes["user"]["name"] ?? "",
+          jsonRes["user"]["email"] ?? "",
+        ).whenComplete(() {
+          mixpanelTrack("User Login", {
             "Name": jsonRes["user"]["name"].toString(),
             "Email": jsonRes["user"]["email"].toString()
           });
-        } else {
-          mixPanelStart(
-            jsonRes["user"]["_id"] ?? "",
-            jsonRes["user"]["name"] ?? "",
-            jsonRes["user"]["email"] ?? "",
-          );
-        }
-        // Mixpanell.mixpanel!.alias(
-        //   "New user",
-        //   jsonRes["user"]["email"].toString(),
-        // );
-        // Mixpanell.mixpanel!.identify(
-        //   jsonRes["user"]["email"].toString(),
-        // );
-        // Mixpanell.mixpanel!.getPeople().set(
-        //       "Name",
-        //       jsonRes["user"]["name"].toString(),
-        //     );
-        // Mixpanell.mixpanel!.getPeople().set(
-        //       "Email",
-        //       jsonRes["user"]["email"].toString(),
-        //     );
+        });
+
+        // log("Email : ${jsonRes["user"]["email"]} Name : ${jsonRes["user"]["name"]} =======");
 
         //@mini
         if (!prefs.containsKey(
             "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}")) {
-          log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
+          //log("====Doesnt contains: onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")} ");
           Get.offAll(const OnboardingWelcome());
         } else {
           Get.offAll(BottomNavigationScreen(

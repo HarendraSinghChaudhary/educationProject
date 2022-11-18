@@ -5,6 +5,7 @@ import 'package:Ambitious/models/courseby_cat_model.dart';
 import 'package:Ambitious/models/get_hot_courses_model.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
 import 'package:Ambitious/screens/onboarding/quick_notification.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class CoursesController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-
+    mixpanelTrack("Course Browse");
     gethotsubcatApi();
     getHotCoursesApi();
     learningPathApi();

@@ -116,7 +116,7 @@ void main() async {
       ?.createNotificationChannel(channel);
 
   await AppTrackingTransparency.requestTrackingAuthorization();
-  getInstance();
+  await getMixpanelInstanceProduction(); //@mini
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,

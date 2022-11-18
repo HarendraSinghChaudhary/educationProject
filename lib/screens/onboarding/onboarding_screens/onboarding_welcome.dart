@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
 import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_interests.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,6 +37,8 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
     // TODO: implement initState
     super.initState();
     setName();
+       mixpanelTrack(
+              "Onboarding Step 1",);
   }
 
   @override
@@ -147,6 +150,8 @@ class _OnboardingWelcomeState extends State<OnboardingWelcome> {
             ),
             InkWell(
               onTap: () {
+             
+
                 Get.to(const OnboardingInterests());
               },
               splashFactory: NoSplash.splashFactory,

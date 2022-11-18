@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:math';
 
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/screens/onboarding/introduction.dart';
@@ -10,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 
+import '../../screens/onboarding/onboarding_screens/onboarding_welcome.dart';
 import '../../services/mixpanel.dart';
 import '../../screens/homeNav/navigationBottomBar.dart';
 import '../../utils/endpoint_url.dart';
@@ -73,34 +76,38 @@ class LoginSignUpConroller extends GetxController {
       var response = await http.post(Uri.parse(RestDatasource.login_URL),
           body: {"email": email, "password": password});
       var data = jsonDecode(response.body);
+      //print("${data.toString()} login =====");
       if (response.statusCode == 200) {
         if (data["status"]) {
-          Preferences.pref!.setString('id', data["data"][0]["_id"].toString());
+          Preferences.pref!.setString('id', data["user"][0]["_id"].toString());
           Preferences.pref!
-              .setString('name', data["data"][0]["name"].toString());
+              .setString('name', data["user"][0]["name"].toString());
 
           Preferences.pref!
-              .setString('email', data["data"][0]["email"].toString());
+              .setString('email', data["user"][0]["email"].toString());
           Preferences.pref!
-              .setString('firstname', data["data"][0]["firstname"].toString());
+              .setString('firstname', data["user"][0]["firstname"].toString());
           Preferences.pref!
-              .setString('lastname', data["data"][0]["lastname"].toString());
+              .setString('lastname', data["user"][0]["lastname"].toString());
 
           Preferences.pref!
-              .setString('status', data["data"][0]["status"].toString());
+              .setString('status', data["user"][0]["status"].toString());
           Preferences.pref!.setBool(
-              "isNotificationAllowed", data["data"][0]["isAllow"] == "true");
+              "isNotificationAllowed", data["user"][0]["isAllow"] == "true");
 
           Preferences.pref!.setString('token', data["token"].toString());
-          mixPanelStart(
-            data["data"][0]["_id"] ?? "",
-            data["data"][0]["name"] ?? "",
-            data["data"][0]["email"] ?? "",
-          );
-          mixpanelTracking("User Login", {
-            "Name": data["data"][0]["name"].toString(),
-            "Email": data["data"][0]["email"].toString()
+          mixpanelIdentify(
+            data["user"][0]["_id"] ?? "",
+            data["user"][0]["name"] ?? "",
+            data["user"][0]["email"] ?? "",
+          ).whenComplete(() {
+            mixpanelTrack("User Login", {
+              "Name": data["user"][0]["name"].toString(),
+              "Email": data["user"][0]["email"].toString()
+            });
           });
+
+          // log("Email : ${data["data"][0]["email"]} Name : ${data["data"][0]["name"]} =======");
 
           mail.clear();
           pass.clear();
@@ -127,6 +134,7 @@ class LoginSignUpConroller extends GetxController {
       var response = await http.post(Uri.parse(RestDatasource.OTP_URL),
           body: {"otp": otpp, "email": otpemail.value});
       var data = jsonDecode(response.body);
+     // print("${data.toString()} otp =====");
       if (response.statusCode == 200) {
         if (data["status"]) {
           Preferences.pref!.setString('id', data["data"]["_id"].toString());
@@ -149,27 +157,29 @@ class LoginSignUpConroller extends GetxController {
             showBottumSheet(const ResetPass());
           } else {
             otp.clear();
-            mixPanelStart(
+
+            mixpanelIdentify(
               data["data"]["_id"] ?? "",
               data["data"]["name"] ?? "",
               data["data"]["email"] ?? "",
-            );
-            // Mixpanell.mixpanel!
-            //   ..alias(
-            //     "New user",
-            //     data["data"]["email"].toString(),
-            //   )
-            //   ..identify(
-            //     data["data"]["email"].toString(),
-            //   )
-            //   ..getPeople().set("\$name", data["data"]["name"].toString())
-            //   ..getPeople().set("\$email", data["data"]["email"].toString());
+            ).whenComplete(() {
+              mixpanelTrack("User Login", {
+                "Name": data["data"]["name"].toString(),
+                "Email": data["data"]["email"].toString()
+              });
+            });
 
             //@mini
-            Get.offAll(() => BottomNavigationScreen(
-                  index: 0.obs,
-                  learningPathIndex: 0.obs,
-                ));
+            if (!Preferences.pref!.containsKey(
+                "onBoarding_isFirstTime_${Preferences.pref!.getString("id_forOnboarding")}")) {
+              //log("====Doesnt contains: onBoarding_isFirstTime_${Preferences.pref!.getString("id_forOnboarding")} ");
+              Get.offAll(const OnboardingWelcome());
+            } else {
+              Get.offAll(BottomNavigationScreen(
+                index: 0.obs,
+                learningPathIndex: 0.obs,
+              ));
+            }
           }
 
           isLoading.value = false;
@@ -187,6 +197,7 @@ class LoginSignUpConroller extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
+      //print("Error: ${e.toString()}====");
       showSnack("Something went wrong please try again later");
     }
   }

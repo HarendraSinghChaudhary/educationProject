@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,6 +48,8 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
     // TODO: implement initState
     super.initState();
     onbardingController.goalsSelectedList.clear();
+    mixpanelTrack(
+              "Onboarding Step 3");
   }
 
   bool job = false;
@@ -396,6 +399,7 @@ class _OnboardingGoalsState extends State<OnboardingGoals> {
                         showSnack("Please select your Goal");
                         return;
                       }
+                      
                       Get.to(const OnboardingLearn());
                     },
                     splashFactory: NoSplash.splashFactory,

@@ -46,7 +46,7 @@ class DarkCourseDetail_Controller extends GetxController {
 
   relode() {
     getcourse_Module().whenComplete(() {
-      mixpanelTracking("Course Details", {
+      mixpanelTrack("Course Details", {
         "Course Name": bigdata.value!.title.toString(),
         "Email": Preferences.pref!.get("email")
       });

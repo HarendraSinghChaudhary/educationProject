@@ -1,4 +1,5 @@
 import 'package:Ambitious/screens/homeNav/Browse/dark_learning_path.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,6 +80,16 @@ class Dark_Course extends GetView<CoursesController> {
                       controller.learningPathList.length,
                       (index) => GestureDetector(
                             onTap: () {
+                              mixpanelTrack("Course: Details", {
+                                "Name": controller
+                                        .learningPathList[index].subCategoryName
+                                        .toString()
+                                        .isEmpty
+                                    ? "No Titile"
+                                    : controller
+                                        .learningPathList[index].subCategoryName
+                                        .toString()
+                              });
                               Get.to(() => const DarkLearningPath2(),
                                   binding: DarkLearningBinding(
                                     courseListbyLearningPath: controller

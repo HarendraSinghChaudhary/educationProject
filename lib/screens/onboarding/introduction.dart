@@ -72,7 +72,7 @@ class _IntroductionState extends State<Introduction> {
   @override
   void initState() {
     super.initState();
-    mixpanelTracking("Welcome Page");
+    mixpanelTrack("Signup Page");
   }
 
   @override

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:Ambitious/controllers/onboarding_controller/onboarding_controller.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +40,8 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
     // TODO: implement initState
     super.initState();
     setName();
+    mixpanelTrack(
+              "Onboarding Step 5");
   }
 
   @override
@@ -277,6 +280,17 @@ class _OnboardingShouldLearnState extends State<OnboardingShouldLearn> {
                         "onBoarding_isFirstTime_${prefs.getString("id_forOnboarding")}",
                         true);
                     Get.delete<OnBoardingController>();
+                    log(onbardingController.interestedInSelectedList
+                        .toJson()
+                        .toString());
+                    mixpanelTrack("Onboarding Complete", {
+                      "interests":
+                          onbardingController.interestedInSelectedList.toJson(),
+                      "learning_preferences": onbardingController
+                          .learningPreferencesSelectedList
+                          .toJson(),
+                      "goals": onbardingController.goalsSelectedList.toJson(),
+                    });
                     Get.offAll(BottomNavigationScreen(
                       index: 0.obs,
                       learningPathIndex: 0.obs,

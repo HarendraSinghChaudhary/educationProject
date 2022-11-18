@@ -1,5 +1,6 @@
 import 'package:Ambitious/controllers/EventController/eventController.dart';
 import 'package:Ambitious/services/launcher.dart';
+import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ import '../Browse/flash_card.dart';
 import '../../../controllers/EventController/currentEventController.dart';
 
 class CurrentEventView extends GetView<CurrentEventController> {
+  
   @override
   Widget build(BuildContext context) {
     controller.onInit();
@@ -206,7 +208,7 @@ class CurrentEventView extends GetView<CurrentEventController> {
                                     child: controller
                                             .eventController.rsvploading.value
                                         ? loader
-                                        : RSVP(""))),
+                                        : RSVP("",controller.data.value!.powerHoursTitle.toString()))),
 
                             // visibility for join power hour or add to calendra
 
@@ -307,11 +309,14 @@ class JoinButton extends StatelessWidget {
 
 class RSVP extends StatelessWidget {
   final joinurl;
-  RSVP(this.joinurl);
+  final powerhourTitle;
+  RSVP(this.joinurl,this.powerhourTitle);
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
+        mixpanelTrack("RSVP to Workshop",
+            {"Name": powerhourTitle.toString().isEmpty?"No Title":powerhourTitle.toString()});
         Get.find<EventController>().rsvpapi();
       },
       style: TextButton.styleFrom(

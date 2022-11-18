@@ -170,6 +170,11 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                             ? "COMPLETED"
                                             : "CONTINUE",
                                     press: () {
+                                         mixpanelTrack("Module: Started", {
+                                "Name": controller.bigdata.value!.title.toString().isEmpty
+                                    ? "No Titile"
+                                    : controller.bigdata.value!.title.toString()
+                              });
                                       controller.onpressed();
                                     }),
                               ),
@@ -203,6 +208,13 @@ class DarkCourseDetail extends GetView<DarkCourseDetail_Controller> {
                                                     .allmodule![index]
                                                     .studayMaterial !=
                                                 0) {
+                                                      mixpanelTrack("Module: Started", {
+                                "Name": mod.moduletitle
+                                                      .toString().isEmpty
+                                    ? "No Titile"
+                                    : mod.moduletitle
+                                                      .toString(),
+                              });
                                               Get.to(
                                                 () => CustomStoryView(
                                                   id: mod.id.toString(),
