@@ -22,11 +22,35 @@
           }
         },
         {
+          "client_id": "1053520529125-bso09tfd2ha1cf0ibekiqaqjrnb3e8r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.educationondemand",
+            "certificate_hash": "d6136a2aa1f53936a2371d14a707597a7fd63454"
+          }
+        },
+        {
+          "client_id": "1053520529125-dkgqvi9ctoqhunpj25no23lbbk1ecshu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.educationondemand",
+            "certificate_hash": "f6fe674da65c8fe973ff2f792b6c2200fd9c3cb3"
+          }
+        },
+        {
           "client_id": "1053520529125-f5vbu6j53bf8cdnkirp4abeuj8tvjnca.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.educationondemand",
             "certificate_hash": "04450625af75bcf47e472905bd139dc7233c7161"
+          }
+        },
+        {
+          "client_id": "1053520529125-meghbv7b4d9lbvqbtiu6n6lebhe59h61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.educationondemand",
+            "certificate_hash": "c41a42fad7df6e0f1ccaa87be6a2b43fe69bdff2"
           }
         },
         {

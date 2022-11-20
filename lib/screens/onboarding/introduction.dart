@@ -160,6 +160,9 @@ class _IntroductionState extends State<Introduction> {
                                 if (value) {
                                   createUserController.createGoogleUserApi(
                                       email!, name!, firstName!, lastName!);
+                                } else {
+                                  showSnack("",
+                                      "Something went wrong please try again");
                                 }
                               });
                             },
@@ -226,7 +229,7 @@ class _IntroductionState extends State<Introduction> {
 
                                     email = value.user?.email.toString();
 
-                                    print("apple email: " + email.toString());
+                                    //print("apple email: " + email.toString());
 
                                     if (email.toString() != "" ||
                                         email.toString() != "null" ||
@@ -234,14 +237,8 @@ class _IntroductionState extends State<Introduction> {
                                       createUserController.createAppleUserApi(
                                           email!, name!);
                                     } else {
-                                      Fluttertoast.showToast(
-                                          msg: "EmailId not found!",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: kPrimaryColor,
-                                          textColor: Colors.white,
-                                          fontSize: 14.0);
+                                      showSnack("", "Email Id not found!");
+ 
                                     }
                                   });
                                 },
