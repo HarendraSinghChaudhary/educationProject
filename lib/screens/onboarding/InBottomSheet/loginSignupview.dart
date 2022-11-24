@@ -431,7 +431,8 @@ class _OtpVerficationState extends State<OtpVerfication> {
               ),
               Form(
                 key: formkey,
-                child: CustomTextField(
+                child: 
+                CustomTextField(
                   hintText: "OTP code",
                   controller: controller.otp,
                   keyboardType: TextInputType.number,

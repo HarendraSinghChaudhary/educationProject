@@ -340,7 +340,8 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
+    return 
+    ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: false,
