@@ -1,6 +1,10 @@
+import 'package:Ambitious/controllers/courses/darkcourse_controller.dart';
+import 'package:Ambitious/reusable/ambitious_header.dart';
+import 'package:Ambitious/screens/homeNav/Browse/dark_course_detail.dart';
 import 'package:Ambitious/screens/homeNav/Browse/dark_learning_path.dart';
 import 'package:Ambitious/services/mixpanel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/courses/courses_controller.dart';
@@ -16,152 +20,308 @@ class Dark_Course extends GetView<CoursesController> {
           backgroundColor: kdarkblue,
           body: Column(
             children: [
-              Container(
-                padding: EdgeInsets.only(
-                    left: w * 0.08, right: w * 0.08, top: h * 0.07),
-                height: h * 0.25,
-                width: w,
-                decoration: BoxDecoration(
-                  gradient: kbluegradiant,
-                  borderRadius: BorderRadius.circular(h * 0.01),
-                ),
-                child: Row(
+              AmbitiousHeaderTop(),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Browse",
-                            style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w700,
-                                color: kWhiteColor),
-                          ),
-                          SizedBox(
-                            height: h * 0.015,
-                          ),
-                          const Expanded(
-                            child: Text(
-                              "Choose a path to view courses, projects and tools.",
-                              // "Select a path that interests you to see available courses, projects and action items.",
-                              // overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: kWhiteColor),
-                            ),
-                          )
-                        ],
-                      ),
+                    SizedBox(
+                      height: 10.h,
                     ),
-                    Expanded(
-                        flex: 3,
-                        child: Image.asset(
-                          "assets/images/magnifying glass.png",
-                          height: h * 0.13,
-                        )),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: w * 0.05, vertical: h * 0.02),
-                  crossAxisSpacing: w * 0.04,
-                  mainAxisSpacing: h * 0.02,
-                  childAspectRatio: 0.85,
-                  children: List.generate(
-                      controller.learningPathList.length,
-                      (index) => GestureDetector(
-                            onTap: () {
-                              mixpanelTrack("Course: Details", {
-                                "Name": controller
-                                        .learningPathList[index].subCategoryName
-                                        .toString()
-                                        .isEmpty
-                                    ? "No Titile"
-                                    : controller
-                                        .learningPathList[index].subCategoryName
-                                        .toString()
-                              });
-                              Get.to(() => const DarkLearningPath2(),
-                                  binding: DarkLearningBinding(
-                                    courseListbyLearningPath: controller
-                                        .learningPathList[index]
-                                        .courseListbyLearningPath,
-                                    description: controller
-                                            .learningPathList[index]
-                                            .description ??
-                                        "",
-                                    image: controller
-                                        .learningPathList[index].image
-                                        .toString(),
-                                    title: controller
-                                        .learningPathList[index].subCategoryName
-                                        .toString(),
-                                  ));
-                            },
-                            child: Container(
-                              height: h * 0.15,
-                              padding:
-                                  EdgeInsets.symmetric(vertical: h * 0.015),
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(
-                                      controller.change_to_a(controller
-                                          .learningPathList[index].a!
-                                          .toInt()),
-                                      controller.learningPathList[index].r!
-                                          .toInt(),
-                                      controller.learningPathList[index].g!
-                                          .toInt(),
-                                      controller.learningPathList[index].b!
-                                          .toInt()),
-                                  borderRadius:
-                                      BorderRadius.circular(h * 0.02)),
-                              child: Column(
-                                children: [
-                                  // Image.asset("assets/images/bitcoin money bag.png",height: h*0.12,),
-                                  Image.network(
-                                    controller.learningPathList[index].image
-                                        .toString(),
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container();
-                                    },
-                                    height: h * 0.12,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: w * 0.02,
-                                          right: w * 0.02,
-                                          top: h * 0.005),
-                                      alignment: Alignment.center,
+                    Text(
+                      "📚 Library",
+                      style: TextStyle(
+                          fontSize: 24.sp,
+                          color: kWhiteColor,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              controller.getCourseLibraryCategoriesList!.length,
+                          itemBuilder: ((context, index) => Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 0.h, horizontal: 2.w),
+                                child: Container(
+                                  //height: 20.h,
+                                  //width: 106.w,
+                                  decoration: const BoxDecoration(
+                                      color: kcardblue,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 0.h, horizontal: 10.w),
                                       child: Text(
-                                        // "Social Media Creator",
-                                        // "pppppppppppppppppppppppp",
-                                        controller.learningPathList[index]
-                                            .subCategoryName
+                                        controller
+                                            .getCourseLibraryCategoriesList![
+                                                index]
+                                            .categoryName
                                             .toString(),
-                                        // "Social Media Creator and Entropruner",
-                                        overflow: TextOverflow.values[1],
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                            color: kWhiteColor),
+                                        style: TextStyle(
+                                            color: kWhiteColor,
+                                            fontSize: 12.sp,
+                                            height: 1.3.h,
+                                            wordSpacing: 2.5.w,
+                                            fontWeight: FontWeight.w800),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                ),
+                              ))),
+                    ),
+                    SizedBox(
+                      height: 490.h,
+                      child: ListView.builder(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 5.w),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: controller.getCourseLibraryList!.length,
+                          itemBuilder: ((context, index) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    controller
+                                        .getCourseLibraryList![index].header
+                                        .toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 16.sp,
+                                        height: 1.3.h,
+                                        wordSpacing: 2.5.w,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    controller
+                                        .getCourseLibraryList![index].subtext
+                                        .toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontSize: 13.sp,
+                                        height: 1.3.h,
+                                        wordSpacing: 2.5.w,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 10.h),
+                                    child: SizedBox(
+                                      height: 300.h,
+                                      child: ListView.builder(
+                                        itemCount: controller
+                                            .getCourseLibraryList![index]
+                                            .courses!
+                                            .length,
+
+                                        scrollDirection: Axis.horizontal,
+                                        // padding: EdgeInsets.only(),
+                                        physics: BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index2) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 12.w),
+                                            child: Container(
+                                                width: 171.w,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    // Get.find<CoursesController>()
+                                                    //     .coursecount(
+                                                    //         coursesController
+                                                    //             .getHotCourseList[
+                                                    //                 index]
+                                                    //             .id);
+
+                                                    // shareCourse = coursesController
+                                                    //     .getHotCourseList[index]
+                                                    //     .title
+                                                    //     .toString();
+                                                    // DarkCourseDetail.viewCount =
+                                                    //     coursesController
+                                                    //         .getHotCourseList[index]
+                                                    //         .viewCount;
+                                                    Get.to(
+                                                      () => DarkCourseDetail(),
+                                                      binding:
+                                                          DarkCourseDetailBinding(
+                                                        id: controller
+                                                            .getCourseLibraryList![
+                                                                index]
+                                                            .courses![index2]
+                                                            .sId
+                                                            .toString(),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 221.h,
+
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color:
+                                                                    kcardblue,
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius
+                                                                        .circular(15
+                                                                            .r),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            15.r)),
+                                                                image: DecorationImage(
+                                                                    image:
+                                                                        // AssetImage("assets/images/img_9.png",),
+                                                                        NetworkImage(controller.getCourseLibraryList![index].courses![index].image.toString()),
+                                                                    fit: BoxFit.fill)),
+                                                        // child: Image.asset("assets/images/img_9.png")
+                                                      ),
+                                                      Container(
+                                                        height: 77.h,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 10.h,
+                                                                horizontal:
+                                                                    5.w),
+                                                        decoration: BoxDecoration(
+                                                            color: kcardblue,
+                                                            borderRadius: BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        15.r),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        15.r))),
+                                                        child: Column(
+                                                          //@mini
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            Text(
+                                                              // "Bitcoin, Simplified",
+                                                              controller
+                                                                  .getCourseLibraryList![
+                                                                      index]
+                                                                  .courses![
+                                                                      index2]
+                                                                  .title
+                                                                  .toString(),
+
+                                                              // softWrap: true,
+                                                              maxLines: 1,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      kWhiteColor),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                              // "12 Shorts",
+                                                              " Modules",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      10.sp,
+                                                                  height: 1.5.h,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      kWhiteColor),
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .groups,
+                                                                        size:
+                                                                            20,
+                                                                        color: kWhiteColor
+                                                                            .withOpacity(0.5),
+                                                                      ),
+                                                                      Text(
+                                                                        "  23"
+                                                                        // "  " +
+                                                                        //     coursesController
+                                                                        //         .getHotCourseList[index]
+                                                                        //         .viewCount
+                                                                        ,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              10.sp,
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          color:
+                                                                              kWhiteColor.withOpacity(0.5),
+                                                                          height:
+                                                                              2.h,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
                                 ],
-                              ),
-                            ),
-                          )),
+                              ))),
+                    ),
+                  ],
                 ),
               )
             ],

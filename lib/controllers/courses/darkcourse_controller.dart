@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:Ambitious/services/mixpanel.dart';
 import 'package:Ambitious/services/snackbar.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -142,10 +143,13 @@ class DarkCourseDetail_Controller extends GetxController {
 
       if (request.statusCode == 200) {
         var data = jsonDecode(request.body);
+        //log(data.toString());
         bigdata.value = darkCourseDetailModelFromJson(jsonEncode(data["data"]));
         isLoading(false);
       }
-    } catch (e) {}
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
 

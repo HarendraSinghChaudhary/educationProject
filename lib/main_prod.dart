@@ -354,7 +354,7 @@ class _EducationOnDemandState extends State<EducationOnDemand> {
               ThemeData(fontFamily: "HK Grotesk", primaryColor: kPrimaryColor),
           navigatorObservers: <NavigatorObserver>[observer],
 
-          locale: DevicePreview.locale(context),
+          //locale: DevicePreview.locale(context),
           //useInheritedMediaQuery: true,
           //builder: DevicePreview.appBuilder,
           builder: (BuildContext context, Widget? child) {

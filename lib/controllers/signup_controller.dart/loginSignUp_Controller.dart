@@ -134,7 +134,7 @@ class LoginSignUpConroller extends GetxController {
       var response = await http.post(Uri.parse(RestDatasource.OTP_URL),
           body: {"otp": otpp, "email": otpemail.value});
       var data = jsonDecode(response.body);
-     // print("${data.toString()} otp =====");
+      // print("${data.toString()} otp =====");
       if (response.statusCode == 200) {
         if (data["status"]) {
           Preferences.pref!.setString('id', data["data"]["_id"].toString());

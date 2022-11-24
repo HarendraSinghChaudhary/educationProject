@@ -1,8 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:Ambitious/controllers/signup_controller.dart/create_user_controller.dart';
+import 'package:Ambitious/reusable/ambitious_header.dart';
+import 'package:Ambitious/reusable/header_streak_banner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -55,6 +60,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
   @override
   void initState() {
     super.initState();
+    coursesController.getCoursesLibrary();
     mixpanelIdentify(
       Preferences.pref!.getString('id') ?? "",
       Preferences.pref!.getString('name') ?? "",
@@ -63,9 +69,10 @@ class _NewHomeLiveState extends State<NewHomeLive> {
       mixpanelTrack("For You Page");
     });
 
-    log("Email : ${Preferences.pref!.getString('email')} Name : ${Preferences.pref!.getString('name')} =======");
+    //log("Email : ${Preferences.pref!.getString('email')} Name : ${Preferences.pref!.getString('name')} =======");
 
     getUserList();
+
     coursesController.learningPathApi();
     coursesController.getHotCoursesApi();
     eventController.getpowerHourData();
@@ -75,6 +82,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
         askPermission();
       }
     });
+
     // askPermission();
     // coursesController.bottomSheet();
   }
@@ -89,27 +97,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
           backgroundColor: kdarkblue,
           body: Column(
             children: [
-              Container(
-                padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 70),
-                height: 130,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: kbluegradiant,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10.r),
-                      bottomRight: Radius.circular(10.r)),
-                ),
-                child: Text(
-                  // "Community ",
-                  firstName.toString().isEmpty
-                      ? "Hi 👋🏼"
-                      : "Hi, " + firstName.toString() + " 👋🏼",
-                  style: TextStyle(
-                      fontSize: 36.sp,
-                      fontWeight: FontWeight.w700,
-                      color: kWhiteColor),
-                ),
-              ),
+              AmbitiousHeaderTop(),
               Expanded(
                 child: !eventController.homeloading.value
                     ? loader
@@ -385,7 +373,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "🚀 All Categories",
+                                  "🚀 Hot Learning Paths",
                                   style: TextStyle(
                                       fontSize: 24.sp,
                                       color: kWhiteColor,
@@ -393,7 +381,7 @@ class _NewHomeLiveState extends State<NewHomeLive> {
                                       fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  "Explore something new",
+                                  "Simplify your path to a carrer",
                                   style: TextStyle(
                                       fontSize: 18.sp,
                                       height: 1.2.h,

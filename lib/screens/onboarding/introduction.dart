@@ -162,7 +162,7 @@ class _IntroductionState extends State<Introduction> {
                                       email!, name!, firstName!, lastName!);
                                 } else {
                                   showSnack("",
-                                      "Something went wrong please try again");
+                                      "Something went wrong. Please try again.");
                                 }
                               });
                             },

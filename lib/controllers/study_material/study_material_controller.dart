@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:Ambitious/models/study_material_model.dart';
 import 'package:Ambitious/models/subcategory_model.dart';
@@ -27,7 +28,8 @@ class StudyMaterialController extends GetxController {
     var request = http.get(
       Uri.parse(RestDatasource.STUDYMETERIAL_URL + id),
       headers: {
-        "Authorization": Preferences.pref!.getString("token").toString()
+        "Authorization":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzZlYjdhYzA2MTIxYTYwM2NjMzNjZTgiLCJlbWFpbCI6ImFqYXkxMjM2QGdtYWlsLmNvbSIsImlhdCI6MTY2OTEzNzI4Mn0.bVKGR-9g-oEh1le4NC09ixFBdVpHcxTiCYrb3whLTT0"
       },
     );
 
@@ -41,10 +43,11 @@ class StudyMaterialController extends GetxController {
         final JsonDecoder _decoder = new JsonDecoder();
         jsonRes = _decoder.convert(response.body.toString());
         msg = jsonRes["message"].toString();
-        jsonArray = jsonRes['Moduledata'];
+        jsonArray = jsonRes['moduledata'];
       });
 
       if (res.statusCode == 200) {
+        log(jsonRes.toString());
         if (jsonRes["status"].toString() == "true") {
           studyMaterialList.clear();
           for (var i = 0; i < jsonArray.length; i++) {

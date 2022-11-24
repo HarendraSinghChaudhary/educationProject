@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:Ambitious/screens/onboarding/name.dart';
 import 'package:Ambitious/screens/onboarding/onboarding_screens/onboarding_welcome.dart';
+import 'package:Ambitious/services/app_data.dart';
 import 'package:Ambitious/utils/constant.dart';
 import 'package:Ambitious/utils/endpoint_url.dart';
 import 'package:Ambitious/utils/sharedPreference.dart';
@@ -27,6 +28,46 @@ class CreateUserController extends GetxController {
   var response = "";
   var tokenId = "";
   Future appledeleteAPI() async {}
+
+  Future<bool> refereshUser() async {
+    try {
+      
+      if (AppData.dailyStreak == -1 ||
+          AppData.weeklyStreak == -1 ||
+          AppData.pointsEarned == -1) {
+            var jsonRes;
+      http.Response? res;
+        var request = http.get(
+          Uri.parse(
+            RestDatasource.REFRESH_USER_URL,
+          ),
+          headers: {
+            "Authorization": Preferences.pref!.getString("token").toString()
+          },
+        );
+
+        await request.then((http.Response response) {
+          res = response;
+          jsonRes = jsonDecode(response.body.toString());
+        });
+        if (res!.statusCode == 200) {
+          AppData.pointsEarned = jsonRes['user']['pointsEarned'];
+          AppData.weeklyStreak = jsonRes['user']['weeklyStreak'];
+          AppData.dailyStreak = jsonRes['user']['dailyStreak'];
+          
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } on Exception catch (e) {
+      return false;
+      // TODO
+    }
+  }
+
   Future<dynamic> chackuserapi(
     String email,
   ) async {

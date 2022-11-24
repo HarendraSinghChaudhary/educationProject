@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:Ambitious/main.dart';
 import 'package:Ambitious/models/allcourses_model.dart';
 import 'package:Ambitious/models/courseby_cat_model.dart';
+import 'package:Ambitious/models/get_courses_library_model.dart';
 import 'package:Ambitious/models/get_hot_courses_model.dart';
 import 'package:Ambitious/models/learnig_path_model.dart';
 import 'package:Ambitious/screens/onboarding/quick_notification.dart';
@@ -22,9 +24,11 @@ class CoursesController extends GetxController {
   RxList<LearningPathModel> hotsubcatList = RxList();
   RxList<GetHotCoursesModel> getHotCourseList = RxList();
 
+  RxList<Categories>? getCourseLibraryCategoriesList = RxList();
+  RxList<Library>? getCourseLibraryList = RxList();
+
   @override
   void onInit() {
-    // TODO: implement onInit
     mixpanelTrack("Course Browse");
     gethotsubcatApi();
     getHotCoursesApi();
@@ -45,6 +49,44 @@ class CoursesController extends GetxController {
           isScrollControlled: true,
           enterBottomSheetDuration: const Duration(milliseconds: 1000));
     });
+  }
+
+  Future<dynamic> getCoursesLibrary() async {
+    isLoading(true);
+
+    var request = http.get(
+      Uri.parse(RestDatasource.LIBRARY_URL),
+      headers: {
+        "Authorization": Preferences.pref!.getString("token").toString()
+      },
+    );
+    var jsonRes;
+    var res;
+
+    await request.then((http.Response response) {
+      res = response;
+
+      jsonRes = json.decode(response.body.toString());
+    });
+
+    if (res.statusCode == 200) {
+      final librarymodel = GetCourseLibraryModel.fromJson(jsonRes);
+
+      librarymodel.categories!.forEach((element) {
+        getCourseLibraryCategoriesList!.add(element);
+      });
+
+      librarymodel.library!.forEach((element) {
+        getCourseLibraryList!.add(element);
+      });
+
+      isLoading(false);
+      update();
+    } else {
+      log("Error: RestDatasource.LIBRARY_URL Failed To Load Data");
+      isLoading(false);
+      update();
+    }
   }
 
   Future<dynamic> gethotsubcatApi() async {
@@ -79,7 +121,7 @@ class CoursesController extends GetxController {
 
           modelAgentSearch.id = jsonArray[i]["_id"].toString();
           modelAgentSearch.subCategoryName =
-              jsonArray[i]["subCategory"].toString();
+              jsonArray[i]["category"].toString();
           modelAgentSearch.description = jsonArray[i]["Description"] ?? "";
           modelAgentSearch.a = jsonArray[i]["A"] ?? 255;
           modelAgentSearch.r = jsonArray[i]["R"] ?? 0;

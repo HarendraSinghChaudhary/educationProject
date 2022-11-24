@@ -2,6 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class AppData {
+  static int pointsEarned = -1;
+  static int weeklyStreak = -1;
+  static int dailyStreak = -1;
+
   static bool isPro = false;
   static String currentActiveSubscription = 'null';
 

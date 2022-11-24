@@ -47,7 +47,8 @@ class _ProfileScreenState extends State<BottomNavigationScreen> {
               // const HomeLive(),
               const NewHomeLive(),
               const Dark_Course(),
-              EventView(),
+
+              //EventView(),
               const Profile(),
             ],
           ),
@@ -98,18 +99,18 @@ class SuperFaBottomNavigationBar extends StatelessWidget {
 
               //Enquiry
               label: "Browse"),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: SvgPicture.asset(
-                  'assets/images/community.svg',
-                  width: 25,
-                  color: profileController._selectedIndex == 2.obs
-                      ? kPrimaryColor
-                      : kWhiteColor,
-                ),
-              ),
-              label: "Community"),
+          // BottomNavigationBarItem(
+          //     icon: Padding(
+          //       padding: const EdgeInsets.only(bottom: 5.0),
+          //       child: SvgPicture.asset(
+          //         'assets/images/community.svg',
+          //         width: 25,
+          //         color: profileController._selectedIndex == 2.obs
+          //             ? kPrimaryColor
+          //             : kWhiteColor,
+          //       ),
+          //     ),
+          //     label: "Community"),
           BottomNavigationBarItem(
               icon: Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
